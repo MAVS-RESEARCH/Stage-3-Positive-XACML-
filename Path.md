@@ -87,6 +87,18 @@ External audit returned 6 CRITICAL / 3 HIGH / 2 MEDIUM findings plus Phase-2B an
 - Environment: single pinned primary environment (WSL2 Ubuntu LTS + exact JDK/Python/parser), `.sh` authoritative, same env for clean reproduction.
 WorkPlan compliance: YES — mutation implements the audit without relaxing any spec gate; recorded in `CHANGELOG.md` at Phase-1 time as a planning change (no prereg artifact existed yet, so no experiment-version change). Deviation: none.
 
+### 3.4 WorkPlan Re-Audit Mutation (2026-09-11, committed + pushed per §3.2)
+
+Second audit round (1 stale assertion + 5 corrections + 1 wording fix), all applied to `WorkPlan.md` (this file: only this log entry):
+1. Removed the premature "no second distinct spec exists" assertion — copy identity/distinctness is UNKNOWN until Phase-1 hashing.
+2. Phase 2B independence made mandatory: positive status requires a second-human adjudicator never shown the expectation; the primary analyst cannot be sole adjudicator; verdict carries a non-exposure attestation.
+3. Scanner split into PRESENCE ALLOWED (the two sealed expectation files) vs USE FORBIDDEN (five computation stages); boxed rule "expected labels may exist as sealed predictions but may never enter computation."
+4. Global modification ban rewritten: frozen primary `external/` immutable; spec-authorized Phase-5 temp-copy mutations labeled as controls, barred from the primary path.
+5. Phase-1 gate 8 → 10 boxes (added spec-hash seal + canary-expectations seal); Phase 6 fixed (CHANGELOG lifecycle clarified, 15 audit sections, 8 gate boxes).
+6. "Machine-readable proof" → "completion-space closure certificate" with the evidence → audit → certificate → |K|=1 chain.
+No spec requirement removed; six-phase structure and primary prediction intact.
+WorkPlan compliance: YES. Deviation: none.
+
 ## 4. Phase 1 Log — External Source Lock and Native Reproduction — TEMPLATE (fill during implementation)
 
 Scope executed: [which of §1.1–1.7 done; note any deferral].
