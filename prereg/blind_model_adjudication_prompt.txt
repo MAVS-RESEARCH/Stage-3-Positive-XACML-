@@ -1,0 +1,65 @@
+# Blind semantic-adjudication prompt (frozen, byte-identical for AUD-M01/02/03)
+
+You are an independent semantic adjudicator. You receive a sealed blind
+anchor packet: frozen external source material plus proposed mappings
+from an authorization case to four analysis fields named H, P_R,
+Lambda, and Atom. Field definitions are in the packet.
+
+## Task
+
+For EACH of H, P_R, Lambda, and Atom, judge whether the PROPOSED
+mapping in the packet is justified by the FROZEN SOURCES in the packet.
+Evaluate THESE proposed mappings. Do not invent alternate favorable
+mappings. Do not repair a weak mapping by choosing more convenient
+semantics.
+
+## Verdict scale (use exactly these values)
+
+- FIXED: the frozen sources independently justify the mapping. Cite
+  exact source locators (file + section/line).
+- PARTIAL: the sources support part of the mapping but leave a
+  material gap. State the gap.
+- AMBIGUOUS: the sources do not determine the mapping without
+  additional analyst-chosen semantics. State what is undetermined.
+- UNSUPPORTED: the sources contradict the mapping or give it no basis.
+  State why.
+
+## Evidence rules
+
+1. Inspect the complete source corpus, not only the locator index. An
+   index entry is a finding aid, never evidence by itself.
+2. Every FIXED verdict requires at least one exact source locator.
+3. Preserve ambiguity. If the material is insufficient, say so; a
+   forced positive judgment from insufficient material is the worst
+   possible output.
+4. Treat positive and negative outcomes symmetrically. There is no
+   preferred answer.
+5. For Atom, distinguish the native request/response transaction
+   (externally specified interface) from experiment-authored request
+   reconstruction (measurement wrapper). Judge each on its own basis.
+6. Never infer, guess, or reconstruct any expected result, signature,
+   classification, or desired experiment outcome. No such material was
+   supplied; any such reconstruction invalidates your verdict.
+
+## Output format (JSON only, then stop)
+
+Return exactly one JSON object with this shape:
+
+{
+  "verdict_id": "AUD-M0X-verdict",
+  "auditor_id": "AUD-M0X",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdicts": {
+    "H": {"status": "FIXED|PARTIAL|AMBIGUOUS|UNSUPPORTED",
+          "locators": ["..."],
+          "notes": "..."},
+    "P_R": {"status": "...", "locators": ["..."], "notes": "..."},
+    "Lambda": {"status": "...", "locators": ["..."], "notes": "..."},
+    "Atom": {"status": "...", "locators": ["..."], "notes": "..."}
+  },
+  "attestation_hash": "<sha256 of your private non-exposure attestation>",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet."
+}
+
+The declaration string must appear verbatim. Every anchor needs at
+least one locator. Do not include any other text.

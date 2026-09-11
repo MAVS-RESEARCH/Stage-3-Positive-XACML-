@@ -139,7 +139,10 @@ Invoke-Step "066" "proving Atom record" {
   & $PythonExe (Join-Path $RepoRoot "src/pc/derive_atom.py") (Join-Path $Fixture "request.xml") (Join-Path $Derived "requests/request_x_permit.xml") (Join-Path $Derived "requests/request_x_nonpermit.xml") (Join-Path $RepoRoot "src/xacml/build_repaired_requests.py") $ExecInputs (Join-Path $Derived "atom_record.json")
 }
 
-# [P2-LOG-070] Step: assemble ledger, judge completeness (0/2/4).
+# [P2-LOG-070] Step: assemble ledger, judge 2A completeness (0/2/4).
+# Under Amendment 001, checker exit 4 (legacy human verdict absent) is
+# the expected steady state: 2A assembly is complete and the operative
+# blind gate is the amended model unanimity check below.
 Write-Output "[P2:phase2:070] assembling anchor ledger"
 & $PythonExe (Join-Path $RepoRoot "src/pc/check_anchor_completeness.py") $RepoRoot $Derived
 $CheckerCode = $LASTEXITCODE
@@ -149,14 +152,26 @@ if ($CheckerCode -eq 2) {
   throw "anchor failure: failure-seal route"
 }
 
-# [P2-LOG-080] Step: build + seal the blind auditor packet.
-Invoke-Step "080" "building blind auditor packet" {
-  & $PythonExe (Join-Path $RepoRoot "src/audit/blind_adjudication.py") --repo-root $RepoRoot --build-packet
+# [P2-LOG-080] Step: ensure the sealed blind auditor packet.
+# Amendment-001 rule: the sealed packet is immutable once built. Rebuild
+# ONLY if absent or corrupt (or via --readjudicate); otherwise verify
+# and reuse, so the amendment-referenced packet hash never drifts.
+Write-Output "[P2:phase2:080] ensuring sealed blind packet"
+& $PythonExe (Join-Path $RepoRoot "scripts/repro_compare.py") packet-verify $RepoRoot
+if ($LASTEXITCODE -ne 0) {
+  Write-Output "[P2:phase2:081] packet absent or corrupt, rebuilding"
+  Invoke-Step "080" "building blind auditor packet" {
+    & $PythonExe (Join-Path $RepoRoot "src/audit/blind_adjudication.py") --repo-root $RepoRoot --build-packet
+  }
+} else {
+  Write-Output "[P2:phase2:081] sealed packet verified, reuse (no rebuild)"
 }
 
 if ($Mode -eq "reproduce") {
   # [P2-LOG-085] Step: reproduce mode verifies + recomputes, no regen.
   Write-Output "[P2:phase2:085] reproduce mode: verify + recompute"
+  & $PythonExe (Join-Path $RepoRoot "src/audit/model_adjudication.py") --repo-root $RepoRoot --check-amendment
+  if ($LASTEXITCODE -ne 0) { throw "reproduce: amendment seal invalid" }
   $ReproDir = Join-Path $WorkDir "phase2-repro"
   if (Test-Path $ReproDir) { Remove-Item -Recurse -Force $ReproDir }
   New-Item -ItemType Directory -Force -Path $ReproDir | Out-Null
@@ -192,17 +207,27 @@ if ($Mode -eq "reproduce") {
   exit 0
 }
 
-# [P2-LOG-090] Step: judge the unlock conjunction before any execution.
-Write-Output "[P2:phase2:090] judging target-audit unlock"
-& $PythonExe (Join-Path $RepoRoot "src/audit/blind_adjudication.py") --repo-root $RepoRoot --assert-unlock
+# [P2-LOG-090] Step: judge the amended model unlock before any execution.
+# Amendment 001 replaces the human-only unlock: unanimous FIXED across
+# three valid cold-model adjudications is required (exit 0). Exit 4 =
+# blocked pending (fewer than three valid records); exit 5 = invalid
+# record (blocked class); exit 3 = valid but nonunanimous verdicts =
+# substantive non-support, failure-seal route, zero execution.
+Write-Output "[P2:phase2:090] judging amended model unlock"
+& $PythonExe (Join-Path $RepoRoot "src/audit/model_adjudication.py") --repo-root $RepoRoot --assert-model-unlock
 $UnlockCode = $LASTEXITCODE
 if ($UnlockCode -eq 4) {
-  Write-Status "BLOCKED_PENDING_ADJUDICATION" "no sealed qualifying blind verdict; completed worlds never executed; target audit locked"
-  Write-Output "[P2:phase2:120] Phase 2 blocked pending adjudication (exit 4)"
+  Write-Status "BLOCKED_PENDING_MODEL_ADJUDICATION" "fewer than three valid cold-model records; completed worlds never executed; target audit locked"
+  Write-Output "[P2:phase2:120] Phase 2 blocked pending model adjudication (exit 4)"
   exit 4
 }
+if ($UnlockCode -eq 5) {
+  Write-Status "MODEL_ADJUDICATION_INVALID" "malformed/incomplete model record; blocked class, not semantic failure; completed worlds never executed"
+  Write-Output "[P2:phase2:120] Phase 2 model adjudication invalid (exit 5)"
+  exit 5
+}
 if ($UnlockCode -eq 3) {
-  Write-Status "ANCHOR_INSUFFICIENT" "blind verdict below FIXED; failure-seal route; completed worlds never executed"
+  Write-Status "MODEL_ADJUDICATION_NONUNANIMOUS" "valid verdict below FIXED on at least one anchor: NATIVE_ANCHOR_INSUFFICIENT; failure-seal route; completed worlds never executed"
   throw "anchor insufficiency: failure-seal route"
 }
 if ($UnlockCode -ne 0) { throw ("unlock judge failed with code {0}" -f $UnlockCode) }

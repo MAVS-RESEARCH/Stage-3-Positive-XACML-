@@ -44,7 +44,11 @@ def test_prereg_hashes_match():
         else:
             recorded[name] = digest
     for name in sorted(os.listdir(prereg_dir)):
-        if name == "prereg_sha256.txt":
+        if name in ("prereg_sha256.txt",
+                    "blind_model_adjudication_prompt.txt"):
+            # The frozen prompt is sealed by Amendment 001, not by the
+            # Phase-1 prereg seal (which stays byte-immutable); its
+            # coverage is asserted in test_prompt_covered_by_amendment.
             continue
         path = os.path.join(prereg_dir, name)
         if os.path.isfile(path):
@@ -54,6 +58,20 @@ def test_prereg_hashes_match():
     assert recorded.get("spec:sha256_raw") == spec["sha256_raw"]
     assert recorded.get("spec:sha256_lf_normalized") == spec[
         "sha256_lf_normalized"]
+
+
+def test_prompt_covered_by_amendment():
+    """Frozen prompt hash matches the Amendment-001 seal record."""
+    # [P1-LOG-T46] Test step: assert prompt seal coverage.
+    print("[P1:test:prereg:046] checking prompt amendment seal",
+          flush=True)
+    with open(os.path.join(REPO_ROOT, "artifacts", "audits",
+                           "amendment_001_seal.json"),
+              encoding="utf-8") as handle:
+        seal = json.load(handle)
+    assert sha256_file(os.path.join(
+        REPO_ROOT, "prereg",
+        "blind_model_adjudication_prompt.txt")) == seal["prompt_sha256"]
 
 
 def test_execution_inputs_valid():

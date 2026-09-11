@@ -9,7 +9,7 @@
   },
   "post_checkpoint": "after repaired request response",
   "pre_checkpoint": "after original MissingAttributeDetail response",
-  "produced_utc": "2026-09-11T12:02:18Z",
+  "produced_utc": "2026-09-11T17:32:10Z",
   "wrapper": {
     "construction_rule": "Copy the frozen original request byte-identically except for inserting exactly one subject Attribute (Category access-subject, AttributeId urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute, DataType xsd:string) carrying the world-specific value. No authorization logic is performed by the wrapper.",
     "diff_evidence": {

@@ -5,7 +5,7 @@
     "H_nonpermit": "5e23086dcf39954491929a6f799cf3b022d7075282d0f6f44fe2992bb0f30ba7",
     "H_permit": "a05f29f5d49a178e214034b9c5db92071580045199868fcd362f9992796e066f"
   },
-  "produced_utc": "2026-09-11T12:02:18Z",
+  "produced_utc": "2026-09-11T17:32:09Z",
   "proof": {
     "ref": "h_equivalence_proof.json",
     "sha256": "4bdacb73382499602c8d63a55a129aeab68bad58038f332d9143a5a1f04aa7e9",

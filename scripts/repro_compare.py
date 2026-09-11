@@ -98,7 +98,11 @@ def packet_verify(repo_root):
     print("[P2:repro:030] verifying blind-packet hashes", flush=True)
     packet = os.path.join(repo_root, "artifacts", "audits",
                           "blind_anchor_packet")
-    manifest = load(os.path.join(packet, "PACKET_MANIFEST.json"))
+    manifest_path = os.path.join(packet, "PACKET_MANIFEST.json")
+    if not os.path.isfile(manifest_path):
+        print("[P2:repro:031] packet manifest absent", flush=True)
+        fail("blind packet absent")
+    manifest = load(manifest_path)
     bad = []
     for rel, digest in manifest["files"].items():
         with open(os.path.join(packet, rel), "rb") as handle:

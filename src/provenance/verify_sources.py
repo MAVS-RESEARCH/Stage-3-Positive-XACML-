@@ -38,12 +38,17 @@ def sha256_file(path):
 
 
 def git_blob_sha(path):
-    """Recompute the Git blob SHA of a file via `git hash-object`."""
-    completed = subprocess.run(["git", "hash-object", path],
-                               capture_output=True, text=True, timeout=120)
-    if completed.returncode != 0:
-        fail("git hash-object failed for " + path)
-    return completed.stdout.strip()
+    """Recompute the Git blob SHA of a file, config-independent.
+
+    Applies the documented CRLF->LF normalization before hashing (the
+    upstream blobs are LF-normalized; working bytes may be CRLF). This
+    replaces `git hash-object`, whose conversion behavior depends on
+    local Git attributes configuration.
+    """
+    with open(path, "rb") as handle:
+        content = handle.read().replace(b"\r\n", b"\n")
+    header = ("blob %d\0" % len(content)).encode("ascii")
+    return hashlib.sha1(header + content).hexdigest()
 
 
 def main(argv):

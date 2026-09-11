@@ -1,15 +1,15 @@
 {
   "files": {
-    "candidates/H_initial.json": "83360d8102cce396acdc12a2826f1c71177460bf7927647017730000bcdd5dd4",
-    "candidates/H_nonpermit.json": "cfde8e170064a10a2c6b158282a1ae4c6abdea7ed8ce51bc3c9f53251ff5cc8a",
-    "candidates/H_permit.json": "012bc20d22a3cd08c1f988e886f9370c316aa001b420ea966a97bfe3c8229b10",
-    "candidates/anchor_ledger.json": "91307c2eb9bec6bb0de7f11d8ffc0ac8373ff97dac22d37fa3b8c6f9b2590122",
-    "candidates/atom_record.json": "9f42eff62ac656b8e251664a6ae5c413fe6e1ece60ea55d4778594127fe6c430",
+    "candidates/H_initial.json": "b1f017c865cf21ec4be58b961f95963a65d4402d97dc472c53e0890c2928e1f9",
+    "candidates/H_nonpermit.json": "c898bd7672b59bfff617d5d0bc9ae705abddaa57ab42bfb17ea2a4e9fd026be1",
+    "candidates/H_permit.json": "be940514b60f82b37effd196d2870310d101bb41e8d31215ec39c9775e2ced8f",
+    "candidates/anchor_ledger.json": "591c263bcfb2716b1098c739f7e6b0fca4c82da721d28efa07abad067402b3c4",
+    "candidates/atom_record.json": "4fa4e2a44ba63f0e1f9776136a1df7f6506c2fcf4d16792f44bd37af54a0d362",
     "candidates/execution_inputs.json": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407",
-    "candidates/h_equivalence_proof.json": "fbc814fa4a28edc18b1096fb012dc86cdd8bdad3d1eeed4161d1d00e857287ea",
-    "candidates/lambda_record.json": "d28a41f9659099c1f59f46ede4dbc94681ea6fc6934cc1c6d120fb5c49af2cd5",
-    "candidates/policy_adequacy_certificate.json": "6059e016f2640d720fcfdd246081b5852a8046faf8f6f198ef82de767fa2d6b1",
-    "candidates/pr_relation.json": "e39e21031984057b9ca002b5b97d1e1cb61a759803f0b65371c87509dddfcfb6",
+    "candidates/h_equivalence_proof.json": "13047906cf3ae4970c40b1d9cab611ddca2685127024595c33596fca8ef91f60",
+    "candidates/lambda_record.json": "2166eb34bc9e892959a839ff6de7d818c5726296d786a0efe448a870926e7ced",
+    "candidates/policy_adequacy_certificate.json": "fc8c7753d5f88f3eb1c727c7d9e63e51af005bc747b6ac15fc2255dea2de1a6d",
+    "candidates/pr_relation.json": "b09d3861faeb888bfca775077966d8d6ebd315f48abbe6ca31d14144a56e87aa",
     "corpus/COMMIT.txt": "4df8e644d886bc593b4a5a203c74e6e2ec9e3bd0ab38d22f6025ad687512a4a0",
     "corpus/MANIFEST.json": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
     "corpus/RELEASE.json": "024492bf254dfec934d34b44f15693307cbfe184aa8e209f3723b388ff0a872c",
@@ -22,5 +22,5 @@
     "rubric.md": "ac41a4aee965c34ca0b8864591ca83ffaa0ba2cff9092d30d74303909662106f"
   },
   "packet_id": "PC-XACML-S3PLUS-v1-blind-packet",
-  "sealed_utc": "2026-09-11T12:02:19Z"
+  "sealed_utc": "2026-09-11T17:22:21Z"
 }

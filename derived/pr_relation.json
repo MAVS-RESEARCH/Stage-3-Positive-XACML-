@@ -28,7 +28,7 @@
       "issuer": null
     }
   ],
-  "produced_utc": "2026-09-11T12:02:18Z",
+  "produced_utc": "2026-09-11T17:32:09Z",
   "projection_sha256": "77b1a650070fd8ea86c7280a6880678092d6f1bdf631b5a7ebb80b79629cb158",
   "relation_id": "PC-XACML-S3PLUS-v1-PR",
   "rule": "histories h1, h2 are P_R-equivalent iff for every frozen designator coordinate (Category, AttributeId, DataType, Issuer) the named attribute bags compare equal as sorted typed multisets under XACML matching semantics"

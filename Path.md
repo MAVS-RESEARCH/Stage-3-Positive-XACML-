@@ -30,7 +30,7 @@ Prior-work references consulted for format only (not normative): `Downloads\Work
 
 ## 2. Current Repository State
 
-Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5); human blind adjudication pending.
+Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10); human blind adjudication pending (superseded as operative path); zero cold-model verdicts ingested; gate BLOCKED_PENDING_MODEL_ADJUDICATION.
 
 - Local workspace: `<WORKSPACE>`; repo checkout: `<REPO>/`, branch `main`; Phase-1 commit `a4fc9be`; Phase-2 file set staged for commit after this log update (per Sec.3.2).
 - New since Sec.4: `derived/` gains projection/adequacy/route-a/equivalence/Hx3/PR/Lambda/Atom/ledger+json+md; `artifacts/audits/` gains blind packet (20 files) + `H_provenance.json` + `phase2_status.json` (BLOCKED_PENDING_ADJUDICATION); `schemas/` gains ledger + verdict schemas; `src/` gains canonicalize/parse/adequacy/route-a (xacml) + prove/derive-H/PR/Lambda/Atom/checker (pc) + blind_adjudication (audit); `scripts/` gains `run_phase2.ps1`/`.sh` + `repro_compare.py`; `tests/` gains 6 Phase-2 files; `src/xacml/run_authzforce.py` gains evaluation-free `stage_completed_fixture()` (refactor verified: Phase-1 tests still 5/5 at change time).
@@ -144,6 +144,19 @@ Seventh audit round, applied to `WorkPlan.md` plus the affected test code (plan/
 1. Chronology test corrected to the attribution rule: `test_phase1_no_completed_execution.py` no longer scans for bare existence of completed outputs (Phase 2 legitimately creates them). It now asserts refusal exit 2, zero completed markers in Phase-1-tagged logs, zero completed entries in the Phase-1 seal, and original-fixture semantics in sealed Phase-1 responses -- plus a simulated post-Phase-2 regression case proving later outputs do not trip it. Verified: 13/13 tests pass; negative controls prove the checks fail on genuinely Phase-1-attributed violations and pass on clean + simulated post-Phase-2 trees.
 2. Target-audit unlock conjunction: execution allowed iff verdict hash sealed AND H/P_R/Lambda/Atom all FIXED; any PARTIAL/AMBIGUOUS/UNSUPPORTED forbids completed-world execution and routes to `NATIVE_ANCHOR_INSUFFICIENT` + `--failure-seal`. Fixed in the unblinding rule, target-audit bullet, `run_phase2.sh` description, new `blind_adjudication.py --assert-unlock` gate mode (exit 0/3), and the compliance map. Stale hash-only unlock wording purged (verified by sweep).
 WorkPlan compliance: YES. Deviation: none. No Phase-1 re-execution required (no completed execution occurred in Phase 1; established by the corrected attribution test).
+
+### 3.10 Protocol Amendment 001 -- Cold-Model Adjudication (2026-09-11, committed + pushed per Sec.3.2)
+
+Eighth change set, the first protocol amendment (past planning-only mutations). All applied pre-execution (0 completed PDP evaluations, target audit NOT_RUN, touch/K NOT_COMPUTED -- verified by artifact scan), committed as a NEW post-Phase-2A commit; history untouched (no amend/squash/fork/version change; experiment stays PC-XACML-S3PLUS-v1):
+1. `PROTOCOL_AMENDMENT_001.md` (original human requirement preserved, unavailability cause, temporal proof, immutable scope list, single mutation human->3x-cold-model-unanimity, disclosure obligation, provenance: prev WorkPlan blob c5e33ae1, prev spec blob 3dad2c10, prev prereg-seal blob 9be3abf9, packet seal, prompt hash, UTC stamp, pre-commit 3daa703) + `artifacts/audits/amendment_001_seal.json`.
+2. `prereg/blind_model_adjudication_prompt.txt` (frozen, sha 9d983e35; category-name prohibitions only, zero values/outcomes/claims -- scanned); sealed by amendment seal, NOT by the Phase-1 prereg seal (byte-preserved; test_prereg_seal updated to the amended rule + prompt-coverage test).
+3. `src/audit/model_adjudication.py` (ingest with raw->parse->validate pipeline, tamper-evident provenance re-hashing, --assert-model-unlock exits 0/3/4/5, --check-amendment with ancestry check; in-session subagent adjudication refused by isolation rules) + `schemas/model_verdict.schema.json` (AUD-M0[1-3], COLD_MODEL_INDEPENDENT, verbatim declaration const, prompt/packet hashes, isolation affirmations).
+4. `run_phase2.ps1`/`.sh` rewired to the amended gate (checker 0-or-4 continues; model gate maps 0->target audit, 4->BLOCKED_PENDING_MODEL_ADJUDICATION, 5->MODEL_ADJUDICATION_INVALID, 3->NONUNANIMOUS failure-seal; packet ensure-not-rebuild so the referenced seal cannot drift).
+5. `tests/test_model_adjudication.py`: all 18 controls pass (0/1/2->4; unanimous->0 + unlock/ledger artifacts; PARTIAL/AMBIGUOUS/UNSUPPORTED->3; malformed/missing-declaration->5; prompt/packet tamper->4; leakage/cross-read->5; post-seal edit->4; pre-unlock ban + zero-scan; amendment window zero; original-hash invariance incl. byte-identical prereg_sha256; chronology incl. ancestor check).
+6. WorkPlan consistently mutated (2B operative rule with ORIGINAL/OPERATIVE labels, unlock conjunction, schemas/tests/tree, reproduce incl. amendment check, Phase-5 leakage extension, Phase-6 model audit language + claim discipline with allowed paragraph and 7 forbidden strings, compliance map, traceability, status taxonomy, byte-regime rule). `allowed_claims.md` untouched (frozen prereg).
+7. Byte-regime stabilization (genuine defect found by the amendment's own discipline): Git EOL conversion desynced sealed working bytes from blobs (packet seal unverifiable after fresh checkout). Fix: `.gitattributes` (`* -text diff`, byte-exact + textual diffs); blob-SHA tooling replaced config-dependent `git hash-object` with deterministic CRLF->LF normalization in code (proven equal to upstream constants); packet rebuilt once under the stable regime (new seal 00710549; equivalence proven: 9/9 mappings timestamp-only diffs, 4/4 fixture corpus byte-identical, 4/4 remaining corpus EOL-only); runner verifies-not-rebuilds (proven by consecutive runs reusing the seal).
+Evidence: full suite 42 passed + 1 skipped (lock-respecting target skip); --primary exit 4 BLOCKED_PENDING_MODEL_ADJUDICATION; reproduce exit 0; packet verify clean; zero completed outputs; no verdicts exist (ingest set empty).
+WorkPlan compliance: YES. Deviation: none (all deltas are the instructed amendment itself).
 
 ## 4. Phase 1 Log -- External Source Lock and Native Reproduction -- EXECUTED 2026-09-11, PASS
 
@@ -305,6 +318,7 @@ WorkPlan compliance: [YES/NO + detail; post-seal changes -> new version]. Models
 - [x] `Path.md` created with review log, state, bootstrap entry, per-phase templates.
 - [x] Phase 1 gate: 10/10 PASS (see Sec.4 evidence; no STOP; `SOURCE_REPRODUCTION_FAIL` not triggered).
 - [x] Phase 2 gate: 2A PASS + packet sealed; human blind verdict PENDING -> BLOCKED_PENDING_ADJUDICATION (not a failure; no outcome emitted; see Sec.5 evidence).
+- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate locked (0/3 records); original hashes/seals invariant; see Sec.3.10.
 - [ ] Phase 3 gate (TOUCH_DERIVATION_MISMATCH or dual-agreement pass).
 - [ ] Phase 4 gate (SOLVER_MISMATCH / NONTRIVIALITY_FAIL or K pass).
 - [ ] Phase 5 gate (13/13 falsification pass).

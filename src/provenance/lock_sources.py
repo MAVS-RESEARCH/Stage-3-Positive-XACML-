@@ -53,6 +53,20 @@ def fail(message):
     sys.exit(1)
 
 
+def git_blob_sha(fixture_subpath, rel, clone_dir):
+    """Compute the upstream Git blob SHA, config-independent.
+
+    Hashes CRLF->LF normalized bytes with the Git blob header so the
+    result equals the upstream blob ID regardless of local Git
+    attributes configuration (replaces `git hash-object`).
+    """
+    with open(os.path.join(clone_dir, fixture_subpath, rel),
+              "rb") as handle:
+        content = handle.read().replace(b"\r\n", b"\n")
+    header = ("blob %d\0" % len(content)).encode("ascii")
+    return hashlib.sha1(header + content).hexdigest()
+
+
 def run_git(args, cwd):
     """Run a git subprocess and return stripped stdout, failing closed."""
     try:
@@ -138,8 +152,7 @@ def main(argv):
         if not os.path.isfile(src):
             fail("fixture file missing upstream: " + rel)
         shutil.copyfile(src, dst)
-        blob_sha = run_git(["hash-object", os.path.join(FIXTURE_SUBPATH, rel)],
-                           cwd=clone_dir)
+        blob_sha = git_blob_sha(FIXTURE_SUBPATH, rel, clone_dir)
         if blob_sha != EXPECTED_BLOB_SHAS[rel]:
             fail("blob SHA mismatch for %s: got %s want %s"
                  % (rel, blob_sha, EXPECTED_BLOB_SHAS[rel]))

@@ -48,18 +48,29 @@ echo "[P2:phase2:066] proving Atom record"
 # [P2-LOG-070] Step: assemble ledger (0/2/4 semantics honoured by caller).
 echo "[P2:phase2:070] assembling anchor ledger"
 "$PYTHON_EXE" "$REPO_ROOT/src/pc/check_anchor_completeness.py" "$REPO_ROOT" "$DERIVED"
-# [P2-LOG-080] Step: build + seal the blind auditor packet.
-echo "[P2:phase2:080] building blind auditor packet"
-"$PYTHON_EXE" "$REPO_ROOT/src/audit/blind_adjudication.py" --repo-root "$REPO_ROOT" --build-packet
+# [P2-LOG-080] Step: ensure the sealed blind packet (verify, rebuild
+# only if absent or corrupt, so the amendment-referenced hash never
+# drifts; --readjudicate forces a rebuild for fresh adjudication).
+echo "[P2:phase2:080] ensuring sealed blind packet"
+if "$PYTHON_EXE" "$REPO_ROOT/scripts/repro_compare.py" packet-verify "$REPO_ROOT"; then
+  echo "[P2:phase2:081] sealed packet verified, reuse (no rebuild)"
+else
+  echo "[P2:phase2:081] packet absent or corrupt, rebuilding"
+  "$PYTHON_EXE" "$REPO_ROOT/src/audit/blind_adjudication.py" --repo-root "$REPO_ROOT" --build-packet
+fi
 if [ "$MODE" = "reproduce" ]; then
-  # [P2-LOG-085] Step: reproduce mode verifies only.
+  # [P2-LOG-085] Step: reproduce mode verifies only (incl. amendment seal).
   echo "[P2:phase2:085] reproduce mode: verification only"
+  "$PYTHON_EXE" "$REPO_ROOT/src/audit/model_adjudication.py" --repo-root "$REPO_ROOT" --check-amendment
   echo "[P2:phase2:120] Phase 2 reproduce complete"
   exit 0
 fi
-# [P2-LOG-090] Step: judge unlock before any completed-world execution.
-echo "[P2:phase2:090] judging target-audit unlock"
-"$PYTHON_EXE" "$REPO_ROOT/src/audit/blind_adjudication.py" --repo-root "$REPO_ROOT" --assert-unlock
+# [P2-LOG-090] Step: judge the amended model unlock before any execution.
+# Amendment 001: unanimous FIXED across three valid cold-model records
+# unlocks (exit 0); 4 = blocked pending; 5 = invalid record (blocked
+# class); 3 = valid but nonunanimous, failure-seal route, zero execution.
+echo "[P2:phase2:090] judging amended model unlock"
+"$PYTHON_EXE" "$REPO_ROOT/src/audit/model_adjudication.py" --repo-root "$REPO_ROOT" --assert-model-unlock
 # [P2-LOG-100] Step: unlocked target audit only (first completed execution).
 echo "[P2:phase2:100] unlock holds: running target audit"
 TEST_CLASSES="$CLONE_DIR/pdp-testutils/target/test-classes"

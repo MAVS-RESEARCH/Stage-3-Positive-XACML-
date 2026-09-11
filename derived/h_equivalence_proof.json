@@ -105,7 +105,7 @@
     "request_x_nonpermit.xml": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd",
     "request_x_permit.xml": "7e28c8c3041b9608f8cb866ed5a85cccaef8a5906cd16678e27ed656c70bc90a"
   },
-  "produced_utc": "2026-09-11T12:02:18Z",
+  "produced_utc": "2026-09-11T17:32:09Z",
   "proof_id": "PC-XACML-S3PLUS-v1-h-equivalence",
   "provenance": {
     "policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",

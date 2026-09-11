@@ -26,3 +26,7 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - Content-addressed cross-artifact references (timestamps excluded from reference hashes); reproduce mode verifies derivations + ledger + packet (all match).
 - Bugs found and fixed: DataType read from Attribute instead of AttributeValue (None coordinates), destructive-test path in synthetic verdict dirs, packet manifest backslash keys, adequacy manifest ordering, scanner false-positive methodology (verified via Python, not PowerShell matching).
 - Status: BLOCKED_PENDING_ADJUDICATION. Unblocks on delivery of a qualifying independent blind verdict (AUD-XXX, never shown the expectations) via `--seal-verdict`, then rerun unlocks the target audit.
+
+## [Amendment 001] - 2026-09-11 - COLD-MODEL ADJUDICATION SUBSTITUTION (prospective, pre-execution)
+
+- No qualifying human adjudicator available in window; mandatory second-human rule replaced by mandatory three-instance cold-model unanimity protocol (`PROTOCOL_AMENDMENT_001.md` + seal). No estimand/mapping/world/target/cost/interface/expectation/criterion changed. Frozen prompt sealed; 18 adversarial gate controls green. Byte-regime stabilization included (`.gitattributes`, deterministic blob-SHA tooling, one documented packet rebuild with equivalence proof). Gate state: BLOCKED_PENDING_MODEL_ADJUDICATION; 0 completed evaluations; target audit locked.

@@ -56,6 +56,30 @@ def sha256_file(path):
     return digest.hexdigest()
 
 
+VOLATILE_KEYS = {"produced_utc", "sealed_utc", "probed_utc"}
+
+
+def normalized_content_sha256(path):
+    """Hash JSON content with volatile run-stamp keys removed.
+
+    Checkpoint references stay stable across reruns; raw file bytes
+    carry run timestamps by design.
+    """
+    with open(path, "r", encoding="utf-8") as handle:
+        doc = json.load(handle)
+
+    def strip(obj):
+        if isinstance(obj, dict):
+            return {k: strip(v) for k, v in obj.items()
+                    if k not in VOLATILE_KEYS}
+        if isinstance(obj, list):
+            return [strip(v) for v in obj]
+        return obj
+
+    canonical = json.dumps(strip(doc), sort_keys=True).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
+
+
 def load_json(path):
     """Load a JSON document, failing closed on absence."""
     if not os.path.isfile(path):
@@ -210,7 +234,7 @@ def main(argv):
     for checkpoint in ("H_initial", "H_permit", "H_nonpermit"):
         checkpoint_path = os.path.join(derived, "%s.json" % checkpoint)
         checkpoint_doc = load_json(checkpoint_path)
-        h_files[checkpoint] = sha256_file(checkpoint_path)
+        h_files[checkpoint] = normalized_content_sha256(checkpoint_path)
         if not checkpoint_doc.get("attributes"):
             fail("empty H object: " + checkpoint)
     ledger["H"] = {
@@ -311,7 +335,8 @@ def main(argv):
     verdict_path = os.path.join(
         repo_root, "artifacts", "audits", "blind_anchor_verdict.json")
     if not os.path.isfile(verdict_path):
-        print("[P2:chka:042] blind verdict absent: BLOCKED", flush=True)
+        print("[P2:chka:042] legacy human verdict absent (see Amendment "
+              "001 model path): BLOCKED", flush=True)
         sys.exit(EXIT_BLIND_PENDING)
     with open(verdict_path, "r", encoding="utf-8") as handle:
         verdict = json.load(handle)

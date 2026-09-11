@@ -7,7 +7,6 @@ authoritative IMPLEMENTATION_SPEC.md raw + LF-normalized hashes.
 import hashlib
 import json
 import os
-import subprocess
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PINNED_COMMIT = "3cc0e988e1639da48184434cd5c918102ff5b499"
@@ -26,6 +25,19 @@ def sha256_file(path):
         for chunk in iter(lambda: handle.read(65536), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def git_blob_sha(path):
+    """Recompute the upstream Git blob SHA, config-independent.
+
+    Same documented normalization as src/provenance (CRLF->LF, then
+    the Git blob header with SHA-1): never depends on local Git
+    attributes configuration, unlike the `git hash-object` subprocess.
+    """
+    with open(path, "rb") as handle:
+        content = handle.read().replace(b"\r\n", b"\n")
+    header = ("blob %d\0" % len(content)).encode("ascii")
+    return hashlib.sha1(header + content).hexdigest()
 
 
 def load_manifest():
@@ -62,10 +74,7 @@ def test_fixture_blobs_and_content():
         assert os.path.isfile(path), rel
         assert manifest["authzforce"]["fixture_files"][rel][
             "git_blob_sha"] == expected_blob
-        blob = subprocess.run(["git", "hash-object", path],
-                              capture_output=True, text=True,
-                              timeout=120).stdout.strip()
-        assert blob == expected_blob, rel
+        assert git_blob_sha(path) == expected_blob, rel
         digest = sha256_file(path)
         assert digest == manifest["authzforce"]["fixture_files"][rel][
             "sha256"], rel
