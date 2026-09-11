@@ -66,11 +66,26 @@ Verification:
 
 WorkPlan compliance: YES — follows WorkPlan "Repository Contract / Phase 1 ¶1.1" (docs-first commit) and "No-Model-Training Policy" (no code claiming training). Deviation: none.
 
-Models trained: none (and none planned — deterministic experiment; see WorkPlan anti-overfitting contract). Benchmarks run: none yet. Overfitting controls applied: n/a at doc stage beyond sealing the expectation-disjointness design into WorkPlan Phase 5.
+Models trained: none (and none planned — deterministic experiment; see WorkPlan anti-circularity contract). Checks run: none yet. Circularity controls applied: n/a at doc stage beyond the sealed-expectation ordering and the Phase-2B blind-adjudication design in the WorkPlan.
 
 ### 3.2 Commit-and-Push Policy (standing instruction, 2026-09-11)
 
 User instruction: commit and push after each instruction/phase is done. From this point on, every completed phase (§§4–9) ends with: update this file's phase log → `git add` only the intended files → commit with a phase-scoped message → `git push` → record the commit SHA and push result back into the phase log. This bootstrap commit (WorkPlan.md + Path.md, zero code per spec §11-Phase1 ¶1.1) is the first such commit.
+
+### 3.3 WorkPlan Audit Mutation (2026-09-11, committed + pushed per §3.2)
+
+External audit returned 6 CRITICAL / 3 HIGH / 2 MEDIUM findings plus Phase-2B and singleton-table directives against `WorkPlan.md`. All were applied to `WorkPlan.md` (this file: only this log entry plus the §3.1 wording fix above):
+- Spec identity: retracted heading-based "text-identical" claim; `IMPLEMENTATION_SPEC.md` is the single authoritative byte sequence with raw + LF-normalized SHA-256 sealed in Phase 1; absolute local paths removed from sealed docs.
+- Phase 2 split into 2A extraction + 2B blinded adjudication (redacted auditor packet, sealed verdict hashes before unblinding, disagreement resolves against the positive claim).
+- H: resolved-PDP-context capture or per-attribute equivalence proof (`h_equivalence_proof.json`), else `AMBIGUOUS`.
+- P_R: adequacy certificate (`policy_adequacy_certificate.json`) covering selectors/provider channels plus the N1-cited instantiation argument.
+- Atom: hardcoded non-decomposability banned; auditor proves the boundary; Omega_ext/Omega_exp scope lock ("external semantics anchor the measured interface; the finite measurement wrapper itself is experiment-authored").
+- Singleton: `completion_space_certificate.json` with `free_k_relevant_fields == 0` gates cardinality 1.
+- Scanner: generic resource-enum constants allowed in the extractor; action-specific preassignments / input touch fields / `q → E` tables / expectation reads banned.
+- Language: "training/held-out/different benchmarks" and generalization claims purged; verification vs falsification vs sensitivity vs anti-circularity terminology throughout.
+- Phase 5: exact sealed canary expectations (`prereg/canary_expectations.json`) required before any canary runs.
+- Environment: single pinned primary environment (WSL2 Ubuntu LTS + exact JDK/Python/parser), `.sh` authoritative, same env for clean reproduction.
+WorkPlan compliance: YES — mutation implements the audit without relaxing any spec gate; recorded in `CHANGELOG.md` at Phase-1 time as a planning change (no prereg artifact existed yet, so no experiment-version change). Deviation: none.
 
 ## 4. Phase 1 Log — External Source Lock and Native Reproduction — TEMPLATE (fill during implementation)
 
