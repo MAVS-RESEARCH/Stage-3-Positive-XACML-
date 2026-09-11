@@ -99,6 +99,16 @@ Second audit round (1 stale assertion + 5 corrections + 1 wording fix), all appl
 No spec requirement removed; six-phase structure and primary prediction intact.
 WorkPlan compliance: YES. Deviation: none.
 
+### 3.5 Phase-Ordering and Leakage-Hygiene Mutation (2026-09-11, committed + pushed per §3.2)
+
+Third audit round, all applied to `WorkPlan.md` (this file: only this log entry):
+1. Phase-1 execution bug fixed: `run_authzforce.py` supports both modes but Phase 1 invokes original-only (`--phase1-only-original` + gate assertion); completed requests are constructed, never executed; new `test_phase1_no_completed_execution.py`; order locked as Phase 1 → 2A → 2B seal → unblind/target audit (first completed execution) → Phase 3. Phase-1 scope wording corrected (native original-fixture reproduction is in scope; PC extraction/touch/freezes are not).
+2. `prereg/execution_inputs.json` created in Phase 1 (non-outcome inputs only, schema-validated, hashed); boxed rule: all computation reads it, only final comparison reads expected outputs; compiler and scanner updated.
+3. Auditor packet upgraded to full frozen corpus + excerpt index (no evidence-selection bias); H-capture restricted to already-exposed non-mutating mechanisms (no AuthzForce instrumentation, else equivalence proof or AMBIGUOUS).
+4. Completion table gained the Y/outcome-semantics row (induced by omega/Succ+/A_Pi).
+5. Phase-6 duplicate CHANGELOG bullet deleted (single lifecycle record); blind attestation uses anonymous auditor IDs in releases, identity-bearing original retained privately.
+WorkPlan compliance: YES. Deviation: none.
+
 ## 4. Phase 1 Log — External Source Lock and Native Reproduction — TEMPLATE (fill during implementation)
 
 Scope executed: [which of §1.1–1.7 done; note any deferral].
