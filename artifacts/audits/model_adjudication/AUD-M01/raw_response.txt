@@ -1,0 +1,40 @@
+{
+"verdict_id": "AUD-M01-verdict",
+"auditor_id": "AUD-M01",
+"qualification": "COLD_MODEL_INDEPENDENT",
+"verdicts": {
+"H": {
+"status": "PARTIAL",
+"locators": ["corpus/fixture/request.xml:1-19", "corpus/fixture/pdp.xml:1-9", "corpus/fixture/policies/policy.xml:14-43", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.5.29 AttributeDesignator", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.4 Attribute Matching", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.5 Attribute Retrieval", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.3.1 Data-flow model", "candidates/H_initial.json", "candidates/h_equivalence_proof.json:global_conditions"],
+"notes": "Request-side bags for H_initial directly match corpus/fixture/request.xml values and designator matching/bag semantics in Sec.5.29/7.3.4/7.3.5 support multimap keyed by Category/AttributeId/DataType. Not FIXED: Issuer-or-null keying conflicts with Sec.7.3.4 Issuer-agnostic matching when designator omits Issuer; Sec.7.3.5 handler MAY add attributes and Sec.7.3.6 SHALL supply environment values leave handler-added content undetermined; Content/RequestDefaults/MultiRequests/IncludeInResult and sorted-multiset canonicalization allow materially different source-consistent H variants; permit/nonpermit histories depend on derived requests absent from packet (hashes only)."
+},
+"P_R": {
+"status": "PARTIAL",
+"locators": ["corpus/fixture/policies/policy.xml:14-43", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.5.29 AttributeDesignator", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.5 Attribute Retrieval", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.6 Match evaluation", "corpus/fixture/pdp.xml:1-9", "candidates/pr_relation.json:designator_coordinates", "candidates/policy_adequacy_certificate.json:channel_inventory"],
+"notes": "Four distinct designator coordinates verified by complete read of corpus/fixture/policies/policy.xml with no selectors/XPath, and Sec.5.29/7.3.5/7.6 support designator-bag projection as authorization-visible. Not FIXED: Issuer-inclusive iff vs Sec.7.3.4 Issuer-agnostic matching, sorted typed multiset canonicalization, missing versus empty versus Indeterminate handling under MustBePresent true, and completeness over extra attributes/Content/environment/provider channels remain undetermined, permitting materially different source-consistent equivalence relations."
+},
+"Lambda": {
+"status": "UNSUPPORTED",
+"locators": ["corpus/fixture/pdp.xml:1-9", "corpus/fixture/policies/policy.xml:1-48", "corpus/RELEASE.json", "corpus/COMMIT.txt", "corpus/MANIFEST.json:authzforce.fixture_files+implementation_spec", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.3.1 Data-flow model", "candidates/lambda_record.json:components+pre_hash+post_hash+equality_criterion"],
+"notes": "Partial pinning exists via pdp/policy hashes matching MANIFEST and release/commit plus data-flow interface notion. As stated hash-pinned capability inadequate: provider hash and preprocessor default-absent have no packet source file, empty provider set as implementation default unverified without implementation code, implementation spec referenced in MANIFEST absent from packet, hash derivation method absent, post_hash null so constant-Lambda equality criterion unevidenced."
+},
+"Atom": {
+"status": "PARTIAL",
+"locators": ["corpus/xacml-3.0-core-spec-cos01-en.html:Sec.3.1 Data-flow model", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.19.3 Missing attributes", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.5.57 StatusDetail", "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.5.58 MissingAttributeDetail", "corpus/fixture/request.xml:1-19", "corpus/fixture/response.xml:1-14", "candidates/atom_record.json:native_transaction+wrapper", "candidates/execution_inputs.json:action_interface"],
+"notes": "(a) Native PEP-style submission to handler to PDP evaluation to response justified by Sec.3.1 data-flow plus Sec.7.19.3 resubmission pattern and response.xml Indeterminate missing-attribute with MissingAttributeDetail. (b) Wrapper-as-pure-construction claim unsupported in packet: repaired requests absent except hashes, builder verification absent, so byte-identical copy plus single Attribute insertion and no-authorization-logic cannot be verified to merely invoke native transaction. Native proven, wrapper not, hence not FIXED."
+}
+},
+"attestation_hash": "9531a83c82db3d2b6f78451c1d5ccaa429ff9e21a486efcd82a5b6664981b793",
+"declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet.",
+"prompt_sha256": "9d983e35fa05090bb1a889358d3dfc54b3e687667e3bce3f359b6261f8265651",
+"packet_sha256": "007105496cc70525810ba9da1da44680ebcc9c506280a33f793cf6588572c413",
+"isolation": {
+"fresh_context": true,
+"no_prior_experiment_context": true,
+"other_outputs_unavailable": true,
+"provider": "UNKNOWN_NOT_EXPOSED",
+"model_id": "UNKNOWN_NOT_EXPOSED",
+"sampling": "UNKNOWN_NOT_EXPOSED",
+"tools_web_disabled": true
+}
+}

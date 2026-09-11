@@ -39,7 +39,7 @@
   ],
   "checkpoint": "S_nonpermit",
   "history_id": "PC-XACML-S3PLUS-v1-H_nonpermit",
-  "produced_utc": "2026-09-11T17:32:09Z",
+  "produced_utc": "2026-09-11T18:56:44Z",
   "proof": {
     "ref": "h_equivalence_proof.json",
     "sha256": "4bdacb73382499602c8d63a55a129aeab68bad58038f332d9143a5a1f04aa7e9",

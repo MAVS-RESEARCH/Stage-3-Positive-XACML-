@@ -31,6 +31,10 @@ All notable changes to this experiment package. Post-preregistration changes to 
 
 - No qualifying human adjudicator available in window; mandatory second-human rule replaced by mandatory three-instance cold-model unanimity protocol (`PROTOCOL_AMENDMENT_001.md` + seal). No estimand/mapping/world/target/cost/interface/expectation/criterion changed. Frozen prompt sealed; 18 adversarial gate controls green. Byte-regime stabilization included (`.gitattributes`, deterministic blob-SHA tooling, one documented packet rebuild with equivalence proof). Gate state: BLOCKED_PENDING_MODEL_ADJUDICATION; 0 completed evaluations; target audit locked.
 
+## [Verdicts] - 2026-09-11 - THREE VALID NONUNANIMOUS RECORDS, FAILURE-SEAL ROUTE
+
+- AUD-M01/M02/M03 ingested valid (exits 0,0,0; tallies PARTIAL/PARTIAL/UNSUPPORTED/PARTIAL, PARTIAL x4, PARTIAL/PARTIAL/FIXED/PARTIAL). Amended gate exit 3 MODEL_ADJUDICATION_NONUNANIMOUS: positive Stage-III witness NOT obtained; routes to NATIVE_ANCHOR_INSUFFICIENT via failure-seal (formal seal = Phase-6 action). Target audit never ran; Phases 3+ untouched; 0 completed PDP evaluations throughout. One non-conforming AUD-2B7 chat input preserved as correspondence, not ingested.
+
 ## [Follow-up] - 2026-09-11 - EOL BLOB NORMALIZATION (no seal changes)
 
 - `* -text diff` byte-regime was masked by stale git stat-cache; restaged blobs byte-faithful (8 files, EOL-only diffs); blob-SHA tooling made config-independent (equal to upstream constants). Fresh-clone proof: full suite 42 passed + 1 skipped with all seals intact.

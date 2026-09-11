@@ -1,0 +1,61 @@
+{
+  "attestation_hash": "9531a83c82db3d2b6f78451c1d5ccaa429ff9e21a486efcd82a5b6664981b793",
+  "auditor_id": "AUD-M02",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet.",
+  "isolation": {
+    "fresh_context": true,
+    "model_id": "UNKNOWN_NOT_EXPOSED",
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true,
+    "provider": "UNKNOWN_NOT_EXPOSED",
+    "sampling": "UNKNOWN_NOT_EXPOSED",
+    "tools_web_disabled": true
+  },
+  "packet_sha256": "007105496cc70525810ba9da1da44680ebcc9c506280a33f793cf6588572c413",
+  "prompt_sha256": "9d983e35fa05090bb1a889358d3dfc54b3e687667e3bce3f359b6261f8265651",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-M02-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html data-flow raw lines 3440-3510 plus glossary Context handler/PDP/PEP raw lines 2442-2540",
+        "corpus/fixture/response.xml lines 1-14 plus Sec 5.57-5.58 StatusDetail/MissingAttributeDetail raw lines 11557-11680 and Sec 7.3.5 Indeterminate handling",
+        "corpus/fixture/request.xml lines 1-19 plus corpus/fixture/policies/policy.xml lines 18-21 (MustBePresent true missing coordinate)",
+        "PACKET_MANIFEST.json files list: repaired request files and wrapper implementation absent; candidates/atom_record.json wrapper evidence is hash-only"
+      ],
+      "notes": "(a) Native PEP-style submission, handler-constructed context, PDP evaluation, response context is externally justified by data-flow and glossary plus observed Indeterminate/missing-attribute response. (b) Wrapper-merely-constructs/invokes claim is not packet-supported: byte-identical-except-one-insertion rule is experiment-authored, repaired files and implementation source are absent, and no-auth-logic cannot be verified from packet. Overall not FIXED; native part fixed, wrapper part partial.",
+      "status": "PARTIAL"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/request.xml lines 1-19",
+        "candidates/H_initial.json lines 1-43 and candidates/h_equivalence_proof.json",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.5 Attribute Retrieval raw lines 12147-12192 and data-flow raw lines 3440-3510",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.4 Attribute Matching raw lines 12104-12146 and Sec 7.3.6 Environment Attributes raw lines 12193-12200",
+        "PACKET_MANIFEST.json files list: no repaired request files and no handler-behavior probes"
+      ],
+      "notes": "Request-to-multimap core is packet-supported: H_initial values match request.xml and keying by Category/AttributeId/DataType parallels Sec 7.3.4/7.3.5. Not FIXED because resolved-context completeness is not determined: handler MAY add attributes without request and SHALL supply environment values, PDP references context via handler/PIP, so file projection versus PDP-visible context remain distinct source-consistent readings. Repaired checkpoints rely on absent files with hash-only references. Issuer-or-null keying leaves Issuer-absent wildcard alternative where context Issuer variations are ignored.",
+      "status": "PARTIAL"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml lines 1-48 and corpus/fixture/pdp.xml lines 1-9 with corpus/MANIFEST.json, corpus/COMMIT.txt, corpus/RELEASE.json",
+        "corpus/xacml-3.0-core-spec-cos01-en.html data-flow raw lines 3440-3510",
+        "candidates/lambda_record.json lines 1-17 (pre_hash opaque, post_hash null, provider/preprocessor entries)",
+        "PACKET_MANIFEST.json files list: no provider, preprocessor, or interface sources"
+      ],
+      "notes": "Frozen policy, PDP config child set, version/commit, and request/response interface are packet-fixed. Not FIXED because full capability including provider set, preprocessor, and interface constancy is not determined: provider/preprocessor hashes have no packet files, equality criterion post==pre cannot be checked with null post, and multiple source-consistent realizations with different retrieval behavior remain.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml lines 11-46 (5 designators collapsing to 4 distinct coordinates)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.4 raw lines 12104-12146, Sec 7.3.5 raw lines 12147-12192, Sec 7.6 Match evaluation raw lines 12348-12420",
+        "corpus/fixture/pdp.xml lines 1-9 (only policyProvider child)",
+        "PACKET_MANIFEST.json files list: channel-inventory and projection probes absent"
+      ],
+      "notes": "Designator set and bag/Match semantics are substantially packet-supported: policy shows only designators with MustBePresent true and string-equal/anyURI-equal Matches; retrieval and Match evaluation define bag and True/False/Indeterminate handling. Not FIXED because exclusivity (only these coordinates matter) depends on absent probes for selectors/Content/provider channels plus handler MAY-add and environment SHALL-supply freedom. Issuer-sensitive equality conflicts with Issuer-absent wildcard rule; bag-equality necessity exceeds sources which establish sufficiency for same Match outcomes.",
+      "status": "PARTIAL"
+    }
+  }
+}

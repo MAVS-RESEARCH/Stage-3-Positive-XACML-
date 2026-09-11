@@ -1,0 +1,59 @@
+{
+  "attestation_hash": "9531a83c82db3d2b6f78451c1d5ccaa429ff9e21a486efcd82a5b6664981b793",
+  "auditor_id": "AUD-M03",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet.",
+  "isolation": {
+    "fresh_context": true,
+    "model_id": "UNKNOWN_NOT_EXPOSED",
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true,
+    "provider": "UNKNOWN_NOT_EXPOSED",
+    "sampling": "UNKNOWN_NOT_EXPOSED",
+    "tools_web_disabled": true
+  },
+  "packet_sha256": "007105496cc70525810ba9da1da44680ebcc9c506280a33f793cf6588572c413",
+  "prompt_sha256": "9d983e35fa05090bb1a889358d3dfc54b3e687667e3bce3f359b6261f8265651",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-M03-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 3.1 raw lines 3460-3503 steps 2-4 PEP-to-handler-to-PDP and steps 10-12 PDP-evaluates-returns-via-handler plus Sec. 3.2 raw lines 3515-3532",
+        "candidates/atom_record.json native_transaction/wrapper/construction_rule/diff_evidence/no_authorization_logic plus candidates/execution_inputs.json action_interface/construction_rule/worlds",
+        "corpus/fixture/request.xml lines 1-19 plus corpus/fixture/response.xml lines 1-14 plus candidates/H_permit.json plus candidates/H_nonpermit.json",
+        "MISSING in packet per PACKET_MANIFEST.json: builder src/xacml/build_repaired_requests.py code, repaired request XML bytes only hashes 7e28c8c3/f5c3b09f, preregistration record"
+      ],
+      "notes": "(a) Native PEP-style submission to handler to PDP to response transaction proven via data-flow. (b) Wrapper copy-byte-identically-plus-one-Attribute with no authorization logic asserted but builder code and repaired bytes absent; counts/hashes and H-level consistency corroborate intent but cannot prove mechanism or absence of runtime evaluation. World values matching policy literal show policy-informed test design. Residual wrapper freedom material to attribution, so not FIXED.",
+      "status": "PARTIAL"
+    },
+    "H": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 5.29 raw lines 9755-9853 Category/AttributeId/DataType/Issuer matching and MustBePresent",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.5 raw lines 12149-12190 plus Sec. 3.2 raw lines 3515-3532 canonical request context and handler/PDP bags",
+        "corpus/fixture/request.xml lines 1-19 plus corpus/fixture/policies/policy.xml lines 1-48 plus corpus/fixture/response.xml lines 1-14 plus corpus/fixture/pdp.xml lines 1-9",
+        "candidates/H_initial.json plus candidates/H_permit.json plus candidates/H_nonpermit.json plus candidates/h_equivalence_proof.json attribute_rows/global_conditions plus candidates/execution_inputs.json worlds"
+      ],
+      "notes": "Key structure keyed by Category/AttributeId/DataType/Issuer-or-null and original 3-attr mapping verified by direct inspection. Repaired 4-attr mappings assume passthrough for worlds with no frozen repaired XMLs/responses in packet and rely on non-packet evidences derived/route_a_probe.json and derived/requests bag coordinates per PACKET_MANIFEST.json file list. Handler MAY-add freedom and empty-environment/IncludeInResult canonicalization leave PDP-visible bag uncertainty material to exact H values, so not FIXED.",
+      "status": "PARTIAL"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/fixture/pdp.xml lines 1-9 sha 2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d plus corpus/fixture/policies/policy.xml lines 1-48 sha 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64 plus corpus/MANIFEST.json plus corpus/COMMIT.txt plus corpus/RELEASE.json",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 3.1 raw lines 3432-3510 PEP/handler/PDP data-flow plus candidates/lambda_record.json components/equality_criterion",
+        "MISSING in packet per PACKET_MANIFEST.json: policy_provider_sha256 73ebcf1d source, request_preprocessor default-absent-in-pdp.xml source, pre_hash bb2c3c94 construction, post_hash null, IMPLEMENTATION_SPEC.md referenced in MANIFEST.json absent from corpus/"
+      ],
+      "notes": "Frozen policy/pdp/interface portion fixed via matching hashes and data-flow. Provider implementation, preprocessor, empty attribute_provider_set beyond pdp children, hash construction and constancy check remain unverified without implementation sources. Alternative capability delineations remain, so constant-Lambda claim not fully determined for the interface.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml lines 14-43 five occurrences four distinct coordinates subject-id/some-attribute/resource-id/action-id MustBePresent true zero selectors/Content/references",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.6 raw lines 12348-12408 Match evaluation plus Sec. 7.3.5 raw lines 12149-12190 plus Sec. 5.29 raw lines 9831-9853",
+        "candidates/pr_relation.json designator_coordinates plus candidates/policy_adequacy_certificate.json channel_inventory/n1_locators/pr_instantiation_argument",
+        "corpus/fixture/pdp.xml lines 1-9 only policyProvider plus corpus/fixture/response.xml lines 1-14 Indeterminate/missing-attribute for some-attribute"
+      ],
+      "notes": "Four-coordinate set exactly exhausts complete policy designator inventory verified by full policy read; no selectors/XPath/references/provider channels per packet fixtures. Retrieval plus Match semantics pin designator-result vector as complete authorization-visible projection for this fixture. Issuer-null and sorted-multiset canonicalization immaterial for null-Issuer two-world interface. No source-consistent alternative coordinate set remains affecting the interface.",
+      "status": "FIXED"
+    }
+  }
+}

@@ -30,7 +30,7 @@ Prior-work references consulted for format only (not normative): `Downloads\Work
 
 ## 2. Current Repository State
 
-Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10) plus EOL-normalization follow-up plus one rejected non-conforming input (Sec.3.11); human blind adjudication pending (superseded as operative path); zero valid cold-model records ingested; gate BLOCKED_PENDING_MODEL_ADJUDICATION.
+Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10) plus EOL-normalization follow-up plus one rejected non-conforming input (Sec.3.11) plus three valid nonunanimous verdicts (Sec.3.12); human blind adjudication pending (superseded as operative path); gate MODEL_ADJUDICATION_NONUNANIMOUS, failure-seal route; zero executions; target audit never ran.
 
 - Local workspace: `<WORKSPACE>`; repo checkout: `<REPO>/`, branch `main`; Phase-1 commit `a4fc9be`; Phase-2 file set staged for commit after this log update (per Sec.3.2).
 - New since Sec.4: `derived/` gains projection/adequacy/route-a/equivalence/Hx3/PR/Lambda/Atom/ledger+json+md; `artifacts/audits/` gains blind packet (20 files) + `H_provenance.json` + `phase2_status.json` (BLOCKED_PENDING_ADJUDICATION); `schemas/` gains ledger + verdict schemas; `src/` gains canonicalize/parse/adequacy/route-a (xacml) + prove/derive-H/PR/Lambda/Atom/checker (pc) + blind_adjudication (audit); `scripts/` gains `run_phase2.ps1`/`.sh` + `repro_compare.py`; `tests/` gains 6 Phase-2 files; `src/xacml/run_authzforce.py` gains evaluation-free `stage_completed_fixture()` (refactor verified: Phase-1 tests still 5/5 at change time).
@@ -169,6 +169,19 @@ A single chat-text input claiming auditor ID AUD-2B7 arrived in-session (verdict
 4. Content is non-unanimous anyway (PARTIAL/AMBIGUOUS present), so it could never unlock even if valid.
 5. Human-path reading likewise insufficient (single record; human-only unlock superseded by Amendment 001).
 Mechanical proof (not fiat): `--ingest` of the input on an isolated temp root exits 5 INVALID (raw JSON unparseable); `--assert-model-unlock` on the real repo exits 4 with 0/3 valid records. Full suite still 42 passed + 1 skipped; zero target outputs; no verdict records created; no Phase-3+ execution. Its substantive objections are neither accepted nor rebutted as findings -- non-evidence cannot move the gate in either direction (no forced failure-seal on invalid input, no credit toward unanimity).
+WorkPlan compliance: YES. Deviation: none.
+
+### 3.12 Three Cold-Model Verdicts Ingested -- Gate NONUNANIMOUS, Failure-Seal Route (2026-09-11, committed + pushed per Sec.3.2)
+
+Externally supplied raw verdicts for AUD-M01/M02/M03 arrived as chat text and were transcribed byte-faithfully (manual transcription caveat recorded here: no external byte reference exists; hashes below are of the transcribed files) to temp files OUTSIDE the repo, then ingested strictly via `model_adjudication.py --ingest` with zero hand-editing:
+- AUD-M01 ingest exit 0 (valid). Tally: H PARTIAL, P_R PARTIAL, Lambda UNSUPPORTED, Atom PARTIAL.
+- AUD-M02 ingest exit 0 (valid). Tally: H PARTIAL, P_R PARTIAL, Lambda PARTIAL, Atom PARTIAL.
+- AUD-M03 ingest exit 0 (valid). Tally: H PARTIAL, P_R FIXED, Lambda PARTIAL, Atom PARTIAL.
+- Amended gate `--assert-model-unlock` exit 3: MODEL_ADJUDICATION_NONUNANIMOUS (all three adjudicators listed). No anchor reaches unanimous FIXED (closest is P_R at 2/3; Lambda draws the sole UNSUPPORTED).
+- Official `run_phase2.ps1 -Mode primary` reproduced the same path (packet verified + reused, seal intact) and wrote phase2_status MODEL_ADJUDICATION_NONUNANIMOUS, then threw the designed failure-seal-route error WITHOUT executing the target audit and WITHOUT touching Phase 3+.
+Outcome determination (mechanical, not discretionary): the positive Stage-III witness is NOT obtained. Per the amended protocol the experiment routes to NATIVE_ANCHOR_INSUFFICIENT via failure-seal (formal seal = Phase-6 action, not executed this turn). This is the fail-closed design working: independent adjudication declined to certify point identification, so no touch/K/result was manufactured.
+Observations recorded without invented criteria: all three verdicts carry the identical attestation_hash 9531a83c... (protocol requires presence, not distinctness -- noted, not failed); transcription fidelity is best-effort manual; verdict contents are neither endorsed nor rebutted as findings beyond the gate verdict (non-evidence cannot move the gate, and here the valid records moved it exactly as specified: to failure-seal).
+Tests evolved to the new true state (same strictness, documented): test_15 now asserts gate exit 3 with zero outputs (was: exit 4 with zero records); test_16 now asserts three valid provenances exist with zero outputs (was: records absent). Full suite 42 passed + 1 lock-respecting skip. Seals intact (packet 00710549, prompt, spec, prereg). Zero completed PDP evaluations before, during, and after ingestion.
 WorkPlan compliance: YES. Deviation: none.
 
 ## 4. Phase 1 Log -- External Source Lock and Native Reproduction -- EXECUTED 2026-09-11, PASS
@@ -331,7 +344,7 @@ WorkPlan compliance: [YES/NO + detail; post-seal changes -> new version]. Models
 - [x] `Path.md` created with review log, state, bootstrap entry, per-phase templates.
 - [x] Phase 1 gate: 10/10 PASS (see Sec.4 evidence; no STOP; `SOURCE_REPRODUCTION_FAIL` not triggered).
 - [x] Phase 2 gate: 2A PASS + packet sealed; human blind verdict PENDING -> BLOCKED_PENDING_ADJUDICATION (not a failure; no outcome emitted; see Sec.5 evidence).
-- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate locked (0/3 records); one non-conforming input mechanically rejected (Sec.3.11); original hashes/seals invariant; EOL follow-up committed; fresh-clone suite green (42+1); see Sec.3.10.
+- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate NONUNANIMOUS exit 3 on three valid records (failure-seal route, zero executions); one non-conforming input mechanically rejected (Sec.3.11); original hashes/seals invariant; EOL follow-up committed; fresh-clone suite green (42+1); see Sec.3.10/3.12.
 - [ ] Phase 3 gate (TOUCH_DERIVATION_MISMATCH or dual-agreement pass).
 - [ ] Phase 4 gate (SOLVER_MISMATCH / NONTRIVIALITY_FAIL or K pass).
 - [ ] Phase 5 gate (13/13 falsification pass).

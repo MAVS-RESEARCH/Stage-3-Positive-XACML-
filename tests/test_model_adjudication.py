@@ -343,25 +343,34 @@ def repo_target_scan():
 
 
 def test_15_no_execution_before_unlock():
-    """Control 15: gate refuses everywhere short of unanimity; repo clean."""
+    """Control 15: gate refuses everywhere short of unanimous unlock."""
     # [P2-LOG-T70] Test step: assert pre-unlock execution ban.
     print("[P2:test:model:070] pre-unlock execution ban", flush=True)
     try:
         model.assert_model_unlock(REPO_ROOT)
     except SystemExit as exc:
-        assert exc.code == 4, exc.code
+        # Current true state: three valid but nonunanimous records
+        # exist, so the gate exits 3 (failure-seal route). Any
+        # non-zero exit proves no execution path opened; exit 0 here
+        # would be the failure.
+        assert exc.code == 3, exc.code
     else:
-        raise AssertionError("real-repo gate granted without verdicts")
+        raise AssertionError("real-repo gate granted without unanimity")
     assert repo_target_scan() == []
 
 
 def test_16_zero_executions_during_amendment():
-    """Control 16: amendment/adjudication window shows zero executions."""
+    """Control 16: three valid records exist yet execution stays zero."""
     # [P2-LOG-T72] Test step: assert zero-execution window.
     print("[P2:test:model:072] zero-execution window", flush=True)
     assert repo_target_scan() == []
-    assert not os.path.isdir(os.path.join(
-        REPO_ROOT, "artifacts", "audits", "model_adjudication"))
+    for auditor in ("AUD-M01", "AUD-M02", "AUD-M03"):
+        provenance_path = os.path.join(
+            REPO_ROOT, "artifacts", "audits", "model_adjudication",
+            auditor, "provenance.json")
+        assert os.path.isfile(provenance_path), auditor
+        with open(provenance_path, encoding="utf-8") as handle:
+            assert json.load(handle)["valid"] is True, auditor
     assert os.path.isfile(os.path.join(
         REPO_ROOT, "artifacts", "audits", "amendment_001_seal.json"))
 
