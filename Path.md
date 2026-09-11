@@ -30,7 +30,7 @@ Prior-work references consulted for format only (not normative): `Downloads\Work
 
 ## 2. Current Repository State
 
-Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10) plus EOL-normalization follow-up; human blind adjudication pending (superseded as operative path); zero cold-model verdicts ingested; gate BLOCKED_PENDING_MODEL_ADJUDICATION.
+Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10) plus EOL-normalization follow-up plus one rejected non-conforming input (Sec.3.11); human blind adjudication pending (superseded as operative path); zero valid cold-model records ingested; gate BLOCKED_PENDING_MODEL_ADJUDICATION.
 
 - Local workspace: `<WORKSPACE>`; repo checkout: `<REPO>/`, branch `main`; Phase-1 commit `a4fc9be`; Phase-2 file set staged for commit after this log update (per Sec.3.2).
 - New since Sec.4: `derived/` gains projection/adequacy/route-a/equivalence/Hx3/PR/Lambda/Atom/ledger+json+md; `artifacts/audits/` gains blind packet (20 files) + `H_provenance.json` + `phase2_status.json` (BLOCKED_PENDING_ADJUDICATION); `schemas/` gains ledger + verdict schemas; `src/` gains canonicalize/parse/adequacy/route-a (xacml) + prove/derive-H/PR/Lambda/Atom/checker (pc) + blind_adjudication (audit); `scripts/` gains `run_phase2.ps1`/`.sh` + `repro_compare.py`; `tests/` gains 6 Phase-2 files; `src/xacml/run_authzforce.py` gains evaluation-free `stage_completed_fixture()` (refactor verified: Phase-1 tests still 5/5 at change time).
@@ -159,6 +159,17 @@ Evidence: full suite 42 passed + 1 skipped (lock-respecting target skip); --prim
 WorkPlan compliance: YES. Deviation: none (all deltas are the instructed amendment itself).
 
 Follow-up (same day, separate commit 43cbdc3 -- history preserved, no amend/squash): the byte-regime fix exposed stale stat-cache masking (git status falsely clean while index LF-blobs differed from sealed CRLF working bytes) plus a config-dependent `git hash-object` in the Phase-1 tooling. Fixed by: `git rm --cached` + full re-add under `* -text diff` (blobs now byte-faithful; 8 files re-stored, content identical modulo EOL, zero seal changes) and deterministic CRLF->LF blob-SHA in code (proven equal to upstream constants). Decisive proof: fresh `git clone` of the new HEAD runs the FULL suite green (42 passed + 1 lock-respecting skip) with the amendment-referenced packet seal intact (00710549). Phase-5 clean-reproduction path is thereby unblocked on any machine honoring the committed attributes.
+
+### 3.11 Non-Conforming Adjudication Input AUD-2B7 -- Received, Rejected, Gate Unchanged (2026-09-11, committed + pushed per Sec.3.2)
+
+A single chat-text input claiming auditor ID AUD-2B7 arrived in-session (verdicts H=PARTIAL, P_R=FIXED, Lambda=AMBIGUOUS, Atom=PARTIAL, overall NO), preserved byte-faithfully (to transcription fidelity) at `artifacts/audits/correspondence/2026-09-11-aud-2b7-input.txt` with a disposition header. It is correspondence, NOT evidence, and was NOT ingested:
+1. Count: ONE input; the amended gate requires THREE valid records (0/3 -> BLOCKED).
+2. Identity: AUD-2B7 is not in {AUD-M01, AUD-M02, AUD-M03} (schema pattern ^AUD-M0[1-3]$).
+3. Form: chat prose, not schema-conformant verdict.json (no verdict_id/qualification/prompt_sha256/packet_sha256/isolation object; unattributable attestation string).
+4. Content is non-unanimous anyway (PARTIAL/AMBIGUOUS present), so it could never unlock even if valid.
+5. Human-path reading likewise insufficient (single record; human-only unlock superseded by Amendment 001).
+Mechanical proof (not fiat): `--ingest` of the input on an isolated temp root exits 5 INVALID (raw JSON unparseable); `--assert-model-unlock` on the real repo exits 4 with 0/3 valid records. Full suite still 42 passed + 1 skipped; zero target outputs; no verdict records created; no Phase-3+ execution. Its substantive objections are neither accepted nor rebutted as findings -- non-evidence cannot move the gate in either direction (no forced failure-seal on invalid input, no credit toward unanimity).
+WorkPlan compliance: YES. Deviation: none.
 
 ## 4. Phase 1 Log -- External Source Lock and Native Reproduction -- EXECUTED 2026-09-11, PASS
 
@@ -320,7 +331,7 @@ WorkPlan compliance: [YES/NO + detail; post-seal changes -> new version]. Models
 - [x] `Path.md` created with review log, state, bootstrap entry, per-phase templates.
 - [x] Phase 1 gate: 10/10 PASS (see Sec.4 evidence; no STOP; `SOURCE_REPRODUCTION_FAIL` not triggered).
 - [x] Phase 2 gate: 2A PASS + packet sealed; human blind verdict PENDING -> BLOCKED_PENDING_ADJUDICATION (not a failure; no outcome emitted; see Sec.5 evidence).
-- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate locked (0/3 records); original hashes/seals invariant; EOL follow-up committed; fresh-clone suite green (42+1); see Sec.3.10.
+- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate locked (0/3 records); one non-conforming input mechanically rejected (Sec.3.11); original hashes/seals invariant; EOL follow-up committed; fresh-clone suite green (42+1); see Sec.3.10.
 - [ ] Phase 3 gate (TOUCH_DERIVATION_MISMATCH or dual-agreement pass).
 - [ ] Phase 4 gate (SOLVER_MISMATCH / NONTRIVIALITY_FAIL or K pass).
 - [ ] Phase 5 gate (13/13 falsification pass).
