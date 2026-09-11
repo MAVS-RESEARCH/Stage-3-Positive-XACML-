@@ -1,0 +1,46 @@
+{
+  "authzforce": {
+    "commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+    "fixture_files": {
+      "pdp.xml": {
+        "git_blob_sha": "01a0adc080253afc2c523a0b8e58e8578e8275eb",
+        "sha256": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d"
+      },
+      "policies/policy.xml": {
+        "git_blob_sha": "698af364ba2db79534cc654765baaed4d1c8f867",
+        "sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64"
+      },
+      "request.xml": {
+        "git_blob_sha": "ff6582db3d9c2bd00ae87e69279c23057b14a47a",
+        "sha256": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540"
+      },
+      "response.xml": {
+        "git_blob_sha": "835d483564a1c3ab052e0dbbd24c2258e5a5c295",
+        "sha256": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687"
+      }
+    },
+    "fixture_subpath": "pdp-testutils/src/test/resources/conformance/others/StatusDetail.MissingAttributeDetail",
+    "repository": "https://github.com/authzforce/core",
+    "tag": "release-21.2.0",
+    "verified_head": true,
+    "working_tree_clean": true
+  },
+  "created_utc": "2026-09-11T11:12:29Z",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "implementation_spec": {
+    "line_count": 2351,
+    "normalization": "CRLF->LF",
+    "path": "IMPLEMENTATION_SPEC.md",
+    "sealed_utc": "2026-09-11T11:12:29Z",
+    "sha256_lf_normalized": "92c55d425531e578ad6ea266e7c6f1bd0418990bd973cd0033fcf6a20dc83963",
+    "sha256_raw": "92c55d425531e578ad6ea266e7c6f1bd0418990bd973cd0033fcf6a20dc83963",
+    "size_bytes": 69241
+  },
+  "xacml": {
+    "local_path": "external/xacml/xacml-3.0-core-spec-cos01-en.html",
+    "retrieved_utc": "2026-09-11T10:43:38Z",
+    "sha256": "8da7d21f72d1813d1f6db0620ee6840ff0687da69cce8bdf075d5ecad592eefb",
+    "size_bytes": 1257025,
+    "source_url": "https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-cos01-en.html"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "certificate_id": "PC-XACML-S3PLUS-v1-adequacy",
+  "channel_inventory": {
+    "attribute_selectors": 0,
+    "data_types": [
+      "http://www.w3.org/2001/XMLSchema#anyURI",
+      "http://www.w3.org/2001/XMLSchema#string"
+    ],
+    "pdp_child_elements": [
+      "policyProvider"
+    ],
+    "policy_id_references": 0,
+    "xpath_expressions": 0
+  },
+  "findings": [],
+  "n1_locators": [
+    "Sec. 7.3.5 Attribute Retrieval (frozen stripped-text lines 8405-8424): the PDP SHALL request attribute values in the request context from the context handler; Category/AttributeId/DataType/Issuer matching; missing attribute with MustBePresent=false yields an empty bag, with MustBePresent=true yields Indeterminate.",
+    "Sec. 5.29 Element AttributeDesignator (frozen stripped-text lines 406-407); MustBePresent governs empty-bag vs Indeterminate (frozen stripped-text lines 6292-6294, see Sec. 7.3.5).",
+    "Sec. 7.6 Match evaluation (frozen stripped-text lines 8577-8594): MatchId function compares the literal AttributeValue with the designator-selected context bag; designator DataType SHALL match the function argument type."
+  ],
+  "pr_instantiation_argument": "Two admitted histories are P_R-equivalent iff all frozen designator results are extensionally equal under standard matching semantics. This instantiates PC's certificate relation (rather than merely asserting it) because: (a) the frozen policy queries authorization inputs ONLY through the inventoried designators (no selectors, XPath, references, or provider channels per the checks above); (b) the XACML standard defines designator retrieval/matching as the exclusive named-attribute access path (Sec. 7.3.5 Attribute Retrieval (frozen stripped-text lines 8405-8424): the PDP SHALL request attribute values in the request context from the context handler; Category/AttributeId/DataType/Issuer matching; missing attribute with MustBePresent=false yields an empty bag, with MustBePresent=true yields Indeterminate. Sec. 5.29 Element AttributeDesignator (frozen stripped-text lines 406-407); MustBePresent governs empty-bag vs Indeterminate (frozen stripped-text lines 6292-6294, see Sec. 7.3.5).); (c) Target Match evaluation consumes exactly these bags (Sec. 7.6 Match evaluation (frozen stripped-text lines 8577-8594): MatchId function compares the literal AttributeValue with the designator-selected context bag; designator DataType SHALL match the function argument type.). Hence the designator-result vector is the complete authorization-visible projection of this fixture.",
+  "produced_utc": "2026-09-11T12:02:17Z",
+  "projection_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+  "sealed_pdp_sha256": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d",
+  "verdict": "PASS"
+}

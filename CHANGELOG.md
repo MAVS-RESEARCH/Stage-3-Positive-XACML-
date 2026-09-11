@@ -18,3 +18,11 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - Original fixture reproduces natively: Indeterminate/missing-attribute, semantic match.
 - 11/11 Phase-1 tests pass; 10/10 gate boxes PASS. Bugs found by stress testing and fixed: destructive INV-05 assertion, manifest `verified_head` gap, prereg-hash test parser bug (see `Path.md` §4).
 - Instantiation note: primary environment is the Windows 11 host + PowerShell (`run_phase1.ps1` authoritative, `.sh` twin); WSL2 was unavailable. No scientific content affected.
+
+## [Phase 2] - 2026-09-11 - 2A COMPLETE, 2B PACKET SEALED, ADJUDICATION PENDING (BLOCKED, not failed)
+
+- 2A extraction complete: 5-designator projection (canary exact), adequacy PASS (no selectors/XPath/references/providers), route (a) unavailable by javap probe + sequencing guard, route (b) equivalence VALID (4 rows), H x3, P_R relation, Lambda pre-hash, Atom NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER (pending 2B), ledger 9/9 FIXED with four PENDING_2B.
+- Blind packet sealed (20 files, redaction-clean, corpus byte-identical); no qualifying human verdict exists, so `--assert-unlock` refuses (exit 4), the target audit stays locked, and zero completed-world PDP evaluations occurred.
+- Content-addressed cross-artifact references (timestamps excluded from reference hashes); reproduce mode verifies derivations + ledger + packet (all match).
+- Bugs found and fixed: DataType read from Attribute instead of AttributeValue (None coordinates), destructive-test path in synthetic verdict dirs, packet manifest backslash keys, adequacy manifest ordering, scanner false-positive methodology (verified via Python, not PowerShell matching).
+- Status: BLOCKED_PENDING_ADJUDICATION. Unblocks on delivery of a qualifying independent blind verdict (AUD-XXX, never shown the expectations) via `--seal-verdict`, then rerun unlocks the target audit.

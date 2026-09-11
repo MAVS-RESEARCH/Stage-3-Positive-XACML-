@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mavs-research/pc-xacml-s3plus/anchor_ledger.schema.json",
+  "title": "Phase-2 anchor ledger record set",
+  "description": "One record per PC semantic anchor with source-class provenance. Only FIXED ambiguity_status is allowed for the Stage-III positive anchor set, and only with blind-verdict agreement for H/P_R/Lambda/Atom.",
+  "type": "object",
+  "required": ["ledger_id", "anchors"],
+  "additionalProperties": false,
+  "properties": {
+    "ledger_id": {"type": "string"},
+    "anchors": {
+      "type": "object",
+      "required": ["H", "P_R", "Lambda", "Atom", "omega", "Q", "Succ+", "c", "A_Pi"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["anchor_id", "pc_field", "extensional_definition", "source_class", "ambiguity_status", "auditor_status", "manual_semantic_choice_required"],
+        "properties": {
+          "anchor_id": {"type": "string"},
+          "pc_field": {"type": "string"},
+          "extensional_definition": {"type": "string"},
+          "source_class": {"type": "array", "minItems": 1, "items": {"enum": ["N1", "N2", "N3", "N4", "X"]}},
+          "ambiguity_status": {"enum": ["FIXED", "PARTIAL", "AMBIGUOUS", "UNSUPPORTED"]},
+          "auditor_status": {"type": "string"},
+          "manual_semantic_choice_required": {"type": "boolean"},
+          "evidence": {"type": "object"},
+          "derivation_module": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

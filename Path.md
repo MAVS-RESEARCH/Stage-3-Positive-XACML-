@@ -30,12 +30,13 @@ Prior-work references consulted for format only (not normative): `Downloads\Work
 
 ## 2. Current Repository State
 
-Date: 2026-09-11, after Phase-1 execution (see Sec.4).
+Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5); human blind adjudication pending.
 
-- Local workspace: `<WORKSPACE>`; repo checkout: `<REPO>/`, branch `main`; pre-Phase-1 commit `1df9c70`; Phase-1 file set staged for commit after this log update (per Sec.3.2).
-- Files present: `LICENSE`, `WorkPlan.md`, `Path.md`, plus Phase-1 outputs: `IMPLEMENTATION_SPEC.md`, `README.md`, `CHANGELOG.md`, `.gitignore`, `pyproject.toml`, `requirements-lock.txt`, `external/` (fixture + manifest + RELEASE/COMMIT + xacml freeze; `external/authzforce-repo/` pinned clone is git-ignored and recreated deterministically), `derived/` (requests + canonical manifest), `prereg/` (5 sealed files), `schemas/` (2 Phase-1 schemas), `src/` (3 provenance + 2 xacml Python modules + 1 Java driver), `scripts/` (`.ps1` authoritative + `.sh` twin), `tests/` (4 files), `artifacts/raw/` + `artifacts/logs/` (run log kept local-only as `local_phase1_run.log`, sha256 `f2298169f8782cb23`, excluded from git by the `local_*` rule).
-- Previous-results clearing: reconfirmed -- repo had zero result artifacts at clone; every result artifact below is post-change with recorded hashes.
-- Environment (pinned, actual): Windows 11 build 26100 + PowerShell 5.1 host; CPython 3.13.7; lxml 6.1.1; pytest 9.0.2; Microsoft JDK 21.0.9 LTS; git 2.49.0; Apache Maven 3.9.9 (temp toolchain, outside repo). Full record: `artifacts/raw/environment.txt`. Instantiation deviation from the WSL2 pin is documented in Sec.4 (science unaffected).
+- Local workspace: `<WORKSPACE>`; repo checkout: `<REPO>/`, branch `main`; Phase-1 commit `a4fc9be`; Phase-2 file set staged for commit after this log update (per Sec.3.2).
+- New since Sec.4: `derived/` gains projection/adequacy/route-a/equivalence/Hx3/PR/Lambda/Atom/ledger+json+md; `artifacts/audits/` gains blind packet (20 files) + `H_provenance.json` + `phase2_status.json` (BLOCKED_PENDING_ADJUDICATION); `schemas/` gains ledger + verdict schemas; `src/` gains canonicalize/parse/adequacy/route-a (xacml) + prove/derive-H/PR/Lambda/Atom/checker (pc) + blind_adjudication (audit); `scripts/` gains `run_phase2.ps1`/`.sh` + `repro_compare.py`; `tests/` gains 6 Phase-2 files; `src/xacml/run_authzforce.py` gains evaluation-free `stage_completed_fixture()` (refactor verified: Phase-1 tests still 5/5 at change time).
+- No completed-world PDP outputs exist anywhere in the checkout (scan empty); chronology test passes.
+- Correction to Sec.4 record: the committed `external/MANIFEST.json` hash is `05f55f0a` (the `c0f4d89a` value noted in Sec.4 was a superseded intermediate seal overwritten by the final official run; committed == working tree verified via raw `cmd` redirect, since PowerShell pipes corrupt byte streams -- never verify hashes through them).
+- Environment (pinned, actual, unchanged since Phase 1): Windows 11 build 26100 + PowerShell 5.1 host; CPython 3.13.7; lxml 6.1.1; pytest 9.0.2; Microsoft JDK 21.0.9 LTS; git 2.49.0; Apache Maven 3.9.9 (temp toolchain, outside repo). Full record: `artifacts/raw/environment.txt`. Instantiation deviation from the WSL2 pin is documented in Sec.4 (science unaffected).
 
 ## 3. Work Implemented So Far
 
@@ -199,15 +200,63 @@ Gate verdict (10/10 PASS): [1] commit pinned (HEAD log + COMMIT.txt + test) [2] 
 WorkPlan compliance: YES, with two instantiation deviations (no scientific content affected, no version change): (a) primary environment is the Windows 11 + PowerShell host (WSL2 not installed and no reboot permitted; Git Bash absent), so `run_phase1.ps1` is authoritative and `run_phase1.sh` its POSIX twin; (b) `src/xacml/PdpRunner.java` added as the required native-execution backend detail, and `tests/test_prereg_seal.py` added as the box-[10] enforcement test (both WorkPlan-consistent, tree extensions recorded here). Text operations on docs must use Python, never PowerShell Get/Set-Content (a scrub pass double-encoded Path.md unicode; repaired to pure ASCII, verified 0 non-ASCII bytes).
 Models trained: none (deterministic harness; no learning anywhere). Sealed expectations (`expected_signature.json`, canary outcomes) opened by no computation step; Phase-1 outputs contain no expected-decision content (verified by test).
 
-## 5. Phase 2 Log -- Source-Native Semantic Anchor Audit -- TEMPLATE
+## 5. Phase 2 Log -- Source-Native Semantic Anchor Audit -- 2A EXECUTED, 2B PACKET SEALED, HUMAN VERDICT PENDING (BLOCKED, not failed)
 
-Scope executed: [Sec.2.1-2.8; ledger records completed].
-Files made: [`policy_projection.json` (designator count + canary triple), `H_*.json`, `anchor_ledger.json/.md`, `H_provenance.json`, Lambda pre/post hashes, atom record, target outputs, schema, tests].
-Code produced + how coded: [`parse_policy.py` (no allowlist, canary assert), `derive_H/PR/Lambda/atom.py` + `canonicalize_request.py` (C14N rules, K-independence), `check_anchor_completeness.py`; confirm zero E/R/A/touch literals in extraction code (grep evidence)].
-Benchmarks: [P01 exact coordinates, A01-A04 FIXED + N-class citations per anchor, N02/N03 Permit/NotApplicable transcripts; S0-open/terminals-closed derivation].
-Tests run: [`test_policy_projection`, `test_anchor_completeness`, target audit -- commands + results].
-Gate verdict: [8 Phase-2 boxes; on ambiguity -> `NATIVE_ANCHOR_INSUFFICIENT`, preserve negative finding, no relabeling].
-WorkPlan compliance: [YES/NO + detail]. Models trained: none. Anti-overfit note: [anchors cite N1-N4, never X-alone for H/P_R/Lambda/Atom; expected_signature unread -- leakage evidence ref].
+Scope executed: Sec.2.1-2.5 + 2.7-2.8 fully (2A extraction, adequacy/equivalence proofs, ledger, blind packet + machinery); Sec.2.6 target audit NOT executed (locked by the unlock rule -- no qualifying blind verdict exists); Sec.2B human adjudication PENDING. No E/R/A/touch literals in extraction code (grep-verified; ledger confirmed clean by independent Python scan after a PowerShell-regex false positive).
+
+Files made (sha256 prefix):
+- `derived/policy_projection.json` [81643475]: 5 designators, exact coordinates, canary triple MBP=true, construct inventory (0 selectors/XPath/references), policy hash matches seal.
+- `derived/policy_adequacy_certificate.json` [6059e016]: PASS; pdp children == [policyProvider]; P_R-instantiation argument with N1 locators (7.3.5/5.29/Match).
+- `derived/route_a_probe.json` [a13f17e2]: route (a) unavailable -- javap scan of PdpEngineInoutAdapter found 0 exposure points (real probe, not fallback) + sequencing guard (completed contexts would need full evaluation).
+- `derived/h_equivalence_proof.json` [fbc814fa]: route b, VALID; 4 global conditions hold; 4 attribute rows (some-attribute absent originally, world values exact).
+- `derived/H_initial.json` [83360d81] (3 entries) / `H_permit.json` [012bc20d] / `H_nonpermit.json` [cfde8e17] (4 entries); `artifacts/audits/H_provenance.json` [5ea0229e].
+- `derived/pr_relation.json` [e39e2103]: bag-equality rule over 5 frozen coordinates, constant-across-repair, content-addressed refs.
+- `derived/lambda_record.json` [d28a41f9]: pre_hash `bb2c3c94...`; providers=1, attr_providers=0, preprocessors=default-absent; post pending Phase 3.
+- `derived/atom_record.json` [9f42eff6]: NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER, four wrapper evidences (N1 dataflow locators; counts 3/4/4 distinct; builder static scan clean of auth logic + decision literals; prereg match), auditor_status PENDING_2B.
+- `derived/anchor_ledger.json` [91307c2e] + `.md` [c436f5fb]: 9/9 FIXED (four PENDING_2B, five INDEPENDENT_CHECK_PASS), no touch/E/R/A labels.
+- `artifacts/audits/blind_anchor_packet/` (20 files, seal `d9f2d3d2`): candidates (ledger draft, adequacy, equivalence, atom, PR, Lambda, Hx3, execution_inputs) + full corpus byte-identical to sealed sources + rubric + locator_index + manifest; redaction-clean over analyst-authored parts.
+- `artifacts/audits/phase2_status.json` [42c24072]: BLOCKED_PENDING_ADJUDICATION. `schemas/anchor_ledger.schema.json`, `schemas/blind_verdict.schema.json`.
+
+Code produced + how coded (stdlib + lxml + javap probe; deterministic; fail-closed exit 1; checker exits 0/2/4; unlock exits 0/3/4):
+- `src/xacml/canonicalize_request.py` (shared C14N loader), `parse_policy.py` (no allowlist, canary assert, manifest cross-check), `check_policy_adequacy.py` (channel inventory + pdp seal check + instantiation argument), `capture_resolved_context.py` (javap API-surface scan + sequencing guard -> route_a_probe.json), `src/pc/prove_h_equivalence.py` (route-b conditions + 4 rows), `derive_H.py` (proof-gated, H_provenance with content-addressed proof ref), `derive_PR.py`, `derive_Lambda.py` (mechanical pdp.xml facts, seal cross-check), `derive_atom.py` (four wrapper evidences incl. builder AST scan), `check_anchor_completeness.py` (assembler + validator, exits 0 complete / 2 anchor-failure / 4 blind-pending), `src/audit/blind_adjudication.py` (--build-packet / --seal-verdict / --assert-unlock), `scripts/repro_compare.py` (normalized reproduce comparator), `scripts/run_phase2.ps1` (.ps1 authoritative, modes primary/reproduce/readjudicate) + `.sh` twin (completed with real invocations).
+- N1 locators used (frozen HTML stripped-text lines, verified by probe): dataflow 1755-1784, glossary 931/1007/1016, 5.29 406-407, MBP 6292-6294, 7.3.5 8405-8424, Match 8577-8594, rule eval 2308-2322, StatusDetail 491-494.
+
+Console-log line index (print line / comment line; convention as Sec.4: Python print == console log):
+- canonicalize L37/36, L49, L56/55, L62/61, FAIL L22/21.
+- parse_policy L78/77, L82, L86/85, L105, L108/107, L134, L139/138, L145, L169/168, FAIL L33/32.
+- check_policy_adequacy L63/62, L75/74, L83, L87/86, L92, L96/95, L106, L110/109, L156/155, FAIL L48/47.
+- capture_resolved_context L52/51, L59, L63/62, L76, L82, L90/89, L95, L115/114, FAIL L27/26.
+- prove_h_equivalence L114/113, L135/134, L143/142, L171, L174/173, L210/209, L235/234, FAIL L55/54.
+- derive_H L115/114, L126, L131/130, L156/155, L173/172, L176/175, FAIL L26/25.
+- derive_PR L62/61, L71, L77/76, L105/104, FAIL L26/25.
+- derive_Lambda L58/57, L66/65, L79, L94/93, L125/124, FAIL L29/28.
+- derive_atom L93/92, L101/100, L110/109, L123, L126/125, L132, L135/134, L144, L174/173, FAIL L47/46.
+- check_anchor_completeness L186/185, L192, L201/200, L302/301, L306, L310/309, L314, L322, L332/331, FAIL L38/37.
+- blind_adjudication L156/155, L207/206, L212, L215/214, L219, L236/235, L265/264, L282, L288/287, L292, L297, L302, L308, L311, L318/317, FAIL L83/82.
+- repro_compare L63/62, L75/76, L84/83, L90, L98/97, L108, L116/115, L134/133, FAIL L41/40.
+- run_phase2.ps1 L62/61, L72, L82, L94/L109 backend, L112-L170 phase steps (020/025/030/040/042/050/052/060/062/064/066/070/080/085/090/100/102/110/115/120), L201 blocked exit, FAIL-helper L39.
+- run_phase2.sh comment+echo pairs L7/8, L10, L17/16, L21, L23, L27, L29, L32, L37, L40-L49 derivations, L52, L56/57, L61, L64, L71.
+- tests: projection T10 32/31, T12 52/51; adequacy T20 22/21; equivalence T22 15/14, T24 35/34; completeness T30 23/22, T32 32/31, T34 52/51, T35 57, T36 74/73; blind T40 37/36, T42 65/64, T44 101/100; target T50 28/27, T52 50/49, T54 59/58, T56 68/67.
+
+Commands executed: official `scripts/run_phase2.ps1 -Mode primary` (exit 4 BLOCKED, full 2A chain + packet seal in `artifacts/logs/local_phase2_run.log` [6d146beb]); `Mode reproduce` (exit 0: derivations/ledger/packet all match); three primary runs total (idempotent, exit 4 each).
+
+Tests run: full suite 23 passed + 1 skipped (target audit skips while locked, zero evaluation). Breakdown: P01 projection, adequacy PASS, equivalence VALID + provenance, ledger states + blocked-exit-4 + Lambda-ablation refusal, packet integrity + unlock-logic matrix (missing->4, tampered->4, PARTIAL->3, all-FIXED->0 on synthetic temp roots), target lock-skip + evaluation-free staging unit. Phase-1 suite re-run: 13 passed (chronology holds; no completed outputs exist anywhere in checkout -- scan empty).
+
+Stress results (evidence):
+- ST-determinism: reproduce mode recomputes all derivations + ledger + packet from scratch: mismatches=[], ledger match=True, packet mismatches=[].
+- ST-tamper: 1-byte flips in temp copies of packet file + derived H file detected (hash mismatch); seal tamper -> unlock exit 4.
+- ST-ablation: H(AMBIGUOUS)/P_R(FAIL)/Atom(AMBIGUOUS) verdict flips in temp roots -> checker exit 2 (failure-seal eligible); Lambda-file removal -> non-zero (committed test).
+- ST-unlock matrix (committed test, synthetic temp roots): absent->4, tampered->4, PARTIAL->3, all-FIXED->0. Real path: absent -> 4 (this run).
+- ST-leakage: zero `open()` calls on expected_signature/canary_expectations/experiment.yaml across src/{pc,xacml} + blind_adjudication (4 string hits all verified as denylist literals, never opened); zero touch/E/R/A label literals in extraction code and ledger (Python-verified after a PowerShell-regex false positive).
+- ST-idempotence: repeated primary runs exit 4 with identical per-file packet hashes; reproduce exit 0.
+- Bugs caught and fixed before seal: (i) DataType read from Attribute instead of AttributeValue (None coordinates) in prove/derive_H; (ii) synthetic-verdict temp dirs missing artifacts/ layer; (iii) packet manifest backslash keys (normalized to forward slashes); (iv) adequacy manifest ordering (use-before-assign); (v) timestamp/location-coupled cross-references replaced by content-addressed hashes (projection/adequacy/proof refs); (vi) moottom inline-python fragility replaced by committed repro_compare.py; (vii) H_provenance.json gap vs WorkPlan file list.
+
+Gate verdict: 2A boxes PASS (H provenance, P_R mechanical, Lambda fixed with equality criterion sealed for Phase 3, Atom justified pending 2B, no manual labels, ledger FIXED + independently checked); target-decision boxes PENDING (locked, not failed); blind-agreement boxes PENDING (no qualifying human verdict). Overall: BLOCKED_PENDING_ADJUDICATION -- NOT a failure, NO outcome emitted (the exactly-one-outcome rule binds at Phase-6 seal), downstream Phases 3-5 correctly unexecuted.
+
+WorkPlan compliance: YES, with documented deltas (no scientific content affected, no version change): (a) Windows/PowerShell host instantiation as in Sec.4; (b) `stage_completed_fixture()` extracted for evaluation-free unit testing (behavior identical, Phase-1 tests unaffected); (c) `scripts/repro_compare.py` added as the fragile-inline-python replacement (scripts/ helper, harness tree untouched); (d) text edits to docs via Edit tool only (PowerShell text cmdlets corrupt unicode/pipes -- established Sec.4 rule).
+Models trained: none (deterministic rule code throughout). Sealed expectations opened by no computation step (leakage evidence above); packet contains zero expected outputs (redaction-tested).
+Handoff to unblock: deliver a `blind_anchor_verdict.json` per `rubric.md` from a qualifying independent adjudicator (AUD-XXX, never shown the expectations) -> `--seal-verdict` -> rerun `--primary` unlocks the target audit.
+
 
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE
 
@@ -255,7 +304,7 @@ WorkPlan compliance: [YES/NO + detail; post-seal changes -> new version]. Models
 - [x] `WorkPlan.md` created with 6 unmerged phases, per-phase scope/files/code-how/benchmarks, no-training contract, full traceability.
 - [x] `Path.md` created with review log, state, bootstrap entry, per-phase templates.
 - [x] Phase 1 gate: 10/10 PASS (see Sec.4 evidence; no STOP; `SOURCE_REPRODUCTION_FAIL` not triggered).
-- [ ] Phase 2 gate (NATIVE_ANCHOR_INSUFFICIENT or all-FIXED pass).
+- [x] Phase 2 gate: 2A PASS + packet sealed; human blind verdict PENDING -> BLOCKED_PENDING_ADJUDICATION (not a failure; no outcome emitted; see Sec.5 evidence).
 - [ ] Phase 3 gate (TOUCH_DERIVATION_MISMATCH or dual-agreement pass).
 - [ ] Phase 4 gate (SOLVER_MISMATCH / NONTRIVIALITY_FAIL or K pass).
 - [ ] Phase 5 gate (13/13 falsification pass).

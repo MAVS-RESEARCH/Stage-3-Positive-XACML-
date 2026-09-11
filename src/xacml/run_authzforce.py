@@ -61,6 +61,31 @@ def check_file(path, label):
         fail("missing %s: %s" % (label, path))
 
 
+def stage_completed_fixture(fixture_dir, request_path, work_dir, world):
+    """Stage a temp fixture copy for one completed world (no evaluation).
+
+    Copies pdp.xml + policies/ from the frozen fixture; the caller
+    supplies the constructed request. Performs no PDP evaluation.
+    """
+    # [P1-LOG-042] Step: completed mode stages a temp fixture copy.
+    print("[P1:run:042] completed mode: staging temp fixture copy",
+          flush=True)
+    if not os.path.isfile(request_path):
+        fail("completed request missing: " + request_path)
+    run_fixture_dir = os.path.join(os.path.abspath(work_dir),
+                                   "fixture_" + world)
+    if os.path.isdir(run_fixture_dir):
+        shutil.rmtree(run_fixture_dir)
+    os.makedirs(os.path.join(run_fixture_dir, "policies"))
+    shutil.copyfile(os.path.join(fixture_dir, "pdp.xml"),
+                    os.path.join(run_fixture_dir, "pdp.xml"))
+    shutil.copyfile(
+        os.path.join(fixture_dir, "policies", "policy.xml"),
+        os.path.join(run_fixture_dir, "policies", "policy.xml"))
+    print("[P1:run:044] staged %s" % run_fixture_dir, flush=True)
+    return run_fixture_dir
+
+
 def main(argv):
     """Entry point: execute one native PDP request/response cycle."""
     # [P1-LOG-010] Step: start run, echo mode and ordering flag.
@@ -113,22 +138,10 @@ def main(argv):
         run_fixture_dir = fixture_dir
         request_path = os.path.join(fixture_dir, "request.xml")
     else:
-        # [P1-LOG-042] Step: completed mode stages a temp fixture copy.
-        print("[P1:run:042] completed mode: staging temp fixture copy",
-              flush=True)
-        check_file(args.request, "completed request")
-        run_fixture_dir = os.path.join(os.path.abspath(args.work_dir),
-                                       "fixture_" + args.world)
-        if os.path.isdir(run_fixture_dir):
-            shutil.rmtree(run_fixture_dir)
-        os.makedirs(os.path.join(run_fixture_dir, "policies"))
-        shutil.copyfile(os.path.join(fixture_dir, "pdp.xml"),
-                        os.path.join(run_fixture_dir, "pdp.xml"))
-        shutil.copyfile(
-            os.path.join(fixture_dir, "policies", "policy.xml"),
-            os.path.join(run_fixture_dir, "policies", "policy.xml"))
+        run_fixture_dir = stage_completed_fixture(
+            fixture_dir, os.path.abspath(args.request),
+            args.work_dir, args.world)
         request_path = os.path.abspath(args.request)
-        print("[P1:run:044] staged %s" % run_fixture_dir, flush=True)
 
     with open(args.cp_file, "r", encoding="utf-8") as handle:
         deps_cp = handle.read().strip()
