@@ -128,6 +128,15 @@ Fifth audit round, all applied to `WorkPlan.md` (this file: only this log entry)
 6. Canary prose fixed to judged-after-raw-execution.
 WorkPlan compliance: YES. Deviation: none.
 
+### 3.8 Namespace, Scanner, and Failure-Seal Mutation (2026-09-11, committed + pushed per §3.2)
+
+Sixth audit round, all applied to `WorkPlan.md` (this file: only this log entry):
+1. Reproduction isolation without new top-level dirs (spec §9 layout untouched): sealed reference = immutable/tagged primary commit + its `artifacts/`; reproduction in temp fresh checkout `$TMPDIR/pc-xacml-repro-<run_id>/`; canonical outputs compared against hashed primary artifacts.
+2. Scanner contradiction fixed: derived touch outputs (`touch.json`, independent-touch output) are PRESENCE ALLOWED with mandatory derivation provenance; FORBIDDEN = source preassignments, contract inputs, touch-accepting schemas, lookup tables, expectation imports into computation.
+3. Failure-seal path: `run_phase6.sh --failure-seal` seals early-STOP negative outcomes (`stopped_at_phase`, `trigger`, downstream `NOT_RUN_BY_PROTOCOL`); downstream phases must not run after a fatal stop; separate failure-seal gate; stopped experiments stay auditable.
+4. Anchor scope sentence: every ledger record gets independent locator verification; blind-`FIXED` (2B) required specifically for H, P_R, Lambda, Atom.
+WorkPlan compliance: YES. Deviation: none.
+
 ## 4. Phase 1 Log — External Source Lock and Native Reproduction — TEMPLATE (fill during implementation)
 
 Scope executed: [which of §1.1–1.7 done; note any deferral].
