@@ -1,0 +1,17 @@
+{
+  "decision_actual": "Indeterminate",
+  "decision_expected": "Indeterminate",
+  "missing_detail_actual": {
+    "AttributeId": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+    "Category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+    "DataType": "http://www.w3.org/2001/XMLSchema#string"
+  },
+  "missing_detail_expected": {
+    "AttributeId": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+    "Category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+    "DataType": "http://www.w3.org/2001/XMLSchema#string"
+  },
+  "semantic_match": true,
+  "status_actual": "urn:oasis:names:tc:xacml:1.0:status:missing-attribute",
+  "status_expected": "urn:oasis:names:tc:xacml:1.0:status:missing-attribute"
+}

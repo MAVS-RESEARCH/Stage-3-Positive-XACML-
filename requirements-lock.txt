@@ -1,0 +1,9 @@
+# requirements-lock.txt — exact pinned Python dependencies for PC-XACML-S3PLUS-v1
+# Generated 2026-09-11 via `python -m pip freeze` on the pinned interpreter
+# (CPython 3.13.7, Windows 11 build 26100). Only lxml + pytest trees are used.
+iniconfig==2.3.0
+lxml==6.1.1
+packaging==25.0
+pluggy==1.6.0
+Pygments==2.19.2
+pytest==9.0.2
