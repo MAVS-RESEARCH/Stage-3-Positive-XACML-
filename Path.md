@@ -109,6 +109,14 @@ Third audit round, all applied to `WorkPlan.md` (this file: only this log entry)
 5. Phase-6 duplicate CHANGELOG bullet deleted (single lifecycle record); blind attestation uses anonymous auditor IDs in releases, identity-bearing original retained privately.
 WorkPlan compliance: YES. Deviation: none.
 
+### 3.6 Atom Scope, Canary Access, and Sealed-Verdict Reproduction Mutation (2026-09-11, committed + pushed per §3.2)
+
+Fourth audit round, all applied to `WorkPlan.md` (this file: only this log entry):
+1. Atom de-strictified to the controlling spec: `Atom` = native request/response transaction [N1], `Q`/wrapper = construct + invoke [N1+X]; `NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER` (four wrapper conditions) is fully valid positive — `COMBINED_BOUNDARY_PROVEN` must not be demanded; `AMBIGUOUS` only for natively-unsupported transaction or overreaching wrapper. Fixed in Mission scope lock, Scope bullet, `derive_atom.py`, and compliance map.
+2. Canary access matrix: primary computation → `execution_inputs.json` only; canary execution writes raw outputs without reading expectations; new `src/audit/compare_canary_outcomes.py` opens `canary_expectations.json` afterward (`canary_*_raw.json` → `canary_*_comparison.json`); final comparison alone opens `expected_signature.json`.
+3. Blind verdict as sealed input: `run_phase2.sh --primary` (adjudicate + seal) / `--reproduce` (verify hashes, recompute deterministics, never regenerate judgment) / `--readjudicate` (optional fresh replication); `reproduce_all.sh` uses `--reproduce`; 5.13 updated.
+WorkPlan compliance: YES. Deviation: none.
+
 ## 4. Phase 1 Log — External Source Lock and Native Reproduction — TEMPLATE (fill during implementation)
 
 Scope executed: [which of §1.1–1.7 done; note any deferral].
