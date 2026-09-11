@@ -117,6 +117,17 @@ Fourth audit round, all applied to `WorkPlan.md` (this file: only this log entry
 3. Blind verdict as sealed input: `run_phase2.sh --primary` (adjudicate + seal) / `--reproduce` (verify hashes, recompute deterministics, never regenerate judgment) / `--readjudicate` (optional fresh replication); `reproduce_all.sh` uses `--reproduce`; 5.13 updated.
 WorkPlan compliance: YES. Deviation: none.
 
+### 3.7 Ordering Edge Cases and Reproduction Isolation Mutation (2026-09-11, committed + pushed per §3.2)
+
+Fifth audit round, all applied to `WorkPlan.md` (this file: only this log entry):
+1. Route-(a) sequencing guard: pre-2B resolved-context observation allowed only if obtainable without producing/exposing a completed-world decision; otherwise deferred post-seal and excluded as sole basis for pre-unblinding H=`FIXED`.
+2. 2B packet contents made explicit (INCLUDES: blind-safe 2A candidate mappings, adequacy/equivalence artifacts, `execution_inputs.json`, wrapper definition + diff evidence, full corpus, locator index; EXCLUDES: all expected outputs/outcomes/claims) with a packet-builder leakage re-scan.
+3. Reproduction namespace isolation: `sealed_reference/` (read-only) vs `reproduction/<run_id>/` (write-only target); ordering tests scope to the current run, never historical sealed artifacts.
+4. Git provenance: HEAD/clean verified once at lock time; later phases verify frozen SHA-256 + recomputed blob SHAs via `git hash-object` (no phantom working-tree re-checks); optional `--recheckout` disposable clone.
+5. `execution_inputs.json` target semantics as a rule (canonical-Decision), never outcome mappings; contract target map flows from parsed PDP responses → `A_Pi`.
+6. Canary prose fixed to judged-after-raw-execution.
+WorkPlan compliance: YES. Deviation: none.
+
 ## 4. Phase 1 Log — External Source Lock and Native Reproduction — TEMPLATE (fill during implementation)
 
 Scope executed: [which of §1.1–1.7 done; note any deferral].
