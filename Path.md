@@ -30,7 +30,7 @@ Prior-work references consulted for format only (not normative): `Downloads\Work
 
 ## 2. Current Repository State
 
-Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10); human blind adjudication pending (superseded as operative path); zero cold-model verdicts ingested; gate BLOCKED_PENDING_MODEL_ADJUDICATION.
+Date: 2026-09-11, after Phase-2 2A execution + packet seal (see Sec.5) plus Amendment 001 implementation (see Sec.3.10) plus EOL-normalization follow-up; human blind adjudication pending (superseded as operative path); zero cold-model verdicts ingested; gate BLOCKED_PENDING_MODEL_ADJUDICATION.
 
 - Local workspace: `<WORKSPACE>`; repo checkout: `<REPO>/`, branch `main`; Phase-1 commit `a4fc9be`; Phase-2 file set staged for commit after this log update (per Sec.3.2).
 - New since Sec.4: `derived/` gains projection/adequacy/route-a/equivalence/Hx3/PR/Lambda/Atom/ledger+json+md; `artifacts/audits/` gains blind packet (20 files) + `H_provenance.json` + `phase2_status.json` (BLOCKED_PENDING_ADJUDICATION); `schemas/` gains ledger + verdict schemas; `src/` gains canonicalize/parse/adequacy/route-a (xacml) + prove/derive-H/PR/Lambda/Atom/checker (pc) + blind_adjudication (audit); `scripts/` gains `run_phase2.ps1`/`.sh` + `repro_compare.py`; `tests/` gains 6 Phase-2 files; `src/xacml/run_authzforce.py` gains evaluation-free `stage_completed_fixture()` (refactor verified: Phase-1 tests still 5/5 at change time).
@@ -157,6 +157,8 @@ Eighth change set, the first protocol amendment (past planning-only mutations). 
 7. Byte-regime stabilization (genuine defect found by the amendment's own discipline): Git EOL conversion desynced sealed working bytes from blobs (packet seal unverifiable after fresh checkout). Fix: `.gitattributes` (`* -text diff`, byte-exact + textual diffs); blob-SHA tooling replaced config-dependent `git hash-object` with deterministic CRLF->LF normalization in code (proven equal to upstream constants); packet rebuilt once under the stable regime (new seal 00710549; equivalence proven: 9/9 mappings timestamp-only diffs, 4/4 fixture corpus byte-identical, 4/4 remaining corpus EOL-only); runner verifies-not-rebuilds (proven by consecutive runs reusing the seal).
 Evidence: full suite 42 passed + 1 skipped (lock-respecting target skip); --primary exit 4 BLOCKED_PENDING_MODEL_ADJUDICATION; reproduce exit 0; packet verify clean; zero completed outputs; no verdicts exist (ingest set empty).
 WorkPlan compliance: YES. Deviation: none (all deltas are the instructed amendment itself).
+
+Follow-up (same day, separate commit 43cbdc3 -- history preserved, no amend/squash): the byte-regime fix exposed stale stat-cache masking (git status falsely clean while index LF-blobs differed from sealed CRLF working bytes) plus a config-dependent `git hash-object` in the Phase-1 tooling. Fixed by: `git rm --cached` + full re-add under `* -text diff` (blobs now byte-faithful; 8 files re-stored, content identical modulo EOL, zero seal changes) and deterministic CRLF->LF blob-SHA in code (proven equal to upstream constants). Decisive proof: fresh `git clone` of the new HEAD runs the FULL suite green (42 passed + 1 lock-respecting skip) with the amendment-referenced packet seal intact (00710549). Phase-5 clean-reproduction path is thereby unblocked on any machine honoring the committed attributes.
 
 ## 4. Phase 1 Log -- External Source Lock and Native Reproduction -- EXECUTED 2026-09-11, PASS
 
@@ -318,7 +320,7 @@ WorkPlan compliance: [YES/NO + detail; post-seal changes -> new version]. Models
 - [x] `Path.md` created with review log, state, bootstrap entry, per-phase templates.
 - [x] Phase 1 gate: 10/10 PASS (see Sec.4 evidence; no STOP; `SOURCE_REPRODUCTION_FAIL` not triggered).
 - [x] Phase 2 gate: 2A PASS + packet sealed; human blind verdict PENDING -> BLOCKED_PENDING_ADJUDICATION (not a failure; no outcome emitted; see Sec.5 evidence).
-- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate locked (0/3 records); original hashes/seals invariant; see Sec.3.10.
+- [x] Amendment 001: prospective cold-model substitution sealed pre-execution (0 evals); 18 gate controls green; amended gate locked (0/3 records); original hashes/seals invariant; EOL follow-up committed; fresh-clone suite green (42+1); see Sec.3.10.
 - [ ] Phase 3 gate (TOUCH_DERIVATION_MISMATCH or dual-agreement pass).
 - [ ] Phase 4 gate (SOLVER_MISMATCH / NONTRIVIALITY_FAIL or K pass).
 - [ ] Phase 5 gate (13/13 falsification pass).

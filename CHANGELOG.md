@@ -30,3 +30,7 @@ All notable changes to this experiment package. Post-preregistration changes to 
 ## [Amendment 001] - 2026-09-11 - COLD-MODEL ADJUDICATION SUBSTITUTION (prospective, pre-execution)
 
 - No qualifying human adjudicator available in window; mandatory second-human rule replaced by mandatory three-instance cold-model unanimity protocol (`PROTOCOL_AMENDMENT_001.md` + seal). No estimand/mapping/world/target/cost/interface/expectation/criterion changed. Frozen prompt sealed; 18 adversarial gate controls green. Byte-regime stabilization included (`.gitattributes`, deterministic blob-SHA tooling, one documented packet rebuild with equivalence proof). Gate state: BLOCKED_PENDING_MODEL_ADJUDICATION; 0 completed evaluations; target audit locked.
+
+## [Follow-up] - 2026-09-11 - EOL BLOB NORMALIZATION (no seal changes)
+
+- `* -text diff` byte-regime was masked by stale git stat-cache; restaged blobs byte-faithful (8 files, EOL-only diffs); blob-SHA tooling made config-independent (equal to upstream constants). Fresh-clone proof: full suite 42 passed + 1 skipped with all seals intact.
