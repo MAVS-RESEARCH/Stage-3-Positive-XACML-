@@ -137,6 +137,13 @@ Sixth audit round, all applied to `WorkPlan.md` (this file: only this log entry)
 4. Anchor scope sentence: every ledger record gets independent locator verification; blind-`FIXED` (2B) required specifically for H, P_R, Lambda, Atom.
 WorkPlan compliance: YES. Deviation: none.
 
+### 3.9 Chronology Test and Target-Audit Unlock Mutation (2026-09-11, committed + pushed per Sec.3.2)
+
+Seventh audit round, applied to `WorkPlan.md` plus the affected test code (plan/code consistency required):
+1. Chronology test corrected to the attribution rule: `test_phase1_no_completed_execution.py` no longer scans for bare existence of completed outputs (Phase 2 legitimately creates them). It now asserts refusal exit 2, zero completed markers in Phase-1-tagged logs, zero completed entries in the Phase-1 seal, and original-fixture semantics in sealed Phase-1 responses -- plus a simulated post-Phase-2 regression case proving later outputs do not trip it. Verified: 13/13 tests pass; negative controls prove the checks fail on genuinely Phase-1-attributed violations and pass on clean + simulated post-Phase-2 trees.
+2. Target-audit unlock conjunction: execution allowed iff verdict hash sealed AND H/P_R/Lambda/Atom all FIXED; any PARTIAL/AMBIGUOUS/UNSUPPORTED forbids completed-world execution and routes to `NATIVE_ANCHOR_INSUFFICIENT` + `--failure-seal`. Fixed in the unblinding rule, target-audit bullet, `run_phase2.sh` description, new `blind_adjudication.py --assert-unlock` gate mode (exit 0/3), and the compliance map. Stale hash-only unlock wording purged (verified by sweep).
+WorkPlan compliance: YES. Deviation: none. No Phase-1 re-execution required (no completed execution occurred in Phase 1; established by the corrected attribution test).
+
 ## 4. Phase 1 Log -- External Source Lock and Native Reproduction -- EXECUTED 2026-09-11, PASS
 
 Scope executed: Sec.1.1-1.7 ALL done, no deferral. No PC semantic-anchor extraction, touch derivation, or freeze computation occurred; only external-source locking and native original-fixture reproduction, per the corrected scope. Completed requests constructed, never executed (ordering enforced in code + test).
@@ -172,7 +179,7 @@ Console-log convention: the Python harness has no JS runtime, so console logging
 - parse_response.py: FAIL 21/20; 010 64/63; 012 69; 020 74/73; 022 76; 030 80/79; 032 82; 040 87/86; 050 100/99.
 - run_phase1.ps1: helper comment 39; 010 comment 45/print 46; 020 comment 54; 030 comment 59; 040 comment 64/print 65; 042 print 80; 050 comment 82; 060 comment 90/print 91; 064 print 108; 070 comment 110; 080 comment 120; 090 comment 132/print 133; 100 comment 143; 110 comment 151/print 152; 112 prints ~157-160; 120 comment 169/print 170. (Invoke-Step calls log their tag via the helper.)
 - run_phase1.sh: comment+echo pairs at lines 6/7, 9, 13/14, 16/17, 19/20, 23, 24/25, 27/28, 36, 38, 39/40, 42/43, 45/46, 48, 50/51, 53/54, 55/56.
-- tests: hashes T10 34/33, T11 43/42, T12 55/54, T13 77/76, T14 88/87; fixture T20 44/43, T22 59/58; ordering T30 21/20, T32 36/35, T34 53/52; prereg T40 33/32, T42 62/61, T44 79/78.
+- tests: hashes T10 34/33, T11 43/42, T12 55/54, T13 77/76, T14 88/87; fixture T20 44/43, T22 59/58; ordering T30 41/40, T32 53/52, T36 70/69, T34 98/97, T38 118/117, T39 148; prereg T40 33/32, T42 62/61, T44 79/78.
 
 Commands executed (official path `scripts/run_phase1.ps1`, three consecutive full runs, final exit 0; run log `artifacts/logs/local_phase1_run.log` [f2298169]):
 - lock (HEAD `3cc0e988`, clean, 4/4 blobs); seal (spec 69241 bytes, 2351 lines, raw==normalized `92c55d42`); env record; `mvn -pl pdp-testutils -am package` BUILD SUCCESS (Maven 3.9.9 quirk found: unquoted dotted `-D` args misparse under `mvn.cmd`+PowerShell; quoted form used); classpath build; `javac` PdpRunner exit 0; build requests (triple read dynamically, 1 designator MBP=true, INV-05 x2 + INV-06); original PDP run (565-byte Indeterminate response); compare `semantic_match: true`; pytest 11 passed; gate 10/10 PASS.
