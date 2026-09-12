@@ -511,7 +511,8 @@ def test_rev5_maps_to_panel3(tmp_path):
     # [P2-LOG-F38] Test step: assert future revision mapping.
     print("[P2:test:final:038] rev5 panel-3 unlock", flush=True)
     root = make_freeze_root(str(tmp_path / "p9"),
-                            [(a, FIXED4) for a in final.PANEL_3],
+                            [(a, FIXED4) for a in ("AUD-C07", "AUD-C08",
+                                                   "AUD-C09")],
                             revision=5)
     expect_exit("rev5-panel3",
                 lambda: final.assert_final_unlock(root), 0)

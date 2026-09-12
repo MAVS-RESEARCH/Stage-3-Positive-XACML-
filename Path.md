@@ -408,6 +408,20 @@ Gate verdict: machinery COMPLETE; state `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLO
 
 WorkPlan compliance: YES (Amendment 005 §§1–20; no specimen/semantic change; zero executions). Models trained: none.
 
+### 3.22 Amendment 006 — Unbounded Panels (2026-09-12)
+
+Files made: `PROTOCOL_AMENDMENT_006.md`; panel-generic `final_certification.py` (`chair_number/chair_id/panel_for_index/panel_of`, alias normalization at ingest, NON_BLIND developmental-marker refusal) + `certification_cycle.py` (revision-bound init, open-cycle-first validated handoff, per-chair instantiated cold prompts, unbounded allocator) + `certification_rehearsal.py` (generic cert-namespace guards); schema + `tests/test_unbounded_panels.py` (23 tests covering the 20-item battery).
+
+Code produced: finite tables (`PANEL_1..4`, `PANEL_IDS`, `C01..C12` regex) replaced by `CHAIR_RE ^AUD-C(0*[1-9][0-9]*)$`, consecutive-triple panels, `max_used+1` allocator, `REVISION_PANELS {1:None,2:0,3:None,4:1}` + rev≥5 fallback; record↔freeze binding retained; fourth-chair/mixed/reuse refusal retained and extended.
+
+Adversarial review (2 subagents): 8 + 7 findings; repaired: non-string crashes, prompt/hash validation, invalid-open passthrough, alias collision, placeholder reintroduction, revision binding at init, empty reasons, sealed-assess overwrite, snapshot trust, handoff revision match, float coercion, stale messages; residual notes (legacy blind-model regex cap out of scope, TOCTOU/documented). Handoff regenerated for C04–C06 with per-chair prompts (two template words substituted to avoid scanner-collision false positives; frozen authoritative prompt unchanged).
+
+Verification: full suite 118 passed + 1 skipped; `--verify-freeze` green; frozen bytes (packet/prompt/externals/seal/derived) byte-unchanged per git status; template fail-closed scanner proved live (caught its own wording twice).
+
+Gate verdict: machinery COMPLETE; state `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION`. STOP: operator runs C04/C05/C06 per handoff.
+
+WorkPlan compliance: YES (Amendment 006 §§1–20; controller mechanics only; zero executions). Models trained: none.
+
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE
 
 Scope executed: [Sec.3.1-3.7].

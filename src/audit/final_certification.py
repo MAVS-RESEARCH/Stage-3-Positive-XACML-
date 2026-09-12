@@ -26,18 +26,51 @@ from datetime import datetime, timezone
 from blind_adjudication import REDACTION_PATTERNS, TOUCH_ASSIGNMENT
 
 AUDITORS = ("AUD-C01", "AUD-C02", "AUD-C03")
-PANEL_1 = AUDITORS
-PANEL_2 = ("AUD-C04", "AUD-C05", "AUD-C06")
-PANEL_3 = ("AUD-C07", "AUD-C08", "AUD-C09")
-PANEL_4 = ("AUD-C10", "AUD-C11", "AUD-C12")
-PANELS = (PANEL_1, PANEL_2, PANEL_3, PANEL_4)
-PANEL_IDS = PANEL_1 + PANEL_2 + PANEL_3 + PANEL_4
-FINAL_NAMESPACE = re.compile(r"^AUD-C(0[1-9]|1[0-2])$")
-# Revision-to-panel binding (Amendment 005): only the listed panel may
-# certify a freeze revision. Revisions without a panel were never
-# externally certified (rehearsal-only). Future revisions map to the
-# next unused panel by index rev-3.
+CHAIR_RE = re.compile(r"^AUD-C(0*[1-9][0-9]*)$")
+FINAL_NAMESPACE = CHAIR_RE
+# Revision-to-panel binding (Amendments 005-006): only the listed panel
+# may certify a freeze revision. Revisions without a panel were never
+# externally certified. Later revisions take panel index rev-3
+# (panels are consecutive triples from chair 1, unbounded).
 REVISION_PANELS = {1: None, 2: 0, 3: None, 4: 1}
+
+
+def chair_number(chair):
+    """Return the integer N of AUD-CN, or None if malformed."""
+    if not isinstance(chair, str):
+        return None
+    match = CHAIR_RE.match(chair)
+    if not match:
+        return None
+    try:
+        number = int(match.group(1))
+    except (TypeError, ValueError):
+        return None
+    return number if number >= 1 else None
+
+
+def chair_id(number):
+    """Return the canonical display ID (zero-padded below 100)."""
+    if not isinstance(number, int) or isinstance(number, bool) \
+            or number < 1:
+        return None
+    return "AUD-C%02d" % number if number < 100 else "AUD-C%d" % number
+
+
+def panel_for_index(index):
+    """Return the fixed triple for panel index (0-based), unbounded."""
+    if not isinstance(index, int) or isinstance(index, bool) or index < 0:
+        return None
+    base = index * 3 + 1
+    return tuple(chair_id(base + offset) for offset in (0, 1, 2))
+
+
+def panel_of(chair):
+    """Return the panel triple containing a chair, or None."""
+    number = chair_number(chair)
+    if number is None:
+        return None
+    return panel_for_index((number - 1) // 3)
 BLIND_ANCHORS = ("H", "P_R", "Lambda", "Atom")
 ALLOWED_STATUSES = ("FIXED", "PARTIAL", "AMBIGUOUS", "UNSUPPORTED")
 DECLARATION = (
@@ -126,9 +159,13 @@ def scan_text_leakage(text, own_id):
             hits.append("expectation-file:" + name)
     if TOUCH_ASSIGNMENT.search(text):
         hits.append("touch-assignment")
+    if "NON_BLIND" in text:
+        hits.append("developmental-marker: in-session subagent output "
+                    "cannot certify")
     for other in set(OTHER_ID.findall(text)):
-        if other != own_id and other in PANEL_IDS + (
-                "AUD-M01", "AUD-M02", "AUD-M03"):
+        if other != own_id and (chair_number(other) is not None
+                                or other in ("AUD-M01", "AUD-M02",
+                                             "AUD-M03")):
             hits.append("cross-read:" + other)
     return hits
 
@@ -139,7 +176,7 @@ def validate_final(doc, freeze, auditor):
     if doc.get("auditor_id") != auditor:
         problems.append("auditor_id must equal the ingested chair")
     if not FINAL_NAMESPACE.match(doc.get("auditor_id", "")):
-        problems.append("auditor_id not in final namespace AUD-C01..C12")
+        problems.append("auditor_id not in final namespace AUD-C<N>)")
     if doc.get("qualification") != "COLD_MODEL_INDEPENDENT":
         problems.append("qualification must be COLD_MODEL_INDEPENDENT")
     verdicts = doc.get("verdicts", {})
@@ -172,10 +209,22 @@ def validate_final(doc, freeze, auditor):
     return problems
 
 
+def known_chairs(repo_root):
+    """Return sorted chair IDs with record directories on disk."""
+    root = records_root(repo_root)
+    chairs = []
+    if os.path.isdir(root):
+        for name in os.listdir(root):
+            if chair_number(name) is not None and os.path.isdir(
+                    os.path.join(root, name)):
+                chairs.append(name)
+    return sorted(chairs, key=chair_number)
+
+
 def existing_texts_and_hashes(repo_root, exclude=""):
     """Collect attestation texts/hashes of the other valid chairs."""
     texts, hashes = set(), set()
-    for auditor in PANEL_IDS:
+    for auditor in known_chairs(repo_root):
         if auditor == exclude:
             continue
         provenance_path = os.path.join(records_root(repo_root), auditor,
@@ -200,9 +249,10 @@ def ingest_final(repo_root, auditor, raw_path, attestation_path):
     """Ingest one final raw response with strict Amendment-002 rules."""
     # [P2-LOG-010] Step: ingest one final raw adjudication.
     print("[P2:final:010] ingesting final %s" % auditor, flush=True)
-    if auditor not in PANEL_IDS:
-        fail("unknown final chair (want AUD-C01..C06): " + auditor,
+    if chair_number(auditor) is None:
+        fail("unknown final chair (want AUD-C<N>, N>=1): " + str(auditor),
              EXIT_INVALID)
+    auditor = chair_id(chair_number(auditor))
     if HARDENING_PATH.search(os.path.abspath(raw_path)):
         fail("raw source lives under hardening/non-blind paths",
              EXIT_INVALID)
@@ -291,9 +341,9 @@ def ingest_final(repo_root, auditor, raw_path, attestation_path):
 
 
 def collect_valid(repo_root):
-    """Collect the valid final certification records."""
+    """Collect the valid final certification records (any chair ID)."""
     valid = {}
-    for auditor in PANEL_IDS:
+    for auditor in known_chairs(repo_root):
         record_dir = os.path.join(records_root(repo_root), auditor)
         provenance_path = os.path.join(record_dir, "provenance.json")
         verdict_path = os.path.join(record_dir, "verdict.json")
@@ -333,12 +383,12 @@ def eligible_panel(freeze):
     revision = raw
     if revision in REVISION_PANELS:
         index = REVISION_PANELS[revision]
-        return PANELS[index] if index is not None else None
+        return panel_for_index(index) if index is not None else None
     if revision >= 5:
-        index = revision - 3
-        if 0 <= index < len(PANELS):
-            return PANELS[index]
+        return panel_for_index(revision - 3)
     return None
+
+
 def matching_freeze_records(repo_root, freeze, valid):
     """Keep only records sealed against the operative freeze."""
     # [P2-LOG-016] Step: bind records to the operative freeze.

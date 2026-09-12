@@ -76,3 +76,8 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - Generic cycle machine (`certification_cycle.py` + schema + 6 tests): sealed CYCLE_001 (rev002/C01–C03, FAILED_REPAIRABLE, consumed by Phase 2D) + open CYCLE_002 (rev004/C04–C06); assess/decide consistency gates; panels through C10–C12 with revision binding, record-freeze binding, fourth-chair refusal.
 - Adversarial review found 8 machinery holes; all repaired + tested. Independent rev004 re-verification 7/7 CONFIRM.
 - `NEXT_EXTERNAL_CERTIFICATION_HANDOFF.md` generated (C04–C06, operative hashes, cold-session + ingest instructions, leak-scanned). Suite 95+1, freeze verified, 0 executions. STOP at `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION`.
+
+## [Amendment 006] - 2026-09-12 - UNBOUNDED PANELS, PER-CHAIR HANDOFF
+
+- Finite C01–C12 tables removed: generic `AUD-C<N>` chairs, consecutive-triple panels, `max_used+1` allocator, revision map + rev≥5 fallback, alias normalization, NON_BLIND-marker refusal, generalized rehearsal guards, per-chair instantiated handoff prompts.
+- Adversarial review: 15 findings, all repaired + tested (crashes, validation, binding, advancement, coercion, stale messages). Suite 118+1, freeze verified, frozen bytes unchanged. STOP at `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION` (AUD-C04/C05/C06).

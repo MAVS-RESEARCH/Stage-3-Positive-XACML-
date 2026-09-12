@@ -25,8 +25,8 @@ import sys
 from datetime import datetime, timezone
 
 BASE_SUBDIR = os.path.join("artifacts", "audits", "certification_cycles")
-PANEL_RE = re.compile(r"^AUD-C(0[1-9]|1[0-2])$")
-CYCLE_RE = re.compile(r"^CERTIFICATION_CYCLE_[0-9]{3}$")
+PANEL_RE = re.compile(r"^AUD-C(0*[1-9][0-9]*)$")
+CYCLE_RE = re.compile(r"^CERTIFICATION_CYCLE_[0-9]+$")
 DECISIONS = ("CERTIFICATION_PASSED", "CERTIFICATION_FAILED_REPAIRABLE",
              "CERTIFICATION_FAILED_IRREDUCIBLE")
 FORBIDDEN_HANDOFF = ("expected_touch", "expected_K", "expected_classification",
@@ -100,11 +100,17 @@ def cmd_init_cycle(args):
     repo_root = os.path.abspath(args.repo_root)
     if not CYCLE_RE.match(args.init_cycle):
         fail("bad cycle id (want CERTIFICATION_CYCLE_NNN)")
+    if isinstance(args.revision, bool) or not isinstance(
+            args.revision, (int, str)):
+        fail("revision must be an integer")
+    if isinstance(args.revision, str) and not re.match(r"^[0-9]+$",
+                                                       args.revision):
+        fail("revision must be an integer")
     try:
         revision = int(args.revision)
     except (TypeError, ValueError):
         fail("revision must be an integer")
-    if isinstance(args.revision, bool) or revision < 1:
+    if revision < 1:
         fail("revision must be a positive integer")
     panel = [item.strip() for item in args.panel.split(",")]
     if len(panel) != 3 or any(not PANEL_RE.match(item) for item in panel):
@@ -114,17 +120,15 @@ def cmd_init_cycle(args):
     sys.path.insert(0, os.path.join(os.path.dirname(
         os.path.abspath(__file__))))
     import final_certification
-    numbers = sorted(int(item.rsplit("-C", 1)[1]) for item in panel)
-    if numbers[2] - numbers[0] != 2 or (numbers[0] - 1) % 3 != 0:
-        fail("panel must be one fixed triple (01-03, 04-06, 07-09, 10-12)")
-    expected = final_certification.REVISION_PANELS.get(revision, None)
-    if expected is None:
-        if revision < 5:
-            fail("revision %d takes no external panel" % revision)
-        expected = revision - 3
-    if tuple(panel) != final_certification.PANELS[expected]:
-        fail("panel does not match revision binding (want %s)" % ",".join(
-            final_certification.PANELS[expected]))
+    numbers = sorted(final_certification.chair_number(item)
+                     for item in panel)
+    if (any(number is None for number in numbers)
+            or numbers[2] - numbers[0] != 2
+            or (numbers[0] - 1) % 3 != 0):
+        fail("panel must be one consecutive triple (N,N+1,N+2 from 1,4,7..)")
+    expected = final_certification.eligible_panel({"revision": revision})
+    if expected is None or tuple(panel) != tuple(expected):
+        fail("panel does not match revision binding")
     state = load_state(repo_root)
     if find_cycle(state, args.init_cycle) is not None:
         fail("cycle exists and is immutable: " + args.init_cycle)
@@ -281,27 +285,128 @@ def cmd_decide_cycle(args):
 def next_panel(state):
     """Return the panel needing external sessions: oldest open cycle first."""
     import re as re_module
+    sys.path.insert(0, os.path.join(os.path.dirname(
+        os.path.abspath(__file__))))
+    import final_certification
+
+    def valid_panel(panel):
+        """Check triple shape, consecutiveness, and alignment."""
+        if len(panel) != 3 or len(set(panel)) != 3:
+            return False
+        numbers = sorted(final_certification.chair_number(item)
+                         for item in panel)
+        return (all(number is not None for number in numbers)
+                and numbers[2] - numbers[0] == 2
+                and (numbers[0] - 1) % 3 == 0)
+
     for record in state.get("cycles", []):
-        panel = record.get("panel", [])
-        if record.get("decision") is None and len(panel) == 3 and all(
-                PANEL_RE.match(item) for item in panel) and len(
-                set(panel)) == 3:
-            return list(panel)
+        if record.get("decision") is None and record.get(
+                "status", "OPEN_PENDING") == "OPEN_PENDING" \
+                and valid_panel(record.get("panel", [])):
+            return list(record["panel"])
     highest = 0
     for record in state.get("cycles", []):
-        try:
-            numbers = sorted(int(re_module.search(r"\d+", chair).group(0))
-                             for chair in record.get("panel", []))
-        except (TypeError, ValueError, AttributeError):
-            continue
-        if (len(numbers) == 3 and numbers[2] - numbers[0] == 2
-                and (numbers[0] - 1) % 3 == 0):
-            highest = max(highest, (numbers[0] - 1) // 3 + 1)
+        for chair in record.get("panel", []):
+            try:
+                number = int(re_module.search(r"\d+", chair).group(0))
+            except (TypeError, ValueError, AttributeError):
+                continue
+            if number >= 1:
+                highest = max(highest, (number - 1) // 3 + 1)
     base = highest * 3 + 1
-    if base + 2 > 12:
-        return None
-    return ["AUD-C%02d" % number
+    return ["AUD-C%02d" % number if number < 100 else "AUD-C%d" % number
             for number in (base, base + 1, base + 2)]
+
+
+CHAIR_PROMPT_TEMPLATE = "\n".join([
+    "You are auditor `<AUDITOR_ID>` for a final blind semantic "
+    "certification.",
+    "",
+    "You are operating in a brand-new isolated session. You have not "
+    "seen and must not seek anything about this experiment beyond the "
+    "supplied materials.",
+    "",
+    "You are given ONLY:",
+    "",
+    "1. the operative `FINAL_BLIND_PACKET/`;",
+    "2. the frozen `final_certification_prompt.txt`;",
+    "3. the final certification schema/output contract.",
+    "",
+    "The frozen certification prompt is authoritative.",
+    "",
+    "Judge:",
+    "",
+    "- H",
+    "- P_R",
+    "- Lambda",
+    "- Atom",
+    "",
+    "against the frozen packet only.",
+    "",
+    "Do not attempt to help the experiment succeed.",
+    "",
+    "Do not infer, reconstruct, seek, or speculate about:",
+    "",
+    "- expected touch;",
+    "- expected K;",
+    "- freeze signature;",
+    "- expected classification;",
+    "- preferred result;",
+    "- publication claims;",
+    "- prior revisions;",
+    "- prior panels;",
+    "- prior developmental review.",
+    "",
+    "Be adversarial toward unsupported mappings.",
+    "",
+    "If materially relevant semantic freedom remains under the supplied "
+    "certification criterion, return the appropriate non-FIXED status.",
+    "",
+    "Do not resolve uncertainty toward FIXED merely because a mapping is "
+    "reasonable or apparently intended.",
+    "",
+    "Inspect frozen evidence rather than trusting experiment-authored "
+    "summaries alone.",
+    "",
+    "For Atom, apply the native-transaction versus experiment-authored "
+    "staging/reconstruction distinction defined by the frozen prompt.",
+    "",
+    "For Lambda, independently verify the capability boundary and "
+    "packet-visible reconstruction rather than assuming manifests or "
+    "composite hashes are complete.",
+    "",
+    "Return exactly the artifacts required by the frozen prompt/schema.",
+    "",
+    "Use:",
+    "",
+    "auditor_id = `<AUDITOR_ID>`",
+    "",
+    "prompt_sha256 = `<OPERATIVE_PROMPT_HASH>`",
+    "",
+    "packet_sha256 = `<OPERATIVE_PACKET_HASH>`",
+    "",
+    "The attestation hash must be the SHA-256 of the exact separate "
+    "attestation artifact bytes.",
+    "",
+    "No commentary outside the required artifacts.",
+    "",
+    "Your role is certification, not collaboration.",
+])
+
+
+def chair_prompt(auditor, prompt_sha, packet_sha):
+    """Instantiate the cold-session prompt for one chair."""
+    import final_certification
+    if final_certification.chair_number(auditor) is None:
+        raise ValueError("refusing non-chair auditor id")
+    for digest in (prompt_sha, packet_sha):
+        if not isinstance(digest, str) or not re.match(r"^[0-9a-f]{64}$",
+                                                       digest):
+            raise ValueError("refusing malformed hash")
+    return CHAIR_PROMPT_TEMPLATE.replace(
+        "<AUDITOR_ID>", auditor).replace(
+        "<OPERATIVE_PROMPT_HASH>", prompt_sha).replace(
+        "<OPERATIVE_PACKET_HASH>", packet_sha)
 
 
 def cmd_handoff(args):
@@ -374,6 +479,16 @@ def cmd_handoff(args):
          "and is byte-distinct across chairs; verdict carries the "
          "verbatim non-exposure declaration and affirms fresh_context, "
          "no_prior_experiment_context, other_outputs_unavailable."),
+        "",
+        "## Per-chair cold-session prompts "
+        "(paste one per isolated session)",
+        "",
+    ] + [
+        line for chair in panel
+        for line in ("### %s" % chair, "",
+                     chair_prompt(chair, freeze.get("prompt_sha256"),
+                                  freeze.get("packet_sha256")),
+                     "")
     ]) + "\n"
     for forbidden in FORBIDDEN_HANDOFF:
         if forbidden in doc:

@@ -27,8 +27,8 @@ import sys
 from datetime import datetime, timezone
 
 BASE_SUBDIR = os.path.join("artifacts", "audits", "certification_rehearsal")
-FORBIDDEN_WRITE = ("final_certification", "AUD-C01", "AUD-C02", "AUD-C03")
-AUDC_ID = re.compile(r"AUD-C0[123]")
+FORBIDDEN_WRITE = ("final_certification",)
+AUDC_ID = re.compile(r"AUD-C\d")
 REHEARSAL_LABEL = re.compile(r"NON_BLIND_(CERTIFICATION_REHEARSAL|ADVERSARIAL_REVIEW|CERTIFIER_EMULATION)")
 ALLOWED_DISPOSITIONS = ("VALID_MATERIAL", "VALID_NONMATERIAL", "DUPLICATE",
                         "SOURCE_REFUTED", "OUT_OF_SCOPE", "REVIEWER_ERROR",
@@ -82,6 +82,8 @@ def guard_no_cert_namespaces(repo_root, sweep=None):
         for forbidden in FORBIDDEN_WRITE:
             if forbidden in lowered:
                 fail("rehearsal must never touch %s" % forbidden)
+        if AUDC_ID.search(target):
+            fail("rehearsal must never touch a certifier namespace")
 
 
 def target_scan(repo_root):
@@ -181,7 +183,7 @@ def check_objection(record):
         problems.append("bad-anchor")
     if record.get("disposition") not in ALLOWED_DISPOSITIONS:
         problems.append("bad-disposition")
-    if "AUD-C0" in json.dumps(record):
+    if AUDC_ID.search(json.dumps(record)):
         problems.append("cert-namespace-leak")
     if record.get("disposition") == "REVIEWER_ERROR" and not record.get(
             "refuting_evidence"):

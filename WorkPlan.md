@@ -181,6 +181,8 @@ Scope: the most important phase — decide whether external semantics actually f
 
 **Recursive certification cycles (operative, Amendment 005).** Every external panel belongs to a sealed `CERTIFICATION_CYCLE_NNN` binding one frozen revision to one fresh chair triple (`CYCLE_001` = rev002/C01–C03, sealed failed-repairable and consumed by Phase 2D; `CYCLE_002` = rev004/C04–C06, open pending). Outcomes are exactly `CERTIFICATION_PASSED` (unanimous FIXED → unlock, loop closed), `CERTIFICATION_FAILED_REPAIRABLE` (≥1 source-grounded material defect → automatic hardening → new revision → burn-in → new freeze → new panel), or `CERTIFICATION_FAILED_IRREDUCIBLE` (stop negative). Panels advance monotonically (C07–09, C10–12), revision-bound at unlock with record↔freeze hash binding; no fourth chair, no cross-panel completion, no ID reuse. `NEXT_EXTERNAL_CERTIFICATION_HANDOFF.md` carries only frozen inputs to the operator. Loop condition is defect-existence, never positivity-seeking.
 
+**Unbounded panels (operative, Amendment 006).** Finite C01–C12 tables replaced by generic `AUD-C<N>` (N≥1) with consecutive-triple panels, `max_used+1` allocation, revision binding `{1:None,2:0,3:None,4:1}` + rev≥5 fallback, alias normalization, and developmental-marker refusal; rehearsal guards generalized; handoff emits per-chair instantiated prompts with leak scan. Standards/invariants regression-tested constant across cycles.
+
 Files to make:
 
 - `derived/policy_projection.json` (every reachable AttributeDesignator: RuleId/path, Category, AttributeId, DataType, Issuer, MustBePresent, match-function context) + `derived/H_initial.json`, `H_permit.json`, `H_nonpermit.json`.

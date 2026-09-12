@@ -217,13 +217,15 @@ def test_namespace_protection(tmp_path):
                            "final_certification.py"),
               encoding="utf-8") as handle:
         final_src = handle.read()
-    # The only NON_BLIND-adjacent literal allowed is inside the guard
-    # pattern that REFUSES hardening/non-blind sources; the module must
+    # NON_BLIND-adjacent literals are allowed only inside guard patterns
+    # that REFUSE hardening/non-blind sources; the module must
     # never read hardening reports or blind packet candidates as verdict
     # inputs (it reads only freeze records, packet seal, prompt file,
     # and the final_certification/ chairs).
-    assert final_src.count("NON_BLIND") == 1
-    assert "HARDENING_PATH.search" in final_src
+    hits = [line for line in final_src.splitlines() if "NON_BLIND" in line]
+    assert len(hits) == 2, hits
+    assert any("HARDENING_PATH" in line for line in hits)
+    assert any('if "NON_BLIND" in text:' in line for line in hits)
     for forbidden in ("reports/non_blind", "semantic_hardening/reports",
                       "semantic_hardening/rounds", "dev_packets"):
         assert forbidden not in final_src, forbidden
