@@ -400,14 +400,14 @@ def test_ingest_malformed_and_mids(tmp_path):
 def test_real_repo_still_locked():
     """Real repo: gate never unlocks without the eligible unanimous panel."""
     # [P2-LOG-F22] Test step: assert real-repo locked state.
-    # Sealed states: rev002 panel exit 3 (nonunanimous); after Amendment-004
-    # reopen + rev003 refreeze, C01-C03 match neither panel-2 nor the new
-    # packet -> exit 4 blocked pending C04/C05/C06.
+    # Sealed terminal state: complete C04-C06 panel, Lambda PARTIAL x3 +
+    # Atom PARTIAL x1 -> exit 3 failure-seal route (CYCLE_002 decided
+    # IRREDUCIBLE; no further panels).
     print("[P2:test:final:022] real-repo locked state", flush=True)
     try:
         final.assert_final_unlock(REPO_ROOT)
     except SystemExit as exc:
-        assert exc.code == 4, exc.code
+        assert exc.code == 3, exc.code
     else:
         raise AssertionError("real-repo final gate granted")
 
