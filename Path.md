@@ -394,6 +394,20 @@ Gate verdict: `POST_CERTIFICATION_HARDENING_CONVERGED` + `FINAL_SEMANTIC_INTERFA
 
 WorkPlan compliance: YES (Amendment 004 §§7–17). Models trained: none.
 
+### 3.21 Amendment 005 — Recursive Certification Cycles (2026-09-12)
+
+Files made: `PROTOCOL_AMENDMENT_005.md`; `src/audit/certification_cycle.py` ([P2-LOG-010]–[P2-LOG-072]/[P2-LOG-900]); `schemas/certification_cycle.schema.json`; `tests/test_certification_cycle.py` (6 tests, [P2-LOG-Y10]–[P2-LOG-Y18]); `certification_cycles/CYCLES.json` (001 sealed failed-repairable, 002 open pending) + `CYCLE_001.assessment.json`; `NEXT_EXTERNAL_CERTIFICATION_HANDOFF.md` (C04–C06, packet/prompt hashes, cold-session + ingest instructions, attestation rules; forbidden-content scanned).
+
+Code produced: cycle init (ID/panel/reuse/revision-double-bind guards + revision↔panel binding check)/assess (tally vs operative-or-snapshot freeze)/decide (PASSED/REPAIRABLE/IRREDUCIBLE consistency + reason/material requirements + immutability)/handoff (open-cycle-first panel advancement, leak scan)/status; final_certification panels C07–12, `REVISION_PANELS` map with rev≥5 fallback, record↔freeze binding, mixed/fourth-chair refusal.
+
+Adversarial review (2 subagents): 8 holes found (cycle revision range, init panel binding, empty reason, sealed-assess overwrite, snapshot trust, handoff revision match, float coercion, message staleness) — all repaired + tested; independent rev004 re-verification 7/7 CONFIRM (freeze, 139-file packet, pre_hash packet-mode, sweeps, zero-exec, specimen; worktree dirt correctly attributed to post-freeze Amendment-005 work).
+
+Verification: full suite 95 passed + 1 skipped; `--verify-freeze` green; handoff targets C04–C06 with operative hashes and no forbidden content.
+
+Gate verdict: machinery COMPLETE; state `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION`. STOP: operator runs three fresh external sessions per handoff.
+
+WorkPlan compliance: YES (Amendment 005 §§1–20; no specimen/semantic change; zero executions). Models trained: none.
+
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE
 
 Scope executed: [Sec.3.1-3.7].

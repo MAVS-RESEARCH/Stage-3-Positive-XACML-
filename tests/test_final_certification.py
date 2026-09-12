@@ -175,7 +175,8 @@ def test_final_unanimous_unlock(tmp_path):
     # [P2-LOG-F12] Test step: assert the unanimous unlock path.
     print("[P2:test:final:012] unanimous unlock case", flush=True)
     root = make_freeze_root(str(tmp_path / "f3"),
-                            [(a, FIXED4) for a in AUDITORS])
+                                [(a, FIXED4) for a in AUDITORS],
+                                revision=2)
     expect_exit("3-unanimous", lambda: final.assert_final_unlock(root), 0)
     with open(os.path.join(root, "artifacts", "audits", "semantic_hardening", "final_freeze",
                            "final_unlock.json"),
@@ -195,7 +196,8 @@ def test_final_nonunanimous_locked(tmp_path):
     root = make_freeze_root(
         str(tmp_path / "f4"),
         [("AUD-C01", FIXED4), ("AUD-C02", FIXED4),
-         ("AUD-C03", dict(FIXED4, P_R="PARTIAL"))])
+         ("AUD-C03", dict(FIXED4, P_R="PARTIAL"))],
+        revision=2)
     expect_exit("partial", lambda: final.assert_final_unlock(root), 3)
 
 
@@ -411,13 +413,13 @@ def test_real_repo_still_locked():
 
 
 def test_panel2_unanimous_unlock(tmp_path):
-    """Second panel C04-C06 unanimous FIXED on rev3 freeze -> UNLOCK."""
+    """Second panel C04-C06 unanimous FIXED on rev4 freeze -> UNLOCK."""
     # [P2-LOG-F24] Test step: assert panel-2 unlock path.
     print("[P2:test:final:024] panel-2 unlock case", flush=True)
     root = make_freeze_root(
         str(tmp_path / "p2"),
         [(a, FIXED4) for a in ("AUD-C04", "AUD-C05", "AUD-C06")],
-        revision=3)
+        revision=4)
     expect_exit("panel2-unanimous",
                 lambda: final.assert_final_unlock(root), 0)
     with open(os.path.join(root, "artifacts", "audits", "semantic_hardening",
@@ -432,7 +434,8 @@ def test_old_records_excluded_after_refreeze(tmp_path):
     # [P2-LOG-F26] Test step: assert freeze binding of records.
     print("[P2:test:final:026] superseded records excluded", flush=True)
     root = make_freeze_root(str(tmp_path / "p3"),
-                            [(a, FIXED4) for a in final.AUDITORS])
+                            [(a, FIXED4) for a in final.AUDITORS],
+                            revision=2)
     freeze_path = os.path.join(root, "artifacts", "audits",
                                "semantic_hardening", "final_freeze",
                                "FINAL_SEMANTIC_FREEZE.json")
@@ -463,11 +466,11 @@ def test_mixed_panels_blocked(tmp_path):
 
 
 def test_unknown_chair_rejected(tmp_path):
-    """AUD-C07 ingest -> INVALID (exit 5)."""
-    # [P2-LOG-F30] Test step: assert namespace closure past C06.
+    """AUD-C13 ingest -> INVALID (exit 5)."""
+    # [P2-LOG-F30] Test step: assert namespace closure past C12.
     print("[P2:test:final:030] unknown chair rejected", flush=True)
-    ingest_case(tmp_path, "p5", "AUD-C07", '{"a": 1}',
-                "Attestation of AUD-C07.", 5)
+    ingest_case(tmp_path, "p5", "AUD-C13", '{"a": 1}',
+                "Attestation of AUD-C13.", 5)
 
 
 def test_panel1_not_eligible_on_rev3(tmp_path):
@@ -489,4 +492,43 @@ def test_panel2_short_on_rev3_locks(tmp_path):
                             [(a, FIXED4) for a in ("AUD-C04", "AUD-C05")],
                             revision=3)
     expect_exit("rev3-panel2-partial",
+                lambda: final.assert_final_unlock(root), 4)
+
+
+def test_rev1_has_no_eligible_panel(tmp_path):
+    """Complete C01-C03 panel on rev1 freeze -> BLOCKED (exit 4)."""
+    # [P2-LOG-F36] Test step: assert rev1 never certifies.
+    print("[P2:test:final:036] rev1 no panel", flush=True)
+    root = make_freeze_root(str(tmp_path / "p8"),
+                            [(a, FIXED4) for a in final.AUDITORS],
+                            revision=1)
+    expect_exit("rev1-nopanel",
+                lambda: final.assert_final_unlock(root), 4)
+
+
+def test_rev5_maps_to_panel3(tmp_path):
+    """C07-C09 unanimous FIXED on rev5 freeze -> UNLOCK (exit 0)."""
+    # [P2-LOG-F38] Test step: assert future revision mapping.
+    print("[P2:test:final:038] rev5 panel-3 unlock", flush=True)
+    root = make_freeze_root(str(tmp_path / "p9"),
+                            [(a, FIXED4) for a in final.PANEL_3],
+                            revision=5)
+    expect_exit("rev5-panel3",
+                lambda: final.assert_final_unlock(root), 0)
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening",
+                           "final_freeze", "final_unlock.json"),
+              encoding="utf-8") as handle:
+        assert json.load(handle)["auditors"] == ["AUD-C07", "AUD-C08",
+                                                 "AUD-C09"]
+
+
+def test_fourth_chair_cannot_complete(tmp_path):
+    """C04+C05+C07 FIXED on rev4 freeze -> BLOCKED (exit 4)."""
+    # [P2-LOG-F40] Test step: assert no fourth-chair completion.
+    print("[P2:test:final:040] fourth chair refused", flush=True)
+    root = make_freeze_root(str(tmp_path / "p10"),
+                            [(a, FIXED4) for a in ("AUD-C04", "AUD-C05",
+                                                   "AUD-C07")],
+                            revision=4)
+    expect_exit("fourth-chair",
                 lambda: final.assert_final_unlock(root), 4)

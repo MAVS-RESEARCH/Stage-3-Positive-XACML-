@@ -28,9 +28,16 @@ from blind_adjudication import REDACTION_PATTERNS, TOUCH_ASSIGNMENT
 AUDITORS = ("AUD-C01", "AUD-C02", "AUD-C03")
 PANEL_1 = AUDITORS
 PANEL_2 = ("AUD-C04", "AUD-C05", "AUD-C06")
-PANELS = (AUDITORS, PANEL_2)
-PANEL_IDS = AUDITORS + PANEL_2
-FINAL_NAMESPACE = re.compile(r"^AUD-C0[1-6]$")
+PANEL_3 = ("AUD-C07", "AUD-C08", "AUD-C09")
+PANEL_4 = ("AUD-C10", "AUD-C11", "AUD-C12")
+PANELS = (PANEL_1, PANEL_2, PANEL_3, PANEL_4)
+PANEL_IDS = PANEL_1 + PANEL_2 + PANEL_3 + PANEL_4
+FINAL_NAMESPACE = re.compile(r"^AUD-C(0[1-9]|1[0-2])$")
+# Revision-to-panel binding (Amendment 005): only the listed panel may
+# certify a freeze revision. Revisions without a panel were never
+# externally certified (rehearsal-only). Future revisions map to the
+# next unused panel by index rev-3.
+REVISION_PANELS = {1: None, 2: 0, 3: None, 4: 1}
 BLIND_ANCHORS = ("H", "P_R", "Lambda", "Atom")
 ALLOWED_STATUSES = ("FIXED", "PARTIAL", "AMBIGUOUS", "UNSUPPORTED")
 DECLARATION = (
@@ -132,7 +139,7 @@ def validate_final(doc, freeze, auditor):
     if doc.get("auditor_id") != auditor:
         problems.append("auditor_id must equal the ingested chair")
     if not FINAL_NAMESPACE.match(doc.get("auditor_id", "")):
-        problems.append("auditor_id not in final namespace AUD-C01..C06")
+        problems.append("auditor_id not in final namespace AUD-C01..C12")
     if doc.get("qualification") != "COLD_MODEL_INDEPENDENT":
         problems.append("qualification must be COLD_MODEL_INDEPENDENT")
     verdicts = doc.get("verdicts", {})
@@ -312,19 +319,26 @@ def collect_valid(repo_root):
 
 
 def eligible_panel(freeze):
-    """Return the single panel bound to the freeze revision.
+    """Return the single panel bound to the freeze revision, or None.
 
-    Revisions 1-2 (pre-Amendment-004) belong to PANEL_1; revision 3+
-    requires the fresh PANEL_2. A panel never certifies another
-    revision's freeze: chairs are not reusable across revisions.
+    Revision 2 belongs to PANEL_1; revisions 1 and 3 were never
+    externally certified; revision 4 requires the fresh PANEL_2. Later
+    revisions take the next unused panel by index rev-3. A panel never
+    certifies another revision's freeze: chairs are not reusable across
+    revisions, and no fourth chair ever completes a panel.
     """
-    try:
-        revision = int((freeze or {}).get("revision", 1))
-    except (TypeError, ValueError):
-        return PANEL_1
-    if revision >= 3:
-        return PANEL_2
-    return PANEL_1
+    raw = (freeze or {}).get("revision", 1)
+    if isinstance(raw, bool) or not isinstance(raw, int):
+        return None
+    revision = raw
+    if revision in REVISION_PANELS:
+        index = REVISION_PANELS[revision]
+        return PANELS[index] if index is not None else None
+    if revision >= 5:
+        index = revision - 3
+        if 0 <= index < len(PANELS):
+            return PANELS[index]
+    return None
 def matching_freeze_records(repo_root, freeze, valid):
     """Keep only records sealed against the operative freeze."""
     # [P2-LOG-016] Step: bind records to the operative freeze.
@@ -367,6 +381,10 @@ def assert_final_unlock(repo_root):
     valid = matching_freeze_records(repo_root, freeze,
                                       collect_valid(repo_root))
     panel = eligible_panel(freeze)
+    if panel is None:
+        print("[P2:final:027] freeze revision has no eligible panel: "
+              "blocked", flush=True)
+        sys.exit(EXIT_BLOCKED)
     if all(auditor in valid for auditor in panel):
         short = [auditor for auditor in panel
                  if any(valid[auditor]["verdicts"][anchor]["status"]

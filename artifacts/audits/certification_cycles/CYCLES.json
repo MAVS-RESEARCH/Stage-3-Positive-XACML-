@@ -1,0 +1,49 @@
+{
+  "cycles": [
+    {
+      "assessment": {
+        "assessed_utc": "2026-09-12T08:59:41Z",
+        "freeze_packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+        "freeze_prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+        "tally": {
+          "AUD-C01": "NON_FIXED:Lambda",
+          "AUD-C02": "NON_FIXED:Lambda",
+          "AUD-C03": "NON_FIXED:Lambda,Atom"
+        },
+        "unanimous": false
+      },
+      "cycle_id": "CERTIFICATION_CYCLE_001",
+      "decision": {
+        "decided_utc": "2026-09-12T08:59:42Z",
+        "material_objections": [
+          "C01-Lambda-engine-closure",
+          "C02-Lambda-verifiability",
+          "C03-Lambda-deferral",
+          "C03-Atom-staging"
+        ],
+        "reason": "Lambda 3xPARTIAL + Atom 1xPARTIAL with source-grounded gaps; consumed by Phase 2D revisions 003/004",
+        "verdict": "CERTIFICATION_FAILED_REPAIRABLE"
+      },
+      "panel": [
+        "AUD-C01",
+        "AUD-C02",
+        "AUD-C03"
+      ],
+      "revision": 2,
+      "status": "SEALED_FAILED_REPAIRABLE"
+    },
+    {
+      "assessment": null,
+      "cycle_id": "CERTIFICATION_CYCLE_002",
+      "decision": null,
+      "panel": [
+        "AUD-C04",
+        "AUD-C05",
+        "AUD-C06"
+      ],
+      "revision": 4,
+      "status": "OPEN_PENDING"
+    }
+  ],
+  "updated_utc": "2026-09-12T08:59:47Z"
+}

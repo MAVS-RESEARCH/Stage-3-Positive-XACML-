@@ -70,3 +70,9 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - `HARDENING_ROUND_004/005`: Lambda reconstruction (76-file set + tree + jars + recompute tool + vector), staged pre-eval equality, engine closure, staging certificate, locator table (13/13), world binding, packet completeness (+14 candidates, engine tree), panel continuity (C04–C06, record-freeze binding, revision eligibility). Ledger 94/94.
 - Holdout-008 found RS008-CE1 (classpath/extension unpinned) → second reopen → `HARDENING_ROUND_006` (classpath manifest + gates). Snapshot incident: REVISION_003 partial snapshot mishandled; recovered byte-identical with marked wrappers (see Path.md §3.20).
 - Burn-in on rev004 (`156e36d7`): sweeps 009 (8/0) + 010 (7/0) + holdout 011 (3/0), no mutation between → `POST_CERTIFICATION_HARDENING_CONVERGED`. Suite 87+1, freeze verified, 0 executions, touch/K uncomputed. State `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION` (AUD-C04/C05/C06).
+
+## [Amendment 005] - 2026-09-12 - RECURSIVE CERTIFICATION CYCLES, HANDOFF GENERATED
+
+- Generic cycle machine (`certification_cycle.py` + schema + 6 tests): sealed CYCLE_001 (rev002/C01–C03, FAILED_REPAIRABLE, consumed by Phase 2D) + open CYCLE_002 (rev004/C04–C06); assess/decide consistency gates; panels through C10–C12 with revision binding, record-freeze binding, fourth-chair refusal.
+- Adversarial review found 8 machinery holes; all repaired + tested. Independent rev004 re-verification 7/7 CONFIRM.
+- `NEXT_EXTERNAL_CERTIFICATION_HANDOFF.md` generated (C04–C06, operative hashes, cold-session + ingest instructions, leak-scanned). Suite 95+1, freeze verified, 0 executions. STOP at `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION`.
