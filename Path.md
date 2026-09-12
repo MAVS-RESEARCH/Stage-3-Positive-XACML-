@@ -360,7 +360,13 @@ Ingest: `AUD-C01` valid, record sealed (exit 0; provenance `valid:true`, no prob
 
 Ingest: `AUD-C02` valid, record sealed (exit 0; provenance `valid:true`). Tally identical shape: H/P_R/Atom FIXED, Lambda PARTIAL (blind-verifiability gap: engine bytes/method, pre_hash inputs, deferred post_hash). Ingest-time notes: first paste lacked 5 schema fields (re-emitted complete in-session, verdicts unchanged); pasted attestation needed trailing newline to match the model's stated hash (bytes normalized, hash recomputed equal); attestation distinct from C01's. One chair outstanding (AUD-C03); gate judgment after all three.
 
-WorkPlan compliance: YES (audit-code repair inside §8 allowed boundary; frozen specimen untouched; zero executions). Models trained: none.
+Ingest: `AUD-C03` valid, record sealed (exit 0; provenance `valid:true`). Tally H=FIXED, P_R=FIXED, Lambda=PARTIAL, Atom=PARTIAL (counting/checkpoint blind-verifiability; core decomposition supported). Ingest-time notes: transcription first introduced a stray bracket (caught by JSON validation, rebuilt byte-faithful from the pasted text, parse + field verification green); attestation needed trailing newline to match stated hash (normalized, recomputed equal); attestation distinct.
+
+Gate judgment: `--assert-final-unlock` exit 3 `MODEL_ADJUDICATION_NONUNANIMOUS` (all three chairs short of unanimous: Lambda PARTIAL ×3, Atom PARTIAL ×1). Target audit stays locked forever; Phases 3–6 computation path closed.
+
+Sec.15 assessment (no auto-reopen): every verdict gap duplicates rehearsal dispositions (Lambda engine/method/deferral → RS001-L02/L03/L05 + RS002/RS004 families; Atom counting/checkpoint → RS001-A04/RS002-A04 + RS004-G02; staging/scripts absence → RS004-G02 disclosed polish); two blind chairs independently recomputed pre_hash + provider-element C14N (corroboration, not contradiction); all chairs state no contradiction found. No genuinely new material defect → no reopen, no new panel. Failure-seal: `artifacts/seal/FINAL_RESULT.json` (`NATIVE_ANCHOR_INSUFFICIENT`, stopped_at_phase 2, downstream `NOT_RUN_BY_PROTOCOL`); verified zero target/response/touch/freeze/contract artifacts and 0 executions.
+
+WorkPlan compliance: YES (2C gate + failure-seal per spec §8/§23; frozen specimen untouched; zero executions). Models trained: none.
 
 WorkPlan compliance: YES (Amendment 003 developmental layer only; experiment ID unchanged; no history rewritten; no estimand change). Models trained: none.
 
