@@ -11,6 +11,8 @@
   "execution_code": {
     "src/audit/conformance_verify_a.py": "5414408832b26b30cb643a1ab30fb60d1786e0917a84535fa4d00ae3ae87a8e9",
     "src/audit/conformance_verify_b.py": "60a71f1e6ac0347fcae5fd035223efa6e047c46c907a267ce7dca4095728bba7",
+    "src/audit/launch_certification.py": "5b0e1e2b64ee841550d129ff9c25a8e00a32718724dc80de661b335815cf439d",
+    "src/audit/launch_freeze.py": "6f30bbafac2750649a86d1cd8bf7b5d9e60d603fd18217e4a92e0dfe8d5fd842",
     "src/audit/recompute_lambda.py": "6c5dcdd353f1689da364ad1be108b167501c16d5a127d95b58d938b2eab2f65f",
     "src/audit/verify_deployment_set.py": "921af26b4f2cde5bad3bb924bf17c0b78615732ac0a39e3b718f48e25d39fc5b",
     "src/pc/derive_Lambda.py": "21afdbe877e3610f36f8f3c3face577f1da203bcc506fde420705177fb987aa8",
@@ -20,15 +22,16 @@
     "src/xacml/run_authzforce.py": "708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce"
   },
   "frozen": true,
-  "frozen_utc": "2026-09-12T13:07:09Z",
-  "launch_id": "PC-XACML-S3PLUS-v1-launch-001",
-  "packet_sha256": "db661dd74a37bec4586fce0ae329263b63ab679908fd1336a69eefa904e92a8d",
+  "frozen_utc": "2026-09-12T15:15:47Z",
+  "launch_id": "PC-XACML-S3PLUS-v1-launch-002",
+  "packet_sha256": "a75ee3b0506de98ea34d925d92c0240d001d685f6be8ed206d3f13787f1e1777",
   "panel": [
-    "AUD-L01",
-    "AUD-L02",
-    "AUD-L03"
+    "AUD-L04",
+    "AUD-L05",
+    "AUD-L06"
   ],
   "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
   "registry_sha256": "12a46820dca3434a6d993d6801c52e4df24d02602e6391a263df03e98910a837",
-  "semantic_revision": 4
+  "semantic_revision": 4,
+  "supersedes": "PC-XACML-S3PLUS-v1-launch-001 (L01-L03: 0/3 valid ingest; merits Lambda 3xPARTIAL packet-internal driver/pom gaps; preserved as launch_packet_rev001)"
 }

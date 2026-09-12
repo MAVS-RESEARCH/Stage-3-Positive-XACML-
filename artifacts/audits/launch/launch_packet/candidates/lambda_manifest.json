@@ -15,15 +15,15 @@
       "drivers": [
         {
           "bytes": 3272,
-          "method": "sha256 of repo file bytes (git-pinned)",
+          "method": "sha256 of staged packet bytes (launch revision 002)",
           "path": "src/xacml/PdpRunner.java",
           "sha256": "38771f99af69e79c1aaa463ec55bca9d557ee96108b3b85a7a0acdd7c95964a3"
         },
         {
-          "bytes": 9575,
-          "method": "sha256 of repo file bytes (git-pinned)",
+          "bytes": 14104,
+          "method": "sha256 of staged packet bytes (launch revision 002)",
           "path": "src/xacml/run_authzforce.py",
-          "sha256": "47b40bdea86fca039be2edcc3a6c0e8241e81829269f544c96d6d11a1d65d0c8"
+          "sha256": "708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce"
         }
       ],
       "jars": [
@@ -77,6 +77,11 @@
       "method": "sha256 per clone-relative path; pre-eval gate recomputes live vs manifest",
       "reason": "runtime classpath composition decides which bytes execute (extension path, test utilities)",
       "stability": "byte-equal across repair"
+    },
+    "dependency_content": {
+      "count": 145,
+      "method": "sha256 of every offline-resolved test-classpath jar (mvn dependency:build-classpath, includeScope=test); packet file candidates/dependency_hashes.json",
+      "sha256": "b8b20ab0d6ea56b02dd6b4ad5a01281a9f98383297561f9b5423df9924c7ea83"
     },
     "engine_semantic_set": {
       "basis": "capability-ranked enumeration at pinned commit (see engine_sources_manifest.json); tree sha binds all blobs",
@@ -471,7 +476,7 @@
     }
   },
   "manifest_id": "PC-XACML-S3PLUS-v1-lambda-manifest",
-  "pre_hash": "d4a5fcd891910184c8d7919ab44395cbf6c1860de95bf8d5ba098b68d757a00b",
+  "pre_hash": "5ecdd192cc606fcc1fdc901c8390c31ba22ec20935f39f1522c6d7867bae1dbd",
   "produced_utc": "2026-09-12T08:23:51Z",
   "reconstruction": {
     "canonicalization": "json.dumps({'components':..., 'exclusions':...}, sort_keys=True, ensure_ascii=True, separators=(', ', ': ')).encode('utf-8'); pre_hash = sha256(canonical).hexdigest() lower-case",
@@ -481,5 +486,6 @@
     "test_vector": "see tests/test_lambda_manifest.py: fixed mini-manifest -> fixed digest",
     "unexposed": "engine full bytes live in packet candidates/engine_sources/ for this revision; transitive Central artifacts by coordinates (limitation disclosed in built_artifacts)"
   },
+  "refresh_note": "Launch-revision 002: drivers rebound to staged packet bytes (prior d4a5fcd891910184 preserved in lineage history); dependency_content added; composite recomputed.",
   "supersedes_pre_hash": "bb2c3c94-method-opaque (historical; replaced by reconstructible construction)"
 }

@@ -1,0 +1,13 @@
+{
+  "attestation_sha256": "22e50c07576623cd507497dc5deeb681b547e82df550decf195f1c015a063a69",
+  "auditor_id": "AUD-L02",
+  "ingested_utc": "2026-09-12T15:10:53Z",
+  "problems": [
+    "attestation hash does not recompute from retained text"
+  ],
+  "raw_sha256": "3de6c0475f52bc81fc79522aed4e670562a0752628f91d16d5b5c2324e290da1",
+  "sealed_packet_sha256": "db661dd74a37bec4586fce0ae329263b63ab679908fd1336a69eefa904e92a8d",
+  "sealed_prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "valid": false,
+  "verdict_sha256": "6c88c3344a7dfd9c3eccb1be49b8b24bd7f1db0ecb35ca06698e76d51c38714b"
+}

@@ -1,0 +1,73 @@
+{
+  "attestation_hash": "cb2e6ce21af15237a4d84f452e6cac87ab4ca0ccbeada22846ed60ab2ba4981b",
+  "auditor_id": "AUD-L02",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed launch packet.",
+  "deferrals": {
+    "RC-ATOM-ORDER": "LEGITIMATELY_DEFERRED",
+    "RC-CLASSPATH-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPLOYMENT-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPS-CONSISTENT": "LEGITIMATELY_DEFERRED",
+    "RC-LAMBDA-POST": "LEGITIMATELY_DEFERRED",
+    "RC-REQUEST-ACTUAL": "LEGITIMATELY_DEFERRED"
+  },
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "db661dd74a37bec4586fce0ae329263b63ab679908fd1336a69eefa904e92a8d",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-L02-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "candidates/builder_source.py:82-112 (MissingAttributeDetail triple read + MustBePresent policy cross-check)",
+        "candidates/builder_source.py:120-193 (INV-05 single-Attribute proof + insert_attribute world-value + disjointness)",
+        "corpus/fixture/response.xml:10 + corpus/fixture/policies/policy.xml:18-20 (triple byte-equal)",
+        "candidates/request_diffs.json:unified_diffs + c14n_sha256 (c14n-identity except one subject Attribute)",
+        "candidates/wrapper_evidence.json:rule_to_code + builder_reaches_pdp=false + forbidden_token_hits=[]",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:3432-3500 Sec-3.1 dataflow PEP-handler-PDP-response-PEP",
+        "candidates/staging_certificate.json:before_after_manifests=PENDING_TARGET + responses_pending_target=true",
+        "LAUNCH_FREEZE.json:completed_executions=0"
+      ],
+      "notes": "Native request/response transaction distinguished from experiment-authored reconstruction: spec 3.1 defines PEP-handler-PDP-response native boundary; builder bytes prove reconstruction is copy-plus-one-subject-Attribute before submission with INV-05 residual and disjointness; diffs prove c14n-identity except insert with re-serialization deltas dispositioned; triple pinned in frozen response Detail and policy designator. Live ordering, staged-copy byte-identity and interior one-native-cycle-per-world counting require future execution (0 observed, PENDING_TARGET listings) and are covered by RC-ATOM-ORDER; frozen sources alone leave material gap. No response content or decision inferred.",
+      "status": "PARTIAL"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-21 (subject-id + some-attribute MustBePresent=true)",
+        "corpus/fixture/request.xml:3-18 (three present bags + empty environment container)",
+        "corpus/fixture/response.xml:9-10 (MissingAttributeDetail triple)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:12136-12142 Sec-7.3.4 Issuer-absent governed by AttributeId+DataType alone",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:12150-12185 Sec-7.3.5 missing MustBePresent empty-vs-Indeterminate + bag immutability + handler MAY add",
+        "n4_excerpts/xsd_std_providers.txt:7-20 + n4_excerpts/stdenv_default_factory.txt:8 + n4_excerpts/xsd_stdenv_doc.txt:9-19 (std-env DEFAULT_FACTORY override=false current-* only)"
+      ],
+      "notes": "Multimap keyed by Category/AttributeId/DataType/Issuer-or-null with absent_required marker for some-attribute, explicit empty environment category, and environment inertness (zero env designators in frozen policy, zero env values in frozen requests, functions string-equal/anyURI-equal only) independently justified by frozen policy/request/response bytes plus spec 7.3.4/7.3.5 and N4 wiring. Issuer uniformly absent verified from frozen bytes; wildcard rule prevents divergence. No outcome inferred.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/MANIFEST.json:authzforce.fixture_files + corpus/RELEASE.json + corpus/COMMIT.txt:3cc0e988/release-21.2.0",
+        "corpus/fixture/policies/policy.xml:8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64 + corpus/fixture/pdp.xml:6-8 + candidates/provider_element_c14n.xml:73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+        "n4_excerpts/adapter_defaults.txt:9-11 + n4_excerpts/xsd_preprocessor_defaults.txt + n4_excerpts/xsd_strict_issuer.txt:8-30 + n4_excerpts/std_wiring.txt + n4_excerpts/xsd_std_providers.txt:7-20 (default-lax strictIssuer=false xPath=false, std-env wiring)",
+        "candidates/lambda_manifest.json:components.built_artifacts.drivers[1].sha256=47b40bdea86fca039be2edcc3a6c0e8241e81829269f544c96d6d11a1d65d0c8 vs LAUNCH_FREEZE.json:execution_code.src/xacml/run_authzforce.py=708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce and candidates/invocation/run_authzforce.py hash 708c80 (absent from PACKET_MANIFEST.json)",
+        "candidates/lambda_manifest.json:components.built_artifacts.poms[0].sha256=21bd68069dd69b59d555fb3feb26dea1baa87072b6d33a7d900458a95ecfa92d absent from PACKET_MANIFEST.json files list",
+        "candidates/lambda_manifest.json:components.built_artifacts.basis transitive Central artifacts by coordinates only, not content-hashed (explicit limitation)"
+      ],
+      "notes": "Most constituents (jars, engine semantic set files, policy/provider/preprocessor/classpath/identity) match frozen bytes and N4 excerpts, but drivers[1] hash contradicts frozen execution code with no packet bytes, root pom hash has no packet bytes per R1, and transitive deps are coordinates-only by disclosed limitation. Material gap prevents FIXED; ambiguity preserved; no outcome inferred.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43 (5 Matches, 4 distinct coordinates, action read/write dedup 34-43, string-equal/anyURI-equal, all MustBePresent=true)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:12380-12410 Sec-7.6 Match TRUE/FALSE/INDETERMINATE existential semantics",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:12150-12185 Sec-7.3.5 missing empty-vs-Indeterminate",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:12136-12142 Sec-7.3.4 Issuer pooling immaterial",
+        "corpus/fixture/request.xml:3-18 + candidates/repaired_request_x_permit.xml:7 (singleton null-Issuer exact-datatype bags)"
+      ],
+      "notes": "5 occurrences project to 4 coordinates with action bag held once evaluated twice; Match-vector TRUE/FALSE/INDETERMINATE per 7.6/7.3.5 coincides with sorted bag equality on admitted singleton null-Issuer interface verified from frozen bytes; duplicates/Issuer-pooling disclosed as immaterial here, not assumed generally. Per-world outcomes not recorded or used. No outcome inferred.",
+      "status": "FIXED"
+    }
+  }
+}

@@ -539,3 +539,68 @@ def test_launch_locked_after_execution(tmp_path):
         assert exc.code == 4, exc.code
     else:
         raise AssertionError("unlock passed post-lock")
+
+
+def test_launch_packet_poms_distinct():
+    """Both poms staged under distinct names with manifest-matching bytes."""
+    # [P2-LOG-V56] Test step: assert pom-collision regression (L01-03).
+    print("[P2:test:launch:056] pom staging", flush=True)
+    packet = os.path.join(REPO_ROOT, "artifacts", "audits", "launch",
+                          "launch_packet")
+    with open(os.path.join(packet, "PACKET_MANIFEST.json"),
+              encoding="utf-8") as handle:
+        files = json.load(handle)["files"]
+    for key in ("candidates/built/poms/root-pom.xml",
+                "candidates/built/poms/pdp-engine-pom.xml"):
+        assert key in files, key
+    with open(os.path.join(packet, "candidates", "lambda_manifest.json"),
+              encoding="utf-8") as handle:
+        poms = json.load(handle)["components"]["built_artifacts"]["poms"]
+    want = {entry["path"]: entry["sha256"] for entry in poms}
+    assert set(want) == {"pom.xml", "pdp-engine/pom.xml"}
+    pairs = {"pom.xml": "candidates/built/poms/root-pom.xml",
+             "pdp-engine/pom.xml":
+             "candidates/built/poms/pdp-engine-pom.xml"}
+    for manifest_path, packet_key in pairs.items():
+        with open(os.path.join(packet, *packet_key.split("/")), "rb") \
+                as handle:
+            assert hashlib.sha256(handle.read()).hexdigest() == \
+                want[manifest_path], packet_key
+
+
+def test_launch_packet_manifest_driver_currency():
+    """Staged manifest drivers equal staged invocation bytes; composite ok."""
+    # [P2-LOG-V58] Test step: assert driver-currency regression (L01-03).
+    print("[P2:test:launch:058] driver currency", flush=True)
+    packet = os.path.join(REPO_ROOT, "artifacts", "audits", "launch",
+                          "launch_packet")
+    with open(os.path.join(packet, "candidates", "lambda_manifest.json"),
+              encoding="utf-8") as handle:
+        manifest = json.load(handle)
+    composite = json.dumps(
+        {"components": manifest["components"],
+         "exclusions": manifest["exclusions"]},
+        sort_keys=True, ensure_ascii=True,
+        separators=(", ", ": ")).encode("utf-8")
+    assert hashlib.sha256(composite).hexdigest() == manifest["pre_hash"]
+    inv_map = {"src/xacml/PdpRunner.java":
+               "candidates/invocation/PdpRunner.java",
+               "src/xacml/run_authzforce.py":
+               "candidates/invocation/run_authzforce.py"}
+    for entry in manifest["components"]["built_artifacts"]["drivers"]:
+        staged = os.path.join(packet, *inv_map[entry["path"]].split("/"))
+        with open(staged, "rb") as handle:
+            assert hashlib.sha256(handle.read()).hexdigest() == \
+                entry["sha256"], entry["path"]
+        assert os.path.getsize(staged) == entry["bytes"], entry["path"]
+    with open(os.path.join(packet, "candidates", "pre_hash_lineage.json"),
+              encoding="utf-8") as handle:
+        lineage = json.load(handle)
+    assert lineage["current"]["pre_hash"] == manifest["pre_hash"]
+    with open(os.path.join(packet, "candidates",
+                           "dependency_hashes.json"),
+              encoding="utf-8") as handle:
+        deps = json.load(handle)
+    assert deps["count"] == len(deps["entries"]) >= 100
+    assert manifest["components"]["dependency_content"]["count"] == \
+        deps["count"]

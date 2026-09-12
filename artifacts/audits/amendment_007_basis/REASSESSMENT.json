@@ -7,7 +7,7 @@
       "classes": [
         "STATIC_REPAIR_REQUIRED"
       ],
-      "evidence": "launch packet candidates/built/jars(4)+poms(2)+drivers+invocation staged; Lambda drivers refreshed to live (run_authzforce e1cb-era); recompute composite ok",
+      "evidence": "launch-002: drivers rebound (R7-10), poms distinct (R7-09), jars 4/4 match, deps content-bound (R7-11)",
       "id": "R7-01",
       "repair": "include driver sources + poms + 4 built jars in packet with method; manifest update",
       "source": "C04/C05/C06 Lambda built_artifacts gaps",
@@ -27,7 +27,7 @@
       "classes": [
         "STATIC_REPAIR_REQUIRED"
       ],
-      "evidence": "launch packet candidates/invocation/PdpRunner.java+run_authzforce.py+phase scripts staged; packet bcc60c77",
+      "evidence": "launch-002 stages derive_Lambda/parse_response/builder/launcher sources + currency gate over 11 tool copies",
       "id": "R7-03",
       "repair": "include run_authzforce.py + PdpRunner.java sources in packet",
       "source": "C06 Atom invocation/scripts absence",
@@ -83,6 +83,36 @@
       "repair": "none; scheduled polish stands (naming, ledger pins, argv trust, TOCTOU residuals documented)",
       "source": "rehearsal RS007/RS009/RS010 polish + Central-by-coordinates disclosure",
       "status": "CLOSED_NONMATERIAL"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-002 candidates/built/poms/{root-pom,pdp-engine-pom}.xml match manifest poms[]",
+      "id": "R7-09",
+      "repair": "stage root-pom.xml + pdp-engine-pom.xml under distinct names; regression test V56",
+      "source": "AUD-L01/L02/L03 unanimous Lambda PARTIAL: root pom 21bd6806 orphan (pom staging basename collision)",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-002 staged pre_hash 5ecdd192; drivers 38771f99/708c80ea match staged bytes",
+      "id": "R7-10",
+      "repair": "launch build rebinds staged drivers to staged bytes + recomputes composite + extends lineage; verify re-checks composite/drivers/lineage; regression test V58",
+      "source": "AUD-L01/L02/L03 unanimous Lambda PARTIAL: packet manifest drivers[1] 47b40bde/9575 vs packet invocation bytes 708c80ea/14104",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-002 dependency_content count 145 sha b8b20ab0",
+      "id": "R7-11",
+      "repair": "offline-resolved 145-jar test-classpath content-hashed into candidates/dependency_hashes.json, bound as manifest dependency_content; RC-DEPS-CONSISTENT gates invocation-time equality",
+      "source": "AUD-L01/L02/L03 Lambda PARTIAL: transitive Central artifacts coordinates-only",
+      "status": "REPAIRED"
     }
   ],
   "reassessment_id": "AMENDMENT_007_REASSESSMENT"

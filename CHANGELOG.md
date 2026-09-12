@@ -93,3 +93,10 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - Hostile developmental waves (deferral/Lambda/quarantine/state-machine/Atom + burn-in A/B + holdout); all VALID_MATERIAL repaired fail-closed (judge coverage+revocation, parser content-allowlist, runner authorization binding, cert lock+attestation binding, verifier hex+content rejection, lineage+manifest refresh, freeze self-manifest fix, env binding, 4 new tests).
 - PROTOCOL_AMENDMENT_007.md full operative SS0-19; registry 6 obligations frozen; launch packet db661dd7 + prompt 251f7e58 + registry 12a46820 sealed and verified; suite 139+1 green.
 - State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION; handoff NEXT_EXTERNAL_LAUNCH_HANDOFF.md (AUD-L01/02/03). No target execution, no touch, no K.
+
+## 2026-09-12 -- Launch-001 failed (L01-03 BLOCKED), repaired transparently, launch-002 frozen for L04-06 (pre-execution, zero target runs)
+
+- Ingest 0/3 VALID (attestation binding/cross-read/paste-divergence); merits Lambda 3xPARTIAL packet-internal (driver staleness, pom collision, coordinates-only deps); launch-001 preserved.
+- launch_freeze.py: staged-manifest rebind+recompute, distinct poms, 145-jar dependency content, 11-copy currency, freeze-code pinning, revision support, verify composite/drivers/lineage.
+- Launch-002 packet a75ee3b05, staged pre 5ecdd192, panel AUD-L04/05/06; suite 141+1 green; handoff NEXT_EXTERNAL_LAUNCH_HANDOFF_L04-L06.md.
+- State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION (launch-002). No target execution, no touch, no K.
