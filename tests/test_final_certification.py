@@ -393,12 +393,14 @@ def test_ingest_malformed_and_mids(tmp_path):
 
 
 def test_real_repo_still_locked():
-    """Real repo: no final freeze yet, gate stays locked (exit 4)."""
+    """Real repo: gate never unlocks without unanimous FIXED (exit 3/4)."""
     # [P2-LOG-F22] Test step: assert real-repo locked state.
+    # Sealed 2026-09-12: three valid chairs, Lambda PARTIAL x3 + Atom
+    # PARTIAL x1 -> exit 3 failure-seal route (was exit 4 pre-certification).
     print("[P2:test:final:022] real-repo locked state", flush=True)
     try:
         final.assert_final_unlock(REPO_ROOT)
     except SystemExit as exc:
-        assert exc.code == 4, exc.code
+        assert exc.code == 3, exc.code
     else:
         raise AssertionError("real-repo final gate granted")
