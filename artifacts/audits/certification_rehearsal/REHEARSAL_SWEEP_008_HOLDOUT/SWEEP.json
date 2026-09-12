@@ -1,0 +1,28 @@
+{
+  "created_utc": "2026-09-12T08:16:45Z",
+  "exec_count_at_init": 0,
+  "freeze_revision": "SEMANTIC_FREEZE_REVISION_003",
+  "freeze_sha256": "5f081c600fbdcaaf2fb87cfffba51045408bb91e64ae52b9ea5275b5a41af960",
+  "header": "THIS IS A NON_BLIND DEVELOPMENTAL REHEARSAL. THIS OUTPUT CANNOT CERTIFY OR UNLOCK THE EXPERIMENT.",
+  "label": "NON_BLIND_CERTIFICATION_REHEARSAL",
+  "manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+  "mutation_required": true,
+  "packet_sha256": "5702825aea4e144c59aab0d89d9778adf5978ff48572957a4b8e4d9d4a7020da",
+  "panels_required": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "phase": "2B-R",
+  "preservation": {
+    "decision": "SEMANTIC_FREEZE_REOPENED_2",
+    "mutation_required": true,
+    "reason": "RS008-CE1 VALID_MATERIAL: runtime classpath/extension deployment unpinned; overturns nothing prior (new mechanism)",
+    "reopen": true
+  },
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "repo_commit": "92d96163b55ecfd4d41c45bd67756afe90905354",
+  "sweep_id": "REHEARSAL_SWEEP_008_HOLDOUT"
+}

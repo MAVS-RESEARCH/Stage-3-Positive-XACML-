@@ -1,0 +1,109 @@
+{
+  "objections": [
+    {
+      "anchor": "H",
+      "claim_attacked": "H form (markers, empty recording, env scope, C14N, basis pointers)",
+      "counterinterpretation": "Form beyond interface; admitted-effect none per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "h_r1 basis/census/method records",
+      "materiality": "Same form family as R3-01/RS001-H03/S04: interface-stated conventions, censused singletons/null-Issuers/no-env-reads; basis-pointer absence is packet-completeness polish",
+      "objection_id": "RS006-01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "P_R",
+      "claim_attacked": "P_R form (bag-vs-vector, error tokens, Issuer pooling, Match-only scope, dual locators)",
+      "counterinterpretation": "Form beyond interface; admitted-effect none per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "pr_r1/match_table/census records",
+      "materiality": "Same rule family as RS001-PR01..PR04/S05/S06: scoped coincidence proven on admitted interface, generality disclaimed",
+      "objection_id": "RS006-02",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "PACKET",
+      "claim_attacked": "operative freeze is REVISION_002; no REVISION_003 artefacts exist",
+      "counterinterpretation": "Sweep binding to 003 untestable; 003 claims blocked",
+      "disposition": "REVIEWER_ERROR",
+      "locator": "final_freeze_REVISION_002 snapshot dir read instead of final_freeze/",
+      "materiality": "Factually wrong: operative final_freeze/FINAL_SEMANTIC_FREEZE.json revision 3 packet 5702825aea4e, SWEEP.json binds same; emulator read the preserved REVISION_002 snapshot",
+      "objection_id": "RS006-E3",
+      "outside_information": false,
+      "refuting_evidence": "final_freeze/FINAL_SEMANTIC_FREEZE.json (revision 3, packet 5702825a) + SWEEP.json packet binding vs final_freeze_REVISION_002 (revision 2, fbd22e2c)",
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "checkpoint inner/outer naming (S0 vs H_initial)",
+      "counterinterpretation": "Auditor equating H checkpoints with Atom checkpoints misled",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "derive_H checkpoint field vs ledger filenames",
+      "materiality": "Real naming polish, nonmaterial here (files hash-bound; distinct namespaces); rename + assert at next revision",
+      "objection_id": "RS006-D1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "checkpoint file hashes + distinct record namespaces",
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "P_R ledger drops derive_PR hashes",
+      "counterinterpretation": "Ledger FIXED unresolvable to packet bytes",
+      "disposition": "DUPLICATE",
+      "locator": "check_anchor_completeness P_R assembly; FINAL_ANCHOR_LEDGER P_R",
+      "materiality": "Same binding family as RS002-J04/RS004-D03/D06: underlying records hold shas; promote pins at next revision",
+      "objection_id": "RS006-D2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "Lambda operative pointer unreachable-from-seal; constancy uncheckable",
+      "counterinterpretation": "Seal+ledger underdetermine operative Lambda",
+      "disposition": "DUPLICATE",
+      "locator": "ledger manifest_note; narrow tuple; post null",
+      "materiality": "Same deferral/binding family as RS001-L05/RS002-J04: supersession disclosed, operative manifest reconstructible, post==pre defined at target audit",
+      "objection_id": "RS006-D3",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "Atom-H homonym, Q counting import, Succ+ existence-vs-reachability",
+      "counterinterpretation": "Conjunction overclaims reachability/counting",
+      "disposition": "DUPLICATE",
+      "locator": "derive_atom checkpoints; Q scope note; worlds_ok file-exists",
+      "materiality": "Same conjunction family as RS002-J05/RS004: scope notes explicit, reachability needs target audit by design",
+      "objection_id": "RS006-D4",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "experiment sentences exceed frozen entailment (S1/S2/S3 grades)",
+      "counterinterpretation": "Packet claims stronger basis than frozen sources supply",
+      "disposition": "DUPLICATE",
+      "locator": "construction_rule/target rule/allowed-claims wording vs N1",
+      "materiality": "S1 duplicates c14n-correction record (RS001-A03, disclosed); S2 duplicates deferral design (RS001-L05); S3 duplicates joint family (RS002-J01..J05)",
+      "objection_id": "RS006-E",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_006"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_006"
+}

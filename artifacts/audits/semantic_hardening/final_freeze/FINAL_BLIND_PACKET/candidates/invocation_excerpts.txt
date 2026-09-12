@@ -1,0 +1,12 @@
+# Invocation excerpts (frozen scripts; full bytes in repo, not packet)
+
+run_phase1.ps1:111: # World values are read from sealed execution_inputs.json (never
+run_phase1.ps1:114: $WorldVals = & $PythonExe -c "import json,os; d=json.load(open(os.path.join(os.environ['PC_REPO_ROOT'],'prereg','execution_inputs.json'))); print(d['worlds']['x_permit']['missing_attribute_value']); print(d['worlds']['x_nonpermit']['missing_attribute_value'])"
+run_phase1.ps1:117: & $PythonExe (Join-Path $RepoRoot "src/xacml/build_repaired_requests.py") `
+run_phase1.ps1:121: $WorldVals[0] $WorldVals[1] `
+run_phase1.ps1:130: --mode original --phase1-only-original --repo-root $RepoRoot `
+run_phase1.ps1:168: @("canary+execution inputs sealed", ((Test-Path (Join-Path $RepoRoot "prereg/canary_expectations.json")) -and (Test-Path (Join-Path $RepoRoot "prereg/execution_inputs.json"))))
+run_phase2.ps1:217: & $PythonExe (Join-Path $RepoRoot "src/audit/model_adjudication.py") --repo-root $RepoRoot --assert-model-unlock
+run_phase2.ps1:240: & $PythonExe (Join-Path $RepoRoot "src/audit/verify_deployment_set.py") --repo-root $RepoRoot --check --fixture-dir (Join-Path $Fixture "policies") --listing (Join-Path $RepoRoot "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_003/evidence/policy_dir_listing.json")
+run_phase2.ps1:242: & $PythonExe (Join-Path $RepoRoot "src/audit/verify_deployment_set.py") --repo-root $RepoRoot --disjoint --out-dir (Join-Path $Derived "requests") --policies-dir (Join-Path $Fixture "policies")
+run_phase2.ps1:249: & $PythonExe (Join-Path $RepoRoot "src/xacml/run_authzforce.py") --mode completed --world $World --request $Req --repo-root $RepoRoot --java $JavaExe --cp-file $CpFile --pdp-test-classes $TestClasses --pdp-classes $PdpClasses --driver-classes $DriverClasses --work-dir (Join-Path $WorkDir "target") --out $Out

@@ -1,5 +1,5 @@
 {
-  "operative_revision": 2,
+  "operative_revision": 4,
   "prior_revisions": [
     {
       "packet_sha256": "4b9f6556bd9d136010adfc0bd65b124d5f140b3da7b02daf6485d666a05b63c1",
@@ -7,6 +7,20 @@
       "revision": 1,
       "revision_dir": "final_freeze_REVISION_001",
       "round": "HARDENING_ROUND_002"
+    },
+    {
+      "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+      "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+      "revision": 2,
+      "revision_dir": "final_freeze_REVISION_002",
+      "round": "HARDENING_ROUND_003"
+    },
+    {
+      "packet_sha256": "5702825aea4e144c59aab0d89d9778adf5978ff48572957a4b8e4d9d4a7020da",
+      "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+      "revision": 3,
+      "revision_dir": "final_freeze_REVISION_003",
+      "round": "HARDENING_ROUND_005"
     }
   ]
 }

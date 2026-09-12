@@ -1,0 +1,53 @@
+SOURCE: pdp-engine/src/main/resources/pdp.xsd lines 1029-1080 (pinned 3cc0e988)
+
+    <xs:complexType name="StdEnvAttributeProviderDescriptor">
+        <xs:annotation>
+            <xs:documentation>
+                <p>
+                    Provides the standard environment attributes specified
+                    in XACML 3.0 Core specification, §10.2.5: current-time, current-date and current-dateTime.
+                    By default, the PDP engine does not set these attributes on its own and only takes the ones from the request. This AttributeProvider is enabled with <i>override='false'</i> whenever <i>standardAttributeProvidersEnabled='true'</i>, ensuring strict compliance with XACML 3.0 standard (§10.2.5): <i>If
+                    values for these
+                    attributes are not present in
+                    the decision request,
+                    then their
+                    values MUST be supplied
+                    by the
+                    context
+                    handler</i>. Note that it does
+                    <b>not</b>
+                    say <i>If AND ONLY IF</i>, therefore, the <i>override=true</i> mode (always override the values if present in the request) may still be considered XACML-compliant.
+                    A StdEnvAttributeProviderDescriptor configuration may not occur more than once.
+                </p>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="authz-ext:AbstractAttributeProvider">
+                <xs:sequence>
+                    <xs:element name="override" type="xs:boolean" default="false">
+                        <xs:annotation>
+                            <xs:documentation>
+                                <p>
+                                    Defines whether the aforementioned attribute values (if present in the request) may
+                                    be overridden by the AttributeProvider:
+                                </p>
+                                <ul>
+                                    <li><i>true</i>: always override, i.e. this AttributeProvider sets the current-*
+                                        attribute always - to the PDP's current dateTime (when the request is received
+                                        by the PDP) - regardless of any value present in the request.
+                                    </li>
+                                    <li><i>false</i>: override or not, depending on the attributes present in the
+                                        request:
+                                        <ol>
+                                            <li>If the standard <i>current-dateTime</i> attribute is present in the
+                                                request, then:
+                                                <ul>
+                                                    <li>If either <i>current-date</i> or <i>current-time</i> is present
+                                                        in the request and does not match current-dateTime
+                                                        (inconsistency): return Indeterminate.
+                                                    </li>
+                                                    <li>Else if either current-date or current-time is missing from the
+                                                        request, the AttributeProvider sets the attribute according to
+                                                        current-dateTime.
+                                                    </li>
+                                                    <li>Else (both are present) the request values are used as is.</li>

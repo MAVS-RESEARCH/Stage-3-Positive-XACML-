@@ -11,9 +11,12 @@
   "mutation_history": [
     "HARDENING_ROUND_001",
     "HARDENING_ROUND_002",
-    "HARDENING_ROUND_003"
+    "HARDENING_ROUND_003",
+    "HARDENING_ROUND_004",
+    "HARDENING_ROUND_005",
+    "HARDENING_ROUND_006"
   ],
-  "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+  "packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e",
   "pr_definition": "interface-scoped Match-vector coincidence with error tokens (pr_r1)",
   "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
   "source_locators": "candidates/locator_map.json (verified)"

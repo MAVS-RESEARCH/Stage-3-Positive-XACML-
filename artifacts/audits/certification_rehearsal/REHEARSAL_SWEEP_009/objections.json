@@ -1,0 +1,109 @@
+{
+  "objections": [
+    {
+      "anchor": "H",
+      "claim_attacked": "H form beyond admitted interface",
+      "counterinterpretation": "Form variants, admitted-effect none per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "h_r1 marker/empty/env/C14N/capture records",
+      "materiality": "Same form family as RS006-01/RS007-01: interface-stated, censused",
+      "objection_id": "RS009-01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "P_R",
+      "claim_attacked": "P_R form beyond admitted interface",
+      "counterinterpretation": "Form variants, admitted-effect none per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "pr_r1/match_table/census records",
+      "materiality": "Same rule family as RS006-02/RS007-02: scoped coincidence proven",
+      "objection_id": "RS009-02",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "PROVENANCE",
+      "claim_attacked": "packet gate copy equals live gate source",
+      "counterinterpretation": "Blind reader cannot run --check-classpath from packet bytes",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "packet verify_deployment_set.py 368901f6 vs live 921af26b",
+      "materiality": "Real staleness erratum, nonmaterial (operative repair present + tested in repo; no measured-reading effect); refresh scheduled; future freezes gate tool-copy currency",
+      "objection_id": "RS009-M1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "live gate + tests + pre-eval wiring",
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "PROVENANCE",
+      "claim_attacked": "lineage current.pre_hash equals operative pre_hash",
+      "counterinterpretation": "Lineage rule violated; audit cleanliness",
+      "disposition": "DUPLICATE",
+      "locator": "pre_hash_lineage current 3e8cf8ff vs operative f1f44fc2/d4a5fcd8",
+      "materiality": "Same erratum as RS007-03: nothing mechanical reads lineage.current; scheduled, no refreeze fabrication",
+      "objection_id": "RS009-M2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "staging borrows classpath closure; extension activation proven",
+      "counterinterpretation": "Auto-loaded test provider changes evaluation silently",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "staging_certificate classpath_manifest string; extension markers",
+      "materiality": "Real import polish, nonmaterial here (no extension config in pdp.xml; policy references no extension functions; census clean); import manifest_sha + activation proof at next revision",
+      "objection_id": "RS009-D1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "pdp.xml child census + policy function census + default wiring",
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "ledger/frozen_files pin operative manifest files",
+      "counterinterpretation": "Substitution passes ledger/seal FIXED",
+      "disposition": "DUPLICATE",
+      "locator": "ledger historical notes; frozen_files 11-file list",
+      "materiality": "Same binding family as RS002-J04/RS004-D03/RS006-D2: packet aggregate binds content; promote pins at next revision",
+      "objection_id": "RS009-D2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "PENDING-as-FIXED conjunction (built .class, Central, gate firing)",
+      "counterinterpretation": "Closure overclaims pre-target measurement",
+      "disposition": "DUPLICATE",
+      "locator": "built_artifacts basis; staging PENDING markers; envelope FIXED",
+      "materiality": "Same disclosed-limitation family as RS008-CE2/RS007-06: coordinates immutable, jars present hashed, deferral honest; gate fires at target audit",
+      "objection_id": "RS009-D3",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_009"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "joint conjunction exceeds scoped documentation",
+      "counterinterpretation": "Byte equality, constancy sharing, reachability overclaimed",
+      "disposition": "DUPLICATE",
+      "locator": "resolved/regime/attribution/binding/reachability joints",
+      "materiality": "Same conjunction family as RS006-D4/E/RS007-08: scoped PASS documented; byte/constancy/reachability need target audit by design",
+      "objection_id": "RS009-J",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_009"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_009"
+}

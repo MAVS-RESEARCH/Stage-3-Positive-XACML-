@@ -370,6 +370,30 @@ WorkPlan compliance: YES (2C gate + failure-seal per spec §8/§23; frozen speci
 
 WorkPlan compliance: YES (Amendment 003 developmental layer only; experiment ID unchanged; no history rewritten; no estimand change). Models trained: none.
 
+### 3.19 Amendment 004 Phase 2D — Post-Certification Development (2026-09-12)
+
+Files made: `PROTOCOL_AMENDMENT_004.md`; `src/audit/post_cert_hardening.py` ([P2-LOG-020]/[P2-LOG-040]/[P2-LOG-060]/[P2-LOG-070]/[P2-LOG-900]); `post_cert_hardening/STATE.json` + `rounds/POST_CERT_HARDENING_ROUND_000/REFERENCES.json` (C01-C03 files tallies, failed gate, prior freeze/result hashes, zero-exec proof); 9-agent specialist wave (Lambda closure/hash/lifecycle, Atom boundary/staging, provenance, red×2, bypass-tester).
+
+Repairs (all source-grounded, specimen immutable): Lambda manifest extended (per-component methods, 76-file semantic set + tree `51e22664`, 4 jars, poms, JDK/drivers, reconstruction block) + `recompute_lambda.py` + frozen vector + `tests/test_lambda_manifest.py`; `verify_deployment_set --check-staged` + `run_authzforce.verify_staged_fixture` pre-eval + pre-eval script wiring; `hardening_evidence` staging-certificate + locator-table (13/13 re-grounded, windows-1252+CRLF procedure) + world_value_binding + classpath-manifest modes; freeze hardening (no-destroy, evidence-round sanitize, `--revision` monotonicity, extended verify, amendment-004 file); final_certification PANELS C01-03/C04-06 + record-freeze binding + mixed-panel block (+6 tests); packet additions (engine tree, tools, staging cert, locator table, corrigendum, censuses, excerpts, execution_inputs).
+
+Wave-2 re-attack findings closed: recompute engine-dict bug, gate UNC/root-listing/ascii gaps, staged-root exclusivity, panel-reuse hole (revision-bound eligibility), freeze revision/verify gaps. Ledger 94/94 (`P2D-01..P2D-06`); suite 87+1; invariant holds; exec 0. Rounds 004 (converged), 005 (R2 batch, converged), 006 (classpath, converged).
+
+WorkPlan compliance: YES (§§1–13; epistemic-access-only mutations). Models trained: none.
+
+### 3.20 Holdout-008 Reopen → REVISION_004 → Burn-In 009/010/011 (2026-09-12)
+
+Holdout-008 (taxonomy-free): 8 objections, 1 VALID_MATERIAL — RS008-CE1 runtime classpath/extension deployment unpinned (pdp-ext fallback live in test-classes, .class bytes unpinned, staged TOCTOU window), overturning nothing prior (new mechanism). Decision: preserve REVISION_003 bytes; second `SEMANTIC_FREEZE_REOPENED`; revision → 004. ROUND_006: classpath content manifest (3073+37 files + extension facts) + pre-eval `--check-classpath` wiring + manifest `classpath` component; sealed + converged.
+
+Incident (transparently recorded): REVISION_003 snapshot copy failed on ~15 >260-char engine paths; partial snapshot wrongly deleted and replaced with rev004 bytes; recovered via `recover_revision003.py` (every content file byte-identical from ROUND_005 evidence + live frozen sources; 2 timestamp wrappers regenerated and marked; attested aggregate preserved as labeled attestation). Root fix: long-path-safe snapshot procedure + freeze-time tool-copy currency gate scheduled. Operative freeze never at risk (`--verify-freeze` green throughout).
+
+Refreeze: `final_freeze_REVISION_003/` snapshot (recovered, 146 files) + operative `final_freeze/` revision 4 (packet `156e36d7`, 138 files, delta = classpath system + refreshed manifests); ancestry lists 001+002(+003 snapshot); packet-mode recompute zero-SKIP zero-MISMATCH.
+
+Burn-in on rev004: 009 (8 objs: 6 DUP, 2 NONMAT) + 010 (7 objs: 5 DUP, 2 NONMAT) + holdout 011 (3 objs: 2 DUP, 1 NONMAT projection_sha naming); fresh instances, no mutation between, invariant/tests PASS, exec/touch/K 0. Emitted: `post_cert_hardening/POST_CERT_BURN_IN.json`.
+
+Gate verdict: `POST_CERTIFICATION_HARDENING_CONVERGED` + `FINAL_SEMANTIC_INTERFACE_FROZEN` (rev004) + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION`. Next: fresh external AUD-C04/C05/C06 over packet `156e36d7` + prompt + schema only.
+
+WorkPlan compliance: YES (Amendment 004 §§7–17). Models trained: none.
+
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE
 
 Scope executed: [Sec.3.1-3.7].

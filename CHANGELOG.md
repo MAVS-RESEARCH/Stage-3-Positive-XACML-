@@ -63,3 +63,10 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - `AUD-C01` ingested valid (exit 0): H/P_R/Atom FIXED, Lambda PARTIAL.
 - `AUD-C02` ingested valid (exit 0): identical shape (H/P_R/Atom FIXED, Lambda PARTIAL on blind verifiability). Awaiting AUD-C03 before gate judgment; unanimity already impossible.
 - `AUD-C03` ingested valid (exit 0): H/P_R FIXED, Lambda+Atom PARTIAL. Gate exit 3 NONUNANIMOUS → failure-seal: `NATIVE_ANCHOR_INSUFFICIENT` (stopped_at_phase 2, downstream NOT_RUN_BY_PROTOCOL). Sec.15: no new material defect (all gaps duplicate rehearsal dispositions) → no reopen. Target audit never runs; touch/K/freezes uncomputed; 0 executions.
+
+## [Amendment 004] - 2026-09-12 - PHASE 2D POST-CERT DEVELOPMENT → REVISION_004 CONVERGED
+
+- Preserved failure as `POST_CERT_HARDENING_ROUND_000` (chair files/tallies, gate, freeze/result hashes, zero-exec proof). 9-agent specialist wave + wave-2 re-attack battery.
+- `HARDENING_ROUND_004/005`: Lambda reconstruction (76-file set + tree + jars + recompute tool + vector), staged pre-eval equality, engine closure, staging certificate, locator table (13/13), world binding, packet completeness (+14 candidates, engine tree), panel continuity (C04–C06, record-freeze binding, revision eligibility). Ledger 94/94.
+- Holdout-008 found RS008-CE1 (classpath/extension unpinned) → second reopen → `HARDENING_ROUND_006` (classpath manifest + gates). Snapshot incident: REVISION_003 partial snapshot mishandled; recovered byte-identical with marked wrappers (see Path.md §3.20).
+- Burn-in on rev004 (`156e36d7`): sweeps 009 (8/0) + 010 (7/0) + holdout 011 (3/0), no mutation between → `POST_CERTIFICATION_HARDENING_CONVERGED`. Suite 87+1, freeze verified, 0 executions, touch/K uncomputed. State `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION` (AUD-C04/C05/C06).
