@@ -77,6 +77,11 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - Adversarial review found 8 machinery holes; all repaired + tested. Independent rev004 re-verification 7/7 CONFIRM.
 - `NEXT_EXTERNAL_CERTIFICATION_HANDOFF.md` generated (C04–C06, operative hashes, cold-session + ingest instructions, leak-scanned). Suite 95+1, freeze verified, 0 executions. STOP at `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION`.
 
+## [Cycle 002] - 2026-09-12 - SECOND PANEL NONUNANIMOUS → TERMINAL NEGATIVE STOP
+
+- AUD-C04/C05/C06 all valid: H/P_R FIXED ×3, Lambda PARTIAL ×3, Atom 2×FIXED/1×PARTIAL. Gate exit 3.
+- Defect ledger: 0 material, 0 unresolved (duplicates of known polish, by-design PENDING_TARGET items, overturn check negative). No pre-measurement revision can advance unanimity → `CERTIFICATION_FAILED_IRREDUCIBLE`, second seal `FINAL_RESULT_CYCLE_002.json` (`NATIVE_ANCHOR_INSUFFICIENT`). Historical seal untouched. Target audit never runs; 0 executions; touch/K/freezes uncomputed. Suite green, freeze verified.
+
 ## [Amendment 006] - 2026-09-12 - UNBOUNDED PANELS, PER-CHAIR HANDOFF
 
 - Finite C01–C12 tables removed: generic `AUD-C<N>` chairs, consecutive-triple panels, `max_used+1` allocator, revision map + rev≥5 fallback, alias normalization, NON_BLIND-marker refusal, generalized rehearsal guards, per-chair instantiated handoff prompts.

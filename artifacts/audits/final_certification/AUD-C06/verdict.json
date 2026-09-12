@@ -1,0 +1,69 @@
+{
+  "attestation_hash": "7ffb4ff960abe21bd934764a2f935277c4487e033c73231803e1a3b6d59b7e4d",
+  "auditor_id": "AUD-C06",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet.",
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e",
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-C06-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.3.1 stripped-text lines 1755-1785 (PEP native request, handler constructs XACML context optionally adds, PDP evaluates, handler translates to native PEP response)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.5.57-5.58 stripped-text lines 7948-7980 (missing-attribute MAY return MissingAttributeDetail)",
+        "corpus/fixture/request.xml:1-19 + corpus/fixture/response.xml:1-14 (original native Indeterminate + Detail triple)",
+        "corpus/fixture/policies/policy.xml:20 (MustBePresent=true designator matching triple)",
+        "candidates/builder_source.py:82-94,97-112,120-167,170-193,204-271 (read triple from response, cross-check policy, copy+insert exactly one, INV-05/06, out_dir disjoint)",
+        "candidates/request_diffs.json (unified diffs + c14n hashes) + candidates/repaired_request_x_permit.xml:7 + candidates/repaired_request_x_nonpermit.xml:7 (c14n-identity except one Attribute)",
+        "candidates/wrapper_evidence.json (imports copy/lxml/os/sys, no PDP reach, token scan clean, rule_to_code, world_value_binding)",
+        "candidates/invocation_excerpts.txt:1 (full bytes in repo not packet) + PACKET_MANIFEST.json (run_phase1.ps1/run_phase2.ps1/src/xacml/* absent)",
+        "candidates/staging_certificate.json (before_after_manifests PENDING_TARGET, responses_pending_target true) + blindness_boundary.md:20-24 (0 executions)"
+      ],
+      "status": "PARTIAL"
+    },
+    "H": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.4 stripped-text lines 8394-8401 (Issuer-absent matching governed by AttributeId+DataType alone)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.5 stripped-text lines 8419-8423 (MustBePresent false=>empty bag, true=>Indeterminate) + lines 8431-8433 (bags immutable during evaluation)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.5.29 stripped-text lines 6286-6295 (designator returns bag or Indeterminate per Sec.7.3.5)",
+        "corpus/fixture/policies/policy.xml:16,20,28,36,42 (5 designators, all MustBePresent=true, Issuer absent) + :14,18,26,34,40 (string-equal/anyURI-equal)",
+        "corpus/fixture/request.xml:3-18 (3 singleton present bags + empty environment Attributes line 18)",
+        "corpus/fixture/response.xml:10 (MissingAttributeDetail triple some-attribute/access-subject/xsd:string)",
+        "candidates/repaired_request_x_permit.xml:7 + candidates/repaired_request_x_nonpermit.xml:7 (exactly one added subject Attribute each, Issuer null)",
+        "candidates/admitted_value_census.json (null_issuers 3/4/4, empty_issuers 0, datatype_conflicts [], env_values 0, singletons)"
+      ],
+      "notes": "H as (Category,AttributeId,DataType,Issuer-or-null) multimap + absent_required missing-must-be-present-true + explicit empty environment + environment-scope inertness is independently justified: Issuer rule, retrieval/error semantics, immutability, designator census, and three request bytes all verify. Finer-than-matching key disclosed with no divergence on admitted null-Issuer singleton interface.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "candidates/lambda_manifest.json (composite pre_hash d4a5fcd891910184c8d7919ab44395cbf6c1860de95bf8d5ba098b68d757a00b recomputes via documented canonicalization)",
+        "candidates/engine_sources/pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/PdpEngineAdapters.java + candidates/engine_sources_manifest.json (77 engine files packet-present, hashes verify)",
+        "corpus/fixture/policies/policy.xml + corpus/fixture/pdp.xml (provider element c14n) + candidates/policy_dir_listing.json + candidates/resolved_effective.json (packet-verified constituents)",
+        "candidates/n4_excerpts/adapter_defaults.txt:6-13 + xsd_preprocessor_defaults.txt + xsd_std_providers.txt:7-20 + std_wiring.txt + stdenv_default_factory.txt (default-lax preprocessor, std-env provider DEFAULT_FACTORY override=false)",
+        "PACKET_MANIFEST.json file list (absence evidence)",
+        "candidates/pre_hash_lineage.json:current pre_hash 3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a",
+        "candidates/classpath_manifest.json + candidates/recompute_lambda.py:83-137 (SKIP logic)"
+      ],
+      "notes": "Partial support with material gaps: engine/policy/provider/preprocessor/resolved/listing subset recomputes and verifies packet-visible, but built_artifacts drivers/jars/poms (src/xacml/PdpRunner.java, run_authzforce.py, 4 jars, poms) and 3110 classpath class-file bytes are absent from PACKET_MANIFEST (hash-only, fails rubric-supplement R1/R2 blind verifiability); transitive Central artifacts explicitly by coordinates not content-hashed (disclosed limitation); pre_hash_lineage current 3e8c contradicts operative manifest pre_hash d4a5 despite rule claiming exactly one operative value; recompute --packet-dir covers only policy/resolved/listing/engine/provider and SKIPs built/classpath.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.6 stripped-text lines 8604-8617 (Match: error=>Indeterminate, empty=>False, existential True/False/Indeterminate)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.7 stripped-text lines 8692-8701 (Target Match/No Match/Indeterminate)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.5 stripped-text lines 8419-8423 (missing+MustBePresent tokens) + lines 8431-8433 (bag immutable, subsequent tests use same bag)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html:Sec.7.3.4 stripped-text lines 8394-8401 (Issuer-absent pooling immaterial)",
+        "corpus/fixture/policies/policy.xml:34-43 (two action Matches share one action-id coordinate; 5 occurrences project to 4 coordinates) + :16,20,28,36,42 (all MustBePresent=true, Issuer absent)",
+        "candidates/admitted_value_census.json (singletons, null Issuers, no datatype conflicts)"
+      ],
+      "notes": "P_R as Match-vector TRUE/FALSE/INDETERMINATE coincidence with bag-identity on admitted interface is justified: Match/Target/error-token semantics, immutability grounding the 5-to-4 dedup (bag held once evaluated twice), and singleton null-Issuer census grounding the interface-scoped coincidence. No per-world outcomes used.",
+      "status": "FIXED"
+    }
+  }
+}
