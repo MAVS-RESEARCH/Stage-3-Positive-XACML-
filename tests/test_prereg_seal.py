@@ -45,10 +45,12 @@ def test_prereg_hashes_match():
             recorded[name] = digest
     for name in sorted(os.listdir(prereg_dir)):
         if name in ("prereg_sha256.txt",
-                    "blind_model_adjudication_prompt.txt"):
-            # The frozen prompt is sealed by Amendment 001, not by the
-            # Phase-1 prereg seal (which stays byte-immutable); its
-            # coverage is asserted in test_prompt_covered_by_amendment.
+                    "blind_model_adjudication_prompt.txt",
+                    "final_certification_prompt.txt"):
+            # Frozen prompts are sealed by their amendment/freeze records,
+            # not by the Phase-1 prereg seal (which stays byte-immutable);
+            # coverage is asserted in test_prompt_covered_by_amendment and
+            # test_final_prompt_covered_by_freeze.
             continue
         path = os.path.join(prereg_dir, name)
         if os.path.isfile(path):
@@ -72,6 +74,21 @@ def test_prompt_covered_by_amendment():
     assert sha256_file(os.path.join(
         REPO_ROOT, "prereg",
         "blind_model_adjudication_prompt.txt")) == seal["prompt_sha256"]
+
+
+def test_final_prompt_covered_by_freeze():
+    """Frozen final prompt hash matches the REVISION_001 freeze record."""
+    # [P1-LOG-T48] Test step: assert final-prompt freeze coverage.
+    print("[P1:test:prereg:048] checking final prompt freeze seal",
+          flush=True)
+    with open(os.path.join(REPO_ROOT, "artifacts", "audits",
+                           "semantic_hardening", "final_freeze",
+                           "FINAL_SEMANTIC_FREEZE.json"),
+              encoding="utf-8") as handle:
+        freeze = json.load(handle)
+    assert sha256_file(os.path.join(
+        REPO_ROOT, "prereg",
+        "final_certification_prompt.txt")) == freeze["prompt_sha256"]
 
 
 def test_execution_inputs_valid():

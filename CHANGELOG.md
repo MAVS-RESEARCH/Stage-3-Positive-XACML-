@@ -44,3 +44,8 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - 86/86 objections RESOLVED (0 OPEN), including Wave-4 R3-01..R3-12 and hunt O-1..O-7 as R3-13..R3-19; all `external_semantics_changed=false`, no downstream-result use.
 - Working-tree hardening: XACML schema fix (Attribute-level DataType removed), builder/phase-script input binding to sealed `execution_inputs.json`, refs-mode cross-artifact verification, envelope mechanical cross-checks, ledger scope corrections; derived artifacts rehashed (timestamp-strip only).
 - HARDENING_ROUND_002 sealed (invariant holds, exec 0, tests green); convergence 10/10 PASS; final blind packet frozen (`4b9f6556bd9d1360`) with frozen prompt; `--verify-freeze` confirmed. Full suite 59 passed + 1 skipped. Zero completed PDP evaluations. Awaiting AUD-C01/02/03 final certification (unanimous FIXED required).
+
+## [Amendment 003] - 2026-09-12 - PHASE 2B-R REHEARSAL SWEEP_001, REVISION_001 PRESERVED
+
+- Inserted developmental Phase 2B-R between candidate freeze and external certification (`PROTOCOL_AMENDMENT_003.md`): contaminated subagent Panels A–E attack the frozen candidate AS-IS; reopen only on surviving source-grounded VALID_MATERIAL. Experiment ID unchanged; no history rewritten.
+- `REHEARSAL_SWEEP_001`: 8 reports ingested, 25 objections normalized (8 DUPLICATE, 17 VALID_NONMATERIAL), 0 surviving material → `SEMANTIC_FREEZE_REVISION_001_PRESERVED`, no reopen. Harness + tests added (`certification_rehearsal.py`, 4 rehearsal tests); fixed pre-existing prereg-seal gap for the frozen final prompt (freeze-record coverage). Full suite 64 passed + 1 skipped. Zero executions; state `BLOCKED_PENDING_FINAL_CERTIFICATION`.

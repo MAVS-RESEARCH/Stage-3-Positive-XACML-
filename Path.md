@@ -310,6 +310,18 @@ Gate verdict: HARDENING_ROUND_002 SEALED; convergence PASS; freeze VALID; state 
 
 WorkPlan compliance: YES (hardening/freeze/certification are evidence-strengthening only; no worlds/target/interface/cost/anchor/freeze/expectation/criteria changed; see WorkPlan Phase-2 hardening paragraph). Models trained: none.
 
+### 3.14 Amendment 003 Phase 2B-R Rehearsal SWEEP_001 — REVISION_001 PRESERVED (2026-09-12)
+
+Files made: `PROTOCOL_AMENDMENT_003.md`; `src/audit/certification_rehearsal.py` ([P2-LOG-005]/[P2-LOG-008]/[P2-LOG-010]/[P2-LOG-020]/[P2-LOG-030]/[P2-LOG-040]/[P2-LOG-050]/[P2-LOG-060]/[P2-LOG-070]/[P2-LOG-900]); `tests/test_certification_rehearsal.py` ([P2-LOG-R10]-[P2-LOG-R16]); `artifacts/audits/certification_rehearsal/REHEARSAL_SWEEP_001/` (`SWEEP.json` revision `SEMANTIC_FREEZE_REVISION_001` packet `4b9f6556`, 8 raw reports Panels A–E, `objections.json` 25 normalized, `NORMALIZATION.json`); fixed `tests/test_prereg_seal.py` ([P2-LOG-T48] freeze coverage for `prereg/final_certification_prompt.txt`, pre-existing gap from the freeze commit).
+
+Code produced + how coded: sweep binds packet/prompt/manifest/freeze hashes + commit at init, refuses cert-mimic IDs and unlabeled/cert-identity reports, validates dispositions (`VALID_MATERIAL` needs grounding, `REVIEWER_ERROR` needs refuting evidence, cert-namespace leak refused), verifies freeze-drift + exec-0 + namespace + ledger validity. Eight contaminated subagents (3 emulators H+P_R/Lambda/Atom, packet/provenance/locator specialist, invariant specialist, red-team countermodels CM1–CM4, global joint JO-01–JO-05, evidence adversary) attacked REVISION_001 AS-IS; all outputs labeled NON_BLIND, none entered cert namespaces.
+
+Verification: normalization total=25, surviving=0, material=0 (`NO_SURVIVING_MATERIAL`: 8 DUPLICATE of R3 dispositions, 17 VALID_NONMATERIAL harness/doc polish); `--verify` exit 0; full suite 64 passed + 1 skipped; target scan empty (0 executions); freeze packet/prompt/manifest hashes unchanged.
+
+Gate verdict: `SEMANTIC_FREEZE_REVISION_001_PRESERVED`, no `SEMANTIC_FREEZE_REOPENED` (reopen requires surviving VALID_MATERIAL; none survived source verification). State remains `BLOCKED_PENDING_FINAL_CERTIFICATION`; Phases 3+ unexecuted; next unblock is genuinely fresh external AUD-C01/02/03 over the preserved freeze.
+
+WorkPlan compliance: YES (Amendment 003 developmental layer only; experiment ID unchanged; no history rewritten; no estimand change). Models trained: none.
+
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE
 
 Scope executed: [Sec.3.1-3.7].
