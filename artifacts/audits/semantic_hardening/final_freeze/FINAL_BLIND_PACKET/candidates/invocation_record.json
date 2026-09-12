@@ -1,0 +1,12 @@
+{
+  "build_precedes_any_completed_run": "Builder executed in Phase 1 (run logs); zero completed PDP evaluations have ever occurred (chronology test + target scans), so no PDP output could have fed any build.",
+  "ordering_flag": "run_authzforce --phase1-only-original refuses completed mode (exit 2; tested).",
+  "pdp_invocation_sites": {
+    "run_phase1.ps1:124-125": "--mode original --phase1-only-original (refusal enforced in code)",
+    "run_phase2.ps1:242": "--mode completed, reachable only after unlock gate exit 0 (line 217)",
+    "tests": "in-process refusal/staging only; never driver subprocess"
+  },
+  "record_id": "PC-XACML-S3PLUS-v1-invocation-record",
+  "response_consumption": "Builder reads frozen MissingAttributeDetail coordinates + policy designator (static inputs); no PDP output is consumed (none exists).",
+  "staging_helper_unused_pre_unlock": "stage_completed_fixture covered only by evaluation-free unit test."
+}

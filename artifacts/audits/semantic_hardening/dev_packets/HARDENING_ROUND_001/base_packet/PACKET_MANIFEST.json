@@ -1,0 +1,26 @@
+{
+  "files": {
+    "candidates/H_initial.json": "b1f017c865cf21ec4be58b961f95963a65d4402d97dc472c53e0890c2928e1f9",
+    "candidates/H_nonpermit.json": "c898bd7672b59bfff617d5d0bc9ae705abddaa57ab42bfb17ea2a4e9fd026be1",
+    "candidates/H_permit.json": "be940514b60f82b37effd196d2870310d101bb41e8d31215ec39c9775e2ced8f",
+    "candidates/anchor_ledger.json": "591c263bcfb2716b1098c739f7e6b0fca4c82da721d28efa07abad067402b3c4",
+    "candidates/atom_record.json": "4fa4e2a44ba63f0e1f9776136a1df7f6506c2fcf4d16792f44bd37af54a0d362",
+    "candidates/execution_inputs.json": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407",
+    "candidates/h_equivalence_proof.json": "13047906cf3ae4970c40b1d9cab611ddca2685127024595c33596fca8ef91f60",
+    "candidates/lambda_record.json": "2166eb34bc9e892959a839ff6de7d818c5726296d786a0efe448a870926e7ced",
+    "candidates/policy_adequacy_certificate.json": "fc8c7753d5f88f3eb1c727c7d9e63e51af005bc747b6ac15fc2255dea2de1a6d",
+    "candidates/pr_relation.json": "b09d3861faeb888bfca775077966d8d6ebd315f48abbe6ca31d14144a56e87aa",
+    "corpus/COMMIT.txt": "4df8e644d886bc593b4a5a203c74e6e2ec9e3bd0ab38d22f6025ad687512a4a0",
+    "corpus/MANIFEST.json": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+    "corpus/RELEASE.json": "024492bf254dfec934d34b44f15693307cbfe184aa8e209f3723b388ff0a872c",
+    "corpus/fixture/pdp.xml": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d",
+    "corpus/fixture/policies/policy.xml": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+    "corpus/fixture/request.xml": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+    "corpus/fixture/response.xml": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687",
+    "corpus/xacml-3.0-core-spec-cos01-en.html": "8da7d21f72d1813d1f6db0620ee6840ff0687da69cce8bdf075d5ecad592eefb",
+    "locator_index.md": "e6a9cb4ded8d6a386b63d557737eed385a6cb50aeb9db223baa67fc833723ef2",
+    "rubric.md": "ac41a4aee965c34ca0b8864591ca83ffaa0ba2cff9092d30d74303909662106f"
+  },
+  "packet_id": "PC-XACML-S3PLUS-v1-blind-packet",
+  "sealed_utc": "2026-09-11T17:22:21Z"
+}

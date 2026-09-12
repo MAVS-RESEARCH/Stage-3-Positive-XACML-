@@ -39,14 +39,14 @@
   ],
   "checkpoint": "S_nonpermit",
   "history_id": "PC-XACML-S3PLUS-v1-H_nonpermit",
-  "produced_utc": "2026-09-11T18:56:44Z",
+  "produced_utc": "2026-09-11T20:33:39Z",
   "proof": {
     "ref": "h_equivalence_proof.json",
-    "sha256": "4bdacb73382499602c8d63a55a129aeab68bad58038f332d9143a5a1f04aa7e9",
+    "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
     "verdict": "VALID"
   },
   "source": {
-    "request_file": "derived\\requests\\request_x_nonpermit.xml",
-    "sha256": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd"
+    "request_file": "derived/requests/request_x_nonpermit.xml",
+    "sha256": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8"
   }
 }

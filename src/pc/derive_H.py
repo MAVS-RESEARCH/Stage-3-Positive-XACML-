@@ -138,7 +138,8 @@ def main(argv):
         record = {
             "history_id": "PC-XACML-S3PLUS-v1-%s" % name,
             "checkpoint": checkpoint,
-            "source": {"request_file": os.path.relpath(path),
+            "source": {"request_file": os.path.relpath(path).replace(
+                os.sep, "/"),
                        "sha256": sha256_file(path)},
             "proof": {"ref": "h_equivalence_proof.json",
                       "sha256": normalized_content_sha256(proof_path),

@@ -30,14 +30,14 @@
   ],
   "checkpoint": "S0",
   "history_id": "PC-XACML-S3PLUS-v1-H_initial",
-  "produced_utc": "2026-09-11T18:56:44Z",
+  "produced_utc": "2026-09-11T20:33:39Z",
   "proof": {
     "ref": "h_equivalence_proof.json",
-    "sha256": "4bdacb73382499602c8d63a55a129aeab68bad58038f332d9143a5a1f04aa7e9",
+    "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
     "verdict": "VALID"
   },
   "source": {
-    "request_file": "external\\authzforce\\fixture\\request.xml",
+    "request_file": "external/authzforce/fixture/request.xml",
     "sha256": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540"
   }
 }

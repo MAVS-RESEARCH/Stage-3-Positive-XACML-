@@ -108,12 +108,17 @@ Invoke-Step "062" "compiling PdpRunner driver" {
 Write-Output "[P1:phase1:064] backend ready"
 
 # [P1-LOG-070] Step: construct (not execute) the completed requests.
+# World values are read from sealed execution_inputs.json (never
+# literals), binding construction inputs to preregistration.
+$env:PC_REPO_ROOT = $RepoRoot
+$WorldVals = & $PythonExe -c "import json,os; d=json.load(open(os.path.join(os.environ['PC_REPO_ROOT'],'prereg','execution_inputs.json'))); print(d['worlds']['x_permit']['missing_attribute_value']); print(d['worlds']['x_nonpermit']['missing_attribute_value'])"
+if ($LASTEXITCODE -ne 0) { throw "world value extraction failed" }
 Invoke-Step "070" "constructing completed requests" {
   & $PythonExe (Join-Path $RepoRoot "src/xacml/build_repaired_requests.py") `
     (Join-Path $RepoRoot "external/authzforce/fixture/request.xml") `
     (Join-Path $RepoRoot "external/authzforce/fixture/response.xml") `
     (Join-Path $RepoRoot "external/authzforce/fixture/policies/policy.xml") `
-    "riddle me this" "not-riddle-me-this" `
+    $WorldVals[0] $WorldVals[1] `
     (Join-Path $RepoRoot "derived/requests")
 }
 

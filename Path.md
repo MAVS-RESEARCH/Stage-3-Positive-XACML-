@@ -296,6 +296,19 @@ WorkPlan compliance: YES, with documented deltas (no scientific content affected
 Models trained: none (deterministic rule code throughout). Sealed expectations opened by no computation step (leakage evidence above); packet contains zero expected outputs (redaction-tested).
 Handoff to unblock: deliver a `blind_anchor_verdict.json` per `rubric.md` from a qualifying independent adjudicator (AUD-XXX, never shown the expectations) -> `--seal-verdict` -> rerun `--primary` unlocks the target audit.
 
+### 3.13 Semantic Hardening 2B-H (ROUND_002 sealed), Convergence 10/10, Final Freeze (2026-09-12)
+
+Files made: `src/audit/hardening.py` ([P2-LOG-010]/[P2-LOG-020]/[P2-LOG-030]/[P2-LOG-040]/[P2-LOG-050]/[P2-LOG-060]/[P2-LOG-070] + [P2-LOG-900]), `hardening_evidence.py` ([P2-LOG-010]/[P2-LOG-020]/[P2-LOG-050]), `objection_ledger.py`, `final_certification.py` ([P2-LOG-900]); `tests/test_hardening.py` ([P2-LOG-H10]-[P2-LOG-H20]), `tests/test_final_certification.py`; `src/xacml/ParseProof.java`; `artifacts/audits/semantic_hardening/` (STATE, `objection_ledger.json` 86/86 RESOLVED + `.md`, `rounds/HARDENING_ROUND_001` 49 files sealed, `rounds/HARDENING_ROUND_002` evidence 4+`n4_excerpts`/mutations/`round_seal.json`/`convergence.json`, `reports/sweep_assessment_HARDENING_ROUND_002.json`, `final_freeze/FINAL_BLIND_PACKET` sha `4b9f6556bd9d1360`); `prereg/final_certification_prompt.txt`.
+
+Code produced + how coded: hardening rounds enforce NATURAL_STAGE3_INVARIANT (fixture/XACML/spec/execution-inputs) + zero completed evaluations + hardening tests at seal; evidence builders are static only (diffs/wrapper/match-table/lambda-manifest, no PDP evaluation, no touch/K); convergence checks 10 conditions (no open, chains complete, packet complete, tests, hashes unchanged, exec zero, sweep no-new-material + redteam clear, system unmodified); freeze copies frozen corpus + ROUND_001 candidates + prompt, writes packet manifest + `FINAL_ANCHOR_LEDGER.json` (PENDING_FINAL_CERTIFICATION), locks to `BLOCKED_PENDING_FINAL_CERTIFICATION` with `--verify-freeze`.
+
+Hardening mutations in this commit (all `external_semantics_changed=false`): schema-illegal Attribute-level DataType removed (value-level only, R2A-07); builder non-empty world-value guard; `run_phase1` binds world values from sealed `execution_inputs.json`; forward-slash request paths; `repro_compare.py` refs mode (H/PR/Lambda/wrapper/match-table/ledger-manifest/envelope/engine/clone-absent-skip) + dead-branch removal + single VOLATILE set (`produced_utc/sealed_utc/probed_utc/checkpoint_sha256`); checker envelope cross-checks (frozen triple, single-result, world files, rule/cost binding); ledger scope notes (A_Pi [N3,X], Q/Succ+/c FIXED-as-definition, Lambda operative-manifest binding, omega verified locators); derived H/proof/provenance rehashes from timestamp-strip normalization only.
+
+Verification: full suite 59 passed + 1 skipped (fixed `test_checker_refuses_ablation` isolated root to provide frozen `response.xml` for the new R3-15 omega cross-check); `refs` mode exit 0; ROUND_002 seal exit 0 (invariant holds, exec 0, hardening tests exit 0); convergence 10/10 PASS; freeze exit 0; `--verify-freeze` confirmed. Zero completed-world PDP evaluations throughout (target scan empty).
+
+Gate verdict: HARDENING_ROUND_002 SEALED; convergence PASS; freeze VALID; state `BLOCKED_PENDING_FINAL_CERTIFICATION` (not a failure, no outcome emitted; Phases 3+ still unexecuted by protocol). Next unblock: three cold-model final chairs AUD-C01/02/03 over the frozen final packet via `final_certification.py --ingest-final` + `--assert-final-unlock` (unanimous FIXED required).
+
+WorkPlan compliance: YES (hardening/freeze/certification are evidence-strengthening only; no worlds/target/interface/cost/anchor/freeze/expectation/criteria changed; see WorkPlan Phase-2 hardening paragraph). Models trained: none.
 
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE
 

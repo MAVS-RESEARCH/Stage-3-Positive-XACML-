@@ -80,6 +80,13 @@ def test_checker_refuses_ablation(tmp_path):
     (fake_root / "external").mkdir(parents=True)
     shutil.copyfile(os.path.join(REPO_ROOT, "external", "MANIFEST.json"),
                     str(fake_root / "external" / "MANIFEST.json"))
+    # Hardening R3-15: envelope omega cross-check reads the frozen fixture
+    # response bytes; the isolated root must provide them (read-only copy).
+    fixture_dir = fake_root / "external" / "authzforce" / "fixture"
+    fixture_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(os.path.join(REPO_ROOT, "external", "authzforce",
+                                 "fixture", "response.xml"),
+                    str(fixture_dir / "response.xml"))
     (fake_root / "prereg").mkdir()
     shutil.copyfile(os.path.join(REPO_ROOT, "prereg",
                                  "execution_inputs.json"),

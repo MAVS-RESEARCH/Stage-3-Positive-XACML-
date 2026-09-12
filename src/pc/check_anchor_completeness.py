@@ -56,7 +56,8 @@ def sha256_file(path):
     return digest.hexdigest()
 
 
-VOLATILE_KEYS = {"produced_utc", "sealed_utc", "probed_utc"}
+VOLATILE_KEYS = {"produced_utc", "sealed_utc", "probed_utc",
+                 "checkpoint_sha256"}
 
 
 def normalized_content_sha256(path):
@@ -88,11 +89,9 @@ def load_json(path):
         return json.load(handle)
 
 
-def envelope_records(repo_root, manifest, exec_inputs):
-    """Build omega/Q/Succ+/c/A_Pi records from sealed inputs only."""
-    actual_path = os.path.join(repo_root, "artifacts", "raw",
-                               "original_response_actual.xml")
-    root = etree.parse(actual_path).getroot()
+def extract_triple(path):
+    """Extract (decision, status, detail) from a response file."""
+    root = etree.parse(path).getroot()
     decision = status = None
     detail = {}
     for element in root.iter():
@@ -105,8 +104,41 @@ def envelope_records(repo_root, manifest, exec_inputs):
             detail = {"AttributeId": element.get("AttributeId"),
                       "Category": element.get("Category"),
                       "DataType": element.get("DataType")}
+    return decision, status, detail
+
+
+def envelope_records(repo_root, manifest, exec_inputs):
+    """Build omega/Q/Succ+/c/A_Pi records from sealed inputs only."""
+    actual_path = os.path.join(repo_root, "artifacts", "raw",
+                               "original_response_actual.xml")
+    decision, status, detail = extract_triple(actual_path)
+    root = etree.parse(actual_path).getroot()
+    status_messages = []
+    result_count = 0
+    top_status_codes = 0
+    for element in root.iter():
+        name = localname(element)
+        if name == "Result":
+            result_count += 1
+        if name == "StatusCode" and element.getparent() is not None and \
+                localname(element.getparent()) == "Status":
+            top_status_codes += 1
+        if name == "StatusMessage" and element.text:
+            status_messages.append(element.text.strip())
+    single_result = (result_count == 1 and top_status_codes == 1)
+    frozen_triple = extract_triple(os.path.join(
+        repo_root, "external", "authzforce", "fixture", "response.xml"))
+    triple_match = ([decision, status, detail] == list(frozen_triple))
     omega_ok = (decision == "Indeterminate" and status is not None
-                and all(detail.values()))
+                and all(detail.values()) and single_result
+                and triple_match)
+    actions_ok = (exec_inputs["action_interface"]["actions"]
+                  == ["q_supply_missing_attribute"])
+    cost_ok = (exec_inputs["action_interface"]["unit_cost"] == 1)
+    worlds_ok = all(os.path.isfile(os.path.join(
+        repo_root, "derived", "requests", "request_%s.xml" % world))
+        for world in ("x_permit", "x_nonpermit"))
+    rule_ok = bool(exec_inputs["target_semantics"]["rule"].strip())
     fixture = manifest["authzforce"]["fixture_files"]
     base = {
         "omega": {
@@ -122,13 +154,16 @@ def envelope_records(repo_root, manifest, exec_inputs):
                                else "INDEPENDENT_CHECK_FAIL"),
             "evidence": {
                 "observed_triple": [decision, status, detail],
+                "frozen_triple_match": triple_match,
+                "single_result_single_status": single_result,
+                "status_message_observed_excluded": status_messages,
                 "fixture_response_sha256": fixture["response.xml"][
                     "sha256"],
                 "n1_locator": ("Response/Decision/StatusCode/StatusDetail "
                                "semantics; MissingAttributeDetail element "
-                               "(frozen stripped-text lines 491-494); "
-                               "Indeterminate carries AttributeId "
-                               "(line 8425)"),
+                               "(verified raw-HTML map Sec-5.57-5.58); "
+                               "Indeterminate lists AttributeId/DataType/"
+                               "Issuer (verified Sec. 7.3.5 tail)"),
             },
             "manual_semantic_choice_required": False,
             "derivation_module": None,
@@ -138,13 +173,19 @@ def envelope_records(repo_root, manifest, exec_inputs):
             "pc_field": "Q",
             "extensional_definition": (
                 "One native PEP-style request submission / PDP response "
-                "cycle applying the preregistered construction rule."),
+                "cycle applying the preregistered construction rule. "
+                "FIXED covers the operation definition; boundary "
+                "attribution follows the Atom record."),
             "source_class": ["N1", "X"],
-            "ambiguity_status": "FIXED",
-            "auditor_status": "INDEPENDENT_CHECK_PASS",
+            "ambiguity_status": ("FIXED" if actions_ok and cost_ok
+                                 else "AMBIGUOUS"),
+            "auditor_status": ("INDEPENDENT_CHECK_PASS"
+                               if actions_ok and cost_ok
+                               else "INDEPENDENT_CHECK_FAIL"),
             "evidence": {
                 "actions": exec_inputs["action_interface"]["actions"],
                 "unit_cost": exec_inputs["action_interface"]["unit_cost"],
+                "values_cross_checked": actions_ok and cost_ok,
                 "n1_locator": "Data-flow model (frozen stripped-text "
                               "lines 1755-1784)",
             },
@@ -157,12 +198,15 @@ def envelope_records(repo_root, manifest, exec_inputs):
             "extensional_definition": (
                 "Positive-support successor set over the two preregistered "
                 "complete request worlds; terminal outcomes pending the "
-                "Phase-2 target audit."),
+                "Phase-2 target audit. FIXED covers membership definition, "
+                "not outcome values."),
             "source_class": ["N3", "X"],
-            "ambiguity_status": "FIXED",
-            "auditor_status": "INDEPENDENT_CHECK_PASS",
+            "ambiguity_status": ("FIXED" if worlds_ok else "AMBIGUOUS"),
+            "auditor_status": ("INDEPENDENT_CHECK_PASS" if worlds_ok
+                               else "INDEPENDENT_CHECK_FAIL"),
             "evidence": {
                 "worlds": ["x_permit", "x_nonpermit"],
+                "world_files_present": worlds_ok,
                 "terminal_outcomes": "PENDING_TARGET_AUDIT",
             },
             "manual_semantic_choice_required": False,
@@ -175,10 +219,12 @@ def envelope_records(repo_root, manifest, exec_inputs):
                 "Unit action-cost normalization (experiment-authored, "
                 "frozen; structural result must be cost-invariant)."),
             "source_class": ["X"],
-            "ambiguity_status": "FIXED",
-            "auditor_status": "INDEPENDENT_CHECK_PASS",
+            "ambiguity_status": ("FIXED" if cost_ok else "AMBIGUOUS"),
+            "auditor_status": ("INDEPENDENT_CHECK_PASS" if cost_ok
+                               else "INDEPENDENT_CHECK_FAIL"),
             "evidence": {"unit_cost": exec_inputs["action_interface"][
-                "unit_cost"]},
+                "unit_cost"],
+                "value_cross_checked": cost_ok},
             "manual_semantic_choice_required": False,
             "derivation_module": None,
         },
@@ -190,11 +236,13 @@ def envelope_records(repo_root, manifest, exec_inputs):
                 "returned by the frozen PDP/policy on a complete request "
                 "world. Definition fixed; per-world values pending the "
                 "Phase-2 target audit."),
-            "source_class": ["N3"],
-            "ambiguity_status": "FIXED",
-            "auditor_status": "INDEPENDENT_CHECK_PASS",
+            "source_class": ["N3", "X"],
+            "ambiguity_status": ("FIXED" if rule_ok else "AMBIGUOUS"),
+            "auditor_status": ("INDEPENDENT_CHECK_PASS" if rule_ok
+                               else "INDEPENDENT_CHECK_FAIL"),
             "evidence": {
                 "rule": exec_inputs["target_semantics"]["rule"],
+                "rule_nonempty": rule_ok,
                 "values": "PENDING_TARGET_AUDIT",
             },
             "manual_semantic_choice_required": False,
@@ -284,7 +332,13 @@ def main(argv):
         "source_class": ["N1", "N2", "N3"],
         "ambiguity_status": "FIXED",
         "auditor_status": "PENDING_2B",
-        "evidence": {"pre_hash": lambda_record["pre_hash"]},
+        "evidence": {"pre_hash_historical": lambda_record["pre_hash"],
+                     "operative_manifest": "lambda_manifest.json "
+                     "(reconstructible canonical pre_hash; see refs "
+                     "mode lambda.pre_hash check)",
+                     "manifest_note": "historical narrow-tuple hash "
+                     "superseded for operative use; preserved here "
+                     "for ROUND_000 provenance"},
         "manual_semantic_choice_required": False,
         "derivation_module": "src/pc/derive_Lambda.py",
     }

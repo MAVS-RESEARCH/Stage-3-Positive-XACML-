@@ -38,3 +38,9 @@ All notable changes to this experiment package. Post-preregistration changes to 
 ## [Follow-up] - 2026-09-11 - EOL BLOB NORMALIZATION (no seal changes)
 
 - `* -text diff` byte-regime was masked by stale git stat-cache; restaged blobs byte-faithful (8 files, EOL-only diffs); blob-SHA tooling made config-independent (equal to upstream constants). Fresh-clone proof: full suite 42 passed + 1 skipped with all seals intact.
+
+## [Hardening 2B-H] - 2026-09-12 - ROUND_002 SEALED, CONVERGENCE 10/10, FINAL FROZEN (BLOCKED_PENDING_FINAL_CERTIFICATION)
+
+- 86/86 objections RESOLVED (0 OPEN), including Wave-4 R3-01..R3-12 and hunt O-1..O-7 as R3-13..R3-19; all `external_semantics_changed=false`, no downstream-result use.
+- Working-tree hardening: XACML schema fix (Attribute-level DataType removed), builder/phase-script input binding to sealed `execution_inputs.json`, refs-mode cross-artifact verification, envelope mechanical cross-checks, ledger scope corrections; derived artifacts rehashed (timestamp-strip only).
+- HARDENING_ROUND_002 sealed (invariant holds, exec 0, tests green); convergence 10/10 PASS; final blind packet frozen (`4b9f6556bd9d1360`) with frozen prompt; `--verify-freeze` confirmed. Full suite 59 passed + 1 skipped. Zero completed PDP evaluations. Awaiting AUD-C01/02/03 final certification (unanimous FIXED required).

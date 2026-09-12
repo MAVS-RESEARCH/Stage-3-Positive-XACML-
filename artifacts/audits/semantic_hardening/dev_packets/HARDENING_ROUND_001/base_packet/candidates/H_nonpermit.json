@@ -1,0 +1,52 @@
+{
+  "attributes": [
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "values": [
+        "Julius Hibbert"
+      ]
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "values": [
+        "not-riddle-me-this"
+      ]
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "values": [
+        "read"
+      ]
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+      "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "issuer": null,
+      "values": [
+        "http://medico.com/record/patient/BartSimpson"
+      ]
+    }
+  ],
+  "checkpoint": "S_nonpermit",
+  "history_id": "PC-XACML-S3PLUS-v1-H_nonpermit",
+  "produced_utc": "2026-09-11T17:19:02Z",
+  "proof": {
+    "ref": "h_equivalence_proof.json",
+    "sha256": "4bdacb73382499602c8d63a55a129aeab68bad58038f332d9143a5a1f04aa7e9",
+    "verdict": "VALID"
+  },
+  "source": {
+    "request_file": "derived\\requests\\request_x_nonpermit.xml",
+    "sha256": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd"
+  }
+}

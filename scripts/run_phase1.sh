@@ -37,8 +37,12 @@ echo "[P1:phase1:062] compiling PdpRunner driver"
 javac -cp "$TEST_CLASSES:$PDP_CLASSES:$DEPS_CP" -d "$DRIVER_CLASSES" "$REPO_ROOT/src/xacml/PdpRunner.java"
 echo "[P1:phase1:064] backend ready"
 # [P1-LOG-070] Step: construct (not execute) completed requests.
+# World values are read from sealed execution_inputs.json (never
+# literals), binding construction inputs to preregistration.
 echo "[P1:phase1:070] constructing completed requests"
-"$PYTHON_EXE" "$REPO_ROOT/src/xacml/build_repaired_requests.py" "$REPO_ROOT/external/authzforce/fixture/request.xml" "$REPO_ROOT/external/authzforce/fixture/response.xml" "$REPO_ROOT/external/authzforce/fixture/policies/policy.xml" "riddle me this" "not-riddle-me-this" "$REPO_ROOT/derived/requests"
+PERMIT_VALUE=$("$PYTHON_EXE" -c "import json,os; print(json.load(open(os.path.join('$REPO_ROOT','prereg','execution_inputs.json')))['worlds']['x_permit']['missing_attribute_value'])")
+NONPERMIT_VALUE=$("$PYTHON_EXE" -c "import json,os; print(json.load(open(os.path.join('$REPO_ROOT','prereg','execution_inputs.json')))['worlds']['x_nonpermit']['missing_attribute_value'])")
+"$PYTHON_EXE" "$REPO_ROOT/src/xacml/build_repaired_requests.py" "$REPO_ROOT/external/authzforce/fixture/request.xml" "$REPO_ROOT/external/authzforce/fixture/response.xml" "$REPO_ROOT/external/authzforce/fixture/policies/policy.xml" "$PERMIT_VALUE" "$NONPERMIT_VALUE" "$REPO_ROOT/derived/requests"
 # [P1-LOG-080] Step: original-only native execution.
 echo "[P1:phase1:080] executing original fixture on frozen PDP"
 "$PYTHON_EXE" "$REPO_ROOT/src/xacml/run_authzforce.py" --mode original --phase1-only-original --repo-root "$REPO_ROOT" --java java --cp-file "$CP_FILE" --pdp-test-classes "$TEST_CLASSES" --pdp-classes "$PDP_CLASSES" --driver-classes "$DRIVER_CLASSES" --work-dir "$WORK_DIR/run" --out "$REPO_ROOT/artifacts/raw/original_response_actual.xml"

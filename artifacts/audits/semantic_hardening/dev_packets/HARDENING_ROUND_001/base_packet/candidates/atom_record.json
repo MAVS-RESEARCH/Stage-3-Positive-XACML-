@@ -1,0 +1,34 @@
+{
+  "atom_id": "xacml-request-transaction",
+  "auditor_status": "PENDING_2B",
+  "conclusion": "NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER",
+  "native_transaction": {
+    "boundary": "PEP-style request submission -> PDP evaluation -> XACML response",
+    "n1_locator": "N1 data-flow model (frozen stripped-text lines 1755-1784): PEP sends the native request to the context handler; the handler constructs the request context and sends it to the PDP; the PDP evaluates and returns the response context; the handler returns the response to the PEP. Glossary: Context handler (line 931), PDP (line 1007), PEP (line 1016).",
+    "status": "PROVEN"
+  },
+  "post_checkpoint": "after repaired request response",
+  "pre_checkpoint": "after original MissingAttributeDetail response",
+  "produced_utc": "2026-09-11T17:19:02Z",
+  "wrapper": {
+    "construction_rule": "Copy the frozen original request byte-identically except for inserting exactly one subject Attribute (Category access-subject, AttributeId urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute, DataType xsd:string) carrying the world-specific value. No authorization logic is performed by the wrapper.",
+    "diff_evidence": {
+      "attribute_counts": {
+        "nonpermit": 4,
+        "original": 3,
+        "permit": 4
+      },
+      "file_hashes": {
+        "nonpermit": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd",
+        "original": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+        "permit": "7e28c8c3041b9608f8cb866ed5a85cccaef8a5906cd16678e27ed656c70bc90a"
+      }
+    },
+    "no_authorization_logic": {
+      "builder": "src\\xacml\\build_repaired_requests.py",
+      "forbidden_tokens": "absent, verified",
+      "import_roots": "locked set, verified"
+    },
+    "preregistered": true
+  }
+}

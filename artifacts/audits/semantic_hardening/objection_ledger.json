@@ -1,0 +1,2073 @@
+{
+  "ledger_id": "PC-XACML-S3PLUS-v1-objections",
+  "objections": [
+    {
+      "anchor": "H",
+      "category": "A",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/env_inertness.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/n4_excerpts/std_wiring.txt",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/n4_excerpts/xsd_stdenv_doc.txt"
+      ],
+      "final_disposition": "Resolved for measured interface: std-env provider (default override=false) serves current-* only and never fires here (zero env designators/functions/values); resolved==request proven for all categories. General MAY-add acknowledged, no channel here.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.5 handler MAY-add",
+        "Sec. 7.3.6 environment SHALL-supply",
+        "data-flow conversion outside scope"
+      ],
+      "materiality": "Material: PDP-visible bags could exceed claimed H (handler-added environment/time/normalization), misattributing Decision to history.",
+      "objection": "Resolved PDP-visible request context may exceed raw request XML (handler MAY add attributes; environment values SHALL be supplied; conversion outside spec scope), so H-as-multimap-of-request may misstate PDP-visible history.",
+      "objection_id": "H-01",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Route-b r1 proof + AuthzForce default-handler source evidence (read-only N4) + explicit admitted-interface scope statement.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "N4 wiring + XSD defaults + census"
+    },
+    {
+      "anchor": "H",
+      "category": "B",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/repaired_bytes/request_x_permit.xml",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/repaired_bytes/request_x_nonpermit.xml",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/request_diffs.json"
+      ],
+      "final_disposition": "Repaired bytes + unified diffs now in evidence and final packet scope; hash-only gap closed.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "PACKET_MANIFEST.json file list (no repaired request bytes)"
+      ],
+      "materiality": "Material: add-only and value-identity claims rest on hashes alone in the packet as sealed.",
+      "objection": "Repaired request XML bytes absent from sealed packet; hash-only references cannot prove byte-identical-except-one-insertion or value identity through the handler.",
+      "objection_id": "H-02",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Include repaired request bytes + unified original-to-world structural diffs as evidence and in the final packet.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "byte copies + diffs"
+    },
+    {
+      "anchor": "H",
+      "category": "A",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/issuer_rule.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/h_r1.json"
+      ],
+      "final_disposition": "Issuer rule quoted (7.3.4 lines 8394-8401); Issuer uniformly absent verified (zero hits); pooling immaterial.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.4 Issuer matching"
+      ],
+      "materiality": "Material if context Issuer variations exist; immaterial if Issuer uniformly absent (to be established).",
+      "objection": "Issuer-or-null H keying conflicts with Issuer-absent wildcard matching: context Issuer variations the designator ignores would still distinguish H entries.",
+      "objection_id": "H-03",
+      "originating_reviewer": "AUD-M01/AUD-M02 (HARDENING_ROUND_000)",
+      "proposed_resolution": "State the exact Issuer rule with frozen-HTML locator; establish Issuer-uniformly-absent across the admitted interface.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "frozen quote + mechanical absence check"
+    },
+    {
+      "anchor": "H",
+      "category": "C",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/canonicalization_scope.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/h_r1.json"
+      ],
+      "final_disposition": "Canonicalization scope recorded (C14N, empty categories explicit, IncludeInResult ignored with reason).",
+      "historical_verdicts": {
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "corpus/fixture/request.xml:18 (empty environment element)"
+      ],
+      "materiality": "Material to exact H values if canonicalization choices admit alternatives.",
+      "objection": "Canonicalization scope undetermined: empty environment element, IncludeInResult flags, and whitespace/order normalization allow source-consistent H variants.",
+      "objection_id": "H-04",
+      "originating_reviewer": "AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Canonicalization scope record: C14N rule, empty-environment handling, IncludeInResult treatment.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "scope record"
+    },
+    {
+      "anchor": "P_R",
+      "category": "A",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/match_table.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/pr_r1.json"
+      ],
+      "final_disposition": "Interface-scoped coincidence lemma + match table; generality claim withdrawn to admitted interface.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "FIXED"
+      },
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.6 Match evaluation"
+      ],
+      "materiality": "Immaterial for the frozen null-Issuer singleton-bag two-world interface (to be proven); material in general.",
+      "objection": "Strict bag-identity is finer than Match-result equivalence (duplicates, extra non-matching values, Issuer pooling); sorted-multiset canonicalization is experimenter gloss.",
+      "objection_id": "P_R-01",
+      "originating_reviewer": "AUD-M01/AUD-M02 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Static Match truth-table artifact over actual designator bag states + immateriality argument for the admitted interface.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "static truth table"
+    },
+    {
+      "anchor": "P_R",
+      "category": "B",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/policy_dir_listing.json"
+      ],
+      "final_disposition": "Full projection + adequacy inputs included in dev packet v2 and final packet scope.",
+      "historical_verdicts": {
+        "AUD-M02": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "PACKET_MANIFEST.json file list (probe files absent)"
+      ],
+      "materiality": "Material at audit time: exclusivity claim references probes outside the sealed packet.",
+      "objection": "Exclusivity (only these coordinates matter) depends on selector/Content/provider probes absent from the sealed packet.",
+      "objection_id": "P_R-02",
+      "originating_reviewer": "AUD-M02 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Include full projection + adequacy evidence files in the final packet.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "dev packet inclusion"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Extensional component manifest with per-component basis; narrow boundary with explicit exclusions.",
+      "historical_verdicts": {
+        "AUD-M01": "UNSUPPORTED",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "candidates/lambda_record.json"
+      ],
+      "materiality": "Material: capability drift vs history misattribution turns on the boundary.",
+      "objection": "Capability boundary vague: narrow (policy+provider) vs broad (handler/normalization/environment/defaults) scopes both source-consistent; no extensional iff-rule.",
+      "objection_id": "L-01",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Extensional component manifest: per-component hash, inclusion reason, source basis, stability criterion; explicit exclusions with inertness reasons.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "component manifest"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Hash-construction record published (method + inputs); pre_hash reconstructible.",
+      "historical_verdicts": {
+        "AUD-M01": "UNSUPPORTED",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "candidates/lambda_record.json provider/preprocessor entries"
+      ],
+      "materiality": "Material: unverifiable hash scope blocks independent reconstruction.",
+      "objection": "Hash scope opaque: provider hash and preprocessor default-absent entries have no packet source files; hash derivation method absent.",
+      "objection_id": "L-02",
+      "originating_reviewer": "AUD-M01/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Publish hash-construction record (method + inputs) and per-component source files/hashes.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "construction record"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_deferral.json"
+      ],
+      "final_disposition": "Honest deferral: criterion + Phase-3 mechanical recheck mechanism; no pre-execution fill.",
+      "historical_verdicts": {
+        "AUD-M01": "UNSUPPORTED",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "candidates/lambda_record.json post_hash null"
+      ],
+      "materiality": "Material if constancy cannot be checked; honest deferral with mechanism is acceptable.",
+      "objection": "post_hash null makes the constant-Lambda equality criterion untestable pre-repair.",
+      "objection_id": "L-03",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Honest deferral record: criterion + the Phase-3 mechanical recheck mechanism (no pre-execution fill).",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "deferral record"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "A",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/env_inertness.json"
+      ],
+      "final_disposition": "Environment/time inertness proven (census + default wiring + lazy-fire semantics).",
+      "historical_verdicts": {
+        "AUD-M01": "UNSUPPORTED",
+        "AUD-M02": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.6"
+      ],
+      "materiality": "Material if environment/time can influence evaluation; otherwise inert.",
+      "objection": "Environment/time machinery (handler SHALL supply date/time; implicit PIP/defaults) may vary capability across repairs.",
+      "objection_id": "L-04",
+      "originating_reviewer": "AUD-M01/AUD-M02 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Environment/time-inertness proof: no environment designators or time functions in frozen policy implies authorization-inertness for this fixture.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "inertness proof"
+    },
+    {
+      "anchor": "Atom",
+      "category": "B",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/repaired_bytes/request_x_permit.xml",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/request_diffs.json"
+      ],
+      "final_disposition": "Wrapper bytes + unified diffs + c14n hashes in evidence and final packet scope.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "PACKET_MANIFEST.json file list (builder/repaired bytes absent)"
+      ],
+      "materiality": "Material: counts+hashes cannot prove single-addition reconstruction.",
+      "objection": "Wrapper evidence insufficient: repaired request bytes and builder source absent; hashes/counts cannot prove byte-identical-except-one-insertion.",
+      "objection_id": "A-01",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Expose wrapper source + repaired bytes + unified structural diffs + static-analysis report in evidence and final packet.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "bytes + diffs"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/wrapper_evidence.json"
+      ],
+      "final_disposition": "Static-analysis report (imports, calls, extended tokens, rule map) in evidence.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "candidates/atom_record.json no_authorization_logic claim"
+      ],
+      "materiality": "Material: undecided wrapper logic corrupts transaction attribution.",
+      "objection": "No-authorization-logic claim unverifiable from packet: no AST/import scan artifacts, no invocation-flow record.",
+      "objection_id": "A-02",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Static-analysis report (imports, forbidden tokens, call scan), invocation-flow record, response-non-use evidence.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "AST scan artifacts"
+    },
+    {
+      "anchor": "Atom",
+      "category": "C",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/atom_r1.json"
+      ],
+      "final_disposition": "Native/wrapper decomposition stated with N1 locators + prereg correspondence + evidence chain.",
+      "historical_verdicts": {
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "candidates/execution_inputs.json action_interface"
+      ],
+      "materiality": "Material to what counts as the measured intervention.",
+      "objection": "Construction rule is experiment-authored; native vs wrapper decomposition needs sharper external grounding.",
+      "objection_id": "A-03",
+      "originating_reviewer": "AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Native/wrapper decomposition statement with N1 transaction locators + prereg correspondence + wrapper evidence chain.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "decomposition record"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "B",
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/policy_dir_listing.json"
+      ],
+      "final_disposition": "Dev packet v2 includes all listed evidence categories; final packet scope fixed.",
+      "historical_verdicts": {
+        "AUD-M01": "PARTIAL",
+        "AUD-M02": "PARTIAL",
+        "AUD-M03": "PARTIAL"
+      },
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "PACKET_MANIFEST.json file list"
+      ],
+      "materiality": "Material at audit time across anchors.",
+      "objection": "Packet completeness gaps: route_a probe, repaired requests, full projection, builder source referenced by records but absent as files.",
+      "objection_id": "G-01",
+      "originating_reviewer": "AUD-M01/AUD-M02/AUD-M03 (HARDENING_ROUND_000)",
+      "proposed_resolution": "Final packet includes every evidence category with presence proofs; completeness audit artifact.",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "dev packet inclusion"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "external_semantics_changed": false,
+      "files_changed": [
+        ".gitattributes",
+        "src/provenance/lock_sources.py",
+        "src/provenance/verify_sources.py",
+        "tests/test_source_hashes.py"
+      ],
+      "final_disposition": "Resolved pre-hardening (byte-regime stabilization + deterministic blob-SHA tooling); files recorded (were empty because the fix predated ledger entry).",
+      "historical_verdicts": {},
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        ".gitattributes"
+      ],
+      "materiality": "Not material to semantics; hygiene only.",
+      "objection": "Seal/hash hygiene (EOL desync, config-dependent hashing) threatened reproducibility.",
+      "objection_id": "G-02",
+      "originating_reviewer": "Amendment-001 implementation audit",
+      "proposed_resolution": "Byte-exact checkouts + deterministic hashing (completed pre-hardening).",
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_000",
+      "source_grounding_evidence": "byte-regime fix set"
+    },
+    {
+      "anchor": "H",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/parser_fidelity.json"
+      ],
+      "final_disposition": "Parser fidelity grounded: empty-skip, immutable bags, lax duplicates recorded with N4 locators.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "src/pc/derive_H.py value extraction",
+        "frozen request parsing path"
+      ],
+      "materiality": "Material: value-identity is load-bearing.",
+      "objection": "XML-bytes to AuthzForce Request parse fidelity unevidenced: whitespace/anyURI normalization and (child.text or '') ungrounded.",
+      "objection_id": "H-05",
+      "originating_reviewer": "Wave-1 H-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "N4 preprocessor reads"
+    },
+    {
+      "anchor": "H",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/route_a_scope.json"
+      ],
+      "final_disposition": "Route-a scope corrected: StatusDetail partial observation acknowledged; unavailability scoped to full-context capture.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "derived/route_a_probe.json"
+      ],
+      "materiality": "Material: weakens the route gate.",
+      "objection": "Route-A exhaustiveness gap: no enumerated public-API list; MissingAttributeDetail as partial resolved-context observation unacknowledged; route_a_unavailable overbroad.",
+      "objection_id": "H-06",
+      "originating_reviewer": "Wave-1 H-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "scope record"
+    },
+    {
+      "anchor": "H",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/h_r1.json"
+      ],
+      "final_disposition": "absent_required marker list added to H r1; error semantics stay in omega linkage.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "h_equivalence_proof attribute rows"
+      ],
+      "materiality": "Material: H/omega linkage.",
+      "objection": "Absent-MustBePresent-true conflated with empty bag in H_initial (key omission); evaluation treats it as Indeterminate, not empty.",
+      "objection_id": "H-07",
+      "originating_reviewer": "Wave-1 H-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "r1 record"
+    },
+    {
+      "anchor": "H",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/h_r1.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/canonicalization_scope.json"
+      ],
+      "final_disposition": "Empty categories recorded explicitly; canonicalization scope stated.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 H-depth sweep",
+      "locators": [
+        "corpus/fixture/request.xml environment element"
+      ],
+      "materiality": "Material for H-as-full-context extensional claim.",
+      "objection": "Empty environment Attributes container dropped from H_initial with no empty-vs-absent marker.",
+      "objection_id": "H-08",
+      "originating_reviewer": "Wave-1 H-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "r1 + scope"
+    },
+    {
+      "anchor": "P_R",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/pr_r1.json"
+      ],
+      "final_disposition": "Error tokens added (Indeterminate distinct from bags); empty unreachable here.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "pr_relation rule text"
+      ],
+      "materiality": "Material: C2 missing state is in the admitted triple.",
+      "objection": "Error-vs-empty conflation: rule has no Indeterminate token though all designators are MustBePresent=true; P_R(missing,missing) undecided.",
+      "objection_id": "P_R-03",
+      "originating_reviewer": "Wave-1 P_R-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "r1 relation"
+    },
+    {
+      "anchor": "P_R",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/policy_dir_listing.json"
+      ],
+      "final_disposition": "Glob resolved: single-file listing + PARENT_DIR rule + ignoreOldVersions default.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "corpus/fixture/pdp.xml policyLocation"
+      ],
+      "materiality": "Material to exclusivity claim.",
+      "objection": "Glob expansion unbounded: ${PARENT_DIR}/policies/*.xml never resolved to a sealed file list; second policy file would widen designators silently.",
+      "objection_id": "P_R-04",
+      "originating_reviewer": "Wave-1 P_R-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "dir listing"
+    },
+    {
+      "anchor": "P_R",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/adequacy_extended.json"
+      ],
+      "final_disposition": "Full-inventory assertions recorded (0 Apply/Condition/Variable/Obligations/Advice/Selectors; exact match-function set).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "adequacy channel_inventory"
+      ],
+      "materiality": "Material: hidden Apply/Advice channel would pass PASS.",
+      "objection": "Channel inventory lossy: obligations_advice/match_functions/rule_combining collected but unasserted; pdp check top-level names only.",
+      "objection_id": "P_R-05",
+      "originating_reviewer": "Wave-1 P_R-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "mechanical census"
+    },
+    {
+      "anchor": "P_R",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/pr_r1.json"
+      ],
+      "final_disposition": "Dedup rationale recorded (5 occurrences, 4 coordinates, bag held once evaluated twice).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "policy.xml action Matches",
+        "pr_relation coordinates"
+      ],
+      "materiality": "Low materiality (dedup correct); representation gap.",
+      "objection": "5-to-4 designator dedup (action-id x2) unexplained in evidence.",
+      "objection_id": "P_R-06",
+      "originating_reviewer": "Wave-1 P_R-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "r1 rationale"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/resolved_effective.json"
+      ],
+      "final_disposition": "Resolved-effective record with all schema defaults + preprocessor default + std-provider default.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "pdp.xsd schema defaults"
+      ],
+      "materiality": "Material: defaults are capability.",
+      "objection": "Resolved-effective-config absent: XPath/std registries, strictIssuer, depths, cache, verbosity defaults uncaptured.",
+      "objection_id": "L-05",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "XSD + N4 wiring"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/env_inertness.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Std-env default corrected to enabled/override-false with lazy-fire semantics; manifest records it.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "pdp.xsd standardAttributeProviders + PdpEngineConfiguration wiring"
+      ],
+      "materiality": "Material: provider set misrecorded.",
+      "objection": "attribute_provider_set [] asserts disabled std-env default without schema/JAXB evidence; default is enabled.",
+      "objection_id": "L-06",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "XSD + wiring lines"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/preprocessor_resolved.json"
+      ],
+      "final_disposition": "Preprocessor resolved to default-lax adapter with flag wiring.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "PdpEngineAdapters default construction"
+      ],
+      "materiality": "Material.",
+      "objection": "Preprocessor sentinel misses the true default adapter chain (default-lax + result postprocessor + flag wiring).",
+      "objection_id": "L-07",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "adapter construction lines"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/policy_dir_listing.json"
+      ],
+      "final_disposition": "Glob/PARENT_DIR bound (single-file listing, no multi-root ambiguity).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "pdp.xml policyLocation",
+        "provider glob handling"
+      ],
+      "materiality": "Material: extra file changes capability silently.",
+      "objection": "Glob/PARENT_DIR binding, ordering, multi-root ambiguity, ignoreOldVersions unpinned.",
+      "objection_id": "L-08",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "listing + rule"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/version_manifest.json"
+      ],
+      "final_disposition": "Version identity pinned to frozen source identifiers (release/tag/commit).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "RELEASE/COMMIT only; no jar/xsd/extension IDs"
+      ],
+      "materiality": "Material: same XML on different code may decide differently.",
+      "objection": "Version/build/extension identity absent (capability == code).",
+      "objection_id": "L-09",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "RELEASE/COMMIT refs"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/env_inertness.json"
+      ],
+      "final_disposition": "Override flags + timestamp paths recorded; inert via env-inertness (no env reads).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "std-env provider override paths"
+      ],
+      "materiality": "Material if env evaluation reachable (see inertness proof).",
+      "objection": "Env override flags and evaluation timestamp source undetermined.",
+      "objection_id": "L-10",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "flag analysis"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_deferral.json"
+      ],
+      "final_disposition": "Comparator design recorded (byte-equality, no tolerance; Phase-3 enforcement).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Lambda-depth sweep",
+      "locators": [
+        "lambda_record equality_criterion prose"
+      ],
+      "materiality": "Material.",
+      "objection": "post comparator design absent: null cannot be compared; no predicate, tolerance, or failure action.",
+      "objection_id": "L-11",
+      "originating_reviewer": "Wave-1 Lambda-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "deferral record"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/request_diffs.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/atom_r1.json"
+      ],
+      "final_disposition": "Identity claim corrected to c14n-identity; re-serialization deltas dispositioned with diffs.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "build output vs frozen original bytes"
+      ],
+      "materiality": "Material: BLOCKING.",
+      "objection": "Byte-identity claim false: pretty_print re-serialization changes declaration quotes, attribute order, empty-element style; builder c14n check masks these deltas and is unexported.",
+      "objection_id": "A-04",
+      "originating_reviewer": "Wave-1 Atom-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "diffs"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/wrapper_evidence.json"
+      ],
+      "final_disposition": "Extended token set + call inventory + rule map; coupling recorded.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "derive_atom token list",
+        "builder imports"
+      ],
+      "materiality": "Material: BLOCKING.",
+      "objection": "No-auth-logic scan incomplete: substring tokens miss eval/exec/__import__/getattr/compile/XSLT; os/sys/lxml permit file/exit/XML transforms; fail() branches are content-conditioned denial.",
+      "objection_id": "A-05",
+      "originating_reviewer": "Wave-1 Atom-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "AST scan"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/wrapper_evidence.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/invocation_record.json"
+      ],
+      "final_disposition": "Coupling + response-consumption flow + invocation ordering recorded.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "build/run module coupling"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Builder-to-PDP coupling unscanned (no Calls/transitive/call graph); response/policy consumption flow undocumented; no argv/log proving build preceded completed runs.",
+      "objection_id": "A-06",
+      "originating_reviewer": "Wave-1 Atom-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "flow record"
+    },
+    {
+      "anchor": "Atom",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/wrapper_evidence.json"
+      ],
+      "final_disposition": "Rule-phrase to code-line map embedded and mechanically presence-checked.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 Atom-depth sweep",
+      "locators": [
+        "execution_inputs construction_rule vs builder source"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Construction rule underspecified vs code surplus (IncludeInResult, datatypes, append position, namespace derivation, MBP gate, INV asserts); no rule-phrase to code-line map.",
+      "objection_id": "A-07",
+      "originating_reviewer": "Wave-1 Atom-assault (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "rule map"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/locator_map_raw_html.json"
+      ],
+      "final_disposition": "Verified raw-HTML locator map replaces stripped-text numbering (14/14 verified).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "locator_index.md",
+        "candidate n1_locators"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Stripped-text N1 locators unresolvable from packet bytes (raw HTML lines differ; index admits convenience-only).",
+      "objection_id": "G-03",
+      "originating_reviewer": "Wave-1 packet-audit (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "verified map"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/rubric_supplement.md"
+      ],
+      "final_disposition": "Rubric supplement adds procedures for hash-only evidence, gaps, locator resolution, manifest, Q/wrapper/adequacy.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "blind_anchor_packet/rubric.md"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Rubric lacks procedures for hash-only evidence, route-a/projection/builder gaps, locator resolution, manifest check, Q/wrapper/adequacy handling.",
+      "objection_id": "G-04",
+      "originating_reviewer": "Wave-1 packet-audit (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "supplement"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/freeze_methodology.json"
+      ],
+      "final_disposition": "Candidate verdicts labeled proponent-claims; adjudicators judge sources per rubric rules 1+6.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "ledger/proof/adequacy verdict fields"
+      ],
+      "materiality": "Material: MINOR.",
+      "objection": "Proponent verdict tokens embedded as candidate bytes risk use as self-evidence.",
+      "objection_id": "G-05",
+      "originating_reviewer": "Wave-1 packet-audit (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "methodology"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/freeze_methodology.json"
+      ],
+      "final_disposition": "Repo-to-packet path remap published; ledger drift explained (run-stamp keys).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "ledger proof/adequacy/source paths"
+      ],
+      "materiality": "Material: MINOR.",
+      "objection": "Repo-path references absent in packet layout; ledger-vs-derived hash drift unexplained.",
+      "objection_id": "G-06",
+      "originating_reviewer": "Wave-1 packet-audit (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "methodology"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/boundary_allocation.json"
+      ],
+      "final_disposition": "Boundary allocation recorded (handler/env/envelope/Issuer ownership across anchors).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "N1 data-flow sentences",
+        "anchor boundary definitions"
+      ],
+      "materiality": "Material: boundary allocation gaps.",
+      "objection": "Cross-anchor consistency: handler triple-counted across H/Lambda/Atom; envelope/flags owned by none; Issuer jointly ungrounded; Lambda post==pre vs Atom pre/post hash different objects.",
+      "objection_id": "G-07",
+      "originating_reviewer": "Wave-1 global-redteam (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "allocation"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/blindness_boundary.md"
+      ],
+      "final_disposition": "Input-vs-outcome blindness boundary declared: world values are measurement inputs; blindness constrains outcomes.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 fresh sweep",
+      "locators": [
+        "execution_inputs worlds",
+        "policy.xml riddle literal"
+      ],
+      "materiality": "Accepted scope: worlds are measurement inputs; blindness constrains outcome knowledge, not input knowledge.",
+      "objection": "World labels+values disclose intended mapping via policy literal (naming-level hint, not numeric expectation).",
+      "objection_id": "G-08",
+      "originating_reviewer": "Wave-1 global-redteam (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "boundary statement"
+    },
+    {
+      "anchor": "H",
+      "category": "A",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/env_inertness.json"
+      ],
+      "final_disposition": "Request env census 0/0/0 + builder category-pin (access-subject only); validation gate cannot trigger without env values.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "std-env OPTIONAL helper",
+        "repaired request bytes"
+      ],
+      "materiality": "Material to generality of resolved==request.",
+      "objection": "Env-validation path: OPTIONAL helper validates present env values (syntax-error Indeterminate); census must cover repaired bytes and builder category pin.",
+      "objection_id": "R2H-01",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "census + pin"
+    },
+    {
+      "anchor": "H",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Clock/timestamp exclusion documented with no-read-path reason; constancy covers capability, not clock.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "overrideEvalCtxFromTimestamp",
+        "lambda manifest"
+      ],
+      "materiality": "Material: constancy across repairs undefined.",
+      "objection": "Wall-clock latent state excluded from hash without pinned timestamp-source/UTC record.",
+      "objection_id": "R2H-02",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "exclusion entry"
+    },
+    {
+      "anchor": "H",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/admitted_value_census.json"
+      ],
+      "final_disposition": "Admitted-value census: single text nodes, non-empty, datatype-consistent; factory generality moot here.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "derive_H canonical_h"
+      ],
+      "materiality": "Material to value-identity.",
+      "objection": "(child.text or '') verbatim fiction vs N4 lexical parsing; empty/whitespace/multi-node/datatype-conflict cases unevidenced.",
+      "objection_id": "R2H-03",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "mechanical census"
+    },
+    {
+      "anchor": "H",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/admitted_value_census.json"
+      ],
+      "final_disposition": "Content 0, categories distinct across all three files.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "request files Content/Category census"
+      ],
+      "materiality": "Material to H-as-full-context.",
+      "objection": "Content/repeated-Category dropped without census over all three request bytes.",
+      "objection_id": "R2H-04",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "mechanical census"
+    },
+    {
+      "anchor": "H",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/admitted_value_census.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/issuer_rule.json"
+      ],
+      "final_disposition": "Empty-Issuer census 0; null-vs-absent moot per 7.3.4 quote; strictIssuer=false in hashed components.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "Issuer census",
+        "resolved_effective flags"
+      ],
+      "materiality": "Material: silent capability change.",
+      "objection": "Issuer '' vs absent census missing; N4 null-vs-'' handling uncited; strictIssuer flag outside hashed components.",
+      "objection_id": "R2H-05",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "census + quote"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Canonical set extended: resolved flags, dir listing, ignoreOldVersions/custom/override values hashed.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "lambda_manifest canonical set"
+      ],
+      "materiality": "Material BLOCKING for constancy.",
+      "objection": "Manifest recorded-but-unhashed: resolved flags, dir listing, ignoreOldVersions, custom providers, std override.",
+      "objection_id": "R2H-06",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "extended manifest"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/policy_dir_listing.json"
+      ],
+      "final_disposition": "Relative-layout rule + single-file listing hashed; absolute URI excluded as machine-dependent by design.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "provider glob handling"
+      ],
+      "materiality": "Material: hermeticity of policy resolution.",
+      "objection": "PARENT_DIR path-dependence: absolute URI machine-dependent; glob ordering/multi-root unevidenced.",
+      "objection_id": "R2H-07",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "layout rule"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/comparator_demo.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/version_manifest.json"
+      ],
+      "final_disposition": "Comparator = derive_Lambda (frozen) + Phase-3 recheck; abort demo recorded; version = source triple + toolchain record.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "lambda deferral",
+        "version manifest"
+      ],
+      "materiality": "Material: constancy untestable pre-repair.",
+      "objection": "Deferral promissory (no sealed comparator/abort demo); version under-pinned (no jar/xsd/extension/JVM pins).",
+      "objection_id": "R2H-08",
+      "originating_reviewer": "Wave-2 H/Lambda sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "demo + record"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/c14n_reparse.json"
+      ],
+      "final_disposition": "Re-parsed residual C14N equality TRUE both worlds; lexical classes XML-infoset-insignificant under standard JAXB parsing.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "request diffs",
+        "builder c14n check"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "C14N-mask concedes byte deltas without PDP-equivalence proof; INV-05 runs pre-serialization, never on re-parsed bytes.",
+      "objection_id": "R2A-01",
+      "originating_reviewer": "Wave-2 Atom sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "reparse proof"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/wrapper_evidence.json"
+      ],
+      "final_disposition": "Published token/AST lists; dangerous set = {parse} (documented frozen-input reader); os-members path-only; inputs entity-free; deepcopy independent.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "wrapper_evidence scan"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Token/import scan too coarse: scanned set unpublished; os/sys/lxml admit dangerous members; parse flags absent; deepcopy semantics unevidenced.",
+      "objection_id": "R2A-02",
+      "originating_reviewer": "Wave-2 Atom sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "extended scan"
+    },
+    {
+      "anchor": "Atom",
+      "category": "A",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/auth_logic_definition.md"
+      ],
+      "final_disposition": "Authorization-logic definition adopted (Decision-computation vs coordinate-forwarding); forwarding steers only via admitted channel per P_R exclusivity.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "builder response/policy reads"
+      ],
+      "materiality": "Material: BLOCKING strict.",
+      "objection": "PDP-output consumption IS construction input (Detail triple determines inserts); 'no authorization logic' undefined.",
+      "objection_id": "R2A-03",
+      "originating_reviewer": "Wave-2 Atom sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "definition"
+    },
+    {
+      "anchor": "Atom",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/invocation_record.json"
+      ],
+      "final_disposition": "Ordering proven by zero-runs-ever + refusal mechanism + staging/evaluation distinction (no argv corpus needed: vacuous chronology + enforced flag).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "invocation record"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Ordering record asserts without argv/log corpus; refusal opt-in; staging-vs-evaluation blur.",
+      "objection_id": "R2A-04",
+      "originating_reviewer": "Wave-2 Atom sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "chronology argument"
+    },
+    {
+      "anchor": "Atom",
+      "category": "A",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/behavior_table.json"
+      ],
+      "final_disposition": "Trigger table + liveness argument + stdout non-interference recorded; guards unreachable on admitted inputs.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "behavior triggers"
+      ],
+      "materiality": "Material: MAJOR (minor if liveness).",
+      "objection": "fail()/refuse() + stdout are content-conditioned decisions/flows; MBP/INV gates encode expectations.",
+      "objection_id": "R2A-05",
+      "originating_reviewer": "Wave-2 Atom sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "behavior record"
+    },
+    {
+      "anchor": "Atom",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/atom_r1.json"
+      ],
+      "final_disposition": "Per-world native cycle counting + interval delimitation + staged-copy identity argument recorded.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "atom checkpoints",
+        "staging helper"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Checkpoint pair bounds two transactions + asymmetric fixture paths (in-place vs staged copy).",
+      "objection_id": "R2A-06",
+      "originating_reviewer": "Wave-2 Atom sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "counting clarification"
+    },
+    {
+      "anchor": "P_R",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/rejected_alternatives.json"
+      ],
+      "final_disposition": "Decision/world-indexed alternatives rejected with reasons (StatusDetail sameness unestablished; degenerate indexing).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "pr_r1 granularity"
+      ],
+      "materiality": "Material: partitions change K.",
+      "objection": "Match-vector P_R admits decision-based and world-indexed completions surviving the match table.",
+      "objection_id": "R2G-01",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "rejection record"
+    },
+    {
+      "anchor": "P_R",
+      "category": "A",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/h_r1.json"
+      ],
+      "final_disposition": "Total-form equivalence proven on admitted interface (single missing-able coordinate).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "pr_r1 error tokens"
+      ],
+      "materiality": "Material: conflates missing states.",
+      "objection": "Indexed Indeterminate + Detail ordering: two missing-different histories equivalent under r1, distinct under indexed reading.",
+      "objection_id": "R2G-02",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "equivalence note"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/version_manifest.json"
+      ],
+      "final_disposition": "Clock/build/interface exclusions documented with reasons; version = source triple + toolchain.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "lambda manifest exclusions"
+      ],
+      "materiality": "Material: drift undetected by pre_hash.",
+      "objection": "Manifest excludes clock/build/interface that are capability; version at source not jar; timestamp excluded.",
+      "objection_id": "R2G-03",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "exclusion entries"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/parser_fidelity.json"
+      ],
+      "final_disposition": "Request-path component added (preprocessor id+flags, parser rules).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "preprocessor + parser records"
+      ],
+      "materiality": "Material: value-identity.",
+      "objection": "Preprocessor/handler normalization excluded though defining bytes-to-bags fidelity.",
+      "objection_id": "R2G-04",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "component"
+    },
+    {
+      "anchor": "H",
+      "category": "A",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/h_r1.json"
+      ],
+      "final_disposition": "Total-form equivalence proven; r1 form retained as derivation-faithful.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "h_r1 definition"
+      ],
+      "materiality": "Material: H-equality indeterminate.",
+      "objection": "Partial-multimap+side-lists vs total error-function; empty container as key vs list both fit r1.",
+      "objection_id": "R2G-05",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "equivalence note"
+    },
+    {
+      "anchor": "Atom",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/atom_r1.json"
+      ],
+      "final_disposition": "Per-world atomicity + interval delimitation recorded; cost attaches per world-instantiation.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "atom_r1 decomposition"
+      ],
+      "materiality": "Material: intervention/cost.",
+      "objection": "Checkpoint placement/construction-inside-outside underdetermined; two-transaction interval may not close as one Atom.",
+      "objection_id": "R2G-06",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "counting clarification"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/boundary_allocation.json"
+      ],
+      "final_disposition": "Closure argument recorded: moves are different experiments requiring reopen, not freedoms within.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-3 focused re-attack",
+      "locators": [
+        "boundary_allocation"
+      ],
+      "materiality": "Material: K-relevant shift.",
+      "objection": "Boundary allocation triple-counts handler; envelope/flags/timestamps movable across H/Lambda/Atom preserving all censuses.",
+      "objection_id": "R2G-07",
+      "originating_reviewer": "Wave-2 global sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "closure argument"
+    },
+    {
+      "anchor": "H",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/parse_proof_bags.txt"
+      ],
+      "final_disposition": "Engine unmarshaller bag proof: written bytes parse to exact expected bags (no evaluation); admitted-shape transfer proven.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-4 confirmation",
+      "locators": [
+        "derive_H canonical_h",
+        "admitted_value_census"
+      ],
+      "materiality": "Material to value-identity.",
+      "objection": "N4 text-to-bag conversion loop uncited; factory normalization for admitted shapes unevidenced.",
+      "objection_id": "R2H-09",
+      "originating_reviewer": "Wave-3 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "N4 parse proof"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Engine source files hashed into manifest canonical set (pristine clone verified); pre_hash reconstructible.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-4 confirmation",
+      "locators": [
+        "lambda_manifest components"
+      ],
+      "materiality": "Material BLOCKING for constancy.",
+      "objection": "Manifest hashes descriptors not content: same triple plus rebuilt/mutated jar or wiring yields same pre_hash.",
+      "objection_id": "R2H-10",
+      "originating_reviewer": "Wave-3 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "source hashes"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/comparator_demo.json"
+      ],
+      "final_disposition": "Full transcript recorded (inputs, expected/actual, stdout, abort token).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-4 confirmation",
+      "locators": [
+        "comparator_demo.json"
+      ],
+      "materiality": "Material: constancy untestable.",
+      "objection": "Comparator demo records exit code only: no transcript of inputs, expected/actual hashes, stdout, or abort token.",
+      "objection_id": "R2H-11",
+      "originating_reviewer": "Wave-3 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "transcript"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/parse_proof_bags.txt"
+      ],
+      "final_disposition": "Resolved via engine-unmarshaller parse proof on written bytes (exact expected bags) + schema fix; Wave-3 seeded entry, resolved in ROUND_001.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-4 confirmation",
+      "locators": [
+        "c14n_reparse record",
+        "request diffs",
+        "engine UnmarshalException on constructed bytes (pre-fix)",
+        "builder insert_attribute (fixed: value-level DataType only)"
+      ],
+      "materiality": "Material: MAJOR (repaired identity).",
+      "objection": "C14N-equality is not PDP-equivalence: no N4/JAXB parse of written bytes; INV-05 runs pre-serialization. ADDITIONALLY (found by evidence tooling during ROUND_001): the builder emitted schema-illegal Attribute DataType, which the frozen validating parser rejects (UnmarshalException cvc-complex-type.3.2.2); repaired requests would have failed target evaluation spuriously.",
+      "objection_id": "R2A-07",
+      "originating_reviewer": "Wave-3 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "re-affirmation"
+    },
+    {
+      "anchor": "Atom",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/invocation_record.json"
+      ],
+      "final_disposition": "Invocation-site map added (PdpRunner reachable only original-only or post-unlock); staging/evaluation distinction; chronology via zero-runs + refusal.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-4 confirmation",
+      "locators": [
+        "invocation_record"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Chronology proves vacuous precedence, not enforcement: no argv/log corpus; refusal opt-in; staging blur unresolved.",
+      "objection_id": "R2A-08",
+      "originating_reviewer": "Wave-3 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "site map"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/rejected_alternatives.json"
+      ],
+      "final_disposition": "Cost-reallocation rejected with reasons (preregistered X normalization; 7.3.6 analogy fails; structural invariance).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-4 confirmation",
+      "locators": [
+        "action cost attachment"
+      ],
+      "materiality": "Material: K-relevant if admitted.",
+      "objection": "Cost-reallocation alternative: wrapper as zero-cost envelope preparation re-partitions touch/K with identical Decisions.",
+      "objection_id": "R2G-08",
+      "originating_reviewer": "Wave-3 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_001",
+      "source_grounding_evidence": "rejection record"
+    },
+    {
+      "anchor": "H",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/parse_proof_bags.txt"
+      ],
+      "final_disposition": "Engine unmarshaller yields exact expected bags for all three worlds (values+datatypes, null Issuers).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-6 confirmation",
+      "locators": [
+        "ParseProof driver",
+        "admitted_value_census"
+      ],
+      "materiality": "Material to value-identity.",
+      "objection": "N4 text-to-bag conversion for admitted shapes unevidenced by census alone; engine parse proof required.",
+      "objection_id": "R3-01",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "N4 parse proof"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/lambda_manifest.json"
+      ],
+      "final_disposition": "Five engine source files hashed into canonical set (pristine clone verified); recompute exercised.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-6 confirmation",
+      "locators": [
+        "lambda_manifest components"
+      ],
+      "materiality": "Material BLOCKING for constancy.",
+      "objection": "Manifest binds descriptor identity, not engine source content; same triple plus rebuilt jar yields same pre_hash.",
+      "objection_id": "R3-02",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "source hashes"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/comparator_demo.json"
+      ],
+      "final_disposition": "Full transcript: mutated/pristine input hashes, expected pre_hash, exit 1, stdout tail, abort token; frozen intact.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-6 confirmation",
+      "locators": [
+        "comparator_demo"
+      ],
+      "materiality": "Material: constancy untestable.",
+      "objection": "Comparator demo records exit code only; transcript of inputs, expected/actual hashes, stdout, abort token required.",
+      "objection_id": "R3-03",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "transcript"
+    },
+    {
+      "anchor": "Atom",
+      "category": "B",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/invocation_record.json"
+      ],
+      "final_disposition": "Invocation-site map with PdpRunner call sites + refusal wiring + staging distinction.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "invocation_record"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "Invocation-site map lacks script hashes/excerpts; refusal opt-in unproven universal; staging blur.",
+      "objection_id": "R3-04",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "site map"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/wrapper_evidence.json"
+      ],
+      "final_disposition": "11-phrase rule map, all presence-checked against builder source.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "wrapper_evidence rule_to_code"
+      ],
+      "materiality": "Material.",
+      "objection": "Rule-to-code map omits surplus lines (IncludeInResult, namespace, append position, value DataType).",
+      "objection_id": "R3-05",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "extended map"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/rejected_alternatives.json"
+      ],
+      "final_disposition": "Cost entry grounded in prereg paths + structural-invariance design.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "rejected_alternatives cost entry"
+      ],
+      "materiality": "Material: K-relevant.",
+      "objection": "Cost-reallocation rejection lacks prereg paths/hashes.",
+      "objection_id": "R3-06",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "grounded rejection"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/parse_proof_bags.txt",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/c14n_reparse.json"
+      ],
+      "final_disposition": "Engine parse of written bytes yields exact expected bags; lexical deltas PDP-irrelevant.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "c14n_reparse",
+        "request diffs"
+      ],
+      "materiality": "Material: MAJOR.",
+      "objection": "C14N-equality is not PDP-equivalence without engine parse of written bytes.",
+      "objection_id": "R3-07",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "parse proof"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "C",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/match_table.json",
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/blindness_boundary.md"
+      ],
+      "final_disposition": "World_rows removed from match table (designator rows only); near-miss documented in blindness record.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "match_table world_rows"
+      ],
+      "materiality": "Material: blindness hygiene.",
+      "objection": "Match table world_rows disclose per-world Match outcomes (outcome-adjacent).",
+      "objection_id": "R3-08",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "removal + addendum"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/HASHING_CONVENTIONS.md"
+      ],
+      "final_disposition": "Conventions published; refs mode verifies all cross-artifact hashes; paths forward-slashed.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "anchor/H/PR references"
+      ],
+      "materiality": "Material: verifiability.",
+      "objection": "Cross-artifact hash references lack stated conventions and mechanical verification; backslash paths unhygienic.",
+      "objection_id": "R3-09",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "conventions + verifier"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/supersession.json"
+      ],
+      "final_disposition": "Supersession chain recorded (old hashes, reason, new hashes).",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "derived/requests regeneration"
+      ],
+      "materiality": "Material: provenance.",
+      "objection": "Builder fix supersedes sealed request bytes; chain undocumented.",
+      "objection_id": "R3-10",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "chain record"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/pc/check_anchor_completeness.py"
+      ],
+      "final_disposition": "A_Pi source_class corrected to [N3,X]; omega locators use verified raw-HTML map; Q/Succ+/c scope notes added.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "ledger envelope records"
+      ],
+      "materiality": "Material: gate-table honesty.",
+      "objection": "Envelope records overclaim (A_Pi N-class, omega locators, Q/Succ+/c scope).",
+      "objection_id": "R3-11",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "envelope corrections"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_001/evidence/pre_hash_lineage.json"
+      ],
+      "final_disposition": "Lineage bb2c->0577->b679->cac0 recorded; single operative pre_hash.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-5 confirmation",
+      "locators": [
+        "lambda pre_hash history"
+      ],
+      "materiality": "Material: which commitment binds.",
+      "objection": "Multiple pre_hash values floating (bb2c/0577/b679/cac0) without lineage record.",
+      "objection_id": "R3-12",
+      "originating_reviewer": "Wave-4 focused sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "lineage"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/pc/check_anchor_completeness.py",
+        "scripts/repro_compare.py",
+        "evidence/HASHING_CONVENTIONS.md"
+      ],
+      "final_disposition": "Single volatile set documented and implemented in both modules; drift note corrected.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "checker VOLATILE_KEYS",
+        "repro_compare DROP",
+        "freeze_methodology ledger-drift"
+      ],
+      "materiality": "Material: latent divergence in canonical forms.",
+      "objection": "VOLATILE strip sets differ across modules; drift story in freeze_methodology inaccurate (timestamps are stripped).",
+      "objection_id": "R3-13",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "unified set"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/pc/check_anchor_completeness.py"
+      ],
+      "final_disposition": "Ledger Lambda points at operative manifest; refs mode checks the binding.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "derived/anchor_ledger Lambda evidence",
+        "lambda_manifest"
+      ],
+      "materiality": "Material: operative pointer stale.",
+      "objection": "Ledger Lambda binds superseded opaque hash; refs mode blind to ledger-to-manifest drift.",
+      "objection_id": "R3-14",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "manifest binding"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/pc/check_anchor_completeness.py"
+      ],
+      "final_disposition": "Envelope records carry mechanical cross-checks (triple/single-result/file/rule/value equality); failures flip to AMBIGUOUS.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "checker envelope_records"
+      ],
+      "materiality": "Material: gate honesty.",
+      "objection": "Envelope Q/Succ+/c/A_Pi/omega FIXED self-attested without mechanical cross-checks.",
+      "objection_id": "R3-15",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "cross-checks"
+    },
+    {
+      "anchor": "Atom",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/hardening_evidence.py"
+      ],
+      "final_disposition": "Reachability predicate covers from-imports, method calls, getattr dispatch, os.system-class spawn.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "hardening_evidence reachability predicate"
+      ],
+      "materiality": "Material: no-reach proof strength.",
+      "objection": "builder_reaches_pdp import-root heuristic misses from-imports, method calls, getattr dispatch, os.system spawn.",
+      "objection_id": "R3-16",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "extended predicate"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "evidence/HASHING_CONVENTIONS.md"
+      ],
+      "final_disposition": "C14N spec documented (exclusive, no comments, pinned lxml); libxml2 scope in manifest exclusions; refs recomputes provider C14N.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "HASHING_CONVENTIONS",
+        "manifest exclusions"
+      ],
+      "materiality": "Material: C14N digest trust.",
+      "objection": "C14N third hash kind unpinned/unverified; libxml2 scope excluded without record.",
+      "objection_id": "R3-17",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "C14N spec"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "D",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/xacml/build_repaired_requests.py",
+        "scripts/run_phase1.ps1",
+        "scripts/run_phase1.sh"
+      ],
+      "final_disposition": "Builder non-empty guard proven; phase scripts bind values from sealed execution_inputs.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "builder guards",
+        "phase scripts"
+      ],
+      "materiality": "Material: input edge + binding.",
+      "objection": "Empty-vs-null edge and argv value binding unproven (builder permits empty; census covers files only).",
+      "objection_id": "R3-18",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "guard + binding"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "scripts/repro_compare.py",
+        "evidence/supersession.json",
+        "evidence/pre_hash_lineage.json"
+      ],
+      "final_disposition": "Dead branch removed; supersession/lineage/newline semantics documented.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-7 confirmation",
+      "locators": [
+        "repro_compare",
+        "supersession",
+        "pre_hash_lineage",
+        "newline handling"
+      ],
+      "materiality": "Material: minor hygiene with one honesty fix.",
+      "objection": "Nits bundle: repro_compare dead branch; supersession old-side pointers; lineage truncation honesty; newline semantics.",
+      "objection_id": "R3-19",
+      "originating_reviewer": "Wave-6 sweep (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_002",
+      "source_grounding_evidence": "hygiene pass"
+    }
+  ]
+}

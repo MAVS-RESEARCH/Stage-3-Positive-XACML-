@@ -9,7 +9,7 @@
   },
   "post_checkpoint": "after repaired request response",
   "pre_checkpoint": "after original MissingAttributeDetail response",
-  "produced_utc": "2026-09-11T18:56:45Z",
+  "produced_utc": "2026-09-11T20:24:00Z",
   "wrapper": {
     "construction_rule": "Copy the frozen original request byte-identically except for inserting exactly one subject Attribute (Category access-subject, AttributeId urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute, DataType xsd:string) carrying the world-specific value. No authorization logic is performed by the wrapper.",
     "diff_evidence": {
@@ -19,9 +19,9 @@
         "permit": 4
       },
       "file_hashes": {
-        "nonpermit": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd",
+        "nonpermit": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
         "original": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
-        "permit": "7e28c8c3041b9608f8cb866ed5a85cccaef8a5906cd16678e27ed656c70bc90a"
+        "permit": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294"
       }
     },
     "no_authorization_logic": {

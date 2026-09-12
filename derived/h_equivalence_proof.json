@@ -102,10 +102,10 @@
   ],
   "input_hashes": {
     "request.xml": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
-    "request_x_nonpermit.xml": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd",
-    "request_x_permit.xml": "7e28c8c3041b9608f8cb866ed5a85cccaef8a5906cd16678e27ed656c70bc90a"
+    "request_x_nonpermit.xml": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
+    "request_x_permit.xml": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294"
   },
-  "produced_utc": "2026-09-11T18:56:44Z",
+  "produced_utc": "2026-09-11T20:23:59Z",
   "proof_id": "PC-XACML-S3PLUS-v1-h-equivalence",
   "provenance": {
     "policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",

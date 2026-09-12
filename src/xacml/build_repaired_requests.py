@@ -116,12 +116,15 @@ def assert_single_attribute_addition(original_root, repaired_root, triple,
     added = new_nodes[0]
     if added.get("AttributeId") != attribute_id:
         fail("INV-05 violated for %s: wrong AttributeId" % name)
-    if added.get("DataType") != datatype:
-        fail("INV-05 violated for %s: wrong DataType" % name)
+    if added.get("DataType") is not None:
+        fail("INV-05 violated for %s: schema-illegal Attribute DataType"
+             % name)
     values = [child for child in added
               if localname(child) == "AttributeValue"]
     if len(values) != 1 or values[0].text != value:
         fail("INV-05 violated for %s: wrong AttributeValue" % name)
+    if values[0].get("DataType") != datatype:
+        fail("INV-05 violated for %s: wrong value DataType" % name)
     parent = added.getparent()
     parent.remove(added)
     if canonical(probe_root) != canonical(original_root):
@@ -150,7 +153,10 @@ def insert_attribute(request_tree, triple, value):
         namespace = root.tag.split("}")[0] + "}"
     attribute = etree.SubElement(subject, namespace + "Attribute")
     attribute.set("AttributeId", attribute_id)
-    attribute.set("DataType", datatype)
+    # NOTE (hardening R2A-07): XACML 3.0 request Attribute elements carry
+    # NO DataType attribute (it lives on AttributeValue only); emitting
+    # one makes the request schema-invalid and the frozen validating
+    # parser rejects it. Values below carry their DataType.
     attribute.set("IncludeInResult", "false")
     value_node = etree.SubElement(attribute, namespace + "AttributeValue")
     value_node.set("DataType", datatype)
@@ -176,6 +182,8 @@ def main(argv):
              "<nonpermit-value> <out-dir>")
     request_path, response_path, policy_path = argv[1], argv[2], argv[3]
     permit_value, nonpermit_value, out_dir = argv[4], argv[5], argv[6]
+    if not permit_value.strip() or not nonpermit_value.strip():
+        fail("world values must be non-empty (preregistered literals)")
     print("[P1:build:012] out-dir=%s" % os.path.abspath(out_dir), flush=True)
 
     # [P1-LOG-020] Step: read coordinates from frozen response.

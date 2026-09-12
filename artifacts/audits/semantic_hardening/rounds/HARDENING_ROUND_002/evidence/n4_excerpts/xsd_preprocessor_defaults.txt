@@ -1,0 +1,32 @@
+SOURCE: pdp-engine/src/main/resources/pdp.xsd lines 165-195 (pinned 3cc0e988)
+
+                        <p>
+                            The following values of
+                            <i>requestPreproc</i>
+                            are natively supported:
+                        </p>
+                        <dl>
+                            <dt>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax</dt>
+                            <dd>
+                                implements only XACML 3.0 Core (NO support for Multiple Decision)
+                                and allows
+                                duplicate &lt;Attribute&gt; with
+                                same
+                                meta-data in the
+                                same &lt;Attributes&gt; element of a Request
+                                (complying with
+                                XACML
+                                3.0 core spec, §7.3.3)
+                            </dd>
+                            <dt>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-strict</dt>
+                            <dd>
+                                implements only XACML 3.0 Core (NO support for Multiple Decision)
+                                and does not
+                                allow duplicate
+                                &lt;Attribute&gt;
+                                with
+                                same meta-data
+                                in the same &lt;Attributes&gt; element of a
+                                Request
+                                (NOT
+                                complying
