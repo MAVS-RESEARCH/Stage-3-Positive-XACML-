@@ -1,0 +1,21 @@
+SOURCE: pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java lines 36-55 (pinned 3cc0e988)
+/**
+ * AttributeProvider that provides the standard environment attributes specified
+ * in XACML 3.0 Core specification, §10.2.5: current-time, current-date and current-dateTime.
+ * This AttributeProvider is enabled by default with <i>override=false</i> mode, in order to comply with XACML 3.0 standard (§10.2.5): <i>If
+ * values for these
+ * attributes are not present in
+ * the decision request,
+ * then their
+ * values MUST be supplied
+ * by the
+ * context
+ * handler</i>. Note that it does <b>not</b>
+ * say <i>If AND ONLY IF</i>, therefore, the <i>override=true</i> mode (always supplied/overridden by the context handler even if present in the request) may still be considered XACML-compliant in a strict sense.
+ */
+public final class StandardEnvironmentAttributeProvider extends BaseNamedAttributeProvider
+{
+    private static final Logger LOGGER = LoggerFactory.getLogger(StandardEnvironmentAttributeProvider.class);
+    private static final ZoneId UTC_ZONE_ID = ZoneId.of("UTC");
+    private static final IndeterminateEvaluationException UNEXPECTED_CALL_TO_GET_ATTRIBUTE_EXCEPTION = new IndeterminateEvaluationException("Method StandardEnvironmentAttributeProvider#get(AttributeFqn, Datatype, EvaluationContext, Optional) should not be called in override=true mode because attributes already provided in EvaluationContext when calling method beginIndividualDecisionRequest(EvaluationContext, Optional). (Possibly this method was not called as expected.)", XacmlStatusCode.PROCESSING_ERROR.value());
+    private static final ImmutableSet<AttributeDesignatorType> SUPPORTED_ATT_DESIGNATORS;

@@ -100,7 +100,7 @@ def target_scan(repo_root):
 
 
 def freeze_hashes(repo_root):
-    """Bind REVISION_001 packet/prompt/manifest/freeze hashes."""
+    """Bind operative freeze revision packet/prompt/manifest hashes."""
     # [P2-LOG-010] Step: bind candidate-freeze hashes.
     packet_sha_path = os.path.join(repo_root, "artifacts", "audits",
                                    "semantic_hardening", "final_freeze",
@@ -114,9 +114,19 @@ def freeze_hashes(repo_root):
     freeze_sha = sha256_file(os.path.join(
         repo_root, "artifacts", "audits", "semantic_hardening",
         "final_freeze", "FINAL_SEMANTIC_FREEZE.json"))
+    revision = "SEMANTIC_FREEZE_REVISION_001"
+    record_path = os.path.join(
+        repo_root, "artifacts", "audits", "semantic_hardening",
+        "final_freeze", "FINAL_SEMANTIC_FREEZE.json")
+    try:
+        with open(record_path, encoding="utf-8") as handle:
+            revision = "SEMANTIC_FREEZE_REVISION_%03d" % int(
+                json.load(handle).get("revision", 1))
+    except (OSError, ValueError, TypeError):
+        pass
     return {"packet_sha256": packet_sha, "prompt_sha256": prompt_sha,
             "manifest_sha256": manifest_sha, "freeze_sha256": freeze_sha,
-            "freeze_revision": "SEMANTIC_FREEZE_REVISION_001"}
+            "freeze_revision": revision}
 
 
 def cmd_init_sweep(args):

@@ -1,0 +1,8 @@
+{
+  "event": "SEMANTIC_FREEZE_REOPENED",
+  "material_evidence": "artifacts/audits/certification_rehearsal/REHEARSAL_SWEEP_003_HOLDOUT/objections.json:RS003-B01",
+  "new_auditor_ids_required": true,
+  "new_packet_required": true,
+  "reason": "RS003-B01 VALID_MATERIAL: staged set-exclusivity ungated + builder self-pollution vector; overturns RS002-L01",
+  "utc": "2026-09-12T06:27:01Z"
+}

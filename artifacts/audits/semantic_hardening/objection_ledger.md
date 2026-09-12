@@ -69,5 +69,26 @@
 | R2A-07 | HARDENING_ROUND_001 | Atom | D | RESOLVED | C14N-equality is not PDP-equivalence: no N4/JAXB parse of written bytes; INV-05 runs pre-serialization. ADDITIONALLY (found by evidence tooling during ROUND_001 |
 | R2A-08 | HARDENING_ROUND_001 | Atom | B | RESOLVED | Chronology proves vacuous precedence, not enforcement: no argv/log corpus; refusal opt-in; staging blur unresolved. |
 | R2G-08 | HARDENING_ROUND_001 | GLOBAL | C | RESOLVED | Cost-reallocation alternative: wrapper as zero-cost envelope preparation re-partitions touch/K with identical Decisions. |
+| R3-01 | HARDENING_ROUND_002 | H | D | RESOLVED | N4 text-to-bag conversion for admitted shapes unevidenced by census alone; engine parse proof required. |
+| R3-02 | HARDENING_ROUND_002 | Lambda | D | RESOLVED | Manifest binds descriptor identity, not engine source content; same triple plus rebuilt jar yields same pre_hash. |
+| R3-03 | HARDENING_ROUND_002 | Lambda | D | RESOLVED | Comparator demo records exit code only; transcript of inputs, expected/actual hashes, stdout, abort token required. |
+| R3-04 | HARDENING_ROUND_002 | Atom | B | RESOLVED | Invocation-site map lacks script hashes/excerpts; refusal opt-in unproven universal; staging blur. |
+| R3-05 | HARDENING_ROUND_002 | Atom | D | RESOLVED | Rule-to-code map omits surplus lines (IncludeInResult, namespace, append position, value DataType). |
+| R3-06 | HARDENING_ROUND_002 | GLOBAL | C | RESOLVED | Cost-reallocation rejection lacks prereg paths/hashes. |
+| R3-07 | HARDENING_ROUND_002 | Atom | D | RESOLVED | C14N-equality is not PDP-equivalence without engine parse of written bytes. |
+| R3-08 | HARDENING_ROUND_002 | GLOBAL | C | RESOLVED | Match table world_rows disclose per-world Match outcomes (outcome-adjacent). |
+| R3-09 | HARDENING_ROUND_002 | GLOBAL | E | RESOLVED | Cross-artifact hash references lack stated conventions and mechanical verification; backslash paths unhygienic. |
+| R3-10 | HARDENING_ROUND_002 | GLOBAL | E | RESOLVED | Builder fix supersedes sealed request bytes; chain undocumented. |
+| R3-11 | HARDENING_ROUND_002 | GLOBAL | D | RESOLVED | Envelope records overclaim (A_Pi N-class, omega locators, Q/Succ+/c scope). |
+| R3-12 | HARDENING_ROUND_002 | Lambda | D | RESOLVED | Multiple pre_hash values floating (bb2c/0577/b679/cac0) without lineage record. |
+| R3-13 | HARDENING_ROUND_002 | GLOBAL | E | RESOLVED | VOLATILE strip sets differ across modules; drift story in freeze_methodology inaccurate (timestamps are stripped). |
+| R3-14 | HARDENING_ROUND_002 | Lambda | D | RESOLVED | Ledger Lambda binds superseded opaque hash; refs mode blind to ledger-to-manifest drift. |
+| R3-15 | HARDENING_ROUND_002 | GLOBAL | D | RESOLVED | Envelope Q/Succ+/c/A_Pi/omega FIXED self-attested without mechanical cross-checks. |
+| R3-16 | HARDENING_ROUND_002 | Atom | D | RESOLVED | builder_reaches_pdp import-root heuristic misses from-imports, method calls, getattr dispatch, os.system spawn. |
+| R3-17 | HARDENING_ROUND_002 | GLOBAL | E | RESOLVED | C14N third hash kind unpinned/unverified; libxml2 scope excluded without record. |
+| R3-18 | HARDENING_ROUND_002 | GLOBAL | D | RESOLVED | Empty-vs-null edge and argv value binding unproven (builder permits empty; census covers files only). |
+| R3-19 | HARDENING_ROUND_002 | GLOBAL | E | RESOLVED | Nits bundle: repro_compare dead branch; supersession old-side pointers; lineage truncation honesty; newline semantics. |
+| H3-01 | HARDENING_ROUND_003 | Lambda | E | RESOLVED | Deployed root-policy-set cardinality unpinned: extra *.xml under frozen glob changes authority with all hashes passing; builder accepts arbitrary out_dir (self- |
+| H3-02 | HARDENING_ROUND_003 | GLOBAL | E | RESOLVED | In-packet builder cross-reference false: wrapper_evidence.builder_sha256 (live) != sha256(packet builder_source.py) (stale pre-guard copy). |
 
 Full records (evidence, dispositions) live in the JSON ledger; this table is a finding aid only.

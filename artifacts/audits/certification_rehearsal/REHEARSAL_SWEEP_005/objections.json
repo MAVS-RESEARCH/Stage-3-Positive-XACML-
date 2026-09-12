@@ -1,0 +1,109 @@
+{
+  "objections": [
+    {
+      "anchor": "Lambda",
+      "claim_attacked": "cardinality/constancy closure incl. TOCTOU + argv trust + staging asymmetry",
+      "counterinterpretation": "Extra glob member / redefined policy_path / in-place original divergence with hashes passing",
+      "disposition": "DUPLICATE",
+      "locator": "builder guard lines; pre-eval gates; listing rule; G02 packet absence",
+      "materiality": "Same residuals as RS004-G01/G02 + RS003-B01: live verified clean (single policy, disjoint dirs, frozen scripts); gate-to-PDP window and argv-trust documented, abort-not-silent; packet behavior specified",
+      "objection_id": "RS005-01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "PACKET",
+      "claim_attacked": "gate source + scripts in-packet for blind verifiability",
+      "counterinterpretation": "Certifier cannot review gate behavior from packet alone",
+      "disposition": "DUPLICATE",
+      "locator": "policy_dir_listing gate_module path; manifest file list",
+      "materiality": "Same completeness polish as RS004-G02: guard bytes + listing + rule in-packet and reviewable; include at next revision if any",
+      "objection_id": "RS005-02",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "H",
+      "claim_attacked": "env_scope imports Lambda provider/preprocessor premises",
+      "counterinterpretation": "Designator census alone does not close H completeness",
+      "disposition": "DUPLICATE",
+      "locator": "h_r1 env_scope vs lambda_manifest/provider + preprocessor_resolved",
+      "materiality": "Same label-pointer substance as RS004-D02: provider proven inert here; add cross-pointer at next revision",
+      "objection_id": "RS005-DG1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "P_R",
+      "claim_attacked": "coincidence imports Lambda parser/preprocessor flags",
+      "counterinterpretation": "Strict preprocessor breaks coincidence silently",
+      "disposition": "DUPLICATE",
+      "locator": "pr_r1/match_table vs lax-duplicate/strictness flags",
+      "materiality": "Same supersession substance as RS004-D03: flags pinned (resolved_effective + excerpts), partitions coincide here; pin packet hash at next revision",
+      "objection_id": "RS005-DG2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "Atom",
+      "claim_attacked": "Detail cardinality asserted (exactly-one Detail)",
+      "counterinterpretation": "Second Detail silently dropped while checks pass",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "builder read_missing_detail first-only; response bytes hashed, count unasserted",
+      "materiality": "Real count-assertion polish, nonmaterial here (frozen response has exactly one Detail, bytes pinned); add cardinality assertion at next revision",
+      "objection_id": "RS005-DG3",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "frozen response.xml single Detail, input_hashes pinned",
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "Q record self-contains counting/cost (vs importing Atom)",
+      "counterinterpretation": "Wrapper build counted 0-or-1; cost reallocated within Q text",
+      "disposition": "SOURCE_REFUTED",
+      "locator": "ledger Q data-flow + unit_cost cites; cost-reallocation open in Q text",
+      "materiality": "Refuted: Q record explicitly scopes FIXED to operation definition with boundary attribution following the Atom record; prereg fixes worlds/cost/interface; reallocation violates prereg, not sources",
+      "objection_id": "RS005-DG4",
+      "outside_information": false,
+      "refuting_evidence": "Q extensional_definition scope sentence + boundary_allocation atom_path + execution_inputs action/cost freeze",
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "ledger binds operative r1 premises (not stale ones)",
+      "counterinterpretation": "Substitution passes ledger FIXED on stale premises",
+      "disposition": "DUPLICATE",
+      "locator": "historical pre_hash; old locators/coords/atom_id without r1 pointers",
+      "materiality": "Same binding substance as RS004-D03/D06: underlying records hold operative values; promote pins at next revision",
+      "objection_id": "RS005-DG5",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    },
+    {
+      "anchor": "Atom",
+      "claim_attacked": "no-authorization-logic distinction frozen-entailed (vs code-evidenced)",
+      "counterinterpretation": "Forwarding-vs-logic rests on diffs/scans, not frozen entailment",
+      "disposition": "SOURCE_REFUTED",
+      "locator": "auth_logic_definition; rule_to_code; blindness_boundary (no N1 sentence)",
+      "materiality": "Misattributed basis: packet never claims N1 entails no-logic; basis is disclosed code evidence (static scans + behavioral INV/error-token tables + input/output separation); grade measures the wrong entailment target",
+      "objection_id": "RS005-E03",
+      "outside_information": false,
+      "refuting_evidence": "auth_logic_definition basis statement + wrapper_evidence rule_to_code + blindness_boundary input/output separation (all disclose code-evidence basis)",
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_005"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_005"
+}

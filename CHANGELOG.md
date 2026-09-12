@@ -49,3 +49,10 @@ All notable changes to this experiment package. Post-preregistration changes to 
 
 - Inserted developmental Phase 2B-R between candidate freeze and external certification (`PROTOCOL_AMENDMENT_003.md`): contaminated subagent Panels A–E attack the frozen candidate AS-IS; reopen only on surviving source-grounded VALID_MATERIAL. Experiment ID unchanged; no history rewritten.
 - `REHEARSAL_SWEEP_001`: 8 reports ingested, 25 objections normalized (8 DUPLICATE, 17 VALID_NONMATERIAL), 0 surviving material → `SEMANTIC_FREEZE_REVISION_001_PRESERVED`, no reopen. Harness + tests added (`certification_rehearsal.py`, 4 rehearsal tests); fixed pre-existing prereg-seal gap for the frozen final prompt (freeze-record coverage). Full suite 64 passed + 1 skipped. Zero executions; state `BLOCKED_PENDING_FINAL_CERTIFICATION`.
+
+## [Amendment 003 continued] - 2026-09-12 - SWEEP_002 CLEAN, HOLDOUT REOPENED, ROUND_003 REPAIRED, BURN-IN CONVERGED (REVISION_002)
+
+- `REHEARSAL_SWEEP_002` (fresh battery, no SWEEP_001 preload): 27 objections (16 DUPLICATE, 7 VALID_NONMATERIAL, 3 SOURCE_REFUTED, 1 OUT_OF_SCOPE), 0 material → clean; emulator PARTIALs dispositioned without weakening FIXED.
+- `REHEARSAL_SWEEP_003_HOLDOUT` (falsification-only, no taxonomy): 11 objections, 1 `VALID_MATERIAL` (RS003-B01 staged set-exclusivity + builder self-pollution vector, overturning RS002-L01) → `SEMANTIC_FREEZE_REOPENED`, revision 002.
+- `HARDENING_ROUND_003`: builder out_dir guard (pre+post-create, alias-hardened) + deployment-set gate module/tests + pre-eval wiring + listing pin + refreshed evidence; ledger 88/88; suite 70+1; convergence 10/10; refreeze verified (packet `fbd22e2c`, delta exactly 4 files; REVISION_001 snapshot preserved).
+- Burn-in on REVISION_002: `SWEEP_004` (18/0) + `SWEEP_005` (8/0), no mutation between → `CERTIFICATION_REHEARSAL_CONVERGED`. Full rules + execution record in `PROTOCOL_AMENDMENT_003_ADDENDUM.md`. Zero executions; touch/K uncomputed; `BLOCKED_PENDING_FINAL_CERTIFICATION`.

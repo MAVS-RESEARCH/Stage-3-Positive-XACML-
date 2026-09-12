@@ -1,0 +1,17 @@
+{
+  "assessed_utc": "2026-09-12T06:33:52Z",
+  "conditions": {
+    "10_system_unmodified": true,
+    "1_no_open": true,
+    "2_no_material_unresolved": true,
+    "3_chains_complete": true,
+    "4_packet_complete": true,
+    "5_tests_pass": true,
+    "6_hashes_unchanged": true,
+    "7_exec_zero": true,
+    "8_no_new_material": true,
+    "9_redteam_clear": true
+  },
+  "passed": true,
+  "round": "HARDENING_ROUND_003"
+}

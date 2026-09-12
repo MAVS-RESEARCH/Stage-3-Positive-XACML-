@@ -61,6 +61,8 @@ RULE_TO_CODE = [
      "etree.SubElement(subject,"),
     ("value-level DataType only (never Attribute-level)",
      "value_node.set(\"DataType\", datatype)"),
+    ("out-dir disjoint from policies glob (RS003-B01)",
+     "assert_out_dir_disjoint(out_dir, policies_dir,"),
 ]
 
 

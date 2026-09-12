@@ -2068,6 +2068,65 @@
       "resolution_status": "RESOLVED",
       "round_id": "HARDENING_ROUND_002",
       "source_grounding_evidence": "hygiene pass"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/xacml/build_repaired_requests.py",
+        "src/audit/verify_deployment_set.py",
+        "tests/test_deployment_set.py",
+        "scripts/run_phase2.sh",
+        "scripts/run_phase2.ps1",
+        "evidence/policy_dir_listing.json",
+        "evidence/wrapper_evidence.json",
+        "evidence/wrapper_source/build_repaired_requests.py"
+      ],
+      "final_disposition": "Builder refuses policies-nested out_dir pre/post-create (canon realpath+normcase+normpath, dot/space-strip, commonpath, fail-closed on ambiguity); deployment set gated (name-set+bytes+count==1) with disjointness check; live workflow verified disjoint; no pollution ever occurred.",
+      "historical_verdict": null,
+      "independent_recheck": "Holdout bypass red-team (SUBST/UNC/8.3/trailing-dot/symlink-prefix/TOCTOU review); residual TOCTOU documented",
+      "locators": [
+        "builder out_dir argv+makedirs (pre-guard)",
+        "pdp.xml:6-8 glob",
+        "atom staged_copy_identity (byte-identity only)",
+        "REHEARSAL_SWEEP_003_HOLDOUT RS003-B01"
+      ],
+      "materiality": "Material: staged set-exclusivity ungated + concrete self-pollution vector; could withhold Lambda FIXED.",
+      "objection": "Deployed root-policy-set cardinality unpinned: extra *.xml under frozen glob changes authority with all hashes passing; builder accepts arbitrary out_dir (self-pollution 1d).",
+      "objection_id": "H3-01",
+      "originating_reviewer": "Holdout sweep 003 (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_003",
+      "source_grounding_evidence": "builder out_dir code + glob + live disjointness proof + gate tests"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "evidence/wrapper_source/build_repaired_requests.py",
+        "evidence/wrapper_evidence.json",
+        "evidence/atom_r1.json"
+      ],
+      "final_disposition": "Packet builder copy refreshed to live bytes; wrapper_evidence regenerated (12/12 rule phrases incl. disjointness guard, sha matches live); atom_r1 pins builder sha + triple + disjointness. Evaluated bytes identical throughout; provenance-only.",
+      "historical_verdict": null,
+      "independent_recheck": "Hash recomputation (packet manifest self-consistent on refreshed bytes)",
+      "locators": [
+        "wrapper_evidence builder_sha256 vs packet builder_source.py",
+        "REHEARSAL_SWEEP_002 RS002-F01"
+      ],
+      "materiality": "Nonmaterial: stale in-packet builder copy vs current wrapper evidence; no semantic effect.",
+      "objection": "In-packet builder cross-reference false: wrapper_evidence.builder_sha256 (live) != sha256(packet builder_source.py) (stale pre-guard copy).",
+      "objection_id": "H3-02",
+      "originating_reviewer": "Rehearsal sweep 002 hash recomputation (NON_BLIND developmental)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_003",
+      "source_grounding_evidence": "live==claimed hash equality + snippet presence"
     }
   ]
 }

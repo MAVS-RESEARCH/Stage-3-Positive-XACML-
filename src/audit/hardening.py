@@ -465,7 +465,10 @@ def cmd_freeze(args):
     harden_base = base_dir(repo_root)
     freeze_dir_path = os.path.join(harden_base, "final_freeze")
     if os.path.isdir(freeze_dir_path):
-        shutil.rmtree(freeze_dir_path)
+        fail("final_freeze exists; snapshot it to final_freeze_REVISION_NNN "
+             "first (revisions are never destroyed)")
+    ev_round = getattr(args, "evidence_round", "") \
+        or "HARDENING_ROUND_001"
     packet = os.path.join(freeze_dir_path, "FINAL_BLIND_PACKET")
     os.makedirs(os.path.join(packet, "candidates"))
     os.makedirs(os.path.join(packet, "corpus", "fixture", "policies"))
@@ -488,6 +491,9 @@ def cmd_freeze(args):
         shutil.copyfile(os.path.join(repo_root, *src_rel.split("/")),
                         os.path.join(packet, *dst_rel.split("/")))
     for src_rel, dst_rel in FINAL_CANDIDATES:
+        if src_rel.startswith("rounds/HARDENING_ROUND_001/"):
+            src_rel = ("rounds/" + ev_round +
+                       src_rel[len("rounds/HARDENING_ROUND_001"):])
         src = os.path.join(harden_base, *src_rel.split("/"))
         if not os.path.isfile(src):
             fail("final candidate missing: " + src_rel)
@@ -580,8 +586,9 @@ def cmd_freeze(args):
                 "external/authzforce/fixture/policies/policy.xml",
                 "external/authzforce/fixture/request.xml",
                 "external/authzforce/fixture/response.xml",
-                "external/xacml/xacml-3.0-core-spec-cos01-en.html",
-                "PROTOCOL_AMENDMENT_001.md"):
+                 "external/xacml/xacml-3.0-core-spec-cos01-en.html",
+                 "PROTOCOL_AMENDMENT_001.md",
+                 "PROTOCOL_AMENDMENT_003.md"):
         frozen_files[rel] = sha256_file(os.path.join(
             repo_root, *rel.split("/")))
     freeze_record = {
@@ -605,6 +612,23 @@ def cmd_freeze(args):
     with open(os.path.join(freeze_dir_path, "SEMANTIC_INTERFACE_FROZEN"),
               "w", encoding="utf-8", newline="\n") as handle:
         handle.write("SEMANTIC_INTERFACE_FROZEN=true\n")
+    ancestry = []
+    for name in sorted(os.listdir(harden_base)):
+        snap = os.path.join(harden_base, name, "FINAL_SEMANTIC_FREEZE.json")
+        if name.startswith("final_freeze_REVISION_") and os.path.isfile(snap):
+            with open(snap, encoding="utf-8") as handle:
+                prior = json.load(handle)
+            ancestry.append({"revision_dir": name,
+                             "revision": prior.get("revision"),
+                             "round": prior.get("round"),
+                             "packet_sha256": prior.get("packet_sha256"),
+                             "prompt_sha256": prior.get("prompt_sha256")})
+    with open(os.path.join(freeze_dir_path, "SEMANTIC_REVISION_ANCESTRY.json"),
+              "w", encoding="utf-8", newline="\n") as handle:
+        json.dump({"operative_revision": len(state.get("reopens", [])) + 1,
+                   "prior_revisions": ancestry}, handle, indent=2,
+                  sort_keys=True)
+        handle.write("\n")
     state["freeze"] = {"valid": True, "round": args.round,
                        "frozen_utc": freeze_record["frozen_utc"],
                        "superseded": False,
@@ -689,6 +713,7 @@ def main(argv):
     parser.add_argument("--assess-convergence", default="")
     parser.add_argument("--freeze", action="store_true")
     parser.add_argument("--freeze-round", default="")
+    parser.add_argument("--evidence-round", default="")
     parser.add_argument("--verify-freeze", action="store_true")
     parser.add_argument("--reopen", action="store_true")
     parser.add_argument("--reason", default="")

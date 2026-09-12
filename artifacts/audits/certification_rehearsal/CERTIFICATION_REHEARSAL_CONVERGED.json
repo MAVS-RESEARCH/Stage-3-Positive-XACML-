@@ -1,0 +1,71 @@
+{
+  "burn_in": {
+    "clean_sweep_1": {
+      "freeze_revision": "SEMANTIC_FREEZE_REVISION_002",
+      "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+      "surviving": 0,
+      "sweep": "REHEARSAL_SWEEP_004",
+      "total": 18,
+      "valid_material": 0
+    },
+    "clean_sweep_2": {
+      "freeze_revision": "SEMANTIC_FREEZE_REVISION_002",
+      "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+      "surviving": 0,
+      "sweep": "REHEARSAL_SWEEP_005",
+      "total": 8,
+      "valid_material": 0
+    },
+    "fresh_instances": true,
+    "full_panels": {
+      "REHEARSAL_SWEEP_004": "Ax3 + B + C + D + E (6 agents)",
+      "REHEARSAL_SWEEP_005": "Ax3 + B/C-combined + D/E-combined (5 agents; all five panel functions covered, mapping in Path.md Sec.3.17)"
+    },
+    "independent_reports": true,
+    "invariant_pass": true,
+    "irreducible_anchor_objection": false,
+    "k_computations": 0,
+    "no_mutation_between": true,
+    "target_executions": 0,
+    "tests_pass": true,
+    "touch_computations": 0
+  },
+  "emission": "CERTIFICATION_REHEARSAL_CONVERGED",
+  "experiment": "PC-XACML-S3PLUS-v1",
+  "holdout": {
+    "objections": 11,
+    "reopened": true,
+    "repair": "HARDENING_ROUND_003: builder out_dir guard + deployment-set gate + listing pin + refreshed bindings",
+    "sweep": "REHEARSAL_SWEEP_003_HOLDOUT",
+    "valid_material": 1
+  },
+  "k": "NOT_COMPUTED",
+  "labels": [
+    "CERTIFICATION_REHEARSAL_CONVERGED",
+    "FINAL_SEMANTIC_INTERFACE_FROZEN",
+    "BLOCKED_PENDING_FINAL_CERTIFICATION"
+  ],
+  "operative_freeze": {
+    "freeze_record_sha256": "d255fcb075ec7a7218c40bff806be28c5385c4cbec1dcacd890989404081867a",
+    "ledger_sha256": "5b366b70057a836e280baff18e82946fdb19aefbe26b7d4a800ad89381ab2f35",
+    "manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+    "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+    "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+    "revision": 2
+  },
+  "prior_revision_sweeps": [
+    {
+      "material": 0,
+      "note": "clean for REVISION_001; superseded by holdout reopen, preserved as history",
+      "sweep": "REHEARSAL_SWEEP_001"
+    },
+    {
+      "material": 0,
+      "note": "clean for REVISION_001; superseded by holdout reopen, preserved as history",
+      "sweep": "REHEARSAL_SWEEP_002"
+    }
+  ],
+  "reaffirmation": "Packet fbd22e2c bound by SWEEP_004+005 unchanged since freeze; reaffirmed byte-identical, no rebuild fabrication",
+  "target_executions": 0,
+  "touch": "NOT_COMPUTED"
+}

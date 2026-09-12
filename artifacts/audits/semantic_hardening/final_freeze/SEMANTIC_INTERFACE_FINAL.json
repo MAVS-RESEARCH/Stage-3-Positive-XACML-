@@ -10,9 +10,10 @@
   "lambda_definition": "extensional component manifest with reconstructible pre_hash (lambda_manifest)",
   "mutation_history": [
     "HARDENING_ROUND_001",
-    "HARDENING_ROUND_002"
+    "HARDENING_ROUND_002",
+    "HARDENING_ROUND_003"
   ],
-  "packet_sha256": "4b9f6556bd9d136010adfc0bd65b124d5f140b3da7b02daf6485d666a05b63c1",
+  "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
   "pr_definition": "interface-scoped Match-vector coincidence with error tokens (pr_r1)",
   "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
   "source_locators": "candidates/locator_map.json (verified)"

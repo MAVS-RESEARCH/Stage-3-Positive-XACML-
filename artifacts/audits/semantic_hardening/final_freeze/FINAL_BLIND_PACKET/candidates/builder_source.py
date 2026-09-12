@@ -27,6 +27,35 @@ def fail(message):
     sys.exit(1)
 
 
+def canon_path(path):
+    """Canonicalize a path for alias-resistant containment checks."""
+    resolved = os.path.realpath(path)
+    if resolved.startswith('\\\\?\\UNC\\'):
+        resolved = '\\' + resolved[8:]
+    elif resolved.startswith('\\\\?\\'):
+        resolved = resolved[4:]
+    resolved = os.path.normcase(os.path.normpath(resolved))
+    parts = [part.rstrip('. ') for part in resolved.split(os.sep)]
+    return os.sep.join(parts)
+
+
+def assert_out_dir_disjoint(out_dir, policies_dir, stage):
+    """Refuse an out_dir nested inside (or containing) the policies glob."""
+    # [P1-LOG-014] Step: prove builder outputs cannot pollute the policy set.
+    canon_out = canon_path(out_dir)
+    canon_pol = canon_path(policies_dir)
+    try:
+        common = os.path.normcase(os.path.commonpath(
+            [canon_out, canon_pol]))
+    except ValueError:
+        fail("out-dir alias ambiguous vs policies dir (%s)" % stage)
+    if canon_out == canon_pol or common in (canon_out, canon_pol):
+        fail("out-dir overlaps policies glob dir (%s): %s"
+             % (stage, os.path.abspath(out_dir)))
+    print("[P1:build:014] out-dir disjoint from policies (%s)" % stage,
+          flush=True)
+
+
 def localname(element):
     """Return the namespace-free local name of an element."""
     tag = element.tag
@@ -182,7 +211,14 @@ def main(argv):
              "<nonpermit-value> <out-dir>")
     request_path, response_path, policy_path = argv[1], argv[2], argv[3]
     permit_value, nonpermit_value, out_dir = argv[4], argv[5], argv[6]
+    if not permit_value.strip() or not nonpermit_value.strip():
+        fail("world values must be non-empty (preregistered literals)")
     print("[P1:build:012] out-dir=%s" % os.path.abspath(out_dir), flush=True)
+    # Hardening RS003-B01: the frozen policy glob (*.xml) is authority; an
+    # out_dir inside it would let built requests pollute the measured policy
+    # set (self-pollution). Refuse before touching the filesystem.
+    policies_dir = os.path.dirname(os.path.abspath(policy_path))
+    assert_out_dir_disjoint(out_dir, policies_dir, "pre-create")
 
     # [P1-LOG-020] Step: read coordinates from frozen response.
     print("[P1:build:020] reading MissingAttributeDetail", flush=True)
@@ -223,6 +259,10 @@ def main(argv):
     # [P1-LOG-070] Step: write both requests.
     print("[P1:build:070] writing completed requests", flush=True)
     os.makedirs(out_dir, exist_ok=True)
+    # Hardening RS003-B01: re-resolve after makedirs so alias tricks that
+    # only materialize on creation (symlink prefixes, SUBST/UNC spellings,
+    # trailing dots/spaces, 8.3 names) are caught before any write.
+    assert_out_dir_disjoint(out_dir, policies_dir, "post-create")
     permit_path = os.path.join(out_dir, "request_x_permit.xml")
     nonpermit_path = os.path.join(out_dir, "request_x_nonpermit.xml")
     write_request(permit_tree, permit_path)

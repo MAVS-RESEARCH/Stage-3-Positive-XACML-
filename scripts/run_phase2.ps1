@@ -234,6 +234,13 @@ if ($UnlockCode -ne 0) { throw ("unlock judge failed with code {0}" -f $UnlockCo
 
 # [P2-LOG-100] Step: unlocked target audit (first completed execution).
 Write-Output "[P2:phase2:100] unlock holds: running target audit"
+# Hardening RS003-B01: deployment-set gate inside the measured interval,
+# after unlock and before the first completed evaluation.
+Write-Output "[P2:phase2:095] gating staged deployment set"
+& $PythonExe (Join-Path $RepoRoot "src/audit/verify_deployment_set.py") --repo-root $RepoRoot --check --fixture-dir (Join-Path $Fixture "policies") --listing (Join-Path $RepoRoot "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_003/evidence/policy_dir_listing.json")
+if ($LASTEXITCODE -ne 0) { throw "deployment-set gate failed" }
+& $PythonExe (Join-Path $RepoRoot "src/audit/verify_deployment_set.py") --repo-root $RepoRoot --disjoint --out-dir (Join-Path $Derived "requests") --policies-dir (Join-Path $Fixture "policies")
+if ($LASTEXITCODE -ne 0) { throw "deployment disjointness gate failed" }
 $JavaExe = Join-Path $JavaHome "bin/java.exe"
 foreach ($World in @("x_permit", "x_nonpermit")) {
   $Req = Join-Path $Derived ("requests/request_{0}.xml" -f $World)

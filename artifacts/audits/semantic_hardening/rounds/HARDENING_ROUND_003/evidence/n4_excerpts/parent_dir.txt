@@ -1,0 +1,52 @@
+SOURCE: pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java lines 700-750 (pinned 3cc0e988)
+
+	/**
+	 * Create PDP instance
+	 * <p>
+	 * To allow using file paths relative to the parent folder of the configuration file (located at confLocation) anywhere in this configuration file (including in PDP extensions'), we define a
+	 * property 'PARENT_DIR', so that the placeholder ${PARENT_DIR} can be used as prefix for file paths in the configuration file. E.g. if confLocation = 'file:///path/to/configurationfile', then
+	 * ${PARENT_DIR} will be replaced by 'file:///path/to'. If confLocation is not a file on the filesystem, then ${PARENT_DIR} is undefined.
+	 *
+	 * @param confFile
+	 *            PDP configuration file
+	 * @param modelHandler
+	 *            PDP configuration model handler
+	 * @return PDP instance
+	 * @throws java.io.IOException
+	 *             I/O error reading from {@code confFile}
+	 * @throws java.lang.IllegalArgumentException
+	 *             Invalid PDP configuration in {@code confFile}
+	 */
+	public static PdpEngineConfiguration getInstance(final File confFile, final PdpModelHandler modelHandler) throws IOException, IllegalArgumentException
+	{
+		if (confFile == null || !confFile.exists())
+		{
+			// no property replacement of PARENT_DIR
+			throw new IllegalArgumentException("Invalid configuration file location: No file exists at: " + confFile);
+		}
+		// configuration file exists
+
+		if (modelHandler == null)
+		{
+			throw NULL_PDP_MODEL_HANDLER_ARGUMENT_EXCEPTION;
+		}
+
+		/*
+		 * Set property PARENT_DIR in environment properties for future replacement in configuration strings by PDP extensions using file paths
+		 */
+		final File confAbsFile = confFile.getAbsoluteFile();
+		LOGGER.debug("Config file's location - absolute path: {}", confAbsFile);
+		final Path confAbsFileParentPath = confAbsFile.getParentFile().toPath();
+		LOGGER.debug("Config file's parent directory: {}", confAbsFileParentPath);
+		final String propVal = confAbsFileParentPath.toUri().toString();
+		/*
+		 Path.toURI() may add ending "/" for directories, remove it if confAbsFileParentPath is not the root path, to prevent double "//" in property replacements
+		 */
+		final String propValWithoutEndingSlash = confAbsFileParentPath.getNameCount() != 0 && propVal.endsWith("/") ? propVal.substring(0, propVal.length() -1): propVal;
+
+		LOGGER.debug("Property {} = {}", EnvironmentPropertyName.PARENT_DIR, propValWithoutEndingSlash);
+		final EnvironmentProperties envProps = new DefaultEnvironmentProperties(Collections.singletonMap(EnvironmentPropertyName.PARENT_DIR, propValWithoutEndingSlash));
+		return getInstance(new StreamSource(confFile), modelHandler, envProps);
+	}
+
+	/**

@@ -320,6 +320,38 @@ Verification: normalization total=25, surviving=0, material=0 (`NO_SURVIVING_MAT
 
 Gate verdict: `SEMANTIC_FREEZE_REVISION_001_PRESERVED`, no `SEMANTIC_FREEZE_REOPENED` (reopen requires surviving VALID_MATERIAL; none survived source verification). State remains `BLOCKED_PENDING_FINAL_CERTIFICATION`; Phases 3+ unexecuted; next unblock is genuinely fresh external AUD-C01/02/03 over the preserved freeze.
 
+### 3.15 Holdout SWEEP_003 — One VALID_MATERIAL → SEMANTIC_FREEZE_REOPENED (2026-09-12)
+
+Files made: `artifacts/audits/certification_rehearsal/REHEARSAL_SWEEP_003_HOLDOUT/` (3 falsification-only reports, `objections.json` 11, `NORMALIZATION.json`); preservation records reopen.
+
+Code produced: none yet (investigation only). Three fresh holdout agents (histories/capability/joint, no taxonomy): H01–H04 duplicates of known families; B01 NEW — staged root-policy-set cardinality unpinned with concrete self-pollution mechanism (`builder_source` arbitrary `out_dir` + `makedirs` + `*.xml` names vs `pdp.xml` glob; staged-copy identity byte-only); J01–J05 duplicates of RS002-J01..J05; X01 naming polish (VALID_NONMATERIAL).
+
+Source verification by analyst: builder `out_dir` arbitrary confirmed live; staged-copy text byte-only confirmed; live workflow disjoint (`derived/requests`) so no pollution occurred — missing gate is the defect. B01 overturns RS002-L01's refutation (listing snapshot is not a gate).
+
+Normalization: 11 objections (9 DUPLICATE, 1 VALID_MATERIAL B01, 1 VALID_NONMATERIAL X01) → `MUTATION_REQUIRED`; `--verify` exit 0. Decision: preserve REVISION_001 bytes; emit `SEMANTIC_FREEZE_REOPENED` (hardening event); revision → 002.
+
+WorkPlan compliance: YES (§7 mutation loop; PARTIALs never triggered it, source-verified material did). Models trained: none.
+
+### 3.16 HARDENING_ROUND_003 — B01 Repair + REVISION_002 Freeze (2026-09-12)
+
+Files made: `src/audit/verify_deployment_set.py` ([P2-LOG-010]/[P2-LOG-020]/[P2-LOG-030]/[P2-LOG-040]/[P2-LOG-050]/[P2-LOG-060]/[P2-LOG-070]/[P2-LOG-900]) + `tests/test_deployment_set.py` (6 tests, [P2-LOG-T10]–[P2-LOG-T20]); `rounds/HARDENING_ROUND_003/` (evidence base + refreshed builder copy/wrapper 12-12/listing+gate/atom pins + `ROUND_003_mutations.json` + seal + convergence); `final_freeze_REVISION_001/` snapshot (packet `4b9f6556` byte-identical); operative `final_freeze/` revision 2 (packet `fbd22e2c`); `SEMANTIC_REVISION_ANCESTRY.json`; ledger 88/88 (`H3-01`, `H3-02` RESOLVED).
+
+Code produced + how coded: builder `canon_path` (realpath + `\\?\` strip + normcase/normpath + dot/space strip) + `assert_out_dir_disjoint` checked pre-create AND post-create (closes symlink/SUBST/UNC/8.3/trailing-dot for missing paths; residual TOCTOU documented); `RULE_TO_CODE` 12th phrase binds guard; freeze hardened (no-destroy guard, `--evidence-round`, ancestry, amendment-003 in `frozen_files`); deployment gate wired pre-eval in `run_phase2.sh/.ps1` target path. Two subagents in parallel: gate-module implementer (new files) + bypass red-team (14 vectors; 2 residual classes documented).
+
+Verification: rebuilt requests byte-identical; guard refuses nested out_dir (exit 1); gate `--check`/`--disjoint` exit 0 live; full suite 70 passed + 1 skipped; invariant holds; exec 0; ROUND_003 sealed; convergence 10/10; `--verify-freeze` exit 0. Packet delta exactly 4 files (builder, wrapper, listing, atom); prompt/manifest/ledger-hashes otherwise stable.
+
+Gate verdict: ROUND_003 SEALED; REVISION_002 FROZEN + VERIFIED. WorkPlan compliance: YES (§8 boundary: provenance/packet/audit code only; specimen immutable). Models trained: none.
+
+### 3.17 Burn-In SWEEP_004 + SWEEP_005 — CERTIFICATION_REHEARSAL_CONVERGED (2026-09-12)
+
+Files made: `REHEARSAL_SWEEP_004/` (6 reports Panels A×3/B/C/D, 18 objections) + `REHEARSAL_SWEEP_005/` (5 reports A×3/B+C/D+E, 8 objections) + `CERTIFICATION_REHEARSAL_CONVERGED.json`; `PROTOCOL_AMENDMENT_003_ADDENDUM.md` (§§7–17 + execution record; bound by commit, folds into `frozen_files` at next freeze if any).
+
+Results: 004 — 14 DUPLICATE, 3 VALID_NONMATERIAL (G01 argv-trust, G02 gate-source packet inclusion, D02 label), 1 SOURCE_REFUTED (D01a enforcement exists); emulator PARTIALs dispositioned per §11 (conservative application; residuals documented); red-team no surviving countermodel (CM-L self-pollution KILLED by repair); integrity 8/8 PASS. 005 — 5 DUPLICATE, 2 SOURCE_REFUTED (DG4 Q-pointer exists, E03 basis misattributed), 1 VALID_NONMATERIAL (DG3 Detail cardinality); emulator FIXED/FIXED + joint PASS corroborate. Zero VALID_MATERIAL/UNRESOLVED in both; no mutation between; fresh instances; conclusions isolated; invariant PASS; tests PASS; exec/touch/K 0.
+
+Gate verdict: two-sweep burn-in SATISFIED → `CERTIFICATION_REHEARSAL_CONVERGED` + `FINAL_SEMANTIC_INTERFACE_FROZEN` reaffirmed (packet `fbd22e2c` unchanged since freeze; no rebuild fabrication) + `BLOCKED_PENDING_FINAL_CERTIFICATION`. Phases 3+ unexecuted. STOP: external AUD-C01/02/03 over operative packet + prompt + schema only.
+
+WorkPlan compliance: YES (Amendment 003 §§10–14). Models trained: none.
+
 WorkPlan compliance: YES (Amendment 003 developmental layer only; experiment ID unchanged; no history rewritten; no estimand change). Models trained: none.
 
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE

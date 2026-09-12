@@ -1,0 +1,34 @@
+{
+  "created_utc": "2026-09-12T06:38:36Z",
+  "exec_count_at_init": 0,
+  "freeze_revision": "SEMANTIC_FREEZE_REVISION_002",
+  "freeze_sha256": "d255fcb075ec7a7218c40bff806be28c5385c4cbec1dcacd890989404081867a",
+  "header": "THIS IS A NON_BLIND DEVELOPMENTAL REHEARSAL. THIS OUTPUT CANNOT CERTIFY OR UNLOCK THE EXPERIMENT.",
+  "label": "NON_BLIND_CERTIFICATION_REHEARSAL",
+  "manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+  "mutation_required": false,
+  "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+  "panels_required": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "phase": "2B-R",
+  "preservation": {
+    "decision": "BURN_IN_SWEEP_2_CLEAN",
+    "emulator_verdicts": {
+      "Atom": "PARTIAL (residuals duplicate)",
+      "H": "FIXED",
+      "Lambda": "PARTIAL (residuals duplicate)",
+      "P_R": "FIXED",
+      "joint": "PASS"
+    },
+    "reason": "8 objections: 5 DUPLICATE, 2 SOURCE_REFUTED (DG4 Q-pointer exists, E03 basis misattributed), 1 VALID_NONMATERIAL (DG3 Detail cardinality); emulator FIXED/FIXED + joint PASS corroborate; integrity PASS; falsifier defeated on admitted interface",
+    "reopen": false
+  },
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "repo_commit": "1d6f51f26f9cff0c7768ce7d104ea927c21d7a81",
+  "sweep_id": "REHEARSAL_SWEEP_005"
+}
