@@ -69,6 +69,57 @@ def main(argv):
     print("[P1:cmp:012] actual=%s expected=%s"
           % (os.path.abspath(actual_path), os.path.abspath(expected_path)),
           flush=True)
+    quarantined = any("target_" in os.path.basename(path).lower()
+                      for path in (actual_path, expected_path))
+    if not quarantined:
+        # Content-bound allowlist (rename-evasion fix): pre-pass, any
+        # file that is not byte-identical to a frozen original is
+        # treated as quarantined. Frozen originals are the recorded
+        # actual response and the fixture expected response.
+        import hashlib as _hl
+        repo_probe = os.path.abspath(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+        frozen = [os.path.join(repo_probe, "artifacts", "raw",
+                               "original_response_actual.xml"),
+                  os.path.join(repo_probe, "external", "authzforce",
+                               "fixture", "response.xml")]
+        allowed = set()
+        for path in frozen:
+            try:
+                with open(path, "rb") as handle:
+                    allowed.add(_hl.sha256(handle.read()).hexdigest())
+            except OSError:
+                continue
+        for path in (actual_path, expected_path):
+            try:
+                with open(path, "rb") as handle:
+                    digest = _hl.sha256(handle.read()).hexdigest()
+            except OSError:
+                digest = ""
+            if digest not in allowed:
+                quarantined = True
+                break
+    if quarantined:
+        # [P1-LOG-014] Step: target-outcome gate (Amendment 007).
+        # Quarantined target responses open only after a recorded
+        # RUN_CONFORMANCE_PASSED verdict. Both argv positions are
+        # gated (B02 fix); basename-substring match replaces the
+        # prefix-only check (B01 partial). Rename-evasion by copying
+        # quarantined bytes to a non-target_ name remains a known
+        # limitation: full content-bound allowlist binds at launch
+        # freeze via quarantined response hashes (see launch packet
+        # quarantine manifest). No parser bypass exists short of that.
+        repo_root = os.path.abspath(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+        gate_path = os.path.join(repo_root, "artifacts", "audits", "launch",
+                                 "RUN_CONFORMANCE_PASS.json")
+        try:
+            with open(gate_path, encoding="utf-8") as handle:
+                gate = json.load(handle)
+        except (OSError, ValueError):
+            gate = {}
+        if gate.get("verdict") != "RUN_CONFORMANCE_PASSED":
+            fail("target outcome quarantined until conformance passes")
 
     # [P1-LOG-020] Step: extract actual semantics.
     print("[P1:cmp:020] extracting actual semantics", flush=True)

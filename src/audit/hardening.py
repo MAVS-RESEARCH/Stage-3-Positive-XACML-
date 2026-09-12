@@ -802,6 +802,9 @@ def cmd_reopen(args):
     repo_root = os.path.abspath(args.repo_root)
     if target_scan(repo_root):
         fail("target executions exist; reopen forbidden")
+    if os.path.isfile(os.path.join(repo_root, "artifacts", "seal",
+                                   "TARGET_EXECUTION_LOCK.json")):
+        fail("execution lock sealed; reopen permanently forbidden")
     state = load_state(repo_root)
     if not state.get("freeze", {}).get("valid"):
         fail("no valid freeze to reopen")

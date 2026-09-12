@@ -1,0 +1,66 @@
+{
+  "before_after_manifests": "PENDING_TARGET: live before/after listings require unlock + execution; procedure: gate --emit at P2:phase2:095 then post-run staged listing",
+  "canonical_realpath_procedure": "realpath + \\?\\ strip + normcase + normpath + per-component dot/space strip; see builder canon_path",
+  "certificate_id": "PC-XACML-S3PLUS-v1-staging",
+  "deployment_set_manifest": {
+    "count": 1,
+    "count_is_one": true,
+    "gate": "verify_deployment_set --check/--disjoint pre-eval",
+    "parent_dir_rule": "PARENT_DIR-relative glob policies/*.xml"
+  },
+  "dir_set_manifest": {
+    "directory": "external/authzforce/fixture/policies/",
+    "files": [
+      {
+        "bytes": 3630,
+        "name": "policy.xml",
+        "sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64"
+      }
+    ]
+  },
+  "disjointness": {
+    "enforced": "builder pre/post-create + pre-eval gate (exit 2 on overlap)",
+    "live_out_dir_disjoint": true
+  },
+  "invocation_argv_templates": {
+    "builder": "build_repaired_requests.py <request.xml> <response.xml> <policy.xml> <permit-value> <nonpermit-value> <out-dir> (values bound from execution_inputs.json by phase scripts)",
+    "runner": "run_authzforce.py --mode completed --world <x_permit|x_nonpermit> --request derived/requests/request_<world>.xml ... (staged fixture + PdpRunner + out artifacts/raw/target_<world>_actual.xml)",
+    "verified_in": "scripts/run_phase1.ps1 + scripts/run_phase2.ps1"
+  },
+  "native_entrypoint": "PdpRunner.main(<fixtureDir> <requestFile> <responseOutFile>) -> PdpEngineConfiguration.getInstance(pdp.xml) -> pdp.evaluate",
+  "no_alternate_policy": {
+    "classpath_manifest": "classpath_manifest.json (content hashes of test-classes + pdp-classes trees; pre-eval --check-classpath gate)",
+    "copy_whitelist": [
+      "pdp.xml",
+      "policies/policy.xml"
+    ],
+    "staged_exclusivity": "gated pre-eval; PENDING_TARGET measurement"
+  },
+  "no_prior_response": {
+    "build_before_eval": "requests constructed in Phase 1, never executed (chronology + phase1-only-original refusal exit 2)",
+    "responses_pending_target": true,
+    "target_scan_empty": true
+  },
+  "produced_utc": "2026-09-12T12:38:12Z",
+  "repaired_hashes": {
+    "nonpermit": {
+      "sha256": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
+      "single_attribute_insert": true,
+      "world_value_bound": true
+    },
+    "permit": {
+      "sha256": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294",
+      "single_attribute_insert": true,
+      "world_value_bound": true
+    }
+  },
+  "source_hashes": {
+    "pdp.xml": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d",
+    "policies_policy.xml": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+    "request.xml": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+    "response.xml": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687"
+  },
+  "staged_path_template": "<work_dir>/fixture_<world>/ + policies/ (run_authzforce.stage_completed_fixture)",
+  "structural_diff": "exactly one added subject Attribute per world (INV-05 probe-copy residual + request_diffs.json unified diffs); inter-world delta is AttributeValue only",
+  "wrapper_hash": "f732a08a37047550f9c067c761e0ab154ca699ee5d0eb9bb516a48f99c0986ea"
+}

@@ -86,3 +86,10 @@ All notable changes to this experiment package. Post-preregistration changes to 
 
 - Finite C01–C12 tables removed: generic `AUD-C<N>` chairs, consecutive-triple panels, `max_used+1` allocator, revision map + rev≥5 fallback, alias normalization, NON_BLIND-marker refusal, generalized rehearsal guards, per-chair instantiated handoff prompts.
 - Adversarial review: 15 findings, all repaired + tested (crashes, validation, binding, advancement, coercion, stale messages). Suite 118+1, freeze verified, frozen bytes unchanged. STOP at `FINAL_SEMANTIC_INTERFACE_FROZEN` + `BLOCKED_PENDING_NEW_FINAL_CERTIFICATION` (AUD-C04/C05/C06).
+
+## 2026-09-12 -- Protocol Amendment 007 split-gate development + launch freeze (pre-execution, zero target runs)
+
+- Recovered interrupted Amendment-007 tree at b693c3d; verified seals/specimen/zero-exec intact.
+- Hostile developmental waves (deferral/Lambda/quarantine/state-machine/Atom + burn-in A/B + holdout); all VALID_MATERIAL repaired fail-closed (judge coverage+revocation, parser content-allowlist, runner authorization binding, cert lock+attestation binding, verifier hex+content rejection, lineage+manifest refresh, freeze self-manifest fix, env binding, 4 new tests).
+- PROTOCOL_AMENDMENT_007.md full operative SS0-19; registry 6 obligations frozen; launch packet db661dd7 + prompt 251f7e58 + registry 12a46820 sealed and verified; suite 139+1 green.
+- State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION; handoff NEXT_EXTERNAL_LAUNCH_HANDOFF.md (AUD-L01/02/03). No target execution, no touch, no K.

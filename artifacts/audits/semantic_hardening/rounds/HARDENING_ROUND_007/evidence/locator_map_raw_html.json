@@ -1,0 +1,104 @@
+{
+  "map_id": "PC-XACML-S3PLUS-v1-locators-verified",
+  "method": "stripped-text line numbers verified by heading presence in this script; numbering is stable for the frozen file (sha in external manifest)",
+  "sections": {
+    "Sec-10.2.5-env-attributes": {
+      "stripped_lines": [
+        10700,
+        10730
+      ],
+      "verified": true
+    },
+    "Sec-3.1-dataflow": {
+      "stripped_lines": [
+        1732,
+        1792
+      ],
+      "verified": true
+    },
+    "Sec-3.2-conversion-scope": {
+      "stripped_lines": [
+        5195,
+        5290
+      ],
+      "verified": true
+    },
+    "Sec-5.29-AttributeDesignator": {
+      "stripped_lines": [
+        6282,
+        6300
+      ],
+      "verified": true
+    },
+    "Sec-5.30-AttributeSelector": {
+      "stripped_lines": [
+        6400,
+        6415
+      ],
+      "verified": true
+    },
+    "Sec-5.57-5.58-StatusDetail": {
+      "stripped_lines": [
+        7901,
+        7985
+      ],
+      "verified": true
+    },
+    "Sec-7.17-Decision": {
+      "stripped_lines": [
+        9260,
+        9280
+      ],
+      "verified": true
+    },
+    "Sec-7.3.4-Attribute-Matching": {
+      "stripped_lines": [
+        8381,
+        8404
+      ],
+      "verified": true
+    },
+    "Sec-7.3.5-Attribute-Retrieval": {
+      "stripped_lines": [
+        8405,
+        8432
+      ],
+      "verified": true
+    },
+    "Sec-7.3.6-Environment": {
+      "stripped_lines": [
+        8434,
+        8441
+      ],
+      "verified": true
+    },
+    "Sec-7.3.7-Selector-eval": {
+      "stripped_lines": [
+        8441,
+        8455
+      ],
+      "verified": true
+    },
+    "Sec-7.6-Match": {
+      "stripped_lines": [
+        8569,
+        8600
+      ],
+      "verified": true
+    },
+    "Sec-7.7-Target": {
+      "stripped_lines": [
+        8691,
+        8710
+      ],
+      "verified": true
+    },
+    "glossary-PDP-PEP-handler": {
+      "stripped_lines": [
+        1000,
+        1020
+      ],
+      "verified": true
+    }
+  }
+}

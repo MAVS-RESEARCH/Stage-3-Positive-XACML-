@@ -1,0 +1,89 @@
+{
+  "amendment": "PROTOCOL_AMENDMENT_007.md",
+  "cycle": "CERTIFICATION_CYCLE_002",
+  "note": "Reclassification only. The sealed CYCLE_002 objection ledger and its dispositions are untouched. Prior non-decisive reasoning is explicitly re-opened for static items per Amendment 007 Sec.3.",
+  "objections": [
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch packet candidates/built/jars(4)+poms(2)+drivers+invocation staged; Lambda drivers refreshed to live (run_authzforce e1cb-era); recompute composite ok",
+      "id": "R7-01",
+      "repair": "include driver sources + poms + 4 built jars in packet with method; manifest update",
+      "source": "C04/C05/C06 Lambda built_artifacts gaps",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "HARDENING_ROUND_007/evidence/pre_hash_lineage.json current==operative 6665fd82 (stale value preserved in history)",
+      "id": "R7-02",
+      "repair": "refresh lineage current to operative pre_hash with history entry",
+      "source": "C04/C05/C06 Lambda lineage contradiction",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch packet candidates/invocation/PdpRunner.java+run_authzforce.py+phase scripts staged; packet bcc60c77",
+      "id": "R7-03",
+      "repair": "include run_authzforce.py + PdpRunner.java sources in packet",
+      "source": "C06 Atom invocation/scripts absence",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-freeze tool-copy currency gate (recompute/verify/builder) + verify extra-file + execution-code drift checks; self-manifest exclusion fix",
+      "id": "R7-04",
+      "repair": "freeze-time gate: packet tool copies equal live sources",
+      "source": "RS009-M1 recurrence class (gate-copy staleness)",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "tree-sha retained as clone provenance only; operative binding is per-file sha256 (76-file engine set packet-verified) + clone commit pin; chairs judge sufficiency",
+      "id": "R7-05",
+      "repair": "restructure tree-sha as provenance; file-level binding operative",
+      "source": "C05/C06 Lambda tree binding",
+      "status": "STATIC_NONMATERIAL"
+    },
+    {
+      "classes": [
+        "LEGITIMATELY_DEFERRED"
+      ],
+      "evidence": "RC-LAMBDA-POST frozen in registry with producer/verifier hashes + binary predicate + TERMINAL",
+      "id": "R7-06",
+      "repair": "registry obligations RC-LAMBDA-POST with frozen producer/verifier/predicate",
+      "source": "C05/C06 deferred post_hash equality",
+      "status": "LEGITIMATE_DEFERRED_FROZEN"
+    },
+    {
+      "classes": [
+        "LEGITIMATELY_DEFERRED"
+      ],
+      "evidence": "RC-DEPLOYMENT/RC-REQUEST/RC-ATOM-ORDER + CLASSPATH/DEPS frozen likewise",
+      "id": "R7-07",
+      "repair": "registry obligations RC-DEPLOYMENT/RC-REQUEST/RC-ATOM-ORDER with frozen gates",
+      "source": "C06 Atom staged/measurement interior",
+      "status": "LEGITIMATE_DEFERRED_FROZEN"
+    },
+    {
+      "classes": [
+        "STATIC_NONMATERIAL",
+        "DUPLICATE"
+      ],
+      "evidence": "polish/duplicate bundle acknowledged; Central-by-coordinates disclosed in manifest",
+      "id": "R7-08",
+      "repair": "none; scheduled polish stands (naming, ledger pins, argv trust, TOCTOU residuals documented)",
+      "source": "rehearsal RS007/RS009/RS010 polish + Central-by-coordinates disclosure",
+      "status": "CLOSED_NONMATERIAL"
+    }
+  ],
+  "reassessment_id": "AMENDMENT_007_REASSESSMENT"
+}

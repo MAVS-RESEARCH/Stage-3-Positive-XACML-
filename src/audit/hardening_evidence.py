@@ -186,6 +186,27 @@ def cmd_wrapper(args):
                          "present": snippet in source})
     if not all(entry["present"] for entry in rule_map):
         fail("rule-to-code map drifted from builder source")
+    flow_reads = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            func = node.func
+            name = ""
+            if isinstance(func, ast.Name):
+                name = func.id
+            elif isinstance(func, ast.Attribute):
+                name = func.attr
+            if name in ("open", "parse", "fromstring"):
+                for arg in node.args:
+                    if isinstance(arg, ast.Constant) and isinstance(
+                            arg.value, str):
+                        flow_reads.add(arg.value)
+    flow_hits = sorted(
+        value for value in flow_reads
+        if any(marker in value for marker in
+               ("x_permit", "x_nonpermit", "target_", "artifacts/raw")))
+    if flow_hits:
+        fail("builder reads built-world or response outputs: %s"
+             % flow_hits)
     with open(args.runner, "r", encoding="utf-8") as handle:
         runner_source = handle.read()
     runner_tree = ast.parse(runner_source)
@@ -256,6 +277,7 @@ def cmd_wrapper(args):
         "from_import_members": sorted(from_imports),
         "risky_members_present": risky_members,
         "builder_reaches_pdp": os_reachable,
+        "flow_reads_outputs": flow_hits,
         "input_hashes": {
             "request.xml": sha256_file(args.original),
             "response.xml": sha256_file(args.response),
@@ -420,7 +442,22 @@ def built_artifact_hashes(repo_root):
         drivers.append({"path": rel, "bytes": os.path.getsize(path),
                         "sha256": sha256_file(path),
                         "method": "sha256 of repo file bytes (git-pinned)"})
-    return {"jars": jars, "poms": poms, "drivers": drivers}
+    jdk_identity = "unrecorded"
+    environment_path = os.path.join(repo_root, "artifacts", "raw",
+                                    "environment.txt")
+    if os.path.isfile(environment_path):
+        with open(environment_path, encoding="utf-8",
+                  errors="replace") as handle:
+            for line in handle.read().splitlines():
+                if "openjdk version" in line:
+                    jdk_identity = line.strip()
+                    break
+    return {"jars": jars, "poms": poms, "drivers": drivers,
+            "jdk_identity": jdk_identity,
+            "api_boundary": ("pdp-api sources external to the clone "
+                             "(artifact 22.2.0, coordinates-pinned); "
+                             "coverage via coordinates + built engine jar "
+                             "bytes + engine-source tree")}
 
 
 def cmd_lambda_manifest(args):
