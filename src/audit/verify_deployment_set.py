@@ -163,12 +163,15 @@ def main(argv=None):
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--check-staged", action="store_true")
     parser.add_argument("--check-classpath", action="store_true")
+    parser.add_argument("--hash-cp", action="store_true")
     parser.add_argument("--disjoint", action="store_true")
     parser.add_argument("--emit", action="store_true")
     parser.add_argument("--fixture-dir", default="")
     parser.add_argument("--staged-dir", default="")
     parser.add_argument("--clone", default="")
     parser.add_argument("--listing", default="")
+    parser.add_argument("--cp-file", default="")
+    parser.add_argument("--world", default="")
     parser.add_argument("--out-dir", default="")
     parser.add_argument("--policies-dir", default="")
     parser.add_argument("--out", default="")
@@ -264,6 +267,33 @@ def main(argv=None):
             fail("out_dir overlaps policies_dir", code=2)
         # [P2-LOG-062] Step: disjointness proved.
         print("[P2:gate:062] disjoint ok", flush=True)
+    elif args.hash_cp:
+        # [P2-LOG-068] Step: hash every cp-file jar for RC-DEPS-CONSISTENT.
+        print("[P2:gate:068] hashing invocation classpath", flush=True)
+        if not args.cp_file or not args.out:
+            fail("--hash-cp needs --cp-file --out")
+        with open(args.cp_file, "r", encoding="utf-8") as handle:
+            raw = handle.read().strip()
+        parts = [part.strip() for part in raw.replace(";", os.pathsep).split(
+            os.pathsep)]
+        entries = [part for part in parts if part]
+        if not entries:
+            fail("cp file lists no jars")
+        hashed = []
+        for part in entries:
+            if not os.path.isfile(part):
+                fail("cp entry missing at invocation: " + ascii_safe(part))
+            hashed.append({"path": part,
+                           "bytes": os.path.getsize(part),
+                           "sha256": sha256_file(part)})
+        doc = {"world": args.world or "unspecified",
+               "produced_utc": utcnow(), "count": len(hashed),
+               "entries": hashed}
+        with open(args.out, "w", encoding="utf-8", newline="\n") as handle:
+            json.dump(doc, handle, indent=2, sort_keys=True)
+            handle.write("\n")
+        # [P2-LOG-069] Step: classpath hashed.
+        print("[P2:gate:069] hashed entries=%d" % len(hashed), flush=True)
     else:
         fail("no gate operation given")
     # [P2-LOG-072] Step: gate operation complete.

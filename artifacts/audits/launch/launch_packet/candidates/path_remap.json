@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "dependency_hashes.json": "candidates/dependency_hashes.json",
+    "pdp-engine/pom.xml": "candidates/built/poms/pdp-engine-pom.xml",
+    "pdp-engine/target/authzforce-ce-core-pdp-engine-21.2.0.jar": "candidates/built/jars/authzforce-ce-core-pdp-engine-21.2.0.jar",
+    "pdp-io-xacml-json/target/authzforce-ce-core-pdp-io-xacml-json-21.2.0.jar": "candidates/built/jars/authzforce-ce-core-pdp-io-xacml-json-21.2.0.jar",
+    "pdp-testutils/src/test/resources.json/lib/Saxon-HE-9.8.0-15.jar": "candidates/built/jars/Saxon-HE-9.8.0-15.jar",
+    "pdp-testutils/target/authzforce-ce-core-pdp-testutils-21.2.0.jar": "candidates/built/jars/authzforce-ce-core-pdp-testutils-21.2.0.jar",
+    "pom.xml": "candidates/built/poms/root-pom.xml",
+    "src/xacml/PdpRunner.java": "candidates/invocation/PdpRunner.java",
+    "src/xacml/run_authzforce.py": "candidates/invocation/run_authzforce.py"
+  },
+  "note": "manifest repo-paths (clone- or repo-relative) to launch-packet paths"
+}

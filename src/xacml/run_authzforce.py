@@ -156,6 +156,38 @@ def sha256_file(path):
     return digest.hexdigest()
 
 
+CHRONOLOGY_EVENTS = ("build_done", "stage_done", "verify_done",
+                     "invoke_start", "invoke_end", "response_sealed")
+
+
+def write_chronology(work_dir, world, event, extra=None):
+    """Append one event to the per-world chronology log (Amendment 007).
+
+    Records event names, UTC time, and optionally a request-content hash.
+    Never records response bytes, Decisions, or outcome content. The
+    frozen RC-ATOM-ORDER evidence producer; the log is replayed by the
+    conformance verifiers' exact-order predicate.
+    """
+    # [P1-LOG-066] Step: record chronology event (no outcome content).
+    if event not in CHRONOLOGY_EVENTS:
+        fail("unknown chronology event: " + event)
+    from datetime import datetime, timezone
+    record = {"event": event,
+              "utc": datetime.now(timezone.utc).strftime(
+                  "%Y-%m-%dT%H:%M:%SZ"),
+              "world": world}
+    if extra:
+        for key in sorted(extra):
+            if key not in ("request_sha256",):
+                fail("chronology extra field not allowlisted: " + key)
+            record[key] = extra[key]
+    path = os.path.join(os.path.abspath(work_dir),
+                        "chronology_" + world + ".jsonl")
+    with open(path, "a", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(record, sort_keys=True) + "\n")
+    print("[P1:run:066] chronology %s" % event, flush=True)
+
+
 def verify_staged_fixture(fixture_dir, run_fixture_dir):
     """Prove staged copies equal frozen bytes with an exclusive set.
 
@@ -262,11 +294,16 @@ def main(argv):
         run_fixture_dir = fixture_dir
         request_path = os.path.join(fixture_dir, "request.xml")
     else:
+        write_chronology(args.work_dir, args.world, "build_done",
+                         {"request_sha256": sha256_file(
+                             os.path.abspath(args.request))})
         run_fixture_dir = stage_completed_fixture(
             fixture_dir, os.path.abspath(args.request),
             args.work_dir, args.world)
         request_path = os.path.abspath(args.request)
+        write_chronology(args.work_dir, args.world, "stage_done")
         verify_staged_fixture(fixture_dir, run_fixture_dir)
+        write_chronology(args.work_dir, args.world, "verify_done")
 
     with open(args.cp_file, "r", encoding="utf-8") as handle:
         deps_cp = handle.read().strip()
@@ -278,6 +315,8 @@ def main(argv):
            run_fixture_dir, request_path, out_path]
     # [P1-LOG-050] Step: invoke the native PDP driver.
     print("[P1:run:050] invoking PdpRunner mode=%s" % args.mode, flush=True)
+    if args.mode == "completed":
+        write_chronology(args.work_dir, args.world, "invoke_start")
     try:
         completed = subprocess.run(cmd, capture_output=True, text=True,
                                    timeout=300)
@@ -298,11 +337,13 @@ def main(argv):
     print("[P1:run:060] response bytes=%d out=%s"
           % (os.path.getsize(out_path), out_path), flush=True)
     if args.mode == "completed":
+        write_chronology(args.work_dir, args.world, "invoke_end")
         # [P1-LOG-062] Step: post-invocation staged re-verification.
         # Shrinks the verify-to-use window: staged bytes re-hashed after
         # the subprocess returns; any mid-run mutation fails closed here.
         verify_staged_fixture(fixture_dir, run_fixture_dir)
         seal_outcome_capsule(repo_root, args.world, out_path)
+        write_chronology(args.work_dir, args.world, "response_sealed")
         write_execution_lock(repo_root, args.world)
 
     # [P1-LOG-070] Step: run complete.

@@ -100,3 +100,10 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - launch_freeze.py: staged-manifest rebind+recompute, distinct poms, 145-jar dependency content, 11-copy currency, freeze-code pinning, revision support, verify composite/drivers/lineage.
 - Launch-002 packet a75ee3b05, staged pre 5ecdd192, panel AUD-L04/05/06; suite 141+1 green; handoff NEXT_EXTERNAL_LAUNCH_HANDOFF_L04-L06.md.
 - State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION (launch-002). No target execution, no touch, no K.
+
+## 2026-09-12 -- Launch-002 failed (L04-06 BLOCKED), five repairs, launch-003 frozen for L07-09 (pre-execution, zero target runs)
+
+- Ingest 0/3 VALID (binding/paste); merits Lambda 2xPARTIAL + 3xIMPROPER (dep opacity, remap, recompute subset, prose producers); launch-002 preserved.
+- Repairs R7-12..16: file-hash dep binding, path_remap, extended recompute + builder lineage, JSONL chronology, --hash-cp, registry scoping; tests V60-V68.
+- Launch-003 packet 8e23901d, staged pre 194fcbbe, panel AUD-L07/08/09; suite 146+1 green; handoff NEXT_EXTERNAL_LAUNCH_HANDOFF_L07-L09.md.
+- State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION (launch-003). No target execution, no touch, no K.

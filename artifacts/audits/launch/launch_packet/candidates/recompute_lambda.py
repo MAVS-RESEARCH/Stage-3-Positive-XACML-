@@ -128,7 +128,68 @@ def main(argv=None):
               comps["provider_element"]["sha256"])
     else:
         skips.append("provider_element: pdp.xml absent in packet")
-    for problem in problems:
+    remap = {}
+    remap_path = packet("candidates", "path_remap.json")
+    if os.path.isfile(remap_path):
+        try:
+            with open(remap_path, encoding="utf-8") as handle:
+                remap = json.load(handle).get("mappings", {})
+        except ValueError:
+            problems.append("path_remap_unparseable")
+    else:
+        skips.append("path_remap: no remap in packet (built-artifact "
+                     "checks skipped)")
+    if remap:
+        for group in ("drivers", "jars", "poms"):
+            for entry in comps.get("built_artifacts", {}).get(
+                    group, []):
+                if not isinstance(entry, dict):
+                    continue
+                rel = entry.get("path", "")
+                target = remap.get(rel, "")
+                if not target:
+                    skips.append("built:%s: no remap entry" % rel)
+                    continue
+                path = packet(*target.split("/"))
+                if not os.path.isfile(path):
+                    skips.append("built:%s: bytes absent in packet"
+                                 % rel)
+                    continue
+                check("built:" + rel, sha256_file(path),
+                      entry.get("sha256"))
+                if "bytes" in entry and os.path.getsize(path) != \
+                        entry.get("bytes"):
+                    problems.append("built-bytes:" + rel)
+        dep_rel = remap.get("dependency_hashes.json",
+                            "candidates/dependency_hashes.json")
+        dep_path = packet(*dep_rel.split("/"))
+        if not os.path.isfile(dep_path):
+            skips.append("dependency_hashes: bytes absent in packet")
+        else:
+            with open(dep_path, encoding="utf-8") as handle:
+                try:
+                    dep_doc = json.load(handle)
+                except ValueError:
+                    dep_doc = None
+            if not isinstance(dep_doc, dict) or \
+                    not isinstance(dep_doc.get("entries"), list) or \
+                    not dep_doc.get("entries"):
+                problems.append("dependency_hashes malformed")
+            else:
+                check("dependency_content",
+                      sha256_file(dep_path),
+                      comps.get("dependency_content", {}).get("sha256"))
+                if len(dep_doc.get("entries", [])) != \
+                        comps.get("dependency_content", {}).get("count"):
+                    problems.append("dependency_content count")
+                for dep_entry in dep_doc.get("entries", []):
+                    digest = dep_entry.get("sha256", "")
+                    if not isinstance(digest, str) or len(digest) != 64 \
+                            or any(char not in "0123456789abcdef"
+                                   for char in digest):
+                        problems.append("dependency_hash malformed")
+                        break
+    for problem in sorted(set(problems)):
         print("[P2:rec:032] MISMATCH %s" % problem, flush=True)
     for skip in skips:
         print("[P2:rec:034] SKIP %s" % skip, flush=True)

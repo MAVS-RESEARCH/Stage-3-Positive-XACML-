@@ -1,6 +1,6 @@
 {
   "current": {
-    "pre_hash": "5ecdd192cc606fcc1fdc901c8390c31ba22ec20935f39f1522c6d7867bae1dbd",
+    "pre_hash": "194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3",
     "scope": "launch packet manifest (see lambda_manifest.json)"
   },
   "history": [
@@ -12,11 +12,11 @@
     {
       "pre_hash": "3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a",
       "scope": "components + exclusions + engine sources + resolved defaults + dir listing (see lambda_manifest.json); recompute procedure: canonical JSON sort_keys of components+exclusions (see refs mode)",
-      "status": "HISTORICAL (stale current preserved transparently at launch 002)"
+      "status": "HISTORICAL (stale current preserved transparently at launch 003)"
     },
     {
       "pre_hash": "d4a5fcd891910184c8d7919ab44395cbf6c1860de95bf8d5ba098b68d757a00b",
-      "scope": "pre-refresh operative (superseded at launch 002; value preserved)",
+      "scope": "pre-refresh operative (superseded at launch 003; value preserved)",
       "status": "HISTORICAL"
     }
   ],

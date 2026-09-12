@@ -204,16 +204,59 @@ def cmd_build_packet(args):
     dep_entries = dep_doc.get("entries", [])
     if not dep_entries:
         fail("dependency hashes empty; cannot bind transitive closure")
-    dep_blob = json.dumps({"entries": dep_entries}, sort_keys=True,
-                          ensure_ascii=True,
-                          separators=(", ", ": ")).encode("utf-8")
+    dep_path = os.path.join(dest, "candidates", "dependency_hashes.json")
     staged_manifest["components"]["dependency_content"] = {
         "count": len(dep_entries),
-        "method": ("sha256 of every offline-resolved test-classpath jar "
-                   "(mvn dependency:build-classpath, includeScope=test); "
-                   "packet file candidates/dependency_hashes.json"),
-        "sha256": hashlib.sha256(dep_blob).hexdigest(),
+        "method": ("sha256 of packet file "
+                   "candidates/dependency_hashes.json "
+                   "(offline mvn dependency:build-classpath, "
+                   "includeScope=test; every listed jar hashed); "
+                   "reproduce with sha256sum over that file"),
+        "sha256": sha256_file(dep_path),
     }
+    staged_manifest["builder_lineage"] = {
+        "operative_builder": ("src/audit/hardening_evidence.py "
+                              "cmd_lambda_manifest: per-constituent sha256 "
+                              "over frozen bytes"),
+        "historical_narrow_author": ("src/pc/derive_Lambda.py: Phase-2A "
+                                     "6-field tuple (bb2c3c94 era); "
+                                     "superseded for the operative set, "
+                                     "retained for provenance"),
+        "verifier": ("src/audit/recompute_lambda.py "
+                     "canonical_composite over components+exclusions plus "
+                     "packet file checks via candidates/path_remap.json"),
+        "note": ("pre_hash reproduces EXACTLY via recompute canonical; "
+                 "authorship history in pre_hash_lineage.json"),
+    }
+    remap = {
+        "src/xacml/PdpRunner.java":
+        "candidates/invocation/PdpRunner.java",
+        "src/xacml/run_authzforce.py":
+        "candidates/invocation/run_authzforce.py",
+        "pdp-engine/target/authzforce-ce-core-pdp-engine-21.2.0.jar":
+        "candidates/built/jars/authzforce-ce-core-pdp-engine-21.2.0.jar",
+        "pdp-io-xacml-json/target/"
+        "authzforce-ce-core-pdp-io-xacml-json-21.2.0.jar":
+        "candidates/built/jars/"
+        "authzforce-ce-core-pdp-io-xacml-json-21.2.0.jar",
+        "pdp-testutils/target/"
+        "authzforce-ce-core-pdp-testutils-21.2.0.jar":
+        "candidates/built/jars/"
+        "authzforce-ce-core-pdp-testutils-21.2.0.jar",
+        "pdp-testutils/src/test/resources.json/lib/Saxon-HE-9.8.0-15.jar":
+        "candidates/built/jars/Saxon-HE-9.8.0-15.jar",
+        "pom.xml": "candidates/built/poms/root-pom.xml",
+        "pdp-engine/pom.xml":
+        "candidates/built/poms/pdp-engine-pom.xml",
+        "dependency_hashes.json": "candidates/dependency_hashes.json",
+    }
+    with open(os.path.join(dest, "candidates", "path_remap.json"), "w",
+              encoding="utf-8", newline="\n") as handle:
+        json.dump({"mappings": remap,
+                   "note": "manifest repo-paths (clone- or repo-relative) "
+                           "to launch-packet paths"}, handle, indent=2,
+                  sort_keys=True)
+        handle.write("\n")
     composite = json.dumps(
         {"components": staged_manifest["components"],
          "exclusions": staged_manifest["exclusions"]},

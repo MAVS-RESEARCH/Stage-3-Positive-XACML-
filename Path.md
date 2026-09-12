@@ -202,6 +202,14 @@ Forensics confirmed VALID_MATERIAL static defects: (a) packet manifest drivers[1
 
 Launch-002 built + verified: packet a75ee3b0506de98e, prompt 251f7e58 (unchanged), registry 12a46820 (unchanged), staged pre 5ecdd192, panel AUD-L04/05/06, supersedes launch-001. Suite 141 passed + 1 skipped. Handoff NEXT_EXTERNAL_LAUNCH_HANDOFF_L04-L06.md. State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION (launch-002). No target execution, no touch, no K.
 
+### 3.26 Launch-002 Failed (L04-06) -- Five Repairs -- Launch-003 Frozen for L07-09 (2026-09-12)
+
+Ingested transcribed L04/05/06 verdicts: 0/3 VALID (L04/L05 no hash quotes; L05 paste-diverged bytes; L06 packet-sha only). Assert-unlock BLOCKED. No authorization; zero executions; no lock. Substantive tally (diagnostic): H/P_R 3xFIXED; Lambda 2xPARTIAL(L04,L06)+1xFIXED(L05 -- validating launch-002 repairs); Atom 3xFIXED; L06 3xIMPROPER_DEFERRAL (ATOM-ORDER, DEPS-CONSISTENT, REQUEST-ACTUAL). Launch-002 preserved (rev002).
+
+Confirmed VALID_MATERIAL: R7-12 opaque dep sha (blob-hash vs file-hash); R7-13 undocumented manifest-to-packet path aliases; R7-14 recompute subset + derive_Lambda lineage; R7-15 ATOM-ORDER producer was prose (no event emitter); R7-16 DEPS cp-hasher was prose (no frozen script). Repairs: file-hash dep binding (now bac1eae9 == sha256(file), the exact value L06 cited); candidates/path_remap.json; recompute extended via remap (SKIP-preserving); builder_lineage in staged manifest; run_authzforce JSONL chronology (names+utc+request-sha, zero response bytes); verify_deployment_set --hash-cp; RC-REQUEST invocation-instant scoping; registry rebound. Tests V60-V68. ROUND_007 tool copies refreshed to live (unsealed evidence).
+
+Launch-003 built + verified: packet 8e23901d4643a42a, registry d7641f64, staged pre 194fcbbecc398f71, panel AUD-L07/08/09, supersedes launch-002. Suite 146 passed + 1 skipped. Handoff NEXT_EXTERNAL_LAUNCH_HANDOFF_L07-L09.md (adds collect-files-directly instruction after two paste corruptions). State BLOCKED_PENDING_PREEXECUTION_LAUNCH_CERTIFICATION (launch-003). No target execution, no touch, no K.
+
 ## 4. Phase 1 Log -- External Source Lock and Native Reproduction -- EXECUTED 2026-09-11, PASS
 
 Scope executed: Sec.1.1-1.7 ALL done, no deferral. No PC semantic-anchor extraction, touch derivation, or freeze computation occurred; only external-source locking and native original-fixture reproduction, per the corrected scope. Completed requests constructed, never executed (ordering enforced in code + test).

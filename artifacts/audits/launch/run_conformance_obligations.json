@@ -3,7 +3,7 @@
   {
    "anchor": "Lambda",
    "canonicalization": "UTF-8 JSON sorted-keys of {constituent: sha256}, recompute_lambda canonical form",
-   "code_sha256": "verify_deployment_set.py:921af26b4f2cde5bad3bb924bf17c0b78615732ac0a39e3b718f48e25d39fc5b",
+   "code_sha256": "verify_deployment_set.py:ecde436471669ddb5d0b4aea760f4316313def4f80be8b240117dcd95a128ee0",
    "depends_on": [
     "classpath_manifest.json",
     "lambda_manifest.json"
@@ -36,7 +36,7 @@
   {
    "anchor": "Lambda",
    "canonicalization": "UTF-8 JSON sorted-keys",
-   "code_sha256": "verify_deployment_set.py:921af26b4f2cde5bad3bb924bf17c0b78615732ac0a39e3b718f48e25d39fc5b;run_authzforce.py:708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce",
+   "code_sha256": "verify_deployment_set.py:ecde436471669ddb5d0b4aea760f4316313def4f80be8b240117dcd95a128ee0;run_authzforce.py:c8c9275d612318c552556d734fe6661499c670ee67acdc17125c64f1b91b5ac7",
    "depends_on": [
     "policy_dir_listing.json",
     "classpath_manifest.json"
@@ -70,7 +70,7 @@
   {
    "anchor": "Lambda",
    "canonicalization": "raw file bytes sha256",
-   "code_sha256": "run_authzforce.py:708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce",
+   "code_sha256": "run_authzforce.py:c8c9275d612318c552556d734fe6661499c670ee67acdc17125c64f1b91b5ac7",
    "depends_on": [
     "wrapper_evidence.json input_hashes",
     "execution_inputs.json worlds"
@@ -97,13 +97,13 @@
     "expected_*"
    ],
    "proposition": "actual staged request bytes equal the frozen world request bytes",
-   "reason_deferred": "staged request files at invocation instant do not exist pre-execution",
+   "reason_deferred": "actual staged request files at invocation (pre- AND post-invoke) do not exist pre-execution; static builder-output equality is proven separately in-packet (request_diffs.json + INV-05/INV-06 + builder_source.py) and is NOT what this obligation defers",
    "verifier": "run_authzforce staged verification"
   },
   {
    "anchor": "Lambda",
    "canonicalization": "UTF-8 JSON sorted-keys of {constituent: sha256}, recompute_lambda canonical form",
-   "code_sha256": "derive_Lambda.py:21afdbe877e3610f36f8f3c3face577f1da203bcc506fde420705177fb987aa8;recompute_lambda.py:6c5dcdd353f1689da364ad1be108b167501c16d5a127d95b58d938b2eab2f65f",
+   "code_sha256": "derive_Lambda.py:21afdbe877e3610f36f8f3c3face577f1da203bcc506fde420705177fb987aa8;recompute_lambda.py:0cea29ff17ba2c29cf89481a59136fd20f980c3b8495027c8506891c5f6bcd76",
    "depends_on": [
     "lambda_manifest.json"
    ],
@@ -133,12 +133,12 @@
   {
    "anchor": "Atom",
    "canonicalization": "UTF-8 JSON sorted-keys of ordered checkpoint events",
-   "code_sha256": "run_authzforce.py:708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce",
+   "code_sha256": "run_authzforce.py:c8c9275d612318c552556d734fe6661499c670ee67acdc17125c64f1b91b5ac7",
    "depends_on": [
     "invocation_record.json",
     "staging_certificate.json"
    ],
-   "evidence_producer": "frozen ordered event log written by run_authzforce.py (build_done, stage_done, verify_done, invoke_start, invoke_end, response_sealed) with file-existence + count only, no response bytes",
+   "evidence_producer": "run_authzforce.py write_chronology JSONL per world (build_done,stage_done,verify_done,invoke_start,invoke_end,response_sealed; event names + utc + request-sha only, zero response bytes) + frozen exact-order predicate in conformance_verify_a/b",
    "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
    "independent_verifier": "second implementation replays event order from log timestamps",
    "needs_decision_content": false,
@@ -163,17 +163,17 @@
    ],
    "proposition": "construction/staging completes, then native invocation begins, then native response becomes available, with no response before invocation and actual invocation count equal to the frozen world count",
    "reason_deferred": "actual event order and actual invocation count of the future execution do not exist pre-execution (the frozen expected count itself is static from execution_inputs.json)",
-   "verifier": "run_authzforce.py event-log writer + chronology replayer (both frozen at launch; code hashes in LAUNCH_FREEZE.json execution_code)"
+   "verifier": "chronology replayer comparing event list to frozen order"
   },
   {
    "anchor": "Lambda",
    "canonicalization": "UTF-8 JSON sorted-keys of {cp-entry: sha256}",
-   "code_sha256": "verify_deployment_set.py:921af26b4f2cde5bad3bb924bf17c0b78615732ac0a39e3b718f48e25d39fc5b",
+   "code_sha256": "verify_deployment_set.py:ecde436471669ddb5d0b4aea760f4316313def4f80be8b240117dcd95a128ee0",
    "depends_on": [
     "built_artifacts poms/coordinates",
     "cp-file at invocation"
    ],
-   "evidence_producer": "verify_deployment_set.py classpath procedure: hash every cp-file-listed jar pre-eval per world; compare worlds equal; record manifest (frozen; hash in LAUNCH_FREEZE.json execution_code)",
+   "evidence_producer": "verify_deployment_set.py --hash-cp over the maven-generated cp file per world pre-eval (every listed jar hashed) + world-pair equality in conformance_verify_a/b; frozen coordinate closure in candidates/dependency_hashes.json",
    "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
    "independent_verifier": "second implementation re-hashes cp entries from the recorded list",
    "needs_decision_content": false,
@@ -195,7 +195,7 @@
    ],
    "proposition": "both worlds execute against byte-identical dependency artifacts",
    "reason_deferred": "cp-file and per-world jar bytes at invocation do not exist pre-execution; absolute provenance rests on pom coordinates",
-   "verifier": "classpath manifest gate + conformance_verify_a/b.py world-pair equality"
+   "verifier": "verify_deployment_set.py --hash-cp + conformance_verify_a/b world-pair equality"
   }
  ],
  "registry_id": "PC-XACML-S3PLUS-v1-run-conformance"

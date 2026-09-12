@@ -604,3 +604,109 @@ def test_launch_packet_manifest_driver_currency():
     assert deps["count"] == len(deps["entries"]) >= 100
     assert manifest["components"]["dependency_content"]["count"] == \
         deps["count"]
+
+
+def test_launch_packet_dependency_file_hash():
+    """Manifest dependency_content binds staged file bytes (R7-12)."""
+    # [P2-LOG-V60] Test step: assert file-hash binding.
+    print("[P2:test:launch:060] dependency binding", flush=True)
+    packet = os.path.join(REPO_ROOT, "artifacts", "audits", "launch",
+                          "launch_packet")
+    with open(os.path.join(packet, "candidates", "lambda_manifest.json"),
+              encoding="utf-8") as handle:
+        manifest = json.load(handle)
+    dep_path = os.path.join(packet, "candidates", "dependency_hashes.json")
+    with open(dep_path, "rb") as handle:
+        assert hashlib.sha256(handle.read()).hexdigest() == \
+            manifest["components"]["dependency_content"]["sha256"]
+    with open(dep_path, encoding="utf-8") as handle:
+        deps = json.load(handle)
+    assert deps["count"] == len(deps["entries"]) >= 100
+
+
+def test_launch_packet_path_remap():
+    """Every manifest built path resolves to an existing packet file."""
+    # [P2-LOG-V62] Test step: assert remap completeness (R7-13).
+    print("[P2:test:launch:062] path remap", flush=True)
+    packet = os.path.join(REPO_ROOT, "artifacts", "audits", "launch",
+                          "launch_packet")
+    with open(os.path.join(packet, "candidates", "path_remap.json"),
+              encoding="utf-8") as handle:
+        remap = json.load(handle)["mappings"]
+    with open(os.path.join(packet, "candidates", "lambda_manifest.json"),
+              encoding="utf-8") as handle:
+        manifest = json.load(handle)
+    with open(os.path.join(packet, "PACKET_MANIFEST.json"),
+              encoding="utf-8") as handle:
+        files = set(json.load(handle)["files"])
+    for group in ("drivers", "jars", "poms"):
+        for entry in manifest["components"]["built_artifacts"][group]:
+            target = remap.get(entry["path"], "")
+            assert target, entry["path"]
+            assert target in files, target
+            assert os.path.isfile(os.path.join(
+                packet, *target.split("/"))), target
+
+
+def test_recompute_extended_live_packet():
+    """Extended recompute passes on the live launch packet."""
+    # [P2-LOG-V64] Test step: assert extended recompute (R7-14).
+    print("[P2:test:launch:064] extended recompute", flush=True)
+    sys.path.insert(0, os.path.join(REPO_ROOT, "src", "audit"))
+    import recompute_lambda as rec
+    packet = os.path.join(REPO_ROOT, "artifacts", "audits", "launch",
+                          "launch_packet")
+    assert rec.main(["--manifest", os.path.join(
+        packet, "candidates", "lambda_manifest.json"),
+        "--packet-dir", packet]) is None
+
+
+def test_chronology_writer_unit(tmp_path):
+    """Chronology emits the frozen six events with no outcome content."""
+    # [P2-LOG-V66] Test step: assert chronology producer (R7-15).
+    print("[P2:test:launch:066] chronology unit", flush=True)
+    sys.path.insert(0, os.path.join(REPO_ROOT, "src", "xacml"))
+    import run_authzforce
+    for event in ("build_done", "stage_done", "verify_done",
+                  "invoke_start", "invoke_end", "response_sealed"):
+        run_authzforce.write_chronology(
+            str(tmp_path), "x_permit", event,
+            {"request_sha256": "ab" * 32} if event == "build_done"
+            else None)
+    with open(os.path.join(str(tmp_path), "chronology_x_permit.jsonl"),
+              encoding="utf-8") as handle:
+        events = [json.loads(line)["event"] for line in handle]
+    assert events == ["build_done", "stage_done", "verify_done",
+                      "invoke_start", "invoke_end", "response_sealed"]
+    with open(os.path.join(str(tmp_path), "chronology_x_permit.jsonl"),
+              encoding="utf-8") as handle:
+        text = handle.read()
+    for banned in ("Decision", "Permit", "NotApplicable"):
+        assert banned not in text
+
+
+def test_hash_cp_unit(tmp_path):
+    """--hash-cp freezes every listed jar (R7-16)."""
+    # [P2-LOG-V68] Test step: assert cp-hasher producer.
+    print("[P2:test:launch:068] hash-cp unit", flush=True)
+    sys.path.insert(0, os.path.join(REPO_ROOT, "src", "audit"))
+    import verify_deployment_set as gate
+    jars = os.path.join(str(tmp_path), "jars")
+    os.makedirs(jars)
+    with open(os.path.join(jars, "a.jar"), "w", encoding="utf-8",
+              newline="\n") as handle:
+        handle.write("A")
+    with open(os.path.join(jars, "b.jar"), "w", encoding="utf-8",
+              newline="\n") as handle:
+        handle.write("BB")
+    cp_file = os.path.join(str(tmp_path), "cp.txt")
+    with open(cp_file, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(os.path.join(jars, "a.jar") + ";" +
+                     os.path.join(jars, "b.jar"))
+    out = os.path.join(str(tmp_path), "cp_manifest.json")
+    gate.main(["--repo-root", REPO_ROOT, "--hash-cp", "--cp-file",
+               cp_file, "--out", out, "--world", "x_permit"])
+    with open(out, encoding="utf-8") as handle:
+        doc = json.load(handle)
+    assert doc["count"] == 2 and doc["world"] == "x_permit"
+    assert sorted(entry["bytes"] for entry in doc["entries"]) == [1, 2]

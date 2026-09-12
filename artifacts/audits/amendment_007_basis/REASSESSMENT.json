@@ -113,6 +113,56 @@
       "repair": "offline-resolved 145-jar test-classpath content-hashed into candidates/dependency_hashes.json, bound as manifest dependency_content; RC-DEPS-CONSISTENT gates invocation-time equality",
       "source": "AUD-L01/L02/L03 Lambda PARTIAL: transitive Central artifacts coordinates-only",
       "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-003 dependency_content bac1eae9 == sha256(candidates/dependency_hashes.json); test V60",
+      "id": "R7-12",
+      "repair": "bind sha256(staged file bytes) with reproduce-by-sha256sum method",
+      "source": "AUD-L04/L06 Lambda PARTIAL: dependency_content sha (canonical-blob) matches neither staged file hash",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-003 path_remap.json; test V62",
+      "id": "R7-13",
+      "repair": "frozen candidates/path_remap.json covering drivers/jars/poms/deps; recompute resolves via remap",
+      "source": "AUD-L04/L06 Lambda PARTIAL: manifest repo-paths vs packet candidates aliases undocumented",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "STATIC_REPAIR_REQUIRED"
+      ],
+      "evidence": "launch-003 recompute extended passes on live packet; test V64",
+      "id": "R7-14",
+      "repair": "recompute extended to drivers/jars/poms/deps via remap (SKIP-preserving); builder_lineage field in staged manifest",
+      "source": "AUD-L04 Lambda PARTIAL: derive_Lambda narrow vs operative pre_hash; recompute subset skips",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "LEGITIMATE_RUN_CONFORMANCE_OBLIGATION"
+      ],
+      "evidence": "chronology unit test V66; registry RC-ATOM-ORDER producer rebound",
+      "id": "R7-15",
+      "repair": "run_authzforce write_chronology JSONL (names+utc+request-sha, zero response bytes); obligation repoints at it",
+      "source": "AUD-L06 IMPROPER_DEFERRAL RC-ATOM-ORDER: event-log producer was prose, not code",
+      "status": "REPAIRED"
+    },
+    {
+      "classes": [
+        "LEGITIMATE_RUN_CONFORMANCE_OBLIGATION"
+      ],
+      "evidence": "hash-cp unit test V68; registry RC-DEPS-CONSISTENT producer rebound",
+      "id": "R7-16",
+      "repair": "verify_deployment_set --hash-cp frozen mode; obligation repoints at it",
+      "source": "AUD-L06 IMPROPER_DEFERRAL RC-DEPS-CONSISTENT: cp-hash producer was prose, not code",
+      "status": "REPAIRED"
     }
   ],
   "reassessment_id": "AMENDMENT_007_REASSESSMENT"

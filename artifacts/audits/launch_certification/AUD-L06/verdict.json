@@ -1,0 +1,79 @@
+{
+  "attestation_hash": "34d563cb90043a4e4a29e2a8fe78891e9cc4d8d7238d150ee01f135ee2f3e51d",
+  "auditor_id": "AUD-L06",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed launch packet.",
+  "deferrals": {
+    "RC-ATOM-ORDER": "IMPROPER_DEFERRAL",
+    "RC-CLASSPATH-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPLOYMENT-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPS-CONSISTENT": "IMPROPER_DEFERRAL",
+    "RC-LAMBDA-POST": "LEGITIMATELY_DEFERRED",
+    "RC-REQUEST-ACTUAL": "IMPROPER_DEFERRAL"
+  },
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "a75ee3b0506de98ea34d925d92c0240d001d685f6be8ed206d3f13787f1e1777",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-L06-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text 1733-1785 Sec-3.1-Data-flow via candidates/locator_verified_table.json",
+        "candidates/invocation/PdpRunner.java:65-71",
+        "candidates/invocation/run_authzforce.py:125-147,159-182",
+        "candidates/builder_source.py:170-193,120-167,204-274",
+        "candidates/request_diffs.json:unified_diffs+c14n_sha256",
+        "corpus/fixture/response.xml:10 + corpus/fixture/policies/policy.xml:20 + candidates/wrapper_evidence.json:rule_to_code",
+        "candidates/invocation_record.json + candidates/staging_certificate.json",
+        "candidates/execution_inputs.json:worlds"
+      ],
+      "notes": "Native PEP-handler-PDP-response flow, PdpRunner native evaluate path, wrapper single-insert with INV-05/06 and disjointness, c14n-identity diffs, triple pinning, and staging/invocation ordering ground native vs reconstruction distinction, two-world counting static, and checkpoints. Actual order/count deferred. No response content used.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/request.xml:3-18",
+        "corpus/fixture/response.xml:10",
+        "corpus/fixture/policies/policy.xml:16,20,28,36,42",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text 8399-8401 Sec-7.3.4 via candidates/locator_verified_table.json",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text 8419-8424+8431-8433 Sec-7.3.5 via candidates/locator_verified_table.json",
+        "candidates/builder_source.py:170-193,120-167",
+        "candidates/repaired_request_x_permit.xml:7 + candidates/request_diffs.json:unified_diffs",
+        "candidates/admitted_value_census.json",
+        "n4_excerpts/xsd_std_providers.txt:7-20 + n4_excerpts/stdenv_default_factory.txt:8"
+      ],
+      "notes": "Multimap key, absent_required triple, empty environment, env inertness, Issuer-absent rule, and c14n comparison grounded in fixtures, spec retrieval/matching sections, N4 defaults, builder bytes, diffs, and census. No outcome inference.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml sha 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+        "corpus/fixture/pdp.xml provider c14n sha 73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+        "candidates/engine_sources_manifest.json + candidates/engine_sources/",
+        "candidates/classpath_manifest.json sha 5920a4267e3533055b497e2696a31813acf78a77cd547a8885f6a0dd523694ce",
+        "candidates/dependency_hashes.json sha bac1eae93f099ec85af41aaf0f3725ca674fd035cd65c835356741e98af41c56 vs components/dependency_content sha b8b20ab0d6ea56b02dd6b4ad5a01281a9f98383297561f9b5423df9924c7ea83",
+        "corpus/COMMIT.txt + corpus/RELEASE.json",
+        "candidates/lambda_manifest.json:pre_hash 5ecdd192cc606fcc1fdc901c8390c31ba22ec20935f39f1522c6d7867bae1dbd recomputed"
+      ],
+      "notes": "Policy, provider, engine sources, classpath manifest hash, identity, and composite recomputation verify in-packet, but dependency_content sha matches neither file hash with vague method and absent jar bytes, drivers/poms cited as src/pom paths absent from manifest with only undocumented candidates aliases, and transitive Central explicitly coordinate-pinned not content-hashed. Material gap remains.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text 8604-8617 Sec-7.6-Match via candidates/locator_verified_table.json",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text 8419-8424 Sec-7.3.5 via candidates/locator_verified_table.json",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text 8399-8401 Sec-7.3.4 via candidates/locator_verified_table.json",
+        "corpus/fixture/request.xml:3-17 + candidates/repaired_request_x_permit.xml:3-18",
+        "candidates/match_table.json:designator_rows",
+        "candidates/admitted_value_census.json"
+      ],
+      "notes": "Four coordinates from five Matches, MustBePresent true, Match True/False/Indeterminate semantics, Indeterminate-vs-empty rule, Issuer pooling immaterial, and singleton null-Issuer coincidence grounded in policy bytes, spec sections, request bytes, and census. No per-world outcomes recorded.",
+      "status": "FIXED"
+    }
+  }
+}
