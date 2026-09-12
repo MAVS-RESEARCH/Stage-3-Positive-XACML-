@@ -241,6 +241,8 @@ Write-Output "[P2:phase2:095] gating staged deployment set"
 if ($LASTEXITCODE -ne 0) { throw "deployment-set gate failed" }
 & $PythonExe (Join-Path $RepoRoot "src/audit/verify_deployment_set.py") --repo-root $RepoRoot --disjoint --out-dir (Join-Path $Derived "requests") --policies-dir (Join-Path $Fixture "policies")
 if ($LASTEXITCODE -ne 0) { throw "deployment disjointness gate failed" }
+& $PythonExe (Join-Path $RepoRoot "src/audit/verify_deployment_set.py") --repo-root $RepoRoot --check-classpath --clone (Join-Path $RepoRoot "external/authzforce-repo") --listing (Join-Path $RepoRoot "artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_006/evidence/classpath_manifest.json")
+if ($LASTEXITCODE -ne 0) { throw "classpath gate failed" }
 $JavaExe = Join-Path $JavaHome "bin/java.exe"
 foreach ($World in @("x_permit", "x_nonpermit")) {
   $Req = Join-Path $Derived ("requests/request_{0}.xml" -f $World)

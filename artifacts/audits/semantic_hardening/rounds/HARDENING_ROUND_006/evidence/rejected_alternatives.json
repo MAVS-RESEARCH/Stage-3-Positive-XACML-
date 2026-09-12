@@ -1,0 +1,10 @@
+{
+  "alternatives_considered": {
+    "H-total-function": "equivalent to r1 on the admitted interface (single missing-able coordinate; empty unreachable as values); r1 partial-multimap+markers form retained as derivation-faithful",
+    "Lambda-clock-build": "rejected: clock has no read path (inertness); build identity is source triple + toolchain record (jars rebuildable); absolute-URI hashing rejected as machine-dependent",
+    "P_R-decision-indexed": "rejected: decision-equivalence needs StatusDetail sameness across extensions (not established); Match-vector is the finest source-fixed relation; indexed errors acknowledged, collapsed form exact here",
+    "atom-placements": "chosen: native cycle per world-instantiation + wrapper as measured pre-step; interval reading documented as equivalent De Morgan of the same checkpoints",
+    "cost_reallocation": "rejected: unit cost is preregistered X-wrapper normalization (execution_inputs + experiment.yaml, immutable); 7.3.6 analogy fails (native engine action vs controller-performed intervention); structural E-dependence is cost-invariant by Phase-5 sweep design"
+  },
+  "record_id": "PC-XACML-S3PLUS-v1-rejected-alternatives"
+}

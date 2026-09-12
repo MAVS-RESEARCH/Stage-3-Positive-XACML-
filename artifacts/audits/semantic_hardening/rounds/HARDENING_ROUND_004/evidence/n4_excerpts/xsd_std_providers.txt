@@ -1,0 +1,32 @@
+SOURCE: pdp-engine/src/main/resources/pdp.xsd lines 545-575 (pinned 3cc0e988)
+                        only these
+                        algorithms may be used in policies.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="standardAttributeProvidersEnabled" type="xs:boolean" default="true">
+                <xs:annotation>
+                    <xs:documentation>
+                        Enable support for providing the following XACML core standard attributes if not provided in the request:
+                        <ol>
+                            <li><i>urn:oasis:names:tc:xacml:1.0:environment:current-dateTime</i></li>
+                            <li><i>urn:oasis:names:tc:xacml:1.0:environment:current-date</i></li>
+                            <li><i>urn:oasis:names:tc:xacml:1.0:environment:current-time</i></li>
+                        </ol>
+                        This is equivalent to adding the following <i>attributeProvider</i> elements:
+                        <ol>
+                        <li><i>StdEnvAttributeProviderDescriptor</i> with <i>id=&quot;_authzforce_pdp_attribute-provider_std-env&quot;</i> <i>override=&quot;false&quot;</i></li>
+                        </ol>
+                        You must set <i>standardAttributeProvidersEnabled='false'</i> if you need to configure a custom <i>attributeProvider</i> element of one of these types.
+                        If <i>standardAttributeProvidersEnabled='false'</i>, only providers specified in
+                        <i>attributeProvider</i>
+                        elements are enabled.
+
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="xPathEnabled" type="xs:boolean" default="false">
+                <xs:annotation>
+                    <xs:documentation>
+                        Enable support for
+                        <i>AttributeSelectors</i>

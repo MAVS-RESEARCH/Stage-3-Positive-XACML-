@@ -79,29 +79,72 @@ def check(live, expected_listing_doc):
     live_files = live.get("files", []) if isinstance(live, dict) else []
     for entry in live_files:
         if entry.get("type") in ("dir", "other"):
-            problems.append("subdir:%s" % entry.get("name", "?"))
+            problems.append("subdir:%s" % ascii_safe(entry.get("name",
+                                                               "?")))
     live_map = {e["name"]: e for e in live_files
                 if isinstance(e, dict) and "sha256" in e and "name" in e}
     expected_map = {e["name"]: e for e in expected_files
                     if isinstance(e, dict) and "name" in e}
     if set(live_map) != set(expected_map):
         problems.append("name-set-mismatch: live=%s expected=%s"
-                        % (sorted(live_map), sorted(expected_map)))
+                        % (ascii_safe(sorted(live_map)),
+                           ascii_safe(sorted(expected_map))))
     if len(live_map) != 1:
         problems.append("count!=1: live has %d files" % len(live_map))
     for name in set(live_map) & set(expected_map):
         got, want = live_map[name], expected_map[name]
         if got.get("bytes") != want.get("bytes") or \
                 got.get("sha256") != want.get("sha256"):
-            problems.append("modified:%s" % name)
+            problems.append("modified:%s" % ascii_safe(name))
     return problems
 
 
+def staged_root_ok(staged_dir):
+    """Require the staged root to hold exactly pdp.xml + policies/."""
+    # [P2-LOG-058] Step: enforce staged-root exclusivity.
+    try:
+        names = sorted(os.listdir(staged_dir))
+    except OSError:
+        return ["staged root unreadable"]
+    if names != ["pdp.xml", "policies"]:
+        return ["staged root not exclusive: %s" % ascii_safe(names)]
+    return []
+
+
+def ascii_safe(value):
+    """Render a value with non-ASCII replaced (console-safe)."""
+    return str(value).encode("ascii", errors="replace").decode("ascii")
+
+
+def canon_path(path):
+    """Canonicalize a path for alias-resistant containment checks."""
+    resolved = os.path.realpath(path)
+    if resolved.startswith('\\\\?\\UNC\\'):
+        resolved = '\\' + resolved[8:]
+    elif resolved.startswith('\\\\?\\'):
+        resolved = resolved[4:]
+    resolved = os.path.normcase(os.path.normpath(resolved))
+    parts = [part.rstrip('. ') for part in resolved.split(os.sep)]
+    return os.sep.join(parts)
+
+
+def is_unc(path):
+    """Detect UNC spellings that realpath may not normalize."""
+    lowered = os.path.normcase(path)
+    return lowered.startswith('\\\\') and not lowered.startswith('\\\\?\\')
+
+
 def disjoint(out_dir, policies_dir):
-    """Return True iff neither dir contains the other."""
+    """Return True iff neither dir contains the other (fail-closed)."""
     # [P2-LOG-030] Step: resolve both dirs and prove neither nests.
-    left = os.path.normcase(os.path.realpath(os.path.abspath(out_dir)))
-    right = os.path.normcase(os.path.realpath(os.path.abspath(policies_dir)))
+    # Same canon as the builder guard: realpath + \\?\ strip + normcase +
+    # normpath + per-component dot/space strip, fail-closed on ambiguity.
+    # UNC spellings fail closed: commonpath cannot prove disjointness
+    # across roots that may alias one device.
+    if is_unc(out_dir) or is_unc(policies_dir):
+        return False
+    left = canon_path(os.path.abspath(out_dir))
+    right = canon_path(os.path.abspath(policies_dir))
     try:
         common = os.path.normcase(os.path.commonpath([left, right]))
     except ValueError:
@@ -118,9 +161,13 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Deployment-set gate.")
     parser.add_argument("--repo-root", required=True)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--check-staged", action="store_true")
+    parser.add_argument("--check-classpath", action="store_true")
     parser.add_argument("--disjoint", action="store_true")
     parser.add_argument("--emit", action="store_true")
     parser.add_argument("--fixture-dir", default="")
+    parser.add_argument("--staged-dir", default="")
+    parser.add_argument("--clone", default="")
     parser.add_argument("--listing", default="")
     parser.add_argument("--out-dir", default="")
     parser.add_argument("--policies-dir", default="")
@@ -152,6 +199,62 @@ def main(argv=None):
             fail("deployment-set mismatch: %s" % problems, code=1)
         # [P2-LOG-052] Step: deployment set matches.
         print("[P2:gate:052] deployment set ok", flush=True)
+    elif args.check_staged:
+        # [P2-LOG-054] Step: staged-copy equality pre-evaluation.
+        print("[P2:gate:054] checking staged fixture copy", flush=True)
+        if not args.staged_dir or not args.fixture_dir:
+            fail("--check-staged needs --staged-dir --fixture-dir")
+        for rel in ("pdp.xml", os.path.join("policies", "policy.xml")):
+            frozen = os.path.join(args.fixture_dir, rel)
+            staged = os.path.join(args.staged_dir, rel)
+            if not os.path.isfile(staged):
+                fail("staged copy missing: " + rel)
+            if sha256_file(staged) != sha256_file(frozen):
+                fail("staged copy drifted: " + rel)
+        for problem in staged_root_ok(args.staged_dir):
+            fail(problem)
+        names = sorted(os.listdir(os.path.join(args.staged_dir,
+                                               "policies")))
+        if names != ["policy.xml"]:
+            fail("staged policy set not exclusive: %s"
+                 % ascii_safe(names))
+        # [P2-LOG-056] Step: staged copy verified.
+        print("[P2:gate:056] staged copy ok", flush=True)
+    elif args.check_classpath:
+        # [P2-LOG-064] Step: classpath content vs manifest, pre-eval.
+        print("[P2:gate:064] checking runtime classpath", flush=True)
+        if not args.clone or not args.listing:
+            fail("--check-classpath needs --clone --listing")
+        with open(args.listing, encoding="utf-8") as handle:
+            expected = json.load(handle)
+        problems = []
+        for key, sub in (("test_classes", os.path.join(
+                "pdp-testutils", "target", "test-classes")),
+                         ("pdp_classes", os.path.join(
+                "pdp-testutils", "target", "classes"))):
+            root = os.path.join(args.clone, sub)
+            live_map = {}
+            for dirpath, _dirs, names in os.walk(root):
+                for name in names:
+                    path = os.path.join(dirpath, name)
+                    rel = os.path.relpath(path, root).replace(os.sep, "/")
+                    live_map[rel] = sha256_file(path)
+            want_map = {}
+            for rel, entry in expected.get(key, {}).get(
+                    "files", {}).items():
+                short = rel.split("target/", 1)[-1] if "target/" in rel \
+                    else rel
+                short = short.split("/", 1)[-1] if "/" in short else short
+                want_map.setdefault(short, entry.get("sha256"))
+            if set(live_map) != set(want_map):
+                problems.append("classpath-set-mismatch:" + key)
+            for rel in set(live_map) & set(want_map):
+                if live_map[rel] != want_map[rel]:
+                    problems.append("classpath-drift:%s/%s" % (key, rel))
+        if problems:
+            fail("classpath mismatch: %s" % ascii_safe(problems), code=1)
+        # [P2-LOG-066] Step: classpath verified.
+        print("[P2:gate:066] classpath ok", flush=True)
     elif args.disjoint:
         # [P2-LOG-060] Step: fail-closed overlap check for builder out_dir.
         print("[P2:gate:060] checking disjointness", flush=True)

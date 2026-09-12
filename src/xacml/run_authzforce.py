@@ -13,6 +13,7 @@ Step console lines use the [P1:run:NNN] tag, each marked by a
 """
 
 import argparse
+import hashlib
 import os
 import shutil
 import subprocess
@@ -86,6 +87,41 @@ def stage_completed_fixture(fixture_dir, request_path, work_dir, world):
     return run_fixture_dir
 
 
+def sha256_file(path):
+    """Return the hex SHA-256 digest of a file."""
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def verify_staged_fixture(fixture_dir, run_fixture_dir):
+    """Prove staged copies equal frozen bytes with an exclusive set.
+
+    Lambda_after_request_repair_pre_evaluation: same capability bytes the
+    frozen manifest pins, checked after staging and before any evaluation.
+    No PDP runs here; pure byte/config equality, not decision equality.
+    """
+    # [P1-LOG-046] Step: verify staged capability equals frozen.
+    print("[P1:run:046] verifying staged fixture equals frozen", flush=True)
+    for rel in ("pdp.xml", os.path.join("policies", "policy.xml")):
+        frozen = os.path.join(fixture_dir, *rel.split("/"))
+        staged = os.path.join(run_fixture_dir, *rel.split("/"))
+        if not os.path.isfile(staged):
+            fail("staged copy missing: " + rel)
+        if sha256_file(staged) != sha256_file(frozen):
+            fail("staged copy drifted: " + rel)
+    staged_policies = os.path.join(run_fixture_dir, "policies")
+    names = sorted(os.listdir(staged_policies))
+    if names != ["policy.xml"]:
+        fail("staged policy set not exclusive: %s" % names)
+    root_names = sorted(os.listdir(run_fixture_dir))
+    if root_names != ["pdp.xml", "policies"]:
+        fail("staged root not exclusive: %s" % root_names)
+    print("[P1:run:048] staged fixture verified", flush=True)
+
+
 def main(argv):
     """Entry point: execute one native PDP request/response cycle."""
     # [P1-LOG-010] Step: start run, echo mode and ordering flag.
@@ -142,6 +178,7 @@ def main(argv):
             fixture_dir, os.path.abspath(args.request),
             args.work_dir, args.world)
         request_path = os.path.abspath(args.request)
+        verify_staged_fixture(fixture_dir, run_fixture_dir)
 
     with open(args.cp_file, "r", encoding="utf-8") as handle:
         deps_cp = handle.read().strip()

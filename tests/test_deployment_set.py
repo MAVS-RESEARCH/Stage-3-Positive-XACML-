@@ -14,6 +14,15 @@ sys.path.insert(0, os.path.join(REPO_ROOT, "src", "audit"))
 import verify_deployment_set as gate  # noqa: E402
 
 
+class _ns:
+    """Minimal argparse-namespace stand-in."""
+
+    def __init__(self, repo_root="", **kwargs):
+        self.repo_root = repo_root
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+
 def write(path, content):
     """Write text, creating parents."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -106,6 +115,10 @@ def test_disjoint_variants(tmp_path, monkeypatch):
     assert gate.disjoint(dotdot_nested, policies) is False
     dotdot_sibling = os.path.join(base, "policies", "..", "out")
     assert gate.disjoint(dotdot_sibling, policies) is True
+    trail_space = os.path.join(base, "policies ", "sub")
+    assert gate.disjoint(trail_space, policies) is False
+    trail_dot = os.path.join(base, "policies.", "sub")
+    assert gate.disjoint(trail_dot, policies) is False
     monkeypatch.chdir(base)
     assert gate.disjoint(os.path.join("policies", "sub"),
                          os.path.join("policies")) is False
@@ -145,3 +158,117 @@ def test_live_builder_out_dir_disjoint():
     out_dir = os.path.join(REPO_ROOT, "derived", "requests")
     assert gate.disjoint(out_dir, policies) is True
     assert gate.disjoint(out_dir + os.sep, policies + os.sep) is True
+
+
+def _stage_copy(tmp_path, tamper=None, extra=False, tag="x"):
+    """Stage a frozen-fixture copy in tmp, optionally tampered."""
+    import shutil
+    fixture = os.path.join(REPO_ROOT, "external", "authzforce", "fixture")
+    staged = str(tmp_path / ("fixture_" + tag))
+    os.makedirs(os.path.join(staged, "policies"))
+    shutil.copyfile(os.path.join(fixture, "pdp.xml"),
+                    os.path.join(staged, "pdp.xml"))
+    shutil.copyfile(os.path.join(fixture, "policies", "policy.xml"),
+                    os.path.join(staged, "policies", "policy.xml"))
+    if tamper == "drift":
+        with open(os.path.join(staged, "policies", "policy.xml"),
+                  "ab") as handle:
+            handle.write(b" ")
+    if tamper == "missing":
+        os.remove(os.path.join(staged, "pdp.xml"))
+    if extra:
+        with open(os.path.join(staged, "policies", "extra.xml"),
+                  "w", encoding="utf-8") as handle:
+            handle.write("<x/>\n")
+    return staged
+
+
+def test_check_staged_roundtrip(tmp_path):
+    """Pristine staged copy passes; drift/missing/extra refused."""
+    # [P2-LOG-T22] Test step: assert staged-copy gate (no PDP run).
+    print("[P2:test:deployment:022] staged gate", flush=True)
+    fixture = os.path.join(REPO_ROOT, "external", "authzforce", "fixture")
+    staged = _stage_copy(tmp_path)
+    gate.main(["--repo-root", str(tmp_path), "--check-staged",
+               "--staged-dir", staged, "--fixture-dir", fixture])
+    try:
+        gate.main(["--repo-root", str(tmp_path), "--check-staged",
+                   "--staged-dir", _stage_copy(tmp_path, tamper="drift",
+                                                tag="drift"),
+                   "--fixture-dir", fixture])
+    except SystemExit as exc:
+        assert exc.code != 0
+    else:
+        raise AssertionError("drifted staged copy accepted")
+    try:
+        gate.main(["--repo-root", str(tmp_path), "--check-staged",
+                   "--staged-dir", _stage_copy(tmp_path, tamper="missing",
+                                                tag="missing"),
+                   "--fixture-dir", fixture])
+    except SystemExit as exc:
+        assert exc.code != 0
+    else:
+        raise AssertionError("incomplete staged copy accepted")
+    try:
+        gate.main(["--repo-root", str(tmp_path), "--check-staged",
+                   "--staged-dir", _stage_copy(tmp_path, extra=True,
+                                                tag="extra"),
+                   "--fixture-dir", fixture])
+    except SystemExit as exc:
+        assert exc.code != 0
+    else:
+        raise AssertionError("polluted staged copy accepted")
+
+
+def test_runner_staged_verification(tmp_path):
+    # [P2-LOG-T24] Test step: assert runner-side staged check.
+    print("[P2:test:deployment:024] runner staged check", flush=True)
+    sys.path.insert(0, os.path.join(REPO_ROOT, "src", "xacml"))
+    import run_authzforce as runner
+    fixture = os.path.join(REPO_ROOT, "external", "authzforce", "fixture")
+    runner.verify_staged_fixture(fixture, _stage_copy(tmp_path))
+    try:
+        runner.verify_staged_fixture(
+            fixture, _stage_copy(tmp_path, tamper="drift", tag="drift2"))
+    except SystemExit as exc:
+        assert exc.code != 0
+    else:
+        raise AssertionError("runner accepted drifted stage")
+
+
+def test_classpath_gate_live_and_tamper(tmp_path):
+    """Classpath manifest verifies live clone; drift refused."""
+    # [P2-LOG-T26] Test step: assert classpath gate (no PDP run).
+    print("[P2:test:deployment:026] classpath gate", flush=True)
+    import shutil
+    import sys
+    sys.path.insert(0, os.path.join(REPO_ROOT, "src", "audit"))
+    import hardening_evidence as hev
+    clone = os.path.join(REPO_ROOT, "external", "authzforce-repo")
+    if not os.path.isdir(os.path.join(clone, ".git")):
+        import pytest
+        pytest.skip("no pristine clone")
+    listing = str(tmp_path / "classpath_manifest.json")
+    hev.cmd_classpath_manifest(_ns(repo_root=REPO_ROOT, clone=clone,
+                                   out=listing))
+    gate.main(["--repo-root", str(tmp_path), "--check-classpath",
+               "--clone", clone, "--listing", listing])
+    with open(listing, encoding="utf-8") as handle:
+        doc = json.load(handle)
+    assert doc["test_classes"]["count"] > 0
+    assert doc["pdp_classes"]["count"] > 0
+    assert doc["extension_active"]["pdp_ext_xsd_present"] is True
+    ext_keys = [key for key in doc["test_classes"]["files"]
+                if key.endswith("pdp-ext.xsd")]
+    assert ext_keys, "extension file missing from manifest"
+    doc["test_classes"]["files"][ext_keys[0]]["sha256"] = "0" * 64
+    tampered = str(tmp_path / "classpath_tampered.json")
+    with open(tampered, "w", encoding="utf-8", newline="\n") as handle:
+        json.dump(doc, handle, indent=2, sort_keys=True)
+    try:
+        gate.main(["--repo-root", str(tmp_path), "--check-classpath",
+                   "--clone", clone, "--listing", tampered])
+    except SystemExit as exc:
+        assert exc.code != 0
+    else:
+        raise AssertionError("tampered classpath manifest accepted")

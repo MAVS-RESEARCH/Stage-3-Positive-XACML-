@@ -90,5 +90,11 @@
 | R3-19 | HARDENING_ROUND_002 | GLOBAL | E | RESOLVED | Nits bundle: repro_compare dead branch; supersession old-side pointers; lineage truncation honesty; newline semantics. |
 | H3-01 | HARDENING_ROUND_003 | Lambda | E | RESOLVED | Deployed root-policy-set cardinality unpinned: extra *.xml under frozen glob changes authority with all hashes passing; builder accepts arbitrary out_dir (self- |
 | H3-02 | HARDENING_ROUND_003 | GLOBAL | E | RESOLVED | In-packet builder cross-reference false: wrapper_evidence.builder_sha256 (live) != sha256(packet builder_source.py) (stale pre-guard copy). |
+| P2D-01 | HARDENING_ROUND_004 | Lambda | E | RESOLVED | Deployment gate canon weaker than builder guard (trailing-space bypass); staged copies never verified pre-evaluation. |
+| P2D-02 | HARDENING_ROUND_004 | GLOBAL | E | RESOLVED | No mechanical binding between built request world values and preregistered worlds. |
+| P2D-03 | HARDENING_ROUND_004 | Lambda | E | RESOLVED | Lambda envelope not independently reconstructible: engine bytes/method absent, canonical form underspecified, capability set incomplete. |
+| P2D-04 | HARDENING_ROUND_004 | GLOBAL | E | RESOLVED | Locator provenance unrecorded; staging evidence prose-only; freeze/panel machinery cannot span revisions. |
+| P2D-05 | HARDENING_ROUND_005 | GLOBAL | E | RESOLVED | Wave-2 re-attack finds: recompute engine-dict mismatch; gate UNC/root-listing gaps; staged-root extras missed; C01-C03 reusable post-refreeze; freeze revision/v |
+| P2D-06 | HARDENING_ROUND_006 | Lambda | E | RESOLVED | Runtime classpath composition (extension path, test-classes content, driver path) and staged TOCTOU window unpinned by any hash or gate. |
 
 Full records (evidence, dispositions) live in the JSON ledger; this table is a finding aid only.

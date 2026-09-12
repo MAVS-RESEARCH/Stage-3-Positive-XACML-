@@ -26,6 +26,11 @@ from datetime import datetime, timezone
 from blind_adjudication import REDACTION_PATTERNS, TOUCH_ASSIGNMENT
 
 AUDITORS = ("AUD-C01", "AUD-C02", "AUD-C03")
+PANEL_1 = AUDITORS
+PANEL_2 = ("AUD-C04", "AUD-C05", "AUD-C06")
+PANELS = (AUDITORS, PANEL_2)
+PANEL_IDS = AUDITORS + PANEL_2
+FINAL_NAMESPACE = re.compile(r"^AUD-C0[1-6]$")
 BLIND_ANCHORS = ("H", "P_R", "Lambda", "Atom")
 ALLOWED_STATUSES = ("FIXED", "PARTIAL", "AMBIGUOUS", "UNSUPPORTED")
 DECLARATION = (
@@ -115,7 +120,7 @@ def scan_text_leakage(text, own_id):
     if TOUCH_ASSIGNMENT.search(text):
         hits.append("touch-assignment")
     for other in set(OTHER_ID.findall(text)):
-        if other != own_id and other in AUDITORS + (
+        if other != own_id and other in PANEL_IDS + (
                 "AUD-M01", "AUD-M02", "AUD-M03"):
             hits.append("cross-read:" + other)
     return hits
@@ -126,8 +131,8 @@ def validate_final(doc, freeze, auditor):
     problems = []
     if doc.get("auditor_id") != auditor:
         problems.append("auditor_id must equal the ingested chair")
-    if not re.match(r"^AUD-C0[1-3]$", doc.get("auditor_id", "")):
-        problems.append("auditor_id not in final namespace AUD-C01/02/03")
+    if not FINAL_NAMESPACE.match(doc.get("auditor_id", "")):
+        problems.append("auditor_id not in final namespace AUD-C01..C06")
     if doc.get("qualification") != "COLD_MODEL_INDEPENDENT":
         problems.append("qualification must be COLD_MODEL_INDEPENDENT")
     verdicts = doc.get("verdicts", {})
@@ -163,7 +168,7 @@ def validate_final(doc, freeze, auditor):
 def existing_texts_and_hashes(repo_root, exclude=""):
     """Collect attestation texts/hashes of the other valid chairs."""
     texts, hashes = set(), set()
-    for auditor in AUDITORS:
+    for auditor in PANEL_IDS:
         if auditor == exclude:
             continue
         provenance_path = os.path.join(records_root(repo_root), auditor,
@@ -188,8 +193,8 @@ def ingest_final(repo_root, auditor, raw_path, attestation_path):
     """Ingest one final raw response with strict Amendment-002 rules."""
     # [P2-LOG-010] Step: ingest one final raw adjudication.
     print("[P2:final:010] ingesting final %s" % auditor, flush=True)
-    if auditor not in AUDITORS:
-        fail("unknown final chair (want AUD-C01/02/03): " + auditor,
+    if auditor not in PANEL_IDS:
+        fail("unknown final chair (want AUD-C01..C06): " + auditor,
              EXIT_INVALID)
     if HARDENING_PATH.search(os.path.abspath(raw_path)):
         fail("raw source lives under hardening/non-blind paths",
@@ -281,7 +286,7 @@ def ingest_final(repo_root, auditor, raw_path, attestation_path):
 def collect_valid(repo_root):
     """Collect the valid final certification records."""
     valid = {}
-    for auditor in AUDITORS:
+    for auditor in PANEL_IDS:
         record_dir = os.path.join(records_root(repo_root), auditor)
         provenance_path = os.path.join(record_dir, "provenance.json")
         verdict_path = os.path.join(record_dir, "verdict.json")
@@ -306,6 +311,40 @@ def collect_valid(repo_root):
     return valid
 
 
+def eligible_panel(freeze):
+    """Return the single panel bound to the freeze revision.
+
+    Revisions 1-2 (pre-Amendment-004) belong to PANEL_1; revision 3+
+    requires the fresh PANEL_2. A panel never certifies another
+    revision's freeze: chairs are not reusable across revisions.
+    """
+    try:
+        revision = int((freeze or {}).get("revision", 1))
+    except (TypeError, ValueError):
+        return PANEL_1
+    if revision >= 3:
+        return PANEL_2
+    return PANEL_1
+def matching_freeze_records(repo_root, freeze, valid):
+    """Keep only records sealed against the operative freeze."""
+    # [P2-LOG-016] Step: bind records to the operative freeze.
+    kept = {}
+    for auditor, verdict in valid.items():
+        provenance_path = os.path.join(records_root(repo_root), auditor,
+                                       "provenance.json")
+        try:
+            with open(provenance_path, "r", encoding="utf-8") as handle:
+                provenance = json.load(handle)
+        except (OSError, ValueError):
+            continue
+        if (provenance.get("sealed_packet_sha256")
+                == freeze.get("packet_sha256")
+                and provenance.get("sealed_prompt_sha256")
+                == freeze.get("prompt_sha256")):
+            kept[auditor] = verdict
+    return kept
+
+
 def assert_final_unlock(repo_root):
     """Evaluate the final-certification unlock conjunction."""
     # [P2-LOG-020] Step: judge final unlock.
@@ -325,42 +364,45 @@ def assert_final_unlock(repo_root):
         print("[P2:final:024] freeze/packet/prompt drift: locked",
               flush=True)
         sys.exit(EXIT_BLOCKED)
-    valid = collect_valid(repo_root)
-    missing = [a for a in AUDITORS if a not in valid]
-    if missing:
-        print("[P2:final:026] valid records=%d missing=%s: blocked"
-              % (len(valid), missing), flush=True)
-        sys.exit(EXIT_BLOCKED)
-    short = [a for a in AUDITORS
-             if any(valid[a]["verdicts"][anchor]["status"] != "FIXED"
-                    for anchor in BLIND_ANCHORS)]
-    if short:
-        print("[P2:final:028] nonunanimous %s: failure-seal route"
-              % short, flush=True)
-        sys.exit(EXIT_NONUNANIMOUS)
-    unlock = {
-        "unlocked": True,
-        "rule": "Amendment-002 unanimous final cold-model certification",
-        "auditors": list(AUDITORS),
-        "packet_sha256": freeze.get("packet_sha256"),
-        "prompt_sha256": freeze.get("prompt_sha256"),
-        "sealed_utc": utcnow(),
-    }
-    with open(os.path.join(freeze_dir(repo_root), "final_unlock.json"),
-              "w", encoding="utf-8", newline="\n") as handle:
-        json.dump(unlock, handle, indent=2, sort_keys=True)
-        handle.write("\n")
-    ledger_path = os.path.join(freeze_dir(repo_root),
-                               "FINAL_ANCHOR_LEDGER.json")
-    with open(ledger_path, "r", encoding="utf-8") as handle:
-        ledger = json.load(handle)
-    for anchor in BLIND_ANCHORS:
-        ledger["anchors"][anchor]["auditor_status"] = "FINAL_CERTIFIED"
-    with open(ledger_path, "w", encoding="utf-8", newline="\n") as handle:
-        json.dump(ledger, handle, indent=2, sort_keys=True)
-        handle.write("\n")
-    print("[P2:final:029] unanimous FIXED: unlocked", flush=True)
-    sys.exit(EXIT_UNLOCK)
+    valid = matching_freeze_records(repo_root, freeze,
+                                      collect_valid(repo_root))
+    panel = eligible_panel(freeze)
+    if all(auditor in valid for auditor in panel):
+        short = [auditor for auditor in panel
+                 if any(valid[auditor]["verdicts"][anchor]["status"]
+                        != "FIXED" for anchor in BLIND_ANCHORS)]
+        if short:
+            print("[P2:final:028] nonunanimous %s: failure-seal route"
+                  % short, flush=True)
+            sys.exit(EXIT_NONUNANIMOUS)
+        unlock = {
+            "unlocked": True,
+            "rule": ("Amendment-004 unanimous fresh-panel final "
+                     "certification"),
+            "auditors": list(panel),
+            "packet_sha256": freeze.get("packet_sha256"),
+            "prompt_sha256": freeze.get("prompt_sha256"),
+            "sealed_utc": utcnow(),
+        }
+        with open(os.path.join(freeze_dir(repo_root), "final_unlock.json"),
+                  "w", encoding="utf-8", newline="\n") as handle:
+            json.dump(unlock, handle, indent=2, sort_keys=True)
+            handle.write("\n")
+        ledger_path = os.path.join(freeze_dir(repo_root),
+                                   "FINAL_ANCHOR_LEDGER.json")
+        with open(ledger_path, "r", encoding="utf-8") as handle:
+            ledger = json.load(handle)
+        for anchor in BLIND_ANCHORS:
+            ledger["anchors"][anchor]["auditor_status"] = "FINAL_CERTIFIED"
+        with open(ledger_path, "w", encoding="utf-8", newline="\n") as handle:
+            json.dump(ledger, handle, indent=2, sort_keys=True)
+            handle.write("\n")
+        print("[P2:final:029] unanimous FIXED: unlocked", flush=True)
+        sys.exit(EXIT_UNLOCK)
+    missing = [auditor for auditor in panel if auditor not in valid]
+    print("[P2:final:026] panel=%s valid matching records=%d missing=%s: "
+          "blocked" % (list(panel), len(valid), missing), flush=True)
+    sys.exit(EXIT_BLOCKED)
 
 
 def main(argv):

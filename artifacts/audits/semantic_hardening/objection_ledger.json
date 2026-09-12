@@ -2127,6 +2127,187 @@
       "resolution_status": "RESOLVED",
       "round_id": "HARDENING_ROUND_003",
       "source_grounding_evidence": "live==claimed hash equality + snippet presence"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/verify_deployment_set.py",
+        "src/xacml/run_authzforce.py",
+        "scripts/run_phase2.sh",
+        "scripts/run_phase2.ps1",
+        "tests/test_deployment_set.py"
+      ],
+      "final_disposition": "Gate canon ported to builder-grade alias resistance; staged-copy equality enforced pre-evaluation in runner + CLI + pre-eval script gates; adversarial bypass battery green except documented TOCTOU/ADS residuals.",
+      "historical_verdict": null,
+      "independent_recheck": "Bypass-tester live execution battery",
+      "locators": [
+        "BYPASS-1 repro",
+        "builder canon_path",
+        "gate disjoint",
+        "runner verify_staged_fixture"
+      ],
+      "materiality": "Material: secondary-gate false-negative + unenforced staged equality.",
+      "objection": "Deployment gate canon weaker than builder guard (trailing-space bypass); staged copies never verified pre-evaluation.",
+      "objection_id": "P2D-01",
+      "originating_reviewer": "Post-cert bypass battery (NON_BLIND)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_004",
+      "source_grounding_evidence": "live bypass repro + gate tests 8/8"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/hardening_evidence.py",
+        "evidence/wrapper_evidence.json"
+      ],
+      "final_disposition": "world_value_binding recorded and enforced (built AttributeValue text == prereg worlds); swap scenario now fails evidence build.",
+      "historical_verdict": null,
+      "independent_recheck": "Cross-artifact recomputation",
+      "locators": [
+        "execution_inputs worlds",
+        "built request AttributeValue",
+        "F2 swap analysis"
+      ],
+      "materiality": "Material: permit/nonpermit value swap passed all anchors (labels would flip).",
+      "objection": "No mechanical binding between built request world values and preregistered worlds.",
+      "objection_id": "P2D-02",
+      "originating_reviewer": "Post-cert cross-anchor red team F2 (NON_BLIND)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_004",
+      "source_grounding_evidence": "binding enforcement + test"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/hardening_evidence.py",
+        "src/audit/recompute_lambda.py",
+        "tests/test_lambda_manifest.py",
+        "evidence/lambda_manifest.json",
+        "evidence/engine_sources/",
+        "evidence/engine_sources_manifest.json"
+      ],
+      "final_disposition": "Per-component methods; 76-file semantic set + tree sha + 4 jars + poms + JDK + drivers; reconstruction block; standalone recompute tool agrees with builder; frozen test vector; full engine bytes in packet.",
+      "historical_verdict": null,
+      "independent_recheck": "Dual-implementation agreement test + packet recompute",
+      "locators": [
+        "C01/C02/C03 Lambda PARTIAL (engine bytes/method, pre_hash inputs, deferred post)",
+        "closure audit A1-A14"
+      ],
+      "materiality": "Material: unanimous blind PARTIAL on Lambda verifiability.",
+      "objection": "Lambda envelope not independently reconstructible: engine bytes/method absent, canonical form underspecified, capability set incomplete.",
+      "objection_id": "P2D-03",
+      "originating_reviewer": "Failed final panel + closure/hash/lifecycle specialists (NON_BLIND)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_004",
+      "source_grounding_evidence": "recompute agreement + vector + 76-file/tree/jar hashes"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/hardening_evidence.py",
+        "evidence/locator_verified_table.json",
+        "evidence/PATH_ALIASES_CORRIGENDUM.md",
+        "evidence/staging_certificate.json",
+        "tests/test_staging_certificate.py",
+        "src/audit/hardening.py",
+        "src/audit/final_certification.py",
+        "tests/test_final_certification.py"
+      ],
+      "final_disposition": "13/13 sections re-grounded in frozen HTML bytes (procedure + table); aliases corrected; staging certificate built evaluation-free with PENDING_TARGET markers; freeze refuses destroy, sanitizes evidence-round, verifies packet/prompt/ledger/state/scan, supports --revision; records bound to operative freeze; panels C01-03 + C04-06 with per-panel unanimity.",
+      "historical_verdict": null,
+      "independent_recheck": "Table builder fail-closed runs + panel gate tests",
+      "locators": [
+        "C03 Atom PARTIAL (staging/checkpoint verifiability)",
+        "provenance audit #9/#10/#15",
+        "freeze-dir wiring refusal at first C01 ingest"
+      ],
+      "materiality": "Material: blind-unverifiable locators/staging/panel continuity.",
+      "objection": "Locator provenance unrecorded; staging evidence prose-only; freeze/panel machinery cannot span revisions.",
+      "objection_id": "P2D-04",
+      "originating_reviewer": "Post-cert atom/provenance specialists (NON_BLIND)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_004",
+      "source_grounding_evidence": "verified table + certificate + gate tests"
+    },
+    {
+      "anchor": "GLOBAL",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/recompute_lambda.py",
+        "src/audit/verify_deployment_set.py",
+        "src/xacml/run_authzforce.py",
+        "src/audit/final_certification.py",
+        "src/audit/hardening.py",
+        "tests/test_final_certification.py",
+        "tests/test_lambda_manifest.py",
+        "tests/test_deployment_set.py"
+      ],
+      "final_disposition": "Engine-dict extraction + provider C14N verification in recompute tool; UNC fail-closed + staged-root exclusivity + ascii-safe gates; staged-root check in runner; eligible-panel-by-revision + record-freeze binding + mixed-panel block; evidence-round sanitize + revision monotonicity + extended verify. All wave-2 findings closed; T1-T7/C1-C4/F1-F4 dispositioned nonmaterial/duplicate/refuted.",
+      "historical_verdict": null,
+      "independent_recheck": "Wave-2 adversarial battery re-run (read-only + temp execution)",
+      "locators": [
+        "wave-2 F5/BYPASS-1/staged-poison/H1-H2/freeze-gaps reports"
+      ],
+      "materiality": "Material: broken independent verification + gate false-negative + panel reuse hole.",
+      "objection": "Wave-2 re-attack finds: recompute engine-dict mismatch; gate UNC/root-listing gaps; staged-root extras missed; C01-C03 reusable post-refreeze; freeze revision/verify gaps.",
+      "objection_id": "P2D-05",
+      "originating_reviewer": "Post-cert wave-2 battery (NON_BLIND)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_005",
+      "source_grounding_evidence": "repro scripts + gate tests + panel tests"
+    },
+    {
+      "anchor": "Lambda",
+      "category": "E",
+      "downstream_result_info_used": false,
+      "external_semantics_changed": false,
+      "files_changed": [
+        "src/audit/hardening_evidence.py",
+        "src/audit/verify_deployment_set.py",
+        "src/xacml/run_authzforce.py",
+        "scripts/run_phase2.sh",
+        "scripts/run_phase2.ps1",
+        "evidence/classpath_manifest.json",
+        "evidence/lambda_manifest.json",
+        "tests/test_deployment_set.py"
+      ],
+      "final_disposition": "Classpath content manifest (test-classes + pdp-classes + extension facts) + pre-eval re-verification gate wired in scripts and runner-adjacent path; manifest bound into Lambda components; staged-root exclusivity; UNC fail-closed; panel bound to freeze revision.",
+      "historical_verdict": null,
+      "independent_recheck": "Holdout-008 mechanism re-test post-repair (scheduled pre-freeze)",
+      "locators": [
+        "PdpRunner pdp-ext fallback",
+        "test-classes ext content",
+        "verify_sources 4-file loop",
+        "stage/invoke window",
+        "REHEARSAL_SWEEP_008_HOLDOUT RS008-CE1"
+      ],
+      "materiality": "Material: runtime classpath/extension deployment unpinned; tampered .class or added glob member changes evaluation with zero hash failure.",
+      "objection": "Runtime classpath composition (extension path, test-classes content, driver path) and staged TOCTOU window unpinned by any hash or gate.",
+      "objection_id": "P2D-06",
+      "originating_reviewer": "Holdout sweep 008 capability falsifier (NON_BLIND)",
+      "proposed_resolution": null,
+      "resolution_status": "RESOLVED",
+      "round_id": "HARDENING_ROUND_006",
+      "source_grounding_evidence": "live ext/catalog/extension-fn bytes + gate live+tamper tests"
     }
   ]
 }

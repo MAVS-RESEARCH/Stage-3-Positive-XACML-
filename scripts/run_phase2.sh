@@ -80,6 +80,7 @@ echo "[P2:phase2:100] unlock holds: running target audit"
 echo "[P2:phase2:095] gating staged deployment set"
 "$PYTHON_EXE" "$REPO_ROOT/src/audit/verify_deployment_set.py" --repo-root "$REPO_ROOT" --check --fixture-dir "$REPO_ROOT/external/authzforce/fixture/policies" --listing "$REPO_ROOT/artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_003/evidence/policy_dir_listing.json"
 "$PYTHON_EXE" "$REPO_ROOT/src/audit/verify_deployment_set.py" --repo-root "$REPO_ROOT" --disjoint --out-dir "$DERIVED/requests" --policies-dir "$REPO_ROOT/external/authzforce/fixture/policies"
+"$PYTHON_EXE" "$REPO_ROOT/src/audit/verify_deployment_set.py" --repo-root "$REPO_ROOT" --check-classpath --clone "$REPO_ROOT/external/authzforce-repo" --listing "$REPO_ROOT/artifacts/audits/semantic_hardening/rounds/HARDENING_ROUND_006/evidence/classpath_manifest.json"
 TEST_CLASSES="$CLONE_DIR/pdp-testutils/target/test-classes"
 DRIVER_CLASSES="$WORK_DIR/driver-classes"
 for WORLD in x_permit x_nonpermit; do

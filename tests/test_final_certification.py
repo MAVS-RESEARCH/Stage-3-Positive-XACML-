@@ -64,10 +64,12 @@ def verdict_doc(auditor, statuses, prompt_sha, packet_sha,
     }
 
 
-def make_freeze_root(base, statuses_by_auditor=(), attestation_text=None):
+def make_freeze_root(base, statuses_by_auditor=(), attestation_text=None,
+                     revision=1):
     """Build a synthetic frozen root with optional C records."""
     os.makedirs(os.path.join(base, "artifacts", "audits",
-                             "final_freeze", "FINAL_BLIND_PACKET"),
+                             "semantic_hardening", "final_freeze",
+                             "FINAL_BLIND_PACKET"),
                 exist_ok=True)
     os.makedirs(os.path.join(base, "prereg"), exist_ok=True)
     prompt = "SYNTHETIC FINAL PROMPT\n"
@@ -85,7 +87,8 @@ def make_freeze_root(base, statuses_by_auditor=(), attestation_text=None):
                packet_sha + "\n")
     prompt_sha = sha256_file(os.path.join(
         base, "prereg", "final_certification_prompt.txt"))
-    freeze = {"freeze_id": "synthetic", "frozen": True, "revision": 1,
+    freeze = {"freeze_id": "synthetic", "frozen": True,
+              "revision": revision,
               "round": "R", "packet_sha256": packet_sha,
               "prompt_sha256": prompt_sha, "frozen_files": {},
               "completed_executions": 0, "superseded": False}
@@ -393,14 +396,97 @@ def test_ingest_malformed_and_mids(tmp_path):
 
 
 def test_real_repo_still_locked():
-    """Real repo: gate never unlocks without unanimous FIXED (exit 3/4)."""
+    """Real repo: gate never unlocks without the eligible unanimous panel."""
     # [P2-LOG-F22] Test step: assert real-repo locked state.
-    # Sealed 2026-09-12: three valid chairs, Lambda PARTIAL x3 + Atom
-    # PARTIAL x1 -> exit 3 failure-seal route (was exit 4 pre-certification).
+    # Sealed states: rev002 panel exit 3 (nonunanimous); after Amendment-004
+    # reopen + rev003 refreeze, C01-C03 match neither panel-2 nor the new
+    # packet -> exit 4 blocked pending C04/C05/C06.
     print("[P2:test:final:022] real-repo locked state", flush=True)
     try:
         final.assert_final_unlock(REPO_ROOT)
     except SystemExit as exc:
-        assert exc.code == 3, exc.code
+        assert exc.code == 4, exc.code
     else:
         raise AssertionError("real-repo final gate granted")
+
+
+def test_panel2_unanimous_unlock(tmp_path):
+    """Second panel C04-C06 unanimous FIXED on rev3 freeze -> UNLOCK."""
+    # [P2-LOG-F24] Test step: assert panel-2 unlock path.
+    print("[P2:test:final:024] panel-2 unlock case", flush=True)
+    root = make_freeze_root(
+        str(tmp_path / "p2"),
+        [(a, FIXED4) for a in ("AUD-C04", "AUD-C05", "AUD-C06")],
+        revision=3)
+    expect_exit("panel2-unanimous",
+                lambda: final.assert_final_unlock(root), 0)
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening",
+                           "final_freeze", "final_unlock.json"),
+              encoding="utf-8") as handle:
+        assert json.load(handle)["auditors"] == ["AUD-C04", "AUD-C05",
+                                                 "AUD-C06"]
+
+
+def test_old_records_excluded_after_refreeze(tmp_path):
+    """Records sealed to a superseded packet do not count (exit 4)."""
+    # [P2-LOG-F26] Test step: assert freeze binding of records.
+    print("[P2:test:final:026] superseded records excluded", flush=True)
+    root = make_freeze_root(str(tmp_path / "p3"),
+                            [(a, FIXED4) for a in final.AUDITORS])
+    freeze_path = os.path.join(root, "artifacts", "audits",
+                               "semantic_hardening", "final_freeze",
+                               "FINAL_SEMANTIC_FREEZE.json")
+    with open(freeze_path, encoding="utf-8") as handle:
+        freeze = json.load(handle)
+    freeze["packet_sha256"] = "f" * 64
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening",
+                           "final_freeze", "FINAL_BLIND_PACKET",
+                           "PACKET_SHA256.txt"),
+              "w", encoding="utf-8", newline="\n") as handle:
+        handle.write("f" * 64 + "\n")
+    with open(freeze_path, "w", encoding="utf-8", newline="\n") as handle:
+        json.dump(freeze, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+    expect_exit("superseded-records",
+                lambda: final.assert_final_unlock(root), 4)
+
+
+def test_mixed_panels_blocked(tmp_path):
+    """Split chairs across panels (C01+C02+C04) -> BLOCKED (exit 4)."""
+    # [P2-LOG-F28] Test step: assert no cross-panel completion.
+    print("[P2:test:final:028] mixed panels blocked", flush=True)
+    root = make_freeze_root(str(tmp_path / "p4"),
+                            [(a, FIXED4) for a in ("AUD-C01", "AUD-C02",
+                                                   "AUD-C04")])
+    expect_exit("mixed-panels",
+                lambda: final.assert_final_unlock(root), 4)
+
+
+def test_unknown_chair_rejected(tmp_path):
+    """AUD-C07 ingest -> INVALID (exit 5)."""
+    # [P2-LOG-F30] Test step: assert namespace closure past C06.
+    print("[P2:test:final:030] unknown chair rejected", flush=True)
+    ingest_case(tmp_path, "p5", "AUD-C07", '{"a": 1}',
+                "Attestation of AUD-C07.", 5)
+
+
+def test_panel1_not_eligible_on_rev3(tmp_path):
+    """Complete C01-C03 panel on rev3 freeze -> BLOCKED (exit 4)."""
+    # [P2-LOG-F32] Test step: assert revision binds the panel.
+    print("[P2:test:final:032] rev3 panel binding", flush=True)
+    root = make_freeze_root(str(tmp_path / "p6"),
+                            [(a, FIXED4) for a in final.AUDITORS],
+                            revision=3)
+    expect_exit("rev3-panel1",
+                lambda: final.assert_final_unlock(root), 4)
+
+
+def test_panel2_short_on_rev3_locks(tmp_path):
+    """Partial C04-C06 panel on rev3 freeze -> BLOCKED (exit 4)."""
+    # [P2-LOG-F34] Test step: assert panel-2 completeness.
+    print("[P2:test:final:034] rev3 panel-2 partial", flush=True)
+    root = make_freeze_root(str(tmp_path / "p7"),
+                            [(a, FIXED4) for a in ("AUD-C04", "AUD-C05")],
+                            revision=3)
+    expect_exit("rev3-panel2-partial",
+                lambda: final.assert_final_unlock(root), 4)

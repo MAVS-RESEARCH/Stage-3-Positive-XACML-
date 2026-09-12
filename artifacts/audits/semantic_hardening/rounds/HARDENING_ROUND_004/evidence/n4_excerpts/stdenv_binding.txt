@@ -1,0 +1,12 @@
+SOURCE: pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java lines 365-375 (pinned 3cc0e988)
+     *                    	</li>
+     *                    </ul>
+     */
+    private StandardEnvironmentAttributeProvider(String id, boolean reqOverride)
+    {
+        super(id);
+        this.helper = reqOverride ? ALWAYS_REQ_OVERRIDING_HELPER : OPTIONAL_REQ_OVERRIDING_HELPER;
+    }
+
+    @Override
+    public void close()

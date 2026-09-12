@@ -1,0 +1,62 @@
+SOURCE: pdp-engine/src/main/resources/pdp.xsd lines 600-660 (pinned 3cc0e988)
+                        datatype support is marked
+                        as
+                        optional in XACML 3.0 core specification.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="strictAttributeIssuerMatch" type="xs:boolean" default="false">
+                <xs:annotation>
+                    <xs:documentation>
+                        <p>true iff we want <i>strict Attribute Issuer matching</i> and we require that all
+                            AttributeDesignators have a non-empty
+                            Issuer.
+                        </p>
+                        <p>
+                            <i>Strict Attribute Issuer matching</i>
+                            means that an AttributeDesignator without Issuer matches only request
+                            Attributes without Issuer. This mode is not fully compliant with XACML 3.0,
+                            §5.29, in the
+                            case that
+                            the Issuer is not present
+                            in the Attribute Designator, but
+                            it performs better and is recommended when all AttributeDesignators have an Issuer (best
+                            practice). Indeed, the XACML 3.0
+                            Attribute Evaluation section
+                            §5.29 says:
+                            <i>If the Issuer is not present in the AttributeDesignator, then the matching of the
+                                attribute to the named
+                                attribute SHALL be governed by AttributeId and
+                                DataType attributes alone.
+                            </i>
+                            Therefore, if
+                            <i>strictAttributeIssuerMatch</i>
+                            is false, since policies may use
+                            <i>AttributeDesignator</i>
+                            s without
+                            Issuer,
+                            if the requests are using matching Attributes but with
+                            none, one or more different Issuers, this PDP
+                            engine has to gather all the values from all the attributes with
+                            matching
+                            Category/AttributeId but
+                            with any Issuer or no Issuer. Therefore, in order
+                            to stay compliant with §5.29 and still enforce best
+                            practice, when
+                            <i>strictAttributeIssuerMatch =
+                                true
+                            </i>
+                            , we also require that all
+                            AttributeDesignators set the Issuer field.
+                        </p>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="maxIntegerValue" type="xs:positiveInteger" default="2147483647">
+                <xs:annotation>
+                    <xs:documentation>
+                        Maximum absolute integer value. This is the expected maximum absolute value for XACML attributes
+                        of standard type
+                        <i>http://www.w3.org/2001/XMLSchema#integer</i>
+                        (requires
+                        <i>useStandardDatatypes

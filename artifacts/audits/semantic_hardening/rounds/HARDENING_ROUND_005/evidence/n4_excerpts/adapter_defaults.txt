@@ -1,0 +1,15 @@
+SOURCE: pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/PdpEngineAdapters.java lines 238-253 (pinned 3cc0e988)
+	 *             if {@code configuration == null || configuration.getXacmlExpressionFactory() == null || configuration.getRootPolicyProvider() == null}
+	 * @throws java.io.IOException
+	 *             error closing {@code configuration.getRootPolicyProvider()} when static resolution is to be used
+	 */
+	public static PdpEngineInoutAdapter<Request, Response> newXacmlJaxbInoutAdapter(final PdpEngineConfiguration configuration) throws IllegalArgumentException, IOException
+	{
+		final DecisionResultPostprocessor<IndividualXacmlJaxbRequest, Response> defaultResultPostproc = new BaseXacmlJaxbResultPostprocessor(configuration.getClientRequestErrorVerbosityLevel());
+		final DecisionRequestPreprocessor<Request, IndividualXacmlJaxbRequest> defaultReqPreproc = SingleDecisionXacmlJaxbRequestPreprocessor.LaxVariantFactory.INSTANCE.getInstance(
+		        configuration.getAttributeValueFactoryRegistry(), configuration.isStrictAttributeIssuerMatchEnabled(), configuration.isXPathEnabled(),
+		        defaultResultPostproc.getFeatures());
+
+		return newInoutAdapter(Request.class, Response.class, configuration, defaultReqPreproc, defaultResultPostproc);
+	}
+}

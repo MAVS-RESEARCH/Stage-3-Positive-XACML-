@@ -17,6 +17,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -436,6 +437,34 @@ FINAL_CANDIDATES = [
      "candidates/repaired_request_x_nonpermit.xml"),
     ("rounds/HARDENING_ROUND_001/evidence/wrapper_source/"
      "build_repaired_requests.py", "candidates/builder_source.py"),
+    ("rounds/HARDENING_ROUND_001/evidence/staging_certificate.json",
+     "candidates/staging_certificate.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/locator_verified_table.json",
+     "candidates/locator_verified_table.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/provider_element_c14n.xml",
+     "candidates/provider_element_c14n.xml"),
+    ("rounds/HARDENING_ROUND_001/evidence/engine_sources_manifest.json",
+     "candidates/engine_sources_manifest.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/PATH_ALIASES_CORRIGENDUM.md",
+     "PATH_ALIASES_CORRIGENDUM.md"),
+    ("rounds/HARDENING_ROUND_001/evidence/HASHING_CONVENTIONS.md",
+     "HASHING_CONVENTIONS.md"),
+    ("rounds/HARDENING_ROUND_001/evidence/pre_hash_lineage.json",
+     "candidates/pre_hash_lineage.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/invocation_excerpts.txt",
+     "candidates/invocation_excerpts.txt"),
+    ("rounds/HARDENING_ROUND_001/evidence/execution_inputs.json",
+     "candidates/execution_inputs.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/admitted_value_census.json",
+     "candidates/admitted_value_census.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/behavior_table.json",
+     "candidates/behavior_table.json"),
+    ("rounds/HARDENING_ROUND_001/evidence/recompute_lambda.py",
+     "candidates/recompute_lambda.py"),
+    ("rounds/HARDENING_ROUND_001/evidence/verify_deployment_set.py",
+     "candidates/verify_deployment_set.py"),
+    ("rounds/HARDENING_ROUND_001/evidence/classpath_manifest.json",
+     "candidates/classpath_manifest.json"),
 ]
 
 FINAL_RUBRIC = """# Final certification rubric
@@ -469,6 +498,15 @@ def cmd_freeze(args):
              "first (revisions are never destroyed)")
     ev_round = getattr(args, "evidence_round", "") \
         or "HARDENING_ROUND_001"
+    if not re.fullmatch(r"[A-Za-z0-9_]+", ev_round):
+        fail("evidence round refused (identifier only)")
+    ev_dir = os.path.join(harden_base, "rounds", ev_round, "evidence")
+    if os.path.commonpath([os.path.abspath(ev_dir),
+                           os.path.abspath(harden_base)]) != os.path.abspath(
+            harden_base):
+        fail("evidence round escapes hardening base")
+    if not os.path.isdir(ev_dir):
+        fail("evidence round missing: " + ev_round)
     packet = os.path.join(freeze_dir_path, "FINAL_BLIND_PACKET")
     os.makedirs(os.path.join(packet, "candidates"))
     os.makedirs(os.path.join(packet, "corpus", "fixture", "policies"))
@@ -498,6 +536,12 @@ def cmd_freeze(args):
         if not os.path.isfile(src):
             fail("final candidate missing: " + src_rel)
         shutil.copyfile(src, os.path.join(packet, *dst_rel.split("/")))
+    ev_tree = os.path.join(harden_base, "rounds", ev_round, "evidence",
+                           "engine_sources")
+    if not os.path.isdir(ev_tree):
+        fail("engine sources tree missing for " + ev_round)
+    shutil.copytree(ev_tree, os.path.join(packet, "candidates",
+                                          "engine_sources"))
     n4_src = os.path.join(harden_base, "rounds", args.round, "evidence",
                           "n4_excerpts")
     if os.path.isdir(n4_src):
@@ -505,7 +549,12 @@ def cmd_freeze(args):
     with open(os.path.join(packet, "locator_index_final.md"), "w",
               encoding="utf-8", newline="\n") as handle:
         handle.write("# Final locator index: verified raw-HTML map is at "
-                     "candidates/locator_map.json.\n")
+                     "candidates/locator_map.json.\n\n"
+                     "Section grounding re-verified in "
+                     "candidates/locator_verified_table.json (deterministic "
+                     "strip procedure, frozen HTML bytes). Stale-path "
+                     "readings are corrected in "
+                     "PATH_ALIASES_CORRIGENDUM.md.\n")
     with open(os.path.join(packet, "rubric_final.md"), "w",
               encoding="utf-8", newline="\n") as handle:
         handle.write(FINAL_RUBRIC)
@@ -588,13 +637,43 @@ def cmd_freeze(args):
                 "external/authzforce/fixture/response.xml",
                  "external/xacml/xacml-3.0-core-spec-cos01-en.html",
                  "PROTOCOL_AMENDMENT_001.md",
-                 "PROTOCOL_AMENDMENT_003.md"):
+                 "PROTOCOL_AMENDMENT_003.md",
+                 "PROTOCOL_AMENDMENT_004.md"):
         frozen_files[rel] = sha256_file(os.path.join(
             repo_root, *rel.split("/")))
+    revision = getattr(args, "revision", 0) or 0
+    if revision:
+        try:
+            revision = int(revision)
+        except (TypeError, ValueError):
+            fail("revision must be an integer")
+        if revision < 1:
+            fail("revision must be positive")
+        known = []
+        for name in os.listdir(harden_base):
+            snap = os.path.join(harden_base, name,
+                                "FINAL_SEMANTIC_FREEZE.json")
+            if name.startswith("final_freeze_REVISION_") and os.path.isfile(
+                    snap):
+                try:
+                    with open(snap, encoding="utf-8") as handle:
+                        prior_rev = json.load(handle).get("revision")
+                    if isinstance(prior_rev, int):
+                        known.append(prior_rev)
+                except (OSError, ValueError):
+                    pass
+        current_rev = (state.get("freeze") or {}).get("revision")
+        if isinstance(current_rev, int):
+            known.append(current_rev)
+        if known and revision <= max(known):
+            fail("explicit revision must exceed recorded revisions %s"
+                 % sorted(known))
+    else:
+        revision = len(state.get("reopens", [])) + 1
     freeze_record = {
         "freeze_id": "PC-XACML-S3PLUS-v1-freeze",
         "frozen": True,
-        "revision": len(state.get("reopens", [])) + 1,
+        "revision": revision,
         "round": args.round,
         "packet_sha256": packet_sha,
         "prompt_sha256": prompt_sha,
@@ -625,7 +704,7 @@ def cmd_freeze(args):
                              "prompt_sha256": prior.get("prompt_sha256")})
     with open(os.path.join(freeze_dir_path, "SEMANTIC_REVISION_ANCESTRY.json"),
               "w", encoding="utf-8", newline="\n") as handle:
-        json.dump({"operative_revision": len(state.get("reopens", [])) + 1,
+        json.dump({"operative_revision": revision,
                    "prior_revisions": ancestry}, handle, indent=2,
                   sort_keys=True)
         handle.write("\n")
@@ -658,6 +737,61 @@ def cmd_verify_freeze(args):
             actual = hashlib.sha256(handle.read()).hexdigest()
         if actual != digest:
             fail("frozen file drifted: " + rel)
+    packet = os.path.join(base_dir(repo_root), "final_freeze",
+                          "FINAL_BLIND_PACKET")
+    manifest_path = os.path.join(packet, "PACKET_MANIFEST.json")
+    with open(manifest_path, encoding="utf-8") as handle:
+        manifest = json.load(handle)
+    for key, digest in manifest.get("files", {}).items():
+        with open(os.path.join(packet, *key.split("/")), "rb") as handle:
+            actual = hashlib.sha256(handle.read()).hexdigest()
+        if actual != digest:
+            fail("packet file drifted: " + key)
+    manifest_json = json.dumps(
+        {"packet_id": manifest.get("packet_id"),
+         "sealed_utc": manifest.get("sealed_utc"),
+         "files": manifest.get("files", {})},
+        indent=2, sort_keys=True)
+    with open(os.path.join(packet, "PACKET_SHA256.txt"),
+              encoding="utf-8") as handle:
+        aggregate = handle.read().strip()
+    if hashlib.sha256(manifest_json.encode("utf-8")).hexdigest() != aggregate:
+        fail("packet aggregate mismatch")
+    if aggregate != record.get("packet_sha256"):
+        fail("packet aggregate differs from freeze record")
+    prompt_path = os.path.join(repo_root, "prereg",
+                               "final_certification_prompt.txt")
+    if sha256_file(prompt_path) != record.get("prompt_sha256"):
+        fail("prompt drifted from freeze record")
+    ledger_path = os.path.join(base_dir(repo_root), "final_freeze",
+                               "FINAL_ANCHOR_LEDGER.json")
+    if not os.path.isfile(ledger_path):
+        fail("final anchor ledger absent")
+    interface_path = os.path.join(base_dir(repo_root), "final_freeze",
+                                  "SEMANTIC_INTERFACE_FINAL.json")
+    with open(interface_path, encoding="utf-8") as handle:
+        interface = json.load(handle)
+    if interface.get("packet_sha256") != record.get(
+            "packet_sha256") or interface.get("prompt_sha256") != record.get(
+            "prompt_sha256"):
+        fail("interface hashes differ from freeze record")
+    marker_path = os.path.join(base_dir(repo_root), "final_freeze",
+                               "SEMANTIC_INTERFACE_FROZEN")
+    if not os.path.isfile(marker_path):
+        fail("freeze marker absent")
+    ancestry_path = os.path.join(base_dir(repo_root), "final_freeze",
+                                 "SEMANTIC_REVISION_ANCESTRY.json")
+    if not os.path.isfile(ancestry_path):
+        fail("revision ancestry absent")
+    with open(ancestry_path, encoding="utf-8") as handle:
+        ancestry_doc = json.load(handle)
+    if ancestry_doc.get("operative_revision") != record.get("revision"):
+        fail("ancestry revision differs from freeze record")
+    state = load_state(repo_root)
+    if not (state.get("freeze") or {}).get("valid"):
+        fail("freeze state not valid")
+    if target_scan(repo_root):
+        fail("target executions exist; freeze violated")
     print("[P2:hrd:082] freeze integrity confirmed", flush=True)
 
 
@@ -714,6 +848,7 @@ def main(argv):
     parser.add_argument("--freeze", action="store_true")
     parser.add_argument("--freeze-round", default="")
     parser.add_argument("--evidence-round", default="")
+    parser.add_argument("--revision", default="")
     parser.add_argument("--verify-freeze", action="store_true")
     parser.add_argument("--reopen", action="store_true")
     parser.add_argument("--reason", default="")
