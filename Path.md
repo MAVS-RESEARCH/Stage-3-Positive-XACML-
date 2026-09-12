@@ -352,6 +352,14 @@ Gate verdict: two-sweep burn-in SATISFIED → `CERTIFICATION_REHEARSAL_CONVERGED
 
 WorkPlan compliance: YES (Amendment 003 §§10–14). Models trained: none.
 
+### 3.18 Phase 2C Scaffolding Repair + AUD-C01 Ingest (2026-09-12)
+
+Defect found at first real use: `final_certification.freeze_dir()` pointed at `artifacts/audits/final_freeze/`, which nothing ever creates — hardening freezes to `semantic_hardening/final_freeze/`. Ingest refused with `no valid final freeze` (exit 4), so Phase 2C could never open. Root cause is audit-code wiring drift, not semantics: the namespace-protection test deliberately permits reading the frozen output (only reports/rounds/dev-packets forbidden). Repair: `freeze_dir()` retargeted (+ comment without guard-substring literals, which the protection test forbids); synthetic roots in `tests/test_final_certification.py` retargeted identically. Full suite 70+1 green; `--verify-freeze` green (frozen files untouched).
+
+Ingest: `AUD-C01` valid, record sealed (exit 0; provenance `valid:true`, no problems). Tally H=FIXED, P_R=FIXED, Lambda=PARTIAL, Atom=FIXED. Ingest-time notes: pasted attestation carried a trailing newline the model's hash excluded — bytes normalized to the hashed form before sealing (hash recomputed equal). Two chairs outstanding (AUD-C02/C03); gate judgment only after all three records exist. Already entailed: unanimity impossible (Lambda PARTIAL on C01); best case is nonunanimous failure-seal route.
+
+WorkPlan compliance: YES (audit-code repair inside §8 allowed boundary; frozen specimen untouched; zero executions). Models trained: none.
+
 WorkPlan compliance: YES (Amendment 003 developmental layer only; experiment ID unchanged; no history rewritten; no estimand change). Models trained: none.
 
 ## 6. Phase 3 Log -- Mechanical PC Contract Compilation -- TEMPLATE

@@ -56,3 +56,8 @@ All notable changes to this experiment package. Post-preregistration changes to 
 - `REHEARSAL_SWEEP_003_HOLDOUT` (falsification-only, no taxonomy): 11 objections, 1 `VALID_MATERIAL` (RS003-B01 staged set-exclusivity + builder self-pollution vector, overturning RS002-L01) → `SEMANTIC_FREEZE_REOPENED`, revision 002.
 - `HARDENING_ROUND_003`: builder out_dir guard (pre+post-create, alias-hardened) + deployment-set gate module/tests + pre-eval wiring + listing pin + refreshed evidence; ledger 88/88; suite 70+1; convergence 10/10; refreeze verified (packet `fbd22e2c`, delta exactly 4 files; REVISION_001 snapshot preserved).
 - Burn-in on REVISION_002: `SWEEP_004` (18/0) + `SWEEP_005` (8/0), no mutation between → `CERTIFICATION_REHEARSAL_CONVERGED`. Full rules + execution record in `PROTOCOL_AMENDMENT_003_ADDENDUM.md`. Zero executions; touch/K uncomputed; `BLOCKED_PENDING_FINAL_CERTIFICATION`.
+
+## [Phase 2C] - 2026-09-12 - FREEZE-DIR WIRING REPAIR + AUD-C01 VALID (1/3)
+
+- First real ingest exposed audit-code drift: certification read the freeze at `artifacts/audits/final_freeze/` (never created) instead of `semantic_hardening/final_freeze/` (operative). Retargeted `freeze_dir()` + synthetic test roots; suite 70+1 green, freeze verification green. No semantic change, zero executions.
+- `AUD-C01` ingested valid (exit 0): H/P_R/Atom FIXED, Lambda PARTIAL. Awaiting AUD-C02/C03 before gate judgment; unanimity already impossible.

@@ -69,7 +69,11 @@ def utcnow():
 
 def freeze_dir(repo_root):
     """Return the final-freeze directory path."""
-    return os.path.join(repo_root, "artifacts", "audits", "final_freeze")
+    # Operative freeze lives under semantic_hardening (written by
+    # hardening.py --freeze). Developmental sweep inputs stay off-limits
+    # to certification reads; the frozen output itself is the input.
+    return os.path.join(repo_root, "artifacts", "audits",
+                         "semantic_hardening", "final_freeze")
 
 
 def records_root(repo_root):

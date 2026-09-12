@@ -74,13 +74,13 @@ def make_freeze_root(base, statuses_by_auditor=(), attestation_text=None):
     write_file(os.path.join(base, "prereg",
                             "final_certification_prompt.txt"), prompt)
     packet_manifest = {"packet_id": "synthetic", "files": {}}
-    write_file(os.path.join(base, "artifacts", "audits", "final_freeze",
+    write_file(os.path.join(base, "artifacts", "audits", "semantic_hardening", "final_freeze",
                             "FINAL_BLIND_PACKET", "PACKET_MANIFEST.json"),
                json.dumps(packet_manifest, indent=2, sort_keys=True))
     packet_sha = sha256_file(os.path.join(
-        base, "artifacts", "audits", "final_freeze", "FINAL_BLIND_PACKET",
+        base, "artifacts", "audits", "semantic_hardening", "final_freeze", "FINAL_BLIND_PACKET",
         "PACKET_MANIFEST.json"))
-    write_file(os.path.join(base, "artifacts", "audits", "final_freeze",
+    write_file(os.path.join(base, "artifacts", "audits", "semantic_hardening", "final_freeze",
                             "FINAL_BLIND_PACKET", "PACKET_SHA256.txt"),
                packet_sha + "\n")
     prompt_sha = sha256_file(os.path.join(
@@ -89,7 +89,7 @@ def make_freeze_root(base, statuses_by_auditor=(), attestation_text=None):
               "round": "R", "packet_sha256": packet_sha,
               "prompt_sha256": prompt_sha, "frozen_files": {},
               "completed_executions": 0, "superseded": False}
-    write_file(os.path.join(base, "artifacts", "audits", "final_freeze",
+    write_file(os.path.join(base, "artifacts", "audits", "semantic_hardening", "final_freeze",
                             "FINAL_SEMANTIC_FREEZE.json"),
                json.dumps(freeze, indent=2, sort_keys=True))
     ledger = {"anchors": {a: {"ambiguity_status": "FIXED",
@@ -97,7 +97,7 @@ def make_freeze_root(base, statuses_by_auditor=(), attestation_text=None):
                               "CERTIFICATION"} for a in
                           ("H", "P_R", "Lambda", "Atom", "omega", "Q",
                            "Succ+", "c", "A_Pi")}}
-    write_file(os.path.join(base, "artifacts", "audits", "final_freeze",
+    write_file(os.path.join(base, "artifacts", "audits", "semantic_hardening", "final_freeze",
                             "FINAL_ANCHOR_LEDGER.json"),
                json.dumps(ledger, indent=2, sort_keys=True))
     for auditor, spec in statuses_by_auditor:
@@ -174,11 +174,11 @@ def test_final_unanimous_unlock(tmp_path):
     root = make_freeze_root(str(tmp_path / "f3"),
                             [(a, FIXED4) for a in AUDITORS])
     expect_exit("3-unanimous", lambda: final.assert_final_unlock(root), 0)
-    with open(os.path.join(root, "artifacts", "audits", "final_freeze",
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening", "final_freeze",
                            "final_unlock.json"),
               encoding="utf-8") as handle:
         assert json.load(handle)["unlocked"] is True
-    with open(os.path.join(root, "artifacts", "audits", "final_freeze",
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening", "final_freeze",
                            "FINAL_ANCHOR_LEDGER.json"),
               encoding="utf-8") as handle:
         ledger = json.load(handle)
@@ -200,7 +200,7 @@ def test_final_tampered_packet_locked(tmp_path):
     """Tampered packet content -> exit 4."""
     root = make_freeze_root(str(tmp_path / "f5"),
                             [(a, FIXED4) for a in AUDITORS])
-    with open(os.path.join(root, "artifacts", "audits", "final_freeze",
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening", "final_freeze",
                            "FINAL_BLIND_PACKET", "PACKET_SHA256.txt"),
               "w", encoding="utf-8", newline="\n") as handle:
         handle.write("0" * 64 + "\n")
@@ -252,7 +252,7 @@ def test_ingest_auditor_mismatch(tmp_path):
 
 def freeze_hashes(root):
     """Read sealed prompt/packet hashes from a synthetic freeze."""
-    with open(os.path.join(root, "artifacts", "audits", "final_freeze",
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening", "final_freeze",
                            "FINAL_SEMANTIC_FREEZE.json"),
               encoding="utf-8") as handle:
         freeze = json.load(handle)
@@ -307,7 +307,7 @@ def test_ingest_recompute_and_crossread(tmp_path):
     # [P2-LOG-F16] Test step: assert hash/cross-read refusal.
     print("[P2:test:final:016] recompute and cross-read cases", flush=True)
     root = ingested_root(tmp_path, "g3")
-    with open(os.path.join(root, "artifacts", "audits", "final_freeze",
+    with open(os.path.join(root, "artifacts", "audits", "semantic_hardening", "final_freeze",
                            "FINAL_SEMANTIC_FREEZE.json"),
               encoding="utf-8") as handle:
         freeze = json.load(handle)
