@@ -60,4 +60,5 @@ All notable changes to this experiment package. Post-preregistration changes to 
 ## [Phase 2C] - 2026-09-12 - FREEZE-DIR WIRING REPAIR + AUD-C01 VALID (1/3)
 
 - First real ingest exposed audit-code drift: certification read the freeze at `artifacts/audits/final_freeze/` (never created) instead of `semantic_hardening/final_freeze/` (operative). Retargeted `freeze_dir()` + synthetic test roots; suite 70+1 green, freeze verification green. No semantic change, zero executions.
-- `AUD-C01` ingested valid (exit 0): H/P_R/Atom FIXED, Lambda PARTIAL. Awaiting AUD-C02/C03 before gate judgment; unanimity already impossible.
+- `AUD-C01` ingested valid (exit 0): H/P_R/Atom FIXED, Lambda PARTIAL.
+- `AUD-C02` ingested valid (exit 0): identical shape (H/P_R/Atom FIXED, Lambda PARTIAL on blind verifiability). Awaiting AUD-C03 before gate judgment; unanimity already impossible.

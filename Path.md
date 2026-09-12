@@ -358,6 +358,8 @@ Defect found at first real use: `final_certification.freeze_dir()` pointed at `a
 
 Ingest: `AUD-C01` valid, record sealed (exit 0; provenance `valid:true`, no problems). Tally H=FIXED, P_R=FIXED, Lambda=PARTIAL, Atom=FIXED. Ingest-time notes: pasted attestation carried a trailing newline the model's hash excluded — bytes normalized to the hashed form before sealing (hash recomputed equal). Two chairs outstanding (AUD-C02/C03); gate judgment only after all three records exist. Already entailed: unanimity impossible (Lambda PARTIAL on C01); best case is nonunanimous failure-seal route.
 
+Ingest: `AUD-C02` valid, record sealed (exit 0; provenance `valid:true`). Tally identical shape: H/P_R/Atom FIXED, Lambda PARTIAL (blind-verifiability gap: engine bytes/method, pre_hash inputs, deferred post_hash). Ingest-time notes: first paste lacked 5 schema fields (re-emitted complete in-session, verdicts unchanged); pasted attestation needed trailing newline to match the model's stated hash (bytes normalized, hash recomputed equal); attestation distinct from C01's. One chair outstanding (AUD-C03); gate judgment after all three.
+
 WorkPlan compliance: YES (audit-code repair inside §8 allowed boundary; frozen specimen untouched; zero executions). Models trained: none.
 
 WorkPlan compliance: YES (Amendment 003 developmental layer only; experiment ID unchanged; no history rewritten; no estimand change). Models trained: none.
