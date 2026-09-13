@@ -1,0 +1,13 @@
+{
+  "attested_not_recomputed": [
+    "ATTESTED_PACKET_SHA256.txt (5702825a..., in sweep bindings + rev004 ancestry + git history)"
+  ],
+  "byte_identical": "every content file: corpus from live frozen externals + candidates/engine/n4 from ROUND_005 evidence (exact freeze sources); verified per-file below",
+  "event": "operator snapshot error + recovery",
+  "regenerated_wrappers": [
+    "PACKET_MANIFEST.json sealed_utc",
+    "FINAL_SEMANTIC_FREEZE.json frozen_utc"
+  ],
+  "verification": "compare every snapshot content file hash vs ROUND_005 evidence / live frozen source",
+  "what_happened": "shutil.copytree snapshot failed on ~15 >260-char engine-source paths; the partial snapshot was then wrongly deleted and replaced with rev004 bytes; the bogus copy was removed and this reconstruction built"
+}

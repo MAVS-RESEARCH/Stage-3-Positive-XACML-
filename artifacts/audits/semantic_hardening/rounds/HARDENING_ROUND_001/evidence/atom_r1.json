@@ -1,0 +1,25 @@
+{
+  "atom_id": "xacml-request-transaction",
+  "auditor_status": "PENDING_FINAL_CERTIFICATION",
+  "basis": "HARDENING_ROUND_001 evidence; same native boundary as Phase-2A atom_record.json",
+  "changes_vs_r0": [
+    "wrapper evidence upgraded from counts+hashes to in-packet bytes/diffs/source/scans",
+    "byte-identity claim corrected to c14n-identity (re-serialization deltas dispositioned)",
+    "rule-to-code map added",
+    "response/policy input bindings added",
+    "native/wrapper decomposition stated with checkpoint semantics"
+  ],
+  "conclusion": "NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER",
+  "counting": "One native request/response transaction per world-instantiation (two worlds CIC two transactions); the wrapper build is a measured pre-step per world, not a third evaluation. Pre/post checkpoints delimit the measured interval whose interior contains exactly one native cycle per world.",
+  "decomposition": "Native transaction (external N1: PEP-style submission -> handler context construction -> PDP evaluation -> response -> PEP) is the authorization boundary. The wrapper (experiment-authored X measurement) constructs the completed request BEFORE submission and invokes exactly one native transaction per world. Pre/post checkpoints (after original MissingAttributeDetail response / after repaired response) delimit the measured interval, not a single PDP cycle.",
+  "evidence_pointers": [
+    "evidence/request_diffs.json (unified diffs + c14n hashes)",
+    "evidence/wrapper_evidence.json (source hash, imports, calls, token scan, bindings)",
+    "packet builder source + repaired request bytes (final packet)"
+  ],
+  "identity_claim": "c14n-identity except one inserted subject Attribute (NOT byte-identity: pretty_print re-serialization changes declaration quotes, attribute order, empty-element style; dispositioned in diffs, masked by C14N lawfully).",
+  "post_checkpoint": "after repaired request response",
+  "pre_checkpoint": "after original MissingAttributeDetail response",
+  "record_id": "PC-XACML-S3PLUS-v1-Atom-r1",
+  "staged_copy_identity": "Staged fixture copies carry byte-identical pdp.xml/policy.xml (copied, never edited); request passed explicitly; absent request.xml/response.xml in the copy are unread by the engine (configuration-driven policy load + explicit request argument)."
+}

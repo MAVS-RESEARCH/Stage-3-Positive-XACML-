@@ -1,0 +1,2 @@
+Development packet for adversarial sweep HARDENING_ROUND_001.
+NON-BLIND hardening material. NEVER a certification packet; carries no seal.

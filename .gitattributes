@@ -1,0 +1,5 @@
+# Hash-pinned experiment: byte-stable checkouts, no EOL conversion.
+# Every sealed sha256 in manifests is computed over working-tree bytes;
+# Git must preserve those bytes exactly on clone and checkout.
+# Textual diffs are retained via the diff attribute.
+* -text diff

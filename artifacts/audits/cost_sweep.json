@@ -1,0 +1,61 @@
+{
+  "control": "5.8",
+  "costs": {
+    "0.5": {
+      "class": "STRUCTURAL_E_TOUCH_DEPENDENCE",
+      "dual_agreement": true,
+      "finite_rescale_ok": true,
+      "kappa": [
+        0.5,
+        "INF",
+        0.5,
+        0.5,
+        "INF",
+        "INF",
+        0.5,
+        "INF"
+      ],
+      "nontrivial": true,
+      "pass": true
+    },
+    "10": {
+      "class": "STRUCTURAL_E_TOUCH_DEPENDENCE",
+      "dual_agreement": true,
+      "finite_rescale_ok": true,
+      "kappa": [
+        10,
+        "INF",
+        10,
+        10,
+        "INF",
+        "INF",
+        10,
+        "INF"
+      ],
+      "nontrivial": true,
+      "pass": true
+    },
+    "2": {
+      "class": "STRUCTURAL_E_TOUCH_DEPENDENCE",
+      "dual_agreement": true,
+      "finite_rescale_ok": true,
+      "kappa": [
+        2,
+        "INF",
+        2,
+        2,
+        "INF",
+        "INF",
+        2,
+        "INF"
+      ],
+      "nontrivial": true,
+      "pass": true
+    }
+  },
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "frozen_external_untouched": true,
+  "invariant": "finite entries rescale, E-freezes INF, structural class invariant",
+  "pass": true,
+  "produced_utc": "2026-09-12T19:01:43Z"
+}

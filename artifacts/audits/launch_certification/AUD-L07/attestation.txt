@@ -1,0 +1,7 @@
+I am AUD-L07, acting as an independent cold launch certifier.
+
+I received only two inputs for this task: the sealed launch packet PC-XACML-S3PLUS-v1-launch-packet-003 and the frozen launch certification prompt. I did not receive, seek, or view any hardening history, earlier adjudications, expected touch sets, freeze signatures, K vectors, classifications, manuscript claims, or any other certifier's verdicts or attestations. I share no context, memory, or communication with other certifiers and I worked from a fresh isolated context.
+
+All judgments I report were made solely from the contents of the sealed packet, grounding each anchor in exact frozen source locators and judging each run-conformance deferral on its producer, verifier, and mechanical criterion.
+
+Binding: auditor AUD-L07, packet 8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6, prompt 251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865.

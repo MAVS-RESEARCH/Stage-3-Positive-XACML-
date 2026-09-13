@@ -1,0 +1,21 @@
+[project]
+name = "pc-xacml-s3plus"
+version = "1.0.0"
+description = "PC-XACML-S3+: source-native positive Stage-III identification experiment harness"
+requires-python = ">=3.10"
+dependencies = [
+  "lxml",
+]
+readme = "README.md"
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

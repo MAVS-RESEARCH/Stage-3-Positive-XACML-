@@ -1,0 +1,190 @@
+{
+  "html_sha256": "8da7d21f72d1813d1f6db0620ee6840ff0687da69cce8bdf075d5ecad592eefb",
+  "legacy_note": "map stripped numbers came from an unrecorded extraction and are superseded by this table; legacy map retained for lineage only",
+  "method": "strip tags re <[^>]*>, html.unescape, split \\n, 1-indexed; heading = first regex match; quote = token-subsequence within following 400 lines",
+  "produced_utc": "2026-09-12T07:58:43Z",
+  "sections": {
+    "Sec-10.2.5-env-attributes": {
+      "candidate_starts": [
+        696,
+        10701
+      ],
+      "heading_pattern": "10\\.2\\.5",
+      "quote_tokens": [
+        "environment",
+        "attributes"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 696
+    },
+    "Sec-3.1-dataflow": {
+      "candidate_starts": [
+        1733
+      ],
+      "heading_pattern": "3\\.1\\s+Data-flow",
+      "quote_tokens": [
+        "native request format",
+        "optionally adds attributes"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 1733
+    },
+    "Sec-3.2-conversion-scope": {
+      "candidate_starts": [
+        277,
+        285,
+        1792,
+        1958,
+        2086,
+        8351
+      ],
+      "heading_pattern": "3\\.2\\s+",
+      "quote_tokens": [
+        "DataType",
+        "AttributeValue"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 1958
+    },
+    "Sec-5.29-AttributeDesignator": {
+      "candidate_starts": [
+        407,
+        6283,
+        9353
+      ],
+      "heading_pattern": "5\\.29\\s+",
+      "quote_tokens": [
+        "MustBePresent",
+        "AttributeId",
+        "Category"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 6283
+    },
+    "Sec-5.30-AttributeSelector": {
+      "candidate_starts": [
+        410,
+        6401,
+        9353
+      ],
+      "heading_pattern": "5\\.30\\s+",
+      "quote_tokens": [
+        "XPath",
+        "AttributeSelector",
+        "Category"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 6401
+    },
+    "Sec-5.57-5.58-StatusDetail": {
+      "candidate_starts": [
+        491,
+        494,
+        7902
+      ],
+      "heading_pattern": "5\\.5[78]\\s+",
+      "quote_tokens": [
+        "MissingAttributeDetail",
+        "StatusDetail"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 491
+    },
+    "Sec-7.17-Decision": {
+      "candidate_starts": [
+        9261
+      ],
+      "heading_pattern": "7\\.17\\s+",
+      "quote_tokens": [
+        "Permit",
+        "Deny"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 9261
+    },
+    "Sec-7.3.4-Attribute-Matching": {
+      "candidate_starts": [
+        8382
+      ],
+      "heading_pattern": "7\\.3\\.4\\s+Attribute Matching",
+      "quote_tokens": [
+        "governed by",
+        "AttributeId",
+        "DataType",
+        "alone"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 8382
+    },
+    "Sec-7.3.5-Attribute-Retrieval": {
+      "candidate_starts": [
+        8406
+      ],
+      "heading_pattern": "7\\.3\\.5\\s+Attribute Retrieval",
+      "quote_tokens": [
+        "SHALL",
+        "empty",
+        "immutable",
+        "bag"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 8406
+    },
+    "Sec-7.3.6-Environment": {
+      "candidate_starts": [
+        8435
+      ],
+      "heading_pattern": "7\\.3\\.6\\s+Environment",
+      "quote_tokens": [
+        "environment",
+        "handler"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 8435
+    },
+    "Sec-7.3.7-Selector-eval": {
+      "candidate_starts": [
+        545,
+        6412,
+        6491,
+        8442
+      ],
+      "heading_pattern": "7\\.3\\.7",
+      "quote_tokens": [
+        "XPath",
+        "evaluation"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 545
+    },
+    "Sec-7.6-Match": {
+      "candidate_starts": [
+        554,
+        8570
+      ],
+      "heading_pattern": "7\\.6\\s+Match",
+      "quote_tokens": [
+        "Indeterminate",
+        "Match"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 554
+    },
+    "Sec-7.7-Target": {
+      "candidate_starts": [
+        557,
+        8692
+      ],
+      "heading_pattern": "7\\.7\\s+Target",
+      "quote_tokens": [
+        "AnyOf",
+        "AllOf",
+        "Match"
+      ],
+      "quote_verified": true,
+      "stripped_start_line": 8692
+    }
+  },
+  "source_encoding": "windows-1252 (per document meta Content-Type); CRLF normalized to LF before numbering",
+  "table_id": "PC-XACML-S3PLUS-v1-locator-table"
+}

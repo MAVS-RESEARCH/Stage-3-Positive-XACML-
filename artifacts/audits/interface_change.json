@@ -1,0 +1,16 @@
+{
+  "audit_verdict": "INTERFACE_CHANGED",
+  "control": "5.7",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "frozen_external_untouched": true,
+  "is_t3_claim": false,
+  "primary_action": "q_supply_missing_attribute",
+  "produced_utc": "2026-09-12T19:01:42Z",
+  "reason": "Action algebra changed from one native request/response transaction to two independently exposed controller actions; K comparison as T3-equivalent is refused.",
+  "split_actions": [
+    "q_construct_attribute",
+    "q_submit_request"
+  ],
+  "theorem3": "THEOREM3_INVARIANCE_NOT_APPLICABLE",
+  "variant": "OUT_OF_SCOPE_INTERFACE_CHANGE"
+}

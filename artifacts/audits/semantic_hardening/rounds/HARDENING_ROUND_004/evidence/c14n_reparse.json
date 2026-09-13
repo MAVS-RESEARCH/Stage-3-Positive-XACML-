@@ -1,0 +1,15 @@
+{
+  "check_id": "PC-XACML-S3PLUS-v1-c14n-reparse",
+  "results": {
+    "nonpermit": {
+      "original_c14n": "37b6056fe974fada510ccbf53771d2d44968585527b2608f6a85f931856a9d8e",
+      "residual_equals_original_c14n": true,
+      "written_c14n": "5ab75ab4ae7ec97fc2dce56ec1bd74f812845c13e8464b1b62d643b25045b92e"
+    },
+    "permit": {
+      "original_c14n": "37b6056fe974fada510ccbf53771d2d44968585527b2608f6a85f931856a9d8e",
+      "residual_equals_original_c14n": true,
+      "written_c14n": "8e8b2fec0b5a56dd33a3ddcf41b7307bf44caa045b12856063240e09e007a4fc"
+    }
+  }
+}

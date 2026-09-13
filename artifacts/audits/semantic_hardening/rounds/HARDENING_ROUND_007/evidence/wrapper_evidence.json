@@ -1,0 +1,199 @@
+{
+  "builder_calls": [
+    "SubElement",
+    "abspath",
+    "add",
+    "any",
+    "append",
+    "assert_out_dir_disjoint",
+    "assert_single_attribute_addition",
+    "canon_path",
+    "canonical",
+    "commonpath",
+    "deepcopy",
+    "dirname",
+    "exit",
+    "fail",
+    "find_all",
+    "get",
+    "getparent",
+    "getroot",
+    "insert_attribute",
+    "isinstance",
+    "iter",
+    "join",
+    "len",
+    "list",
+    "localname",
+    "main",
+    "makedirs",
+    "normcase",
+    "normpath",
+    "open",
+    "parse",
+    "print",
+    "read_missing_detail",
+    "read_policy_designators",
+    "realpath",
+    "remove",
+    "rstrip",
+    "set",
+    "split",
+    "startswith",
+    "strip",
+    "tostring",
+    "write",
+    "write_request"
+  ],
+  "builder_import_roots": [
+    "copy",
+    "lxml",
+    "os",
+    "sys"
+  ],
+  "builder_reaches_pdp": false,
+  "builder_sha256": "f732a08a37047550f9c067c761e0ab154ca699ee5d0eb9bb516a48f99c0986ea",
+  "checked_ast_nodes": [
+    "Import",
+    "ImportFrom",
+    "Call",
+    "FunctionDef"
+  ],
+  "checked_tokens": [
+    "Indeterminate",
+    "NotApplicable",
+    "PdpEngine",
+    "Permit",
+    "XSLT",
+    "__import__",
+    "canary_expectations",
+    "compile(",
+    "eval(",
+    "evaluate(",
+    "exec(",
+    "expected_signature",
+    "getattr(",
+    "socket",
+    "subprocess",
+    "urllib",
+    "xslt"
+  ],
+  "dangerous_calls_present": [
+    "parse"
+  ],
+  "deepcopy_note": "copy.deepcopy of lxml ElementTree yields an independent tree (verified root-distinct during implementation); original never mutated by insertion (INV-05 residual check runs on a probe copy)",
+  "evidence_id": "PC-XACML-S3PLUS-v1-wrapper",
+  "flow_reads_outputs": [],
+  "forbidden_token_hits": [],
+  "from_import_members": [
+    "lxml.etree"
+  ],
+  "input_hashes": {
+    "policy.xml": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+    "request.xml": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+    "request_x_nonpermit.xml": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
+    "request_x_permit.xml": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294",
+    "response.xml": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687"
+  },
+  "input_trust": "inputs are frozen sealed files (fixture bytes hash-verified pre-parse by the phase seal) containing no DOCTYPE/ENTITY/stylesheet constructs (scanned above); no untrusted XML is ever parsed",
+  "os_sys_lxml_members_used": [
+    "os.makedirs",
+    "sys.exit"
+  ],
+  "produced_utc": "2026-09-12T12:38:11Z",
+  "risky_members_present": [],
+  "rule_to_code": [
+    {
+      "code_snippet": "copy.deepcopy(original)",
+      "present": true,
+      "rule_phrase": "copy frozen original"
+    },
+    {
+      "code_snippet": "insert_attribute(copy.deepcopy(original), triple,",
+      "present": true,
+      "rule_phrase": "insert exactly one subject Attribute"
+    },
+    {
+      "code_snippet": "permit_value, nonpermit_value, out_dir = argv[4], argv[5], argv[6]",
+      "present": true,
+      "rule_phrase": "world-specific value"
+    },
+    {
+      "code_snippet": "read_missing_detail(response_path)",
+      "present": true,
+      "rule_phrase": "coordinates from MissingAttributeDetail"
+    },
+    {
+      "code_snippet": "read_policy_designators(policy_path, triple)",
+      "present": true,
+      "rule_phrase": "MustBePresent cross-check against policy"
+    },
+    {
+      "code_snippet": "assert_single_attribute_addition(",
+      "present": true,
+      "rule_phrase": "single-addition assertion INV-05"
+    },
+    {
+      "code_snippet": "if permit_value == nonpermit_value:",
+      "present": true,
+      "rule_phrase": "inter-world value difference INV-06"
+    },
+    {
+      "code_snippet": "attribute.set(\"IncludeInResult\", \"false\")",
+      "present": true,
+      "rule_phrase": "IncludeInResult false on insert"
+    },
+    {
+      "code_snippet": "namespace = root.tag.split(\"}\")[0]",
+      "present": true,
+      "rule_phrase": "namespace derivation from request root"
+    },
+    {
+      "code_snippet": "etree.SubElement(subject,",
+      "present": true,
+      "rule_phrase": "append-last position"
+    },
+    {
+      "code_snippet": "value_node.set(\"DataType\", datatype)",
+      "present": true,
+      "rule_phrase": "value-level DataType only (never Attribute-level)"
+    },
+    {
+      "code_snippet": "assert_out_dir_disjoint(out_dir, policies_dir,",
+      "present": true,
+      "rule_phrase": "out-dir disjoint from policies glob (RS003-B01)"
+    }
+  ],
+  "runner_import_roots": [
+    "argparse",
+    "datetime",
+    "hashlib",
+    "json",
+    "os",
+    "shutil",
+    "subprocess",
+    "sys"
+  ],
+  "world_value_binding": {
+    "binding": {
+      "nonpermit": {
+        "expected": "not-riddle-me-this",
+        "match": true,
+        "observed": [
+          "not-riddle-me-this"
+        ],
+        "world": "x_nonpermit"
+      },
+      "permit": {
+        "expected": "riddle me this",
+        "match": true,
+        "observed": [
+          "riddle me this"
+        ],
+        "world": "x_permit"
+      }
+    },
+    "bound": true,
+    "source": "prereg/execution_inputs.json worlds vs built request AttributeValue text"
+  }
+}

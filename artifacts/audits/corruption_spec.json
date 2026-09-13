@@ -1,0 +1,16 @@
+{
+  "byte_offset": 100,
+  "control": "5.1",
+  "detected": true,
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "file": "xacml-3.0-core-spec-cos01-en.html",
+  "frozen_external_untouched": true,
+  "mutated_blob": "4d76817757617686338a8025086c723ad305ea03",
+  "mutated_byte": 108,
+  "mutated_sha256": "1ef98445c3526eea919edcb84f5293cf8c7d488a5d6ce2a2c727703d4131109a",
+  "original_byte": 109,
+  "produced_utc": "2026-09-12T19:01:00Z",
+  "sealed_blob": "n/a-spec",
+  "sealed_sha256": "8da7d21f72d1813d1f6db0620ee6840ff0687da69cce8bdf075d5ecad592eefb",
+  "verifier_exit_nonzero": true
+}

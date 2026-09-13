@@ -1,0 +1,116 @@
+{
+  "attribute_rows": [
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "equality_argument": "Request-side values pass to the resolved context unchanged: the handler has no PIP source to add values from, no selector/XPath channel reads other XML, and Sec. 7.3.5 retrieval reads exactly these named bags; MustBePresent error semantics operate on the same bags.",
+      "n1_locators": [
+        "Sec. 7.3.5 Attribute Retrieval (frozen stripped-text lines 8405-8424): the PDP SHALL request attribute values in the request context from the context handler; missing attribute with MustBePresent=false yields an empty bag, with MustBePresent=true yields Indeterminate.",
+        "Data-flow model (frozen stripped-text lines 1755-1784): the context handler constructs the XACML request context, optionally adds attributes, and sends it to the PDP; the PDP requests additional attributes from the handler only via PIP, of which this fixture configures none.",
+        "Sec. 5.29 AttributeDesignator (frozen stripped-text lines 406-407); MustBePresent semantics (frozen stripped-text lines 6292-6294)."
+      ],
+      "nonpermit_values": [
+        "Julius Hibbert"
+      ],
+      "permit_values": [
+        "Julius Hibbert"
+      ],
+      "present_in_original": true
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "equality_argument": "Request-side values pass to the resolved context unchanged: the handler has no PIP source to add values from, no selector/XPath channel reads other XML, and Sec. 7.3.5 retrieval reads exactly these named bags; MustBePresent error semantics operate on the same bags.",
+      "n1_locators": [
+        "Sec. 7.3.5 Attribute Retrieval (frozen stripped-text lines 8405-8424): the PDP SHALL request attribute values in the request context from the context handler; missing attribute with MustBePresent=false yields an empty bag, with MustBePresent=true yields Indeterminate.",
+        "Data-flow model (frozen stripped-text lines 1755-1784): the context handler constructs the XACML request context, optionally adds attributes, and sends it to the PDP; the PDP requests additional attributes from the handler only via PIP, of which this fixture configures none.",
+        "Sec. 5.29 AttributeDesignator (frozen stripped-text lines 406-407); MustBePresent semantics (frozen stripped-text lines 6292-6294)."
+      ],
+      "nonpermit_values": [
+        "not-riddle-me-this"
+      ],
+      "permit_values": [
+        "riddle me this"
+      ],
+      "present_in_original": false
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+      "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "equality_argument": "Request-side values pass to the resolved context unchanged: the handler has no PIP source to add values from, no selector/XPath channel reads other XML, and Sec. 7.3.5 retrieval reads exactly these named bags; MustBePresent error semantics operate on the same bags.",
+      "n1_locators": [
+        "Sec. 7.3.5 Attribute Retrieval (frozen stripped-text lines 8405-8424): the PDP SHALL request attribute values in the request context from the context handler; missing attribute with MustBePresent=false yields an empty bag, with MustBePresent=true yields Indeterminate.",
+        "Data-flow model (frozen stripped-text lines 1755-1784): the context handler constructs the XACML request context, optionally adds attributes, and sends it to the PDP; the PDP requests additional attributes from the handler only via PIP, of which this fixture configures none.",
+        "Sec. 5.29 AttributeDesignator (frozen stripped-text lines 406-407); MustBePresent semantics (frozen stripped-text lines 6292-6294)."
+      ],
+      "nonpermit_values": [
+        "http://medico.com/record/patient/BartSimpson"
+      ],
+      "permit_values": [
+        "http://medico.com/record/patient/BartSimpson"
+      ],
+      "present_in_original": true
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "equality_argument": "Request-side values pass to the resolved context unchanged: the handler has no PIP source to add values from, no selector/XPath channel reads other XML, and Sec. 7.3.5 retrieval reads exactly these named bags; MustBePresent error semantics operate on the same bags.",
+      "n1_locators": [
+        "Sec. 7.3.5 Attribute Retrieval (frozen stripped-text lines 8405-8424): the PDP SHALL request attribute values in the request context from the context handler; missing attribute with MustBePresent=false yields an empty bag, with MustBePresent=true yields Indeterminate.",
+        "Data-flow model (frozen stripped-text lines 1755-1784): the context handler constructs the XACML request context, optionally adds attributes, and sends it to the PDP; the PDP requests additional attributes from the handler only via PIP, of which this fixture configures none.",
+        "Sec. 5.29 AttributeDesignator (frozen stripped-text lines 406-407); MustBePresent semantics (frozen stripped-text lines 6292-6294)."
+      ],
+      "nonpermit_values": [
+        "read"
+      ],
+      "permit_values": [
+        "read"
+      ],
+      "present_in_original": true
+    }
+  ],
+  "global_conditions": [
+    {
+      "condition": "route_a_unavailable",
+      "evidence": "derived/route_a_probe.json",
+      "holds": true
+    },
+    {
+      "condition": "no_pip_configured",
+      "evidence": "pdp.xml child elements=['policyProvider']",
+      "holds": true
+    },
+    {
+      "condition": "no_selector_input_channels",
+      "evidence": "derived/policy_adequacy_certificate.json",
+      "holds": true
+    },
+    {
+      "condition": "completed_requests_add_only_declared_attribute",
+      "evidence": "derived/requests/request_x_*.xml bag coordinates",
+      "holds": true
+    },
+    {
+      "condition": "all_relevant_coordinates_designed",
+      "evidence": "derived/policy_projection.json designator set",
+      "holds": true
+    }
+  ],
+  "input_hashes": {
+    "request.xml": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+    "request_x_nonpermit.xml": "f5c3b09fc887d4c2e3963ea6637545c089e08b26ab0da8e38ce338a204d6d3dd",
+    "request_x_permit.xml": "7e28c8c3041b9608f8cb866ed5a85cccaef8a5906cd16678e27ed656c70bc90a"
+  },
+  "produced_utc": "2026-09-11T17:19:01Z",
+  "proof_id": "PC-XACML-S3PLUS-v1-h-equivalence",
+  "provenance": {
+    "policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+    "spec_sha256": "see external/MANIFEST.json xacml.sha256"
+  },
+  "route": "b",
+  "verdict": "VALID"
+}

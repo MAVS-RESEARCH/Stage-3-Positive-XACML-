@@ -1,0 +1,24 @@
+{
+  "backend_commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+  "base": "original_plus_extra",
+  "canary_id": "irrelevant_extra_attribute",
+  "control": "5.5",
+  "driver_exit": 0,
+  "driver_produced_response": true,
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "frozen_external_untouched": true,
+  "observed": {
+    "decision": "Indeterminate",
+    "missing_attribute_detail_present": true,
+    "missing_detail": {
+      "AttributeId": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "Category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "DataType": "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:missing-attribute"
+  },
+  "policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+  "produced_utc": "2026-09-12T19:01:04Z",
+  "request_sha256": "cb09c24aad29550a710f11704e8ca3d451a58e6713823286e94c78e171ce9f26",
+  "response_sha256": "cf2325f9f3d65a135bfe14c50571920bc7e422ea0ca2e862ec6d0c039b8d33ca"
+}

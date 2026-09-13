@@ -1,0 +1,11 @@
+{
+  "attestation_sha256": "7b9e1b5d6ed4b28ce3f77e0de654ab69fe73e8da41540f7db9c9f3e345238beb",
+  "auditor_id": "AUD-L09",
+  "ingested_utc": "2026-09-12T16:27:09Z",
+  "problems": [],
+  "raw_sha256": "d0037768e6514bccdde6c33bf0208b30aa0d34baf2ab5053412576a6cda2c4d5",
+  "sealed_packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "sealed_prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "valid": true,
+  "verdict_sha256": "42b7b1ca25996b5aafc8aca31892a0bb9f05a1f57e28f7a79ae88f3e66f6956a"
+}

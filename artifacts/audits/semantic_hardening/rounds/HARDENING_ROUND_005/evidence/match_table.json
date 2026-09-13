@@ -1,0 +1,76 @@
+{
+  "designator_rows": [
+    {
+      "coordinate": [
+        "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+        "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "duplicate_extra_values": "same Match outcome as singleton under existential Match semantics; recorded, immaterial here",
+      "match_bag": "Match TRUE",
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "mismatch_bag": "Match FALSE",
+      "missing_bag": "Indeterminate (MustBePresent=true)",
+      "must_be_present": "true"
+    },
+    {
+      "coordinate": [
+        "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+        "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "duplicate_extra_values": "same Match outcome as singleton under existential Match semantics; recorded, immaterial here",
+      "match_bag": "Match TRUE",
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "mismatch_bag": "Match FALSE",
+      "missing_bag": "Indeterminate (MustBePresent=true)",
+      "must_be_present": "true"
+    },
+    {
+      "coordinate": [
+        "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+        "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+        "http://www.w3.org/2001/XMLSchema#anyURI"
+      ],
+      "duplicate_extra_values": "same Match outcome as singleton under existential Match semantics; recorded, immaterial here",
+      "match_bag": "Match TRUE",
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:anyURI-equal",
+      "mismatch_bag": "Match FALSE",
+      "missing_bag": "Indeterminate (MustBePresent=true)",
+      "must_be_present": "true"
+    },
+    {
+      "coordinate": [
+        "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+        "urn:oasis:names:tc:xacml:1.0:action:action-id",
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "duplicate_extra_values": "same Match outcome as singleton under existential Match semantics; recorded, immaterial here",
+      "match_bag": "Match TRUE",
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "mismatch_bag": "Match FALSE",
+      "missing_bag": "Indeterminate (MustBePresent=true)",
+      "must_be_present": "true"
+    },
+    {
+      "coordinate": [
+        "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+        "urn:oasis:names:tc:xacml:1.0:action:action-id",
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "duplicate_extra_values": "same Match outcome as singleton under existential Match semantics; recorded, immaterial here",
+      "match_bag": "Match TRUE",
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "mismatch_bag": "Match FALSE",
+      "missing_bag": "Indeterminate (MustBePresent=true)",
+      "must_be_present": "true"
+    }
+  ],
+  "granularity_note": "Bag-identity coincides with Match-vector equality on the admitted singleton null-Issuer interface; bag-identity is finer in general and that generality is not claimed.",
+  "produced_utc": "2026-09-11T20:40:26Z",
+  "projection_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+  "table_id": "PC-XACML-S3PLUS-v1-match-table",
+  "world_rows": {
+    "note": "per-world Match outcomes are OUTCOME-adjacent and are deliberately NOT recorded here (blindness hygiene); the table covers designator-coordinate semantics only"
+  }
+}

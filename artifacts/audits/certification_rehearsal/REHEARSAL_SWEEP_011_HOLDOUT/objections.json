@@ -1,0 +1,44 @@
+{
+  "objections": [
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "revision-004 repairs leave admitted-interface gaps",
+      "counterinterpretation": "Countermodels with admitted-interface effect",
+      "disposition": "DUPLICATE",
+      "locator": "classpath/staged/world/locator/panel attack targets",
+      "materiality": "Attacker self-graded all five attempts VALID_NONMATERIAL or OUT_OF_SCOPE (deferred measurements honest; scope explicit); no surviving effect exhibited",
+      "objection_id": "RS011-01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_011_HOLDOUT"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "derivation-code conjunction binds byte-pinned regime",
+      "counterinterpretation": "Code-level conjunction overclaims byte binding",
+      "disposition": "DUPLICATE",
+      "locator": "Issuer tuples; projection_sha domains; volatile strips; verdict-string gates; unopened ledger paths",
+      "materiality": "Same joint family as RS002-J01..J05/RS006-D4/RS010: scoped PASS documented; byte/constancy/reachability need target audit; packet refinements (not derivation records) carry operative claims",
+      "objection_id": "RS011-02",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_011_HOLDOUT"
+    },
+    {
+      "anchor": "PROVENANCE",
+      "claim_attacked": "projection_sha256 denotes one comparable domain",
+      "counterinterpretation": "Same-name incomparable digests confuse binding checks",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "adequacy certificate (policy bytes 8475) vs pr_relation (normalized projection 77b1)",
+      "materiality": "Real naming collision, nonmaterial (both methods documented; no gate compares across domains); disambiguate names at next revision",
+      "objection_id": "RS011-03",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "adequacy cert bytes vs pr_relation normalized method",
+      "sweep": "REHEARSAL_SWEEP_011_HOLDOUT"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_011_HOLDOUT"
+}

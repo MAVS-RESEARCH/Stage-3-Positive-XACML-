@@ -1,0 +1,31 @@
+{
+  "capsules": {
+    "x_nonpermit": {
+      "capsule_id": "PC-XACML-S3PLUS-v1-outcome-x_nonpermit",
+      "response_bytes": 167,
+      "response_sha256": "67961314e19c0fc00df45eeff46d396778704a3461ba9c8a0f4b794889c17f10",
+      "sealed_utc": "2026-09-12T18:31:51Z",
+      "world": "x_nonpermit"
+    },
+    "x_permit": {
+      "capsule_id": "PC-XACML-S3PLUS-v1-outcome-x_permit",
+      "response_bytes": 160,
+      "response_sha256": "87f6336c52763de2810fa478d38695f229eeea8b4aaecd68e06b33c49ccef53b",
+      "sealed_utc": "2026-09-12T18:31:45Z",
+      "world": "x_permit"
+    }
+  },
+  "conformance": "RUN_CONFORMANCE_PASSED",
+  "decisions": {
+    "x_nonpermit": "NotApplicable",
+    "x_permit": "Permit"
+  },
+  "match": true,
+  "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "preregistered_classes": {
+    "source": "tests/test_completed_world_decisions.py N02/N03 (unlock-gated, written pre-execution)",
+    "x_nonpermit": "NotApplicable",
+    "x_permit": "Permit"
+  },
+  "record_id": "PC-XACML-S3PLUS-v1-outcome-opening"
+}

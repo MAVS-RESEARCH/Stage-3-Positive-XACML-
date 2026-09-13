@@ -1,0 +1,23 @@
+{
+  "completed_executions": 0,
+  "freeze_id": "PC-XACML-S3PLUS-v1-freeze",
+  "frozen": true,
+  "frozen_files": {
+    "PROTOCOL_AMENDMENT_001.md": "47c803a41177ddfb885e60a4ead3f3ed8b65a010977922862cc993a440be1be8",
+    "PROTOCOL_AMENDMENT_003.md": "5944bd21009df723af3ca86917ade9d8513e7cf6e0d312743f1f7c2fabe7a070",
+    "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+    "external/MANIFEST.json": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+    "external/authzforce/fixture/pdp.xml": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d",
+    "external/authzforce/fixture/policies/policy.xml": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+    "external/authzforce/fixture/request.xml": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+    "external/authzforce/fixture/response.xml": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687",
+    "external/xacml/xacml-3.0-core-spec-cos01-en.html": "8da7d21f72d1813d1f6db0620ee6840ff0687da69cce8bdf075d5ecad592eefb",
+    "prereg/final_certification_prompt.txt": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3"
+  },
+  "frozen_utc": "2026-09-12T06:34:02Z",
+  "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "revision": 2,
+  "round": "HARDENING_ROUND_003",
+  "superseded": false
+}

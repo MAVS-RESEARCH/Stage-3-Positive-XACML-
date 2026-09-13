@@ -1,0 +1,17 @@
+{
+  "components": {
+    "attribute_provider_set": [],
+    "native_request_interface": "XACML request/response transaction (N1 data-flow)",
+    "pdp_xml_sha256": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d",
+    "policy_provider_sha256": "73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+    "request_preprocessor": [
+      "default-absent-in-pdp.xml"
+    ],
+    "root_policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64"
+  },
+  "equality_criterion": "post_hash == pre_hash after q_supply_missing_attribute; any extensional change invalidates the constant-Lambda design",
+  "lambda_id": "PC-XACML-S3PLUS-v1-Lambda",
+  "post_hash": null,
+  "pre_hash": "bb2c3c9472f887eb6674c337ac3c5145fa04b4fb0e169908e4e4a6cbc4b3dc94",
+  "produced_utc": "2026-09-11T18:56:45Z"
+}

@@ -1,0 +1,73 @@
+{
+  "attestation_hash": "c9569845a74c4f9ddaacedb97104385416c02e81414020d17c9fca348e430172",
+  "auditor_id": "AUD-L07",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed launch packet.",
+  "deferrals": {
+    "RC-ATOM-ORDER": "LEGITIMATELY_DEFERRED",
+    "RC-CLASSPATH-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPLOYMENT-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPS-CONSISTENT": "LEGITIMATELY_DEFERRED",
+    "RC-LAMBDA-POST": "LEGITIMATELY_DEFERRED",
+    "RC-REQUEST-ACTUAL": "LEGITIMATELY_DEFERRED"
+  },
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-L07-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 3.1 stripped lines 1755-1785: PEP native request format, handler constructs context, PDP evaluates, response context to handler, native translation to PEP",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 3.2 stripped lines 1794-1811: XACML context canonical inputs/outputs, application-to-context conversion outside scope",
+        "corpus/xacml-3.0-core-spec-cos01-en.html glossary stripped lines 1008-1021: PDP evaluates policy and renders decision, PEP makes requests and enforces",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 5.57-5.58 stripped lines 7948-7980: StatusDetail missing-attribute and MissingAttributeDetail conveys missing required attributes",
+        "corpus/fixture/response.xml:10 MissingAttributeDetail triple byte-equal corpus/fixture/policies/policy.xml:20 designator",
+        "candidates/builder_source.py:82-112 read_missing_detail plus read_policy_designators plus INV-05/INV-06, candidates/request_diffs.json unified diffs plus c14n hashes, candidates/wrapper_evidence.json rule_to_code plus forbidden_token_hits empty plus builder_reaches_pdp false",
+        "candidates/invocation/PdpRunner.java:65-71 config-driven policy load plus explicit request argument plus evaluate, candidates/invocation/run_authzforce.py:297-306 build_done stage_done verify_done invoke_start ordering plus verify_staged_fixture, candidates/execution_inputs.json worlds plus construction rule, candidates/staging_certificate.json plus invocation_record.json"
+      ],
+      "notes": "Native transaction boundary versus wrapper reconstruction is determined by frozen sources. Dataflow and context sections place handler construction and PEP native conversion outside PDP evaluation; PdpRunner takes fixtureDir plus explicit requestFile plus responseOut and evaluates one request; builder copies frozen original and inserts exactly one subject Attribute from frozen MissingAttributeDetail cross-checked to policy with INV-05 residual and INV-06 difference, c14n-identity with re-serialization deltas dispositioned; staged copies are byte-identical pdp/policy with disjoint out-dir; pre/post checkpoints delimit measured interval with exactly one native cycle per world-instantiation. No outcome content inferred.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-21 subject Matches including some-attribute, :26-29 resource, :34-43 action two AllOf sharing one coordinate",
+        "corpus/fixture/request.xml:3-17 present subject/resource/action singleton bags, :18 empty environment Attributes container",
+        "corpus/fixture/response.xml:10 MissingAttributeDetail triple Category AttributeId DataType",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.4 stripped lines 8399-8401: Issuer-absent matching governed by AttributeId and DataType alone",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.5 stripped lines 8416-8424: handler returns matching values as typed bag, missing if no match, MustBePresent false empty versus true Indeterminate, plus lines 8431-8433 immutable populated bag",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 5.29 stripped lines 6291-6295: designator returns all matched values, MustBePresent governs empty versus Indeterminate",
+        "n4_excerpts/xsd_std_providers.txt:7-20 standardAttributeProvidersEnabled default true serves current-time/date/dateTime only, candidates/admitted_value_census.json null Issuers with zero Issuer attributes"
+      ],
+      "notes": "Multimap keyed by Category AttributeId DataType Issuer-or-null with present bags plus absent_required missing-must-be-present-true plus explicit empty_categories plus environment scope is independently justified. Fixture bytes supply three present coordinates plus one required-but-absent coordinate named by native MissingAttributeDetail and matched to a MustBePresent-true designator; Issuer uniformly absent so wildcard rule applies with no divergence; environment handler may-supply current-star only and designator/function census shows zero environment reads; C14N multimap comparison with explicit empty handling matches spec bag semantics.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/MANIFEST.json fixture_files plus corpus/COMMIT.txt 3cc0e988 plus corpus/RELEASE.json release 21.2.0 plus corpus/fixture/policies/policy.xml sha 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+        "corpus/fixture/pdp.xml:6-8 StaticPolicyProvider PARENT_DIR glob policies/*.xml, n4_excerpts/parent_dir.txt:37-48 PARENT_DIR definition, n4_excerpts/std_wiring.txt plus xsd_std_providers.txt plus stdenv_default_factory.txt DEFAULT_FACTORY override false",
+        "n4_excerpts/adapter_defaults.txt:9-11 LaxVariantFactory with strictIssuer false xPath false plus xsd_preprocessor_defaults.txt plus xsd_strict_issuer.txt strictAttributeIssuerMatch default false",
+        "candidates/lambda_manifest.json pre_hash 194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3 recomputes via UTF-8 JSON sorted-keys components plus exclusions per candidates/recompute_lambda.py canonical_composite",
+        "candidates/dependency_hashes.json count 145 plus candidates/path_remap.json plus candidates/built/jars plus poms plus invocation drivers, candidates/engine_sources/pdp-engine tree plus candidates/policy_dir_listing.json plus candidates/resolved_effective.json plus provider element c14n"
+      ],
+      "notes": "Capability composite with stated exclusions is fully grounded and recomputable. Per-constituent bytes are present in-packet and verified: policy bytes, provider c14n, resolved defaults, dir listing, engine semantic set at pinned commit, built drivers/jars/poms via remap, 145-entry dependency closure, std-env wiring with override false, default-lax preprocessor. Canonical pre_hash recomputes exactly; exclusions for clock, non-env handler additions, toolchain substrate, and absolute location rest on designator/function census and documented hashing rules with no omission. Transitive provenance limitation is disclosed and gated at run time.",
+      "status": "FIXED"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43 five Match occurrences projecting to four coordinates each MustBePresent true with string-equal and anyURI-equal",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.6 stripped lines 8570-8595: Match Boolean over designator bag with two-arg boolean MatchId",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.7 stripped lines 8694-8702: empty target matches any, otherwise Match versus No Match versus Indeterminate",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.5 stripped lines 8419-8424: missing with MustBePresent true yields Indeterminate versus false yields empty, plus Sec. 5.29 stripped lines 6291-6295",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.4 stripped lines 8399-8401: Issuer-absent governed by AttributeId DataType alone",
+        "candidates/match_table.json five rows to four coordinates with TRUE FALSE INDETERMINATE per coordinate plus granularity note"
+      ],
+      "notes": "Match-vector equivalence per frozen designator coordinate with TRUE FALSE INDETERMINATE tokens is justified. Policy supplies four coordinates with five occurrences where action-id bag is held once and evaluated twice; all designators require MustBePresent true so empty is unreachable and missing yields Indeterminate per spec; singleton null-Issuer admitted histories make bag-identity coincide extensionally with Match-vector equality as proven by the table, while generality of finer bag identity is explicitly disclaimed.",
+      "status": "FIXED"
+    }
+  }
+}

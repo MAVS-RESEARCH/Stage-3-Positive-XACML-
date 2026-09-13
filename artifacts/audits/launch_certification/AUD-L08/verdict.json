@@ -1,0 +1,77 @@
+{
+  "attestation_hash": "128ea5f878402fa0ca4b7bf724291253c1601bdffa61534abda4f7d4dcacd85e",
+  "auditor_id": "AUD-L08",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed launch packet.",
+  "deferrals": {
+    "RC-ATOM-ORDER": "LEGITIMATELY_DEFERRED",
+    "RC-CLASSPATH-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPLOYMENT-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPS-CONSISTENT": "LEGITIMATELY_DEFERRED",
+    "RC-LAMBDA-POST": "LEGITIMATELY_DEFERRED",
+    "RC-REQUEST-ACTUAL": "LEGITIMATELY_DEFERRED"
+  },
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-L08-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text Sec. 3.1 lines 1755-1785",
+        "corpus/fixture/request.xml:1-19",
+        "corpus/fixture/response.xml:1-14",
+        "candidates/builder_source.py:82-94,120-167,170-193",
+        "candidates/request_diffs.json unified diffs plus c14n_sha256",
+        "candidates/wrapper_evidence.json rule_to_code plus input_hashes plus forbidden_token_hits",
+        "candidates/invocation_record.json plus candidates/staging_certificate.json",
+        "candidates/repaired_request_x_permit.xml sha256 3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294 plus candidates/repaired_request_x_nonpermit.xml sha256 b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8"
+      ],
+      "notes": "Native PEP-handler-PDP-response transaction distinguished from experiment-authored single-Attribute reconstruction. C14N-identity except one inserted subject Attribute proven by probe-copy residual, diffs, and source; build-before-invocation, byte-identical staged policy copies, and out-dir disjointness delimit one native cycle per world instantiation.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-21",
+        "corpus/fixture/request.xml:3-18",
+        "corpus/fixture/response.xml:10",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text Sec. 7.3.4 lines 8394-8401",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text Sec. 7.3.5 lines 8406-8424, 8431-8433",
+        "candidates/admitted_value_census.json",
+        "candidates/issuer_rule.json",
+        "candidates/env_inertness.json"
+      ],
+      "notes": "Multimap keyed by Category/AttributeId/DataType/Issuer-or-null with present singleton bags, single absent_required coordinate with missing-must-be-present-true, explicit empty environment category, env-inert scope, and Issuer-absent matching rule is grounded in frozen designators, request bytes, MissingAttributeDetail triple, and spec retrieval/matching text. No outcome inference.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/fixture/pdp.xml:6-8",
+        "corpus/fixture/policies/policy.xml sha256 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+        "candidates/lambda_manifest.json pre_hash 194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3 recomputable via stated UTF-8 JSON sorted-keys canonicalization",
+        "n4_excerpts/std_wiring.txt plus n4_excerpts/adapter_defaults.txt plus candidates/resolved_effective.json plus candidates/preprocessor_resolved.json",
+        "candidates/provider_element_c14n.xml sha256 73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+        "candidates/classpath_manifest.json sha256 5920a4267e3533055b497e2696a31813acf78a77cd547a8885f6a0dd523694ce",
+        "candidates/dependency_hashes.json sha256 bac1eae93f099ec85af41aaf0f3725ca674fd035cd65c835356741e98af41c56",
+        "corpus/COMMIT.txt plus corpus/RELEASE.json 3cc0e988e1639da48184434cd5c918102ff5b499 release-21.2.0"
+      ],
+      "notes": "Composite capability of frozen policy bytes, provider element C14N, preprocessor/defaults wiring, engine semantic set at pinned commit, built drivers/jars/poms, classpath manifest, and dependency content with documented exclusions and byte/config-equal stability is recomputable and content-bound. Transitive limitation disclosed and gated by run-conformance equality checks, not hidden.",
+      "status": "FIXED"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text Sec. 7.6 lines 8570-8604",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text Sec. 7.3.5 lines 8417-8424",
+        "corpus/xacml-3.0-core-spec-cos01-en.html stripped-text Sec. 5.29 lines 6283-6295",
+        "candidates/match_table.json:designator_rows"
+      ],
+      "notes": "Match-vector equivalence per frozen designator coordinate with TRUE/FALSE/INDETERMINATE, 5-occurrences to 4-coordinates dedup, MustBePresent-true Indeterminate token vs empty-bag distinction, and singleton null-Issuer coincidence with bag identity is grounded in frozen policy literals/functions and spec Match/Target/Retrieval text. No per-world outcome recorded or used.",
+      "status": "FIXED"
+    }
+  }
+}

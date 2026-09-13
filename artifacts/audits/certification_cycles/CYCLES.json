@@ -1,0 +1,64 @@
+{
+  "cycles": [
+    {
+      "assessment": {
+        "assessed_utc": "2026-09-12T08:59:41Z",
+        "freeze_packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+        "freeze_prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+        "tally": {
+          "AUD-C01": "NON_FIXED:Lambda",
+          "AUD-C02": "NON_FIXED:Lambda",
+          "AUD-C03": "NON_FIXED:Lambda,Atom"
+        },
+        "unanimous": false
+      },
+      "cycle_id": "CERTIFICATION_CYCLE_001",
+      "decision": {
+        "decided_utc": "2026-09-12T08:59:42Z",
+        "material_objections": [
+          "C01-Lambda-engine-closure",
+          "C02-Lambda-verifiability",
+          "C03-Lambda-deferral",
+          "C03-Atom-staging"
+        ],
+        "reason": "Lambda 3xPARTIAL + Atom 1xPARTIAL with source-grounded gaps; consumed by Phase 2D revisions 003/004",
+        "verdict": "CERTIFICATION_FAILED_REPAIRABLE"
+      },
+      "panel": [
+        "AUD-C01",
+        "AUD-C02",
+        "AUD-C03"
+      ],
+      "revision": 2,
+      "status": "SEALED_FAILED_REPAIRABLE"
+    },
+    {
+      "assessment": {
+        "assessed_utc": "2026-09-12T10:31:30Z",
+        "freeze_packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e",
+        "freeze_prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+        "tally": {
+          "AUD-C04": "NON_FIXED:Lambda",
+          "AUD-C05": "NON_FIXED:Lambda",
+          "AUD-C06": "NON_FIXED:Lambda,Atom"
+        },
+        "unanimous": false
+      },
+      "cycle_id": "CERTIFICATION_CYCLE_002",
+      "decision": {
+        "decided_utc": "2026-09-12T10:32:02Z",
+        "material_objections": [],
+        "reason": "Measurement-gating deadlock: surviving gaps are PENDING_TARGET-by-design (post equality, live staged measurement) unprovable before locked execution; no pre-measurement revision can advance unanimity; further cycles would be positivity theater. Assessment: Path.md Sec.3.23 + CYCLE_002.objections.json (0 material, 0 unresolved).",
+        "verdict": "CERTIFICATION_FAILED_IRREDUCIBLE"
+      },
+      "panel": [
+        "AUD-C04",
+        "AUD-C05",
+        "AUD-C06"
+      ],
+      "revision": 4,
+      "status": "SEALED_FAILED_IRREDUCIBLE"
+    }
+  ],
+  "updated_utc": "2026-09-12T10:32:02Z"
+}

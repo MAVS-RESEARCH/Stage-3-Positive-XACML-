@@ -1,0 +1,12 @@
+{
+  "auditors": [
+    "AUD-L07",
+    "AUD-L08",
+    "AUD-L09"
+  ],
+  "authorized": true,
+  "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "rule": "Amendment-007 unanimous launch certification",
+  "sealed_utc": "2026-09-12T17:52:10Z"
+}

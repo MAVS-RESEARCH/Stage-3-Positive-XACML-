@@ -1,0 +1,202 @@
+{
+ "obligations": [
+  {
+   "anchor": "Lambda",
+   "canonicalization": "UTF-8 JSON sorted-keys of {constituent: sha256}, recompute_lambda canonical form",
+   "code_sha256": "verify_deployment_set.py:ecde436471669ddb5d0b4aea760f4316313def4f80be8b240117dcd95a128ee0",
+   "depends_on": [
+    "classpath_manifest.json",
+    "lambda_manifest.json"
+   ],
+   "evidence_producer": "verify_deployment_set.py --check-classpath over live clone dirs (frozen; hash in LAUNCH_FREEZE.json execution_code)",
+   "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
+   "independent_verifier": "second implementation compares manifest vs live listing independently (no shared helpers)",
+   "needs_decision_content": false,
+   "obligation_id": "RC-CLASSPATH-ACTUAL",
+   "pass_criterion": "live test-classes/pdp-classes name-set equal AND every sha256 equal AND extension-marker set equal",
+   "permitted_fields": [
+    "file paths relative to clone",
+    "sha256",
+    "bytes",
+    "count"
+   ],
+   "prohibited_fields": [
+    "Decision",
+    "Permit",
+    "NotApplicable",
+    "touch",
+    "K",
+    "classification",
+    "expected_*"
+   ],
+   "proposition": "actual invocation classpath content equals the frozen classpath manifest",
+   "reason_deferred": "live tree bytes at invocation instant do not exist pre-execution",
+   "verifier": "verify_deployment_set.py --check-classpath"
+  },
+  {
+   "anchor": "Lambda",
+   "canonicalization": "UTF-8 JSON sorted-keys",
+   "code_sha256": "verify_deployment_set.py:ecde436471669ddb5d0b4aea760f4316313def4f80be8b240117dcd95a128ee0;run_authzforce.py:c8c9275d612318c552556d734fe6661499c670ee67acdc17125c64f1b91b5ac7",
+   "depends_on": [
+    "policy_dir_listing.json",
+    "classpath_manifest.json"
+   ],
+   "evidence_producer": "verify_deployment_set.py --check/--check-staged + run_authzforce.verify_staged_fixture pre/post-invoke (all frozen; hashes in LAUNCH_FREEZE.json execution_code)",
+   "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
+   "independent_verifier": "second implementation re-lists dirs and recomputes hashes from frozen manifests",
+   "needs_decision_content": false,
+   "obligation_id": "RC-DEPLOYMENT-ACTUAL",
+   "pass_criterion": "staged pdp.xml/policy.xml byte-equal frozen AND staged policies/ == [policy.xml] AND staged root == [pdp.xml, policies] AND live deployment set equals manifest, pre- AND post-invocation",
+   "permitted_fields": [
+    "paths",
+    "sha256",
+    "bytes",
+    "names",
+    "counts"
+   ],
+   "prohibited_fields": [
+    "Decision",
+    "Permit",
+    "NotApplicable",
+    "touch",
+    "K",
+    "classification",
+    "expected_*"
+   ],
+   "proposition": "actual staged/deployed policy set equals the frozen single-policy set at invocation",
+   "reason_deferred": "staged copies and live listings at invocation instant do not exist pre-execution",
+   "verifier": "verify_deployment_set.py --check-staged"
+  },
+  {
+   "anchor": "Lambda",
+   "canonicalization": "raw file bytes sha256",
+   "code_sha256": "run_authzforce.py:c8c9275d612318c552556d734fe6661499c670ee67acdc17125c64f1b91b5ac7",
+   "depends_on": [
+    "wrapper_evidence.json input_hashes",
+    "execution_inputs.json worlds"
+   ],
+   "evidence_producer": "sha256 over staged request bytes pre/post-invoke (hash only, no value read) + frozen repaired-byte manifest compare",
+   "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
+   "independent_verifier": "second implementation re-hashes staged bytes and compares to frozen repaired bytes",
+   "needs_decision_content": false,
+   "obligation_id": "RC-REQUEST-ACTUAL",
+   "pass_criterion": "staged request sha256 equal frozen repaired sha256 per world AND staged byte count equal frozen byte count, pre- AND post-invocation (single-Attribute structure proven statically pre-launch; no value plaintext in conformance evidence)",
+   "permitted_fields": [
+    "paths",
+    "sha256",
+    "bytes",
+    "AttributeValue sha256 (no plaintext values)"
+   ],
+   "prohibited_fields": [
+    "Decision",
+    "Permit",
+    "NotApplicable",
+    "touch",
+    "K",
+    "classification",
+    "expected_*"
+   ],
+   "proposition": "actual staged request bytes equal the frozen world request bytes",
+   "reason_deferred": "actual staged request files at invocation (pre- AND post-invoke) do not exist pre-execution; static builder-output equality is proven separately in-packet (request_diffs.json + INV-05/INV-06 + builder_source.py) and is NOT what this obligation defers",
+   "verifier": "run_authzforce staged verification"
+  },
+  {
+   "anchor": "Lambda",
+   "canonicalization": "UTF-8 JSON sorted-keys of {constituent: sha256}, recompute_lambda canonical form",
+   "code_sha256": "derive_Lambda.py:21afdbe877e3610f36f8f3c3face577f1da203bcc506fde420705177fb987aa8;recompute_lambda.py:0cea29ff17ba2c29cf89481a59136fd20f980c3b8495027c8506891c5f6bcd76",
+   "depends_on": [
+    "lambda_manifest.json"
+   ],
+   "evidence_producer": "derive_Lambda.py over staged fixture + recompute_lambda.py composite (both frozen; hashes in LAUNCH_FREEZE.json execution_code)",
+   "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
+   "independent_verifier": "second implementation recomputes composite from manifest constituents",
+   "needs_decision_content": false,
+   "obligation_id": "RC-LAMBDA-POST",
+   "pass_criterion": "post composite hash == pre composite hash (no tolerance)",
+   "permitted_fields": [
+    "constituent hashes",
+    "composite hash"
+   ],
+   "prohibited_fields": [
+    "Decision",
+    "Permit",
+    "NotApplicable",
+    "touch",
+    "K",
+    "classification",
+    "expected_*"
+   ],
+   "proposition": "Lambda composite hash after request repair and staging equals pre-repair hash",
+   "reason_deferred": "post-repair/post-staging state does not exist pre-execution",
+   "verifier": "recompute_lambda.py composite compare + conformance_verify_a/b.py pre/post equality"
+  },
+  {
+   "anchor": "Atom",
+   "canonicalization": "UTF-8 JSON sorted-keys of ordered checkpoint events",
+   "code_sha256": "run_authzforce.py:c8c9275d612318c552556d734fe6661499c670ee67acdc17125c64f1b91b5ac7",
+   "depends_on": [
+    "invocation_record.json",
+    "staging_certificate.json"
+   ],
+   "evidence_producer": "run_authzforce.py write_chronology JSONL per world (build_done,stage_done,verify_done,invoke_start,invoke_end,response_sealed; event names + utc + request-sha only, zero response bytes) + frozen exact-order predicate in conformance_verify_a/b",
+   "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
+   "independent_verifier": "second implementation replays event order from log timestamps",
+   "needs_decision_content": false,
+   "obligation_id": "RC-ATOM-ORDER",
+   "pass_criterion": "construction/staging/verification complete before invocation begins AND response file appears only after invocation ends AND actual native-cycle count equals frozen world count (2), read from the frozen event log",
+   "permitted_fields": [
+    "event names",
+    "ordering",
+    "cycle count",
+    "file existence",
+    "hashes"
+   ],
+   "prohibited_fields": [
+    "Decision",
+    "Permit",
+    "NotApplicable",
+    "touch",
+    "K",
+    "classification",
+    "expected_*",
+    "response content"
+   ],
+   "proposition": "construction/staging completes, then native invocation begins, then native response becomes available, with no response before invocation and actual invocation count equal to the frozen world count",
+   "reason_deferred": "actual event order and actual invocation count of the future execution do not exist pre-execution (the frozen expected count itself is static from execution_inputs.json)",
+   "verifier": "chronology replayer comparing event list to frozen order"
+  },
+  {
+   "anchor": "Lambda",
+   "canonicalization": "UTF-8 JSON sorted-keys of {cp-entry: sha256}",
+   "code_sha256": "verify_deployment_set.py:ecde436471669ddb5d0b4aea760f4316313def4f80be8b240117dcd95a128ee0",
+   "depends_on": [
+    "built_artifacts poms/coordinates",
+    "cp-file at invocation"
+   ],
+   "evidence_producer": "verify_deployment_set.py --hash-cp over the maven-generated cp file per world pre-eval (every listed jar hashed) + world-pair equality in conformance_verify_a/b; frozen coordinate closure in candidates/dependency_hashes.json",
+   "failure_outcome": "EXECUTION_CONFORMANCE_FAIL; TERMINAL, no rerun, no repair",
+   "independent_verifier": "second implementation re-hashes cp entries from the recorded list",
+   "needs_decision_content": false,
+   "obligation_id": "RC-DEPS-CONSISTENT",
+   "pass_criterion": "per-world cp entry sets identical AND every entry hash equal across worlds AND per-world set equals frozen manifest set AND manifest recorded",
+   "permitted_fields": [
+    "cp entries",
+    "sha256",
+    "bytes"
+   ],
+   "prohibited_fields": [
+    "Decision",
+    "Permit",
+    "NotApplicable",
+    "touch",
+    "K",
+    "classification",
+    "expected_*"
+   ],
+   "proposition": "both worlds execute against byte-identical dependency artifacts",
+   "reason_deferred": "cp-file and per-world jar bytes at invocation do not exist pre-execution; absolute provenance rests on pom coordinates",
+   "verifier": "verify_deployment_set.py --hash-cp + conformance_verify_a/b world-pair equality"
+  }
+ ],
+ "registry_id": "PC-XACML-S3PLUS-v1-run-conformance"
+}

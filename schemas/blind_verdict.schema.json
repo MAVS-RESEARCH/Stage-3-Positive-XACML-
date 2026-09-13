@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/blind_verdict.schema.json",
+  "title": "Phase-2B blind adjudication verdict",
+  "description": "Independent adjudicator verdicts for H/P_R/Lambda/Atom with source locators. Adjudicator identity is an anonymous AUD-XXX id; the identity-bearing attestation original is retained privately and only its hash is sealed.",
+  "type": "object",
+  "required": ["verdict_id", "auditor_id", "qualification", "verdicts", "attestation_hash"],
+  "additionalProperties": false,
+  "properties": {
+    "verdict_id": {"type": "string"},
+    "auditor_id": {"type": "string", "pattern": "^AUD-[A-Z0-9]{2,12}$"},
+    "qualification": {"type": "string", "const": "QUALIFIED_INDEPENDENT"},
+    "verdicts": {
+      "type": "object",
+      "required": ["H", "P_R", "Lambda", "Atom"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "locators"],
+        "additionalProperties": false,
+        "properties": {
+          "status": {"enum": ["FIXED", "PARTIAL", "AMBIGUOUS", "UNSUPPORTED"]},
+          "locators": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "attestation_hash": {"type": "string", "minLength": 16}
+  }
+}

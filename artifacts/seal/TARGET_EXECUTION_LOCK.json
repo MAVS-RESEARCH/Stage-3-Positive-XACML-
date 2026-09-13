@@ -1,0 +1,8 @@
+{
+  "lock_id": "PC-XACML-S3PLUS-v1-target-lock",
+  "updated_utc": "2026-09-12T18:31:51Z",
+  "worlds": [
+    "x_nonpermit",
+    "x_permit"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "completed_executions": 0,
+  "environment": {
+    "authzforce_commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+    "lxml": "6.1.1",
+    "toolchain": [
+      "Python 3.13.7",
+      "openjdk version \"21.0.9\" 2025-10-21 LTS"
+    ]
+  },
+  "execution_code": {
+    "src/audit/conformance_verify_a.py": "5414408832b26b30cb643a1ab30fb60d1786e0917a84535fa4d00ae3ae87a8e9",
+    "src/audit/conformance_verify_b.py": "60a71f1e6ac0347fcae5fd035223efa6e047c46c907a267ce7dca4095728bba7",
+    "src/audit/recompute_lambda.py": "6c5dcdd353f1689da364ad1be108b167501c16d5a127d95b58d938b2eab2f65f",
+    "src/audit/verify_deployment_set.py": "921af26b4f2cde5bad3bb924bf17c0b78615732ac0a39e3b718f48e25d39fc5b",
+    "src/pc/derive_Lambda.py": "21afdbe877e3610f36f8f3c3face577f1da203bcc506fde420705177fb987aa8",
+    "src/xacml/PdpRunner.java": "38771f99af69e79c1aaa463ec55bca9d557ee96108b3b85a7a0acdd7c95964a3",
+    "src/xacml/build_repaired_requests.py": "f732a08a37047550f9c067c761e0ab154ca699ee5d0eb9bb516a48f99c0986ea",
+    "src/xacml/parse_response.py": "c37b3b99e0a4ce0435880abc072c8a2854d5dc841235aa9578c968aee8fd9284",
+    "src/xacml/run_authzforce.py": "708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce"
+  },
+  "frozen": true,
+  "frozen_utc": "2026-09-12T13:07:09Z",
+  "launch_id": "PC-XACML-S3PLUS-v1-launch-001",
+  "packet_sha256": "db661dd74a37bec4586fce0ae329263b63ab679908fd1336a69eefa904e92a8d",
+  "panel": [
+    "AUD-L01",
+    "AUD-L02",
+    "AUD-L03"
+  ],
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "registry_sha256": "12a46820dca3434a6d993d6801c52e4df24d02602e6391a263df03e98910a837",
+  "semantic_revision": 4
+}

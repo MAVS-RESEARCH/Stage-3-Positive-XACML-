@@ -1,0 +1,109 @@
+{
+  "objections": [
+    {
+      "anchor": "H",
+      "claim_attacked": "H form beyond admitted interface (markers, empty, env, C14N, capture)",
+      "counterinterpretation": "Form variants with no admitted-effect per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "h_r1/census/method records",
+      "materiality": "Same form family as RS006-01/R3-01: interface-stated, censused",
+      "objection_id": "RS007-01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "P_R",
+      "claim_attacked": "P_R form beyond admitted interface (fineness, tokens, pooling, scope, dedup)",
+      "counterinterpretation": "Form variants with no admitted-effect per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "pr_r1/match_table/census records",
+      "materiality": "Same rule family as RS006-02/RS001-PR01..PR04: scoped coincidence proven",
+      "objection_id": "RS007-02",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "PROVENANCE",
+      "claim_attacked": "lineage current.pre_hash equals operative manifest pre_hash",
+      "counterinterpretation": "Stale intermediate breaks lineage rule + audit cleanliness",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "pre_hash_lineage.json current vs lambda_manifest pre_hash",
+      "materiality": "Real erratum, nonmaterial (nothing mechanical reads lineage.current; operative field + recompute agree); fix scheduled, no refreeze fabrication",
+      "objection_id": "RS007-03",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "operative pre_hash f1f44fc2 + recompute agreement + refs mode",
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "freeze/packet naming exactness (REVISION_003 dir label)",
+      "counterinterpretation": "Label mismatch blocks binding claims",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "final_freeze/ operative vs final_freeze_REVISION_003/ label",
+      "materiality": "Real naming polish, nonmaterial (content binds by hash; convention documented); exact-label at next revision",
+      "objection_id": "RS007-04",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "ancestry record + packet hash bindings",
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "census source_class (X worlds inside N3-cited census)",
+      "counterinterpretation": "X dependence hidden from hard-rule check",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "h_r1 census scope vs ledger source_class [N1,N3]",
+      "materiality": "Real scoping polish, nonmaterial here (constructed worlds deterministic from frozen inputs + prereg rule); pin census hashes / add X class at next revision",
+      "objection_id": "RS007-05",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "deterministic construction + INV-05/06 + execution_inputs freeze",
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "drivers inside Lambda capability (harness in authority hash)",
+      "counterinterpretation": "Authority drift masked by harness constancy or vice versa",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "built_artifacts.drivers in lambda_manifest components",
+      "materiality": "Real scope note, nonmaterial direction-safe (stricter hash); move drivers to wrapper envelope at next revision",
+      "objection_id": "RS007-06",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "commit/tree/jar hashes independently pin authority",
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "staging booleans assert measurement (vs procedure)",
+      "counterinterpretation": "Pre-execution certifier misled about live measurement",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "staging_certificate disjointness/no_alternate_policy flags",
+      "materiality": "Real wording polish, nonmaterial (PENDING_TARGET markers adjacent; procedure reviewable); relabel verified-vs-pending at next revision",
+      "objection_id": "RS007-07",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "adjacent PENDING_TARGET markers + gate code",
+      "sweep": "REHEARSAL_SWEEP_007"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "joint conjunction exceeds scoped documentation",
+      "counterinterpretation": "Conjunction overclaims byte equality, constancy sharing, reachability",
+      "disposition": "DUPLICATE",
+      "locator": "resolved/regime/attribution/binding/reachability joints",
+      "materiality": "Same conjunction family as RS006-D4/E/RS002-J01..J05: scoped PASS documented, byte/constancy/reachability need target audit by design",
+      "objection_id": "RS007-08",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_007"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_007"
+}

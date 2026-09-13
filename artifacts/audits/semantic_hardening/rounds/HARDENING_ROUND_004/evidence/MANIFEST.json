@@ -1,0 +1,82 @@
+[
+  {
+    "file": "xsd_std_providers.txt",
+    "lines": [
+      545,
+      575
+    ],
+    "source": "pdp-engine/src/main/resources/pdp.xsd"
+  },
+  {
+    "file": "xsd_strict_issuer.txt",
+    "lines": [
+      600,
+      660
+    ],
+    "source": "pdp-engine/src/main/resources/pdp.xsd"
+  },
+  {
+    "file": "xsd_preprocessor_defaults.txt",
+    "lines": [
+      165,
+      195
+    ],
+    "source": "pdp-engine/src/main/resources/pdp.xsd"
+  },
+  {
+    "file": "xsd_stdenv_doc.txt",
+    "lines": [
+      1029,
+      1080
+    ],
+    "source": "pdp-engine/src/main/resources/pdp.xsd"
+  },
+  {
+    "file": "adapter_defaults.txt",
+    "lines": [
+      238,
+      253
+    ],
+    "source": "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/PdpEngineAdapters.java"
+  },
+  {
+    "file": "stdenv_default_doc.txt",
+    "lines": [
+      36,
+      55
+    ],
+    "source": "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java"
+  },
+  {
+    "file": "stdenv_binding.txt",
+    "lines": [
+      365,
+      375
+    ],
+    "source": "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java"
+  },
+  {
+    "file": "stdenv_default_factory.txt",
+    "lines": [
+      475,
+      485
+    ],
+    "source": "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java"
+  },
+  {
+    "file": "std_wiring.txt",
+    "lines": [
+      375,
+      396
+    ],
+    "source": "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java"
+  },
+  {
+    "file": "parent_dir.txt",
+    "lines": [
+      700,
+      750
+    ],
+    "source": "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java"
+  }
+]

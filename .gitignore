@@ -1,0 +1,29 @@
+# Python / test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.hypothesis/
+
+# AuthzForce working clones and build outputs (recreated deterministically)
+external/authzforce-repo/
+*.class
+target/
+
+# Maven local repository lives outside the repo; never commit it
+# (path recorded in artifacts/raw/environment.txt)
+
+# AuthzForce distribution / toolchain unpacked under temp (outside repo)
+# (paths recorded in artifacts/raw/environment.txt)
+
+# Run-scoped reproduction checkouts (outside repo, per WorkPlan isolation rule)
+# $TMPDIR/pc-xacml-repro-*/
+
+# Logs with absolute local paths stay out of sealed docs; kept locally only
+artifacts/logs/local_*.log
+
+# OS / editor artefacts
+.DS_Store
+Thumbs.db
+*~
+.vscode/
+.idea/

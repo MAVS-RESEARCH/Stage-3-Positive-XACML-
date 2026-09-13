@@ -1,0 +1,20 @@
+{
+  "anchor_ledger_sha256": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "derivation": {
+    "compiler": "src/pc/compile_contract.py",
+    "independent": "src/audit/independent_touch.py",
+    "primary": "src/pc/derive_touch.py"
+  },
+  "execution_inputs_sha256": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407",
+  "external_manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+  "files": {
+    "artifacts/contracts/pc_xacml_primary.contract.json": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+    "artifacts/contracts/touch.json": "123672b954f2f79c6d98220f260db2e9786e89fa6006a7ef7e9f991d013f2127",
+    "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+    "external/MANIFEST.json": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+    "prereg/execution_inputs.json": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407"
+  },
+  "phase": 3,
+  "touch_sha256": "123672b954f2f79c6d98220f260db2e9786e89fa6006a7ef7e9f991d013f2127"
+}

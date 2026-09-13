@@ -1,0 +1,35 @@
+{
+  "adequacy_ref": "policy_adequacy_certificate.json",
+  "adequacy_sha256": "0fc251e2a554c031897e23c7355b8cefe1522a0a5ce8ed5fb6027bc344976248",
+  "constant_across_repair": true,
+  "designator_coordinates": [
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+      "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "issuer": null
+    }
+  ],
+  "produced_utc": "2026-09-11T18:56:44Z",
+  "projection_sha256": "77b1a650070fd8ea86c7280a6880678092d6f1bdf631b5a7ebb80b79629cb158",
+  "relation_id": "PC-XACML-S3PLUS-v1-PR",
+  "rule": "histories h1, h2 are P_R-equivalent iff for every frozen designator coordinate (Category, AttributeId, DataType, Issuer) the named attribute bags compare equal as sorted typed multisets under XACML matching semantics"
+}

@@ -1,0 +1,28 @@
+{
+  "contract_id": "pc-xacml-s3plus-primary",
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "freeze_order": [
+    "F000",
+    "F100",
+    "F010",
+    "F001",
+    "F110",
+    "F101",
+    "F011",
+    "F111"
+  ],
+  "kappa": [
+    1,
+    "INF",
+    1,
+    1,
+    "INF",
+    "INF",
+    1,
+    "INF"
+  ],
+  "nontrivial": true,
+  "produced_utc": "2026-09-12T18:46:29Z",
+  "solver": "primary"
+}

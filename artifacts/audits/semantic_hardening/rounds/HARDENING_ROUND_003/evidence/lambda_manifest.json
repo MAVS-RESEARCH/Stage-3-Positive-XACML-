@@ -1,0 +1,91 @@
+{
+  "canonical_spec": "UTF-8 JSON, sorted keys, of components+exclusions",
+  "components": {
+    "attribute_providers_resolved": {
+      "active": [
+        "StandardEnvironmentAttributeProvider (DEFAULT_FACTORY, override=false)"
+      ],
+      "basis": "N4 PdpEngineConfiguration std-provider wiring + pdp.xsd documentary + designator census (no environment designators read it)",
+      "canonical": "descriptor identifier set",
+      "reason": "enabled by pdp.xsd standardAttributeProviders default true; serves current-* environment attributes only",
+      "stability": "config-equal across repair"
+    },
+    "engine_sources": {
+      "basis": "pristine pinned clone (clean tree verified at evidence build)",
+      "canonical": "frozen file bytes",
+      "files": {
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java": "54892fad033cbb80fc7cee5688bfb54da02ded8ce74169f2759d641c07e8fcdf",
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java": "8de8c40436982f1685d514bc5b6de51e18246a4b449c18af7f70b29bcd5fc915",
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/PdpEngineAdapters.java": "82ce86f56edbd1540105ac8d87fa244dd5a7a446477fd7315ac0fec07db8c326",
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/SingleDecisionXacmlJaxbRequestPreprocessor.java": "9d0fc2bc537adb04de1d45b42597dc93995a02e2d3e51c5182fb3becaf751d99",
+        "pdp-engine/src/main/resources/pdp.xsd": "63cbcc2ce6e2517fc4526a9bf5000c3e43e402101779568308bf3ffbb193748e"
+      },
+      "reason": "cited N4 default-wiring evidence bound by content",
+      "stability": "byte-equal across repair"
+    },
+    "implementation_identity": {
+      "basis": "frozen RELEASE.json/COMMIT.txt",
+      "canonical": "identifier triple",
+      "commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+      "reason": "capability == code; version pins behavior",
+      "release": "21.2.0",
+      "stability": "identical across repair",
+      "tag": "release-21.2.0"
+    },
+    "policy_bytes": {
+      "basis": "frozen fixture + designator census",
+      "canonical": "frozen file bytes",
+      "reason": "sole authorization policy evaluated",
+      "sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+      "stability": "byte-equal across repair"
+    },
+    "preprocessor_resolved": {
+      "basis": "N4 PdpEngineAdapters default adapter construction with strictIssuer=false (pdp.xsd default), xPath=false (pdp.xsd default), verbosity=0 (pdp.xsd default)",
+      "canonical": "identifier string",
+      "id": "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax",
+      "reason": "effective preprocessor absent explicit config",
+      "stability": "config-equal across repair"
+    },
+    "provider_element": {
+      "basis": "frozen pdp.xml StaticPolicyProvider element",
+      "canonical": "W3C exclusive C14N, no comments, of the policyProvider element bytes",
+      "reason": "sole policy provider configuration",
+      "sha256": "73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+      "stability": "byte-equal across repair"
+    },
+    "request_path": {
+      "basis": "N4 preprocessor + parser findings (see parser_fidelity record)",
+      "canonical": "rule strings",
+      "parser_rules": "empty containers skipped; bags immutable per 7.3.5; lax duplicates permitted (moot: singletons throughout)",
+      "preprocessor": "default-lax adapter (strictIssuer=false, xPath=false, verbosity=0)",
+      "reason": "bytes-to-bags path is capability, not per-eval state",
+      "stability": "config-equal across repair"
+    }
+  },
+  "exclusions": {
+    "evaluation_clock": {
+      "basis": "env-inertness record (designator/function census)",
+      "reason": "no read path from timestamps into evaluation: timestamps enter only via env attributes, proven inert for this fixture; excluded from hash by documented rule, not by omission"
+    },
+    "handler_added_non_env": {
+      "basis": "pdp.xml child census + provider scope + designator census",
+      "reason": "no configured channel can supply non-environment values: sole provider serves current-* only; no PIP elements; default handler passes request values through"
+    },
+    "jvm_toolchain": {
+      "basis": "environment record (out of Lambda scope by definition)",
+      "reason": "execution substrate, not authorization capability; pinned in environment record, not in capability hash"
+    },
+    "policy_location": {
+      "rule": "PARENT_DIR-relative glob policies/*.xml resolved inside the frozen fixture dir; absolute URI excluded as machine-dependent by design",
+      "sha256": "3560d67298def4d74418ead1c9b0d070b216792c25fbfa3ad7c4900ce98d3865"
+    },
+    "resolved_defaults": {
+      "reason": "schema defaults (XPath/strictIssuer/verbosity/maxInteger/ignoreOldVersions/std registries) are capability; pinned by content hash",
+      "sha256": "62bc5f920879c22d08dda611ec31ffd0f33ecfeaccf748046366598b74301e67"
+    }
+  },
+  "manifest_id": "PC-XACML-S3PLUS-v1-lambda-manifest",
+  "pre_hash": "3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a",
+  "produced_utc": "2026-09-11T20:40:57Z",
+  "supersedes_pre_hash": "bb2c3c94-method-opaque (historical; replaced by reconstructible construction)"
+}

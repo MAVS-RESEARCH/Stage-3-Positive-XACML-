@@ -1,0 +1,12 @@
+{
+  "adapter_exposure_hits": [],
+  "available": false,
+  "conclusion": "route (a) unavailable: H must be established via route (b) equivalence proof or stay AMBIGUOUS",
+  "engine_modified": false,
+  "probe_id": "PC-XACML-S3PLUS-v1-route-a",
+  "probed_utc": "2026-09-11T18:56:44Z",
+  "reasons_unavailable": [
+    "PdpEngineInoutAdapter exposes indivisible evaluate() only; no resolved-context observation point exists on the public API",
+    "H_permit/H_nonpermit resolved contexts would require full PDP evaluation of completed worlds, which is prohibited before the 2B seal; route (a) therefore cannot ground the pre-unblinding H verdict"
+  ]
+}

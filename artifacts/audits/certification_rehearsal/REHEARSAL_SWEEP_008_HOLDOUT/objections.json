@@ -1,0 +1,109 @@
+{
+  "objections": [
+    {
+      "anchor": "H",
+      "claim_attacked": "resolved-context identity vs handler-added bags",
+      "counterinterpretation": "Handler/timezone bags enter resolved context beyond request bytes",
+      "disposition": "DUPLICATE",
+      "locator": "N1 dataflow optionally-adds; DefaultEnvironmentProperties; sysprop fallback",
+      "materiality": "Same handler family as R3-01/RS001-H03/RS002-J01: zero env reads + sole current-* channel + singletons; no other ${} in frozen pdp.xml; unexploited",
+      "objection_id": "RS008-H01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "P_R",
+      "claim_attacked": "bag-vector vs outcome-vector vs 4v5 coordinates",
+      "counterinterpretation": "Instance readings change R-membership and freeze removal",
+      "disposition": "DUPLICATE",
+      "locator": "duplicate action-id; MustBePresent-error placement; Sec 7.6/7.7",
+      "materiality": "Same indexing family as SWEEP_002-C2/RS001-PR01..PR04: coincidence censused on admitted interface; conditional freeze talk unobserved (touch uncomputed)",
+      "objection_id": "RS008-P01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "Lambda",
+      "claim_attacked": "narrow/manifest/wide capability cuts",
+      "counterinterpretation": "Staged extra-policy authority change with hashes passing",
+      "disposition": "DUPLICATE",
+      "locator": "9-line pdp.xml; glob; JDK/jars/deps/parser/defaults",
+      "materiality": "Same cut family as SWEEP_002-C3/RS003-B01: listing pin + deployment gate + staged gate; extra-file vector gated (procedure) with TOCTOU residual documented",
+      "objection_id": "RS008-L01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "Atom",
+      "claim_attacked": "one vs split vs PDP-only transaction cuts",
+      "counterinterpretation": "Split algebra changes freeze lattice; K incomparable",
+      "disposition": "DUPLICATE",
+      "locator": "N1 stage names; builder/driver separability; PDP-internal calls",
+      "materiality": "Same cut family as SWEEP_002-C4/RS003-H04: OUT_OF_SCOPE_INTERFACE_CHANGE by stipulation; no new N1 individuation rule",
+      "objection_id": "RS008-A01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "Lambda",
+      "claim_attacked": "runtime classpath composition pinned (extension path, test-classes, driver)",
+      "counterinterpretation": "Extension present/absent flips construction path; tampered .class or added glob member changes evaluation with zero hash failure; staged write between verify and subprocess wins",
+      "disposition": "VALID_MATERIAL",
+      "locator": "PdpRunner pdp-ext.xsd/catalog fallback; test-classes with extensions+TestExtensible fns; verify_sources 4-file loop; derive_Lambda no-classpath; staged TOCTOU window",
+      "materiality": "MATERIAL: concrete live-code mechanism; certifier withholds Lambda-closure FIXED. Repair: classpath content manifest + pre-eval re-verification (REVISION_004)",
+      "objection_id": "RS008-CE1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "PdpRunner fallback lines + test-classes ext/catalog/extension-fn bytes + verify_sources loop + derive_Lambda components + stage/invoke window",
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "Lambda",
+      "claim_attacked": "transitive Central artifacts + JDK inside hash",
+      "counterinterpretation": "Mirror/compromise/patch changes evaluation with hashes passing",
+      "disposition": "DUPLICATE",
+      "locator": "built_artifacts coordinates-only basis; jvm_toolchain exclusion",
+      "materiality": "Same disclosed-limitation family as red-team T7/RS004: coordinates immutable by repository policy, jars present hashed, no concrete mechanism on this deployment; exclusion rule stated",
+      "objection_id": "RS008-CE2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "Atom",
+      "claim_attacked": "split counting (construct+submit) as equally native",
+      "counterinterpretation": "Relocated E-touch changes freeze sets",
+      "disposition": "DUPLICATE",
+      "locator": "N1 stage names; builder/driver separability",
+      "materiality": "Same split family as RS008-A01/SWEEP_002-C4: stipulated OUT_OF_SCOPE; censuses/INV/counting unchanged",
+      "objection_id": "RS008-CE3",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "narrow-gate vs operative-manifest regimes both FIXED unbound",
+      "counterinterpretation": "Joint regime/attribution/binding/reachability overclaims",
+      "disposition": "DUPLICATE",
+      "locator": "no_pip child census; Issuer 3-vs-4 tuples; triple/Detail/count/sha unpinned in derive_atom; VOLATILE strips; existence-only envelope",
+      "materiality": "Same joint family as RS002-J01..J05/RS004/RS006-D4: scoped PASS documented, byte/constancy/reachability need target audit by design; no new bytes",
+      "objection_id": "RS008-J01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_008_HOLDOUT"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_008_HOLDOUT"
+}

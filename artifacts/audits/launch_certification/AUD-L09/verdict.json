@@ -1,0 +1,65 @@
+{
+  "attestation_hash": "7b9e1b5d6ed4b28ce3f77e0de654ab69fe73e8da41540f7db9c9f3e345238beb",
+  "auditor_id": "AUD-L09",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed launch packet.",
+  "deferrals": {
+    "RC-ATOM-ORDER": "LEGITIMATELY_DEFERRED",
+    "RC-CLASSPATH-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPLOYMENT-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPS-CONSISTENT": "LEGITIMATELY_DEFERRED",
+    "RC-LAMBDA-POST": "LEGITIMATELY_DEFERRED",
+    "RC-REQUEST-ACTUAL": "LEGITIMATELY_DEFERRED"
+  },
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-L09-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 3.1 stripped lines 1755-1785 (PEP native request to handler to PDP to response)",
+        "candidates/builder_source.py:insert_attribute plus assert_single_attribute_addition INV-05 lines 120-167 plus assert_out_dir_disjoint lines 42-56 plus candidates/request_diffs.json:unified_diffs (single Attribute insert, re-serialization deltas masked by C14N)",
+        "candidates/wrapper_evidence.json:builder_reaches_pdp false plus forbidden_token_hits empty plus rule_to_code plus input_hashes plus corpus/fixture/response.xml:10 MissingAttributeDetail triple plus corpus/fixture/policies/policy.xml:18-21 matching MustBePresent true designator",
+        "candidates/invocation/PdpRunner.java:68-71 single pdp.evaluate plus candidates/invocation/run_authzforce.py:stage_completed_fixture lines 125-147 plus verify_staged_fixture lines 191-214 plus write_chronology lines 163-188 (build_done/stage_done/verify_done/invoke_start/invoke_end/response_sealed, request-sha only) plus candidates/execution_inputs.json:worlds 2 worlds plus candidates/staging_certificate.json plus candidates/invocation_record.json"
+      ],
+      "notes": "Native PEP-handler-PDP-response cycle distinguished from wrapper single-Attribute construction via spec dataflow, builder bytes with INV-05/INV-06 and disjointness, diffs, wrapper scans, single-evaluate driver, and staged-copy verification; actual order and count deferred with frozen chronology producer and exact-order predicate.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43 (5 designators, MustBePresent true, Issuer absent)",
+        "corpus/fixture/request.xml:3-18 (3 Attributes, empty environment container, Issuer null) plus candidates/repaired_request_x_permit.xml:7 plus candidates/repaired_request_x_nonpermit.xml:7 (single added subject Attribute)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.4 stripped lines 8394-8401 (Issuer-absent wildcard governed by AttributeId and DataType alone)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.5 stripped lines 8417-8433 (missing with MustBePresent true gives Indeterminate; bags immutable during evaluation)",
+        "candidates/admitted_value_census.json (mechanical census over 3 request files: null Issuers 3/4/4, env values 0) plus candidates/env_inertness.json:designator_census (0 environment designators, string-equal/anyURI-equal only) plus n4_excerpts/xsd_std_providers.txt:7-20"
+      ],
+      "notes": "Multimap key with Issuer-or-null, absent-required marker for the single missing coordinate, explicit empty environment record, env inertness, and Issuer wildcard each verified against frozen policy/request bytes, mechanical censuses, and spec 7.3.4/7.3.5/7.3.6/10.2.5. No material gap.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "candidates/lambda_manifest.json:pre_hash 194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3 recomputed via candidates/recompute_lambda.py:canonical_composite UTF-8 JSON sorted-keys plus verified with packet-dir all verifiable constituents match, Sec. canonicalization",
+        "corpus/fixture/pdp.xml:6-8 plus candidates/provider_element_c14n.xml (StaticPolicyProvider PARENT_DIR glob) plus corpus/fixture/policies/policy.xml:sha256 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64 plus corpus/xacml-3.0-core-spec-cos01-en.html Sec. 3.1 dataflow lines 1755-1785",
+        "n4_excerpts/std_wiring.txt:2 plus n4_excerpts/stdenv_default_factory.txt:8 plus n4_excerpts/xsd_std_providers.txt:7-20 plus n4_excerpts/xsd_strict_issuer.txt:8-31 plus n4_excerpts/adapter_defaults.txt:9-11 (default-lax preprocessor, std-env override false, strict false) plus candidates/resolved_effective.json plus candidates/preprocessor_resolved.json",
+        "corpus/MANIFEST.json:authzforce commit 3cc0e988 plus corpus/COMMIT.txt plus corpus/RELEASE.json tag release-21.2.0 plus candidates/built/jars plus candidates/built/poms via candidates/path_remap.json plus candidates/dependency_hashes.json count 145 plus candidates/engine_sources/pdp-engine tree plus candidates/policy_dir_listing.json plus candidates/version_manifest.json"
+      ],
+      "notes": "Composite recomputes exactly; file-backed constituents match via recompute with packet dir; provider/preprocessor/wiring grounded in N4 excerpts and pdp.xsd; policy and implementation pinned to frozen seals; live classpath/deps/staging equality properly deferred with frozen producers/verifiers and binary criteria.",
+      "status": "FIXED"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43 (4 coordinates from 5 occurrences; action-id read/write share one coordinate, all MustBePresent true)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.6 stripped lines 8604-8617 (Match: empty bag gives False, error gives Indeterminate, existential True)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec. 7.3.5 stripped lines 8417-8424 plus Sec. 5.29 stripped lines 6291-6295 (missing with MustBePresent true gives Indeterminate)",
+        "candidates/match_table.json:designator_rows coordinate semantics with no per-world outcomes plus candidates/issuer_rule.json quote Sec. 7.3.4 lines 8394-8401 (Issuer-absent wildcard, pooling immaterial on null interface)"
+      ],
+      "notes": "Match-vector TRUE/FALSE/INDETERMINATE rule, 5-to-4 dedup with two literals on the action coordinate, error-token semantics, and singleton coincidence with bag equality verified against frozen designators, match table, and spec 7.6/7.3.5/5.29. No per-world outcomes recorded.",
+      "status": "FIXED"
+    }
+  }
+}

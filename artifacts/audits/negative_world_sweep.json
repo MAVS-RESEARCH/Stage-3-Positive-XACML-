@@ -1,0 +1,23 @@
+{
+  "control": "5.9",
+  "e_class_preserved": true,
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "fiber_open": true,
+  "frozen_external_untouched": true,
+  "permit_decision": "Permit",
+  "primary_never_replaced": true,
+  "primary_nonpermit_preserved": true,
+  "produced_utc": "2026-09-12T19:01:43Z",
+  "worlds": {
+    "wrong_answer_1": {
+      "decision": "NotApplicable",
+      "fiber_open_vs_permit": true,
+      "request_value": "wrong-answer-1"
+    },
+    "wrong_answer_2": {
+      "decision": "NotApplicable",
+      "fiber_open_vs_permit": true,
+      "request_value": "wrong-answer-2"
+    }
+  }
+}

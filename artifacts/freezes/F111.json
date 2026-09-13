@@ -1,0 +1,21 @@
+{
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "freeze": "F111",
+  "frozen_resources": [
+    "A",
+    "E",
+    "R"
+  ],
+  "kappa": "INF",
+  "proper_closer_exists": false,
+  "reachable_checkpoints": [
+    "S0"
+  ],
+  "removed_actions": [
+    "q_supply_missing_attribute"
+  ],
+  "solver": "primary",
+  "surviving_actions": [],
+  "terminal_target_classes": {},
+  "worst_branch_cost": "INF"
+}

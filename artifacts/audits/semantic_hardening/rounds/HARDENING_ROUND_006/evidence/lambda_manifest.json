@@ -1,0 +1,485 @@
+{
+  "canonical_spec": "UTF-8 JSON, sorted keys, of components+exclusions",
+  "components": {
+    "attribute_providers_resolved": {
+      "active": [
+        "StandardEnvironmentAttributeProvider (DEFAULT_FACTORY, override=false)"
+      ],
+      "basis": "N4 PdpEngineConfiguration std-provider wiring + pdp.xsd documentary + designator census (no environment designators read it)",
+      "canonical": "descriptor identifier set",
+      "reason": "enabled by pdp.xsd standardAttributeProviders default true; serves current-* environment attributes only",
+      "stability": "config-equal across repair"
+    },
+    "built_artifacts": {
+      "basis": "hashes of built/tested artifacts at pinned commit; transitive Central artifacts pinned by pom coordinates (immutable repository policy), not content-hashed: explicit limitation",
+      "drivers": [
+        {
+          "bytes": 3272,
+          "method": "sha256 of repo file bytes (git-pinned)",
+          "path": "src/xacml/PdpRunner.java",
+          "sha256": "38771f99af69e79c1aaa463ec55bca9d557ee96108b3b85a7a0acdd7c95964a3"
+        },
+        {
+          "bytes": 9575,
+          "method": "sha256 of repo file bytes (git-pinned)",
+          "path": "src/xacml/run_authzforce.py",
+          "sha256": "47b40bdea86fca039be2edcc3a6c0e8241e81829269f544c96d6d11a1d65d0c8"
+        }
+      ],
+      "jars": [
+        {
+          "bytes": 480333,
+          "method": "sha256 of built file bytes",
+          "path": "pdp-engine/target/authzforce-ce-core-pdp-engine-21.2.0.jar",
+          "sha256": "64b730bd2fac0972c710bdd414d3d356d7dbd235d966ed64d555a497743fce09"
+        },
+        {
+          "bytes": 42692,
+          "method": "sha256 of built file bytes",
+          "path": "pdp-io-xacml-json/target/authzforce-ce-core-pdp-io-xacml-json-21.2.0.jar",
+          "sha256": "7b0533b09de41a65bb63bb74b93d0590cf5e7f3bf43b6027099a09eb56db17fc"
+        },
+        {
+          "bytes": 66119,
+          "method": "sha256 of built file bytes",
+          "path": "pdp-testutils/target/authzforce-ce-core-pdp-testutils-21.2.0.jar",
+          "sha256": "065d4fcce6468bed6206cf25e382b2a5e7061fe2ce5b14c28d9be04ef4f038d1"
+        },
+        {
+          "bytes": 5052591,
+          "method": "sha256 of built file bytes",
+          "path": "pdp-testutils/src/test/resources.json/lib/Saxon-HE-9.8.0-15.jar",
+          "sha256": "74f4f51ce0a3151b0cc3f6e6cacd8608ad2430c14c363c378d8ad93b26ad9afc"
+        }
+      ],
+      "poms": [
+        {
+          "bytes": 2467,
+          "method": "sha256 of lockfile bytes",
+          "path": "pom.xml",
+          "sha256": "21bd68069dd69b59d555fb3feb26dea1baa87072b6d33a7d900458a95ecfa92d"
+        },
+        {
+          "bytes": 11358,
+          "method": "sha256 of lockfile bytes",
+          "path": "pdp-engine/pom.xml",
+          "sha256": "b0e2afd3d094571640a68e32c52ed126fed0587f773011522da6a20450b1f89e"
+        }
+      ],
+      "reason": "executed bytes (jars), dependency lock (poms), evaluation-path drivers",
+      "stability": "byte-equal across repair"
+    },
+    "classpath": {
+      "basis": "classpath_manifest content + pre-eval --check-classpath gate",
+      "canonical": "manifest file bytes (bound by hash)",
+      "manifest": "classpath_manifest.json (content hashes of test-classes + pdp-classes trees, extension activation facts)",
+      "manifest_sha256": "5920a4267e3533055b497e2696a31813acf78a77cd547a8885f6a0dd523694ce",
+      "method": "sha256 per clone-relative path; pre-eval gate recomputes live vs manifest",
+      "reason": "runtime classpath composition decides which bytes execute (extension path, test utilities)",
+      "stability": "byte-equal across repair"
+    },
+    "engine_semantic_set": {
+      "basis": "capability-ranked enumeration at pinned commit (see engine_sources_manifest.json); tree sha binds all blobs",
+      "commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+      "files": {
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/AllOfEvaluator.java": {
+          "bytes": 6660,
+          "sha256": "2c5b098de3601733fda4d65d92679113f6adcfe8e2592001a383cc700b32f7ae"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/AnyOfEvaluator.java": {
+          "bytes": 6064,
+          "sha256": "c03112203643275c53247758dd6574742cf36aab0882465556517ec815f91a13"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/AttributeAssignmentExpressionEvaluator.java": {
+          "bytes": 10348,
+          "sha256": "447f26d3155a9568cf29737523969d371524d5d9c00c872fa4004784f637706f"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/BasePdpEngine.java": {
+          "bytes": 27213,
+          "sha256": "ac69a4651dd5f0cf00ceae93ace99b716aa55684995f38ed58dde42d60ae31a9"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/BooleanEvaluator.java": {
+          "bytes": 1559,
+          "sha256": "99ea33f58d989e5dc688ab45061dc10cdaba5b753ea68d909b2f8189edcad877"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/BooleanEvaluators.java": {
+          "bytes": 1488,
+          "sha256": "90e4b9ab856865b65df3f0f0bbcf7f686408713d65ee338a8a1b2b020d8cfb89"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/CloseableNamedAttributeProviderRegistry.java": {
+          "bytes": 20198,
+          "sha256": "9c927f48daefc3d5a2784b1b2044d7e145ca29b79d2e456897b7832a29027fae"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/DefaultEnvironmentProperties.java": {
+          "bytes": 3558,
+          "sha256": "3fa898c87eaaf3cbecdfdf2e7301fffc33e9119955bc742809cdb407d1388a46"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/EvaluationContextBasedMultiNamedAttributeProvider.java": {
+          "bytes": 3765,
+          "sha256": "00656c171f3106233e78875a87d80aedfca2e2bbdaad9697798df3e633de38b5"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/EvaluationContextBasedNamedAttributeProvider.java": {
+          "bytes": 12678,
+          "sha256": "a58e72f43814efae2c209eae85a90eda6f6eb8fe11567be3a33c52400db73a56"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/EvaluationContextBasedSingleNamedAttributeProvider.java": {
+          "bytes": 3314,
+          "sha256": "5117beb5c9aa1066ab2542eb54087a3174107addf7bc808e884d83cf0b81a799"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/ImmutableAttributeDesignator.java": {
+          "bytes": 1743,
+          "sha256": "85ffb235c2ea1c0d4733d417b00e330bda6c8bb10b32b17679c7355d58e1887c"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/ImmutablePdpExtensionRegistry.java": {
+          "bytes": 1598,
+          "sha256": "baa07c4132ed33bd81c3d11d963fed009286da8abe32c4e294e3243ded20c4c8"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/IndividualDecisionRequestContext.java": {
+          "bytes": 7329,
+          "sha256": "77dea28e9932424774c7b3ae59a36640a9fbc0a5f91f527eaeabee7f91ab481b"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/MatchEvaluator.java": {
+          "bytes": 6692,
+          "sha256": "be87790a30d9a35d9acaa50ea90b40f3bd2bf325f62be421a5154b7e5b909954"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpBean.java": {
+          "bytes": 6372,
+          "sha256": "21bb1486a143ed8967ad7b0324c44e55b88180a4165ce42451b791a93981ef79"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java": {
+          "bytes": 48911,
+          "sha256": "54892fad033cbb80fc7cee5688bfb54da02ded8ce74169f2759d641c07e8fcdf"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpExtensions.java": {
+          "bytes": 13001,
+          "sha256": "149fb17516cb8cb1ce34c7572f2279326efbeade74c695f22edc2f1d74c5cb6e"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpModelHandler.java": {
+          "bytes": 9119,
+          "sha256": "30b1cc25916eca6c9627c0a6ac7ae41574b73813f1d0074263b15a3215524c5c"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PepActionExpression.java": {
+          "bytes": 5915,
+          "sha256": "1747451dcef00a07afed5ddab063400e3647cd80bd65c6b6ff7e31e30edf866c"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/SchemaHandler.java": {
+          "bytes": 15703,
+          "sha256": "3adcfb32fbb64605a045e0ee27a9ce23ed8a42db2eb58385fbf2db7ec1ee82cc"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttribute.java": {
+          "bytes": 3428,
+          "sha256": "d656229b0396a616c925dca1063ffc80487f0c2b865d61416b8ab97f1bcbb8b3"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java": {
+          "bytes": 30425,
+          "sha256": "8de8c40436982f1685d514bc5b6de51e18246a4b449c18af7f70b29bcd5fc915"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardResourceAttribute.java": {
+          "bytes": 2886,
+          "sha256": "a302ca79d772f7b0398ba587a510108bc3fb40b294bae1e4537b094c69994770"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardSubjectAttribute.java": {
+          "bytes": 6164,
+          "sha256": "b33edf74dd265d0bd83c945d3893a3dd11284e9a3a09d38df8ec99df178883b1"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/TargetEvaluators.java": {
+          "bytes": 6945,
+          "sha256": "d584816b3c51b6b05f22c9c84eb228651939162d11c179f781d61453a1eaf9dd"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/XacmlVariableBasedAttributeProvider.java": {
+          "bytes": 5425,
+          "sha256": "e27659954bd43741de4f37caa8bd5a341668854066b80ec4b05e1e4b70d6b659"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/CombiningAlgEvaluators.java": {
+          "bytes": 13986,
+          "sha256": "8be22cf8ba119e11e642869965be416fb95ae5ccd519b47960e07b8f11eb29f6"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/DPOverridesCombiningAlg.java": {
+          "bytes": 48491,
+          "sha256": "44a9cb9a8a90d65034bc9b1954eb294b1eb7743b3a5cfd550676a83482769c22"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/DPUnlessPDCombiningAlg.java": {
+          "bytes": 3785,
+          "sha256": "89bd02ac7f2036e9c56953116434968d120634ffc3bd9e124b81bdc717f7bb6b"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/FirstApplicableCombiningAlg.java": {
+          "bytes": 5547,
+          "sha256": "5f3b89d4e8fe016de43caa52bb996d2553259d233ebcb5d7258de4e636a770b7"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/ImmutableCombiningAlgRegistry.java": {
+          "bytes": 2748,
+          "sha256": "d8789076991fc68e7dbd4e9da188225d4d17ab39f3ebe4965fdc09e35320418f"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/LegacyDenyOverridesCombiningAlg.java": {
+          "bytes": 3593,
+          "sha256": "996e1f5abe1566166acd71d8791beafbd9af51875567528b50e6dd8a6a871368"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/LegacyPermitOverridesCombiningAlg.java": {
+          "bytes": 4407,
+          "sha256": "efbbd735ad14f0d50afd2c55397da8cc3ee19c2d6905daa9690b8fdfe26394ae"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/OnlyOneApplicableCombiningAlg.java": {
+          "bytes": 4710,
+          "sha256": "360e6c9eb256c2d28ba46f85d339b616ce058a55c08ab082403af36a803c2a09"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/combining/StandardCombiningAlgorithm.java": {
+          "bytes": 11183,
+          "sha256": "73018765d6f79793ceaa274030574ad542fedbf26b2d2e76707226b198b17df7"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/expression/ApplyExpressions.java": {
+          "bytes": 9094,
+          "sha256": "84acb600434f0f93bc91b80071cd729eaad63edb9ed15ebbf1f2658484e3ec59"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/expression/AttributeSelectorExpressions.java": {
+          "bytes": 40666,
+          "sha256": "a447af9c0d907a8672b09906b9e0b1c955c997d5db1304c80696a6c328e74d8b"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/expression/DepthLimitingExpressionFactory.java": {
+          "bytes": 33666,
+          "sha256": "a2042c712bb1cc8f196719697dc9e194d4dee11a90a763aa001b6965c22d043f"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/ConstantResultFirstOrderFunctionCall.java": {
+          "bytes": 2377,
+          "sha256": "b28388529f670555b01ebdfdf316894288120bee23968ee54bb796454351c04d"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/FunctionRegistry.java": {
+          "bytes": 2557,
+          "sha256": "897097aca0f760da4f323b457c73829dfd6dd826bf3fc65343b61afde47a49de"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/ImmutableFunctionRegistry.java": {
+          "bytes": 3519,
+          "sha256": "053968858869c5d982fb8dec80b7b3f620bc6dcb178f6287c3b326ed971fb497"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/LogicalAndFunction.java": {
+          "bytes": 6492,
+          "sha256": "c83610befff520fc94c639fd4ac9c8de64a27dccc7dc885b5d70fb28956f010a"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/LogicalNOfFunction.java": {
+          "bytes": 16911,
+          "sha256": "8e96218f7f533eb22e964bbb51ef2d5d6353b9d31ac63396d1920e3fffe7934e"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/LogicalNotFunction.java": {
+          "bytes": 2094,
+          "sha256": "e2e3f7346b88baebfc1d37300b4b75161c856d0fc202fcb75cd1d07c01d5e5a8"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/LogicalOrFunction.java": {
+          "bytes": 5967,
+          "sha256": "299a1a9a7bee02400416174896b046ff3523bdbc75ef2292ed6b3a4de02d09cb"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/MapFunctionFactory.java": {
+          "bytes": 6595,
+          "sha256": "ba6cf46873e0efef6d508907e0d8acf5a32ed3579a287900973db5475b077005"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/NumericArithmeticFunction.java": {
+          "bytes": 7436,
+          "sha256": "aa665765be4ca39e9d21c3e770898339496c1fc3f7c0bbde007c054ef16a90bb"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/NumericArithmeticOperators.java": {
+          "bytes": 3469,
+          "sha256": "bd80606dd6a8f7b682af11bbfecff24e66a7a882d484d455e38afb96fa627101"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StandardDatatypeConverters.java": {
+          "bytes": 3051,
+          "sha256": "9a1152511363c2889cccb6b4aecf10e7f04e2f28d9348fa292df84b3049dac4d"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StandardEqualTypeMatchers.java": {
+          "bytes": 4873,
+          "sha256": "04a2686f24c52ef6c4bd04f63eb0cb0d99abb74c0c8be45c669a4faf7e7a0449"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StandardFunction.java": {
+          "bytes": 41237,
+          "sha256": "7c1e1908c736d9800faf8bdce9de581e00748f2965ddc3ef9d38328f212d9da9"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StandardHigherOrderBagFunctions.java": {
+          "bytes": 38919,
+          "sha256": "15c28cc73a77b2f0ddb32a75b567cd445910004a0990809b461b48e56bc803ed"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StandardNonEqualTypeMatchers.java": {
+          "bytes": 3282,
+          "sha256": "638f8227e1f78755ed7c7a0c39ccb869c4ac7e9c77549bd76d2c64a8c2c42a9b"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StringConcatenateFunction.java": {
+          "bytes": 2321,
+          "sha256": "de6bf9542f53c27677722c2ddb45ff74d3a93db8b1a7ad6bff0eb550d5d99f2b"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/StringN11nFunction.java": {
+          "bytes": 3147,
+          "sha256": "715a6c42990c8446ea9e5a0f159a27c62ed22753d2cdbd6a9940a25ccd9150b6"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/SubstringFunction.java": {
+          "bytes": 9536,
+          "sha256": "35d53fe65d5b68f4c035167becdb010d142dc2288ecd7bc014dec83039a5a749"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/TemporalArithmeticFunction.java": {
+          "bytes": 4980,
+          "sha256": "be648cd64f295c7dd1cb2f753b8fd9e3e829bca767fb4f5869445b801724c8a1"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/TemporalArithmeticOperators.java": {
+          "bytes": 1587,
+          "sha256": "77e05d533ca7820fc44d1bd92d95ebea031e26dedc4b606d61967993d440c556"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/TimeRangeComparisonFunction.java": {
+          "bytes": 7705,
+          "sha256": "297d7b7db74417fa184a439493b50ef1b156413d6ecbbd4fae18230bcca5b23e"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/func/XPathNodeCountFunction.java": {
+          "bytes": 5476,
+          "sha256": "91e4d0181c3b3a71a5eba8e410388ef0a7ee4e3868b1cf4cc93f16c1f7b84a5f"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/DecisionRequestPreprocessorSupplier.java": {
+          "bytes": 1676,
+          "sha256": "e979d7beb4e3c703d6144cb182def3eb72d7dc5c27692cab32b5dc8378f81385"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/DefaultXacmlJaxbResultPostprocessorFactory.java": {
+          "bytes": 1780,
+          "sha256": "0e9607cfe5779678e037fcb1eb714fb46f39b524e8f36b618664bda7a7607a91"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/MultiDecisionXacmlJaxbRequestPreprocessor.java": {
+          "bytes": 5474,
+          "sha256": "143395ad8be8b178a04321fd5c676c64f217c08f0dbe844705298cbe1d4d6830"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/PdpEngineAdapters.java": {
+          "bytes": 13560,
+          "sha256": "82ce86f56edbd1540105ac8d87fa244dd5a7a446477fd7315ac0fec07db8c326"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/SingleDecisionXacmlJaxbRequestPreprocessor.java": {
+          "bytes": 10916,
+          "sha256": "9d0fc2bc537adb04de1d45b42597dc93995a02e2d3e51c5182fb3becaf751d99"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/CoreStaticPolicyProvider.java": {
+          "bytes": 44458,
+          "sha256": "3f9cd896c30f29b9b6fbbe7bcc379d4bbb5af5ab973e030f2e52acde1f258481"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/FlattenedPolicyTree.java": {
+          "bytes": 7167,
+          "sha256": "8d8bb4b6f741dfa572274cca9b1c6ce57c0df708e3cfc4004bc7e47be39352dd"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/PolicyEvaluators.java": {
+          "bytes": 137643,
+          "sha256": "087f53ad2bc07d9dbc705c6e54e2ac446eb2aaf9e4bcf3ebbbbb9fca4ebe635d"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/PolicyMap.java": {
+          "bytes": 2898,
+          "sha256": "ae379fd45d4b10e84e0e3a0e20b507f3d9ef43777fa546ada340752a7c91e043"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/PolicyVersions.java": {
+          "bytes": 6192,
+          "sha256": "0a5d47a854b6f3ee5bf4c8ca0a31f7505f1174984479a256b5d055318f5f6102"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/RootPolicyEvaluator.java": {
+          "bytes": 2807,
+          "sha256": "d88938594da8101f8a2736f73732de192cf33198c23e7ab63dd7f0ef1f92480f"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/policy/RootPolicyEvaluators.java": {
+          "bytes": 11101,
+          "sha256": "76947e932edd307496cf4326119fe1133ed0332cf47d296ceb259b570a5e8ba1"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/rule/ConditionEvaluators.java": {
+          "bytes": 5848,
+          "sha256": "259235fee658da24fca1b9c873985588a52cea486cc0df8f061f57298d88800c"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/rule/RuleEvaluator.java": {
+          "bytes": 3231,
+          "sha256": "5fe29e67ece95c2223803102caceab72f1f79be505940139e32f3b2529adc3fb"
+        },
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/rule/RuleEvaluators.java": {
+          "bytes": 19788,
+          "sha256": "4f8bbcfab98684035a7a5d9499dca9f4dee45df75ee0fc9491e380aecd215d3f"
+        }
+      },
+      "method": "sha256 of frozen file bytes per path; tree binds all blobs at commit (git rev-parse HEAD^{tree})",
+      "reason": "every AuthzForce source capable of changing evaluation under the measured interface: evaluation core, combining, functions, datatypes, policy/rule/target/match, preprocessing io",
+      "stability": "byte-equal across repair",
+      "tree": "51e22664e96f4f24b7d2f6dfc7bbcafaa0cfec8a"
+    },
+    "engine_sources": {
+      "basis": "pristine pinned clone (clean tree verified at evidence build)",
+      "canonical": "frozen file bytes",
+      "files": {
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java": "54892fad033cbb80fc7cee5688bfb54da02ded8ce74169f2759d641c07e8fcdf",
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/StandardEnvironmentAttributeProvider.java": "8de8c40436982f1685d514bc5b6de51e18246a4b449c18af7f70b29bcd5fc915",
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/PdpEngineAdapters.java": "82ce86f56edbd1540105ac8d87fa244dd5a7a446477fd7315ac0fec07db8c326",
+        "pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/SingleDecisionXacmlJaxbRequestPreprocessor.java": "9d0fc2bc537adb04de1d45b42597dc93995a02e2d3e51c5182fb3becaf751d99",
+        "pdp-engine/src/main/resources/pdp.xsd": "63cbcc2ce6e2517fc4526a9bf5000c3e43e402101779568308bf3ffbb193748e"
+      },
+      "method": "sha256 of frozen file bytes per path (subset kept for lineage; superseded by engine_semantic_set)",
+      "reason": "cited N4 default-wiring evidence bound by content",
+      "stability": "byte-equal across repair"
+    },
+    "implementation_identity": {
+      "basis": "frozen RELEASE.json/COMMIT.txt",
+      "canonical": "identifier triple",
+      "commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+      "method": "identifier triple cross-checked to frozen RELEASE.json/COMMIT.txt + clone HEAD",
+      "reason": "capability == code; version pins behavior",
+      "release": "21.2.0",
+      "stability": "identical across repair",
+      "tag": "release-21.2.0"
+    },
+    "policy_bytes": {
+      "basis": "frozen fixture + designator census",
+      "canonical": "frozen file bytes",
+      "method": "sha256 of frozen policy.xml file bytes",
+      "reason": "sole authorization policy evaluated",
+      "sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+      "stability": "byte-equal across repair"
+    },
+    "preprocessor_resolved": {
+      "basis": "N4 PdpEngineAdapters default adapter construction with strictIssuer=false (pdp.xsd default), xPath=false (pdp.xsd default), verbosity=0 (pdp.xsd default)",
+      "canonical": "identifier string",
+      "id": "urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax",
+      "reason": "effective preprocessor absent explicit config",
+      "stability": "config-equal across repair"
+    },
+    "provider_element": {
+      "basis": "frozen pdp.xml StaticPolicyProvider element",
+      "canonical": "W3C exclusive C14N, no comments, of the policyProvider element bytes",
+      "method": "sha256 of b''.join(exclusive-C14N-no-comments per policyProvider element) via lxml etree.tostring(method='c14n', exclusive=True); pinned lxml 6.1.1",
+      "reason": "sole policy provider configuration",
+      "sha256": "73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+      "stability": "byte-equal across repair"
+    },
+    "request_path": {
+      "basis": "N4 preprocessor + parser findings (see parser_fidelity record)",
+      "canonical": "rule strings",
+      "parser_rules": "empty containers skipped; bags immutable per 7.3.5; lax duplicates permitted (moot: singletons throughout)",
+      "preprocessor": "default-lax adapter (strictIssuer=false, xPath=false, verbosity=0)",
+      "reason": "bytes-to-bags path is capability, not per-eval state",
+      "stability": "config-equal across repair"
+    }
+  },
+  "exclusions": {
+    "evaluation_clock": {
+      "basis": "env-inertness record (designator/function census)",
+      "reason": "no read path from timestamps into evaluation: timestamps enter only via env attributes, proven inert for this fixture; excluded from hash by documented rule, not by omission"
+    },
+    "handler_added_non_env": {
+      "basis": "pdp.xml child census + provider scope + designator census",
+      "reason": "no configured channel can supply non-environment values: sole provider serves current-* only; no PIP elements; default handler passes request values through"
+    },
+    "jvm_toolchain": {
+      "basis": "environment record (out of Lambda scope by definition)",
+      "reason": "execution substrate, not authorization capability; pinned in environment record, not in capability hash"
+    },
+    "policy_location": {
+      "rule": "PARENT_DIR-relative glob policies/*.xml resolved inside the frozen fixture dir; absolute URI excluded as machine-dependent by design",
+      "sha256": "78fbb6191ed8a460e864a6aecb920d3d7d8d636fafb8025e2a11d2d465198815"
+    },
+    "resolved_defaults": {
+      "reason": "schema defaults (XPath/strictIssuer/verbosity/maxInteger/ignoreOldVersions/std registries) are capability; pinned by content hash",
+      "sha256": "62bc5f920879c22d08dda611ec31ffd0f33ecfeaccf748046366598b74301e67"
+    }
+  },
+  "manifest_id": "PC-XACML-S3PLUS-v1-lambda-manifest",
+  "pre_hash": "d4a5fcd891910184c8d7919ab44395cbf6c1860de95bf8d5ba098b68d757a00b",
+  "produced_utc": "2026-09-12T08:23:51Z",
+  "reconstruction": {
+    "canonicalization": "json.dumps({'components':..., 'exclusions':...}, sort_keys=True, ensure_ascii=True, separators=(', ', ': ')).encode('utf-8'); pre_hash = sha256(canonical).hexdigest() lower-case",
+    "composition": "extract components+exclusions objects only; serialize per canonicalization; pre_hash = sha256 hexdigest lower-case",
+    "ordered_manifest": "component/exclusion keys in JSON sorted-key order (deterministic)",
+    "recompute_tool": "src/audit/recompute_lambda.py (--manifest always; --packet-dir verifies file-backed constituents)",
+    "test_vector": "see tests/test_lambda_manifest.py: fixed mini-manifest -> fixed digest",
+    "unexposed": "engine full bytes live in packet candidates/engine_sources/ for this revision; transitive Central artifacts by coordinates (limitation disclosed in built_artifacts)"
+  },
+  "supersedes_pre_hash": "bb2c3c94-method-opaque (historical; replaced by reconstructible construction)"
+}

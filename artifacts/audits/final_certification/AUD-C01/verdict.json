@@ -1,0 +1,68 @@
+{
+  "attestation_hash": "d282ff14ce83c37886d664eac150ddb11dfa5f9daf5d0b5cd179dbd144f65bcc",
+  "auditor_id": "AUD-C01",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet.",
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-C01-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 3.1 via candidates/locator_map.json Sec-3.1-dataflow stripped_lines 1732-1792 (PEP native format->handler->PDP->response->PEP; PDP requests/context-handler supplies/PIP flow)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html glossary via candidates/locator_map.json glossary-PDP-PEP-handler stripped_lines 1000-1020 + Sec 5.57-5.58 via Sec-5.57-5.58-StatusDetail stripped_lines 7901-7985 (MissingAttributeDetail Category/AttributeId/DataType/Issuer-required/optional)",
+        "corpus/fixture/request.xml:1-19 + corpus/fixture/response.xml:3-11 + corpus/fixture/policies/policy.xml:18-20 (native original cycle + triple byte-equal across Detail and MustBePresent-true designator)",
+        "candidates/builder_source.py:82-94,97-112,120-167,170-193,42-56,220-221,265,204-274 (Detail triple read; policy MustBePresent cross-check; INV-05 single-addition residual on probe copy; single subject insert value-DataType only; out_dir disjoint pre/post-create; two worlds INV-06 differ by value only)",
+        "candidates/request_diffs.json:9-12 (unified diffs + c14n hashes proving c14n-identity except one inserted subject Attribute; re-serialization deltas dispositioned)",
+        "candidates/wrapper_evidence.json:48-96,104-165 (imports copy/lxml/os/sys; builder_reaches_pdp false; zero forbidden-token hits; input hashes equal frozen seals; 12 rule_to_code mappings)",
+        "candidates/repaired_request_x_permit.xml:7 + candidates/repaired_request_x_nonpermit.xml:7 + candidates/policy_dir_listing.json (two completed bytes; single-policy glob; disjoint rule)",
+        "n4_excerpts/parent_dir.txt:37-49 (PARENT_DIR=parent of config file; glob resolves inside fixture dir)"
+      ],
+      "notes": "Native transaction vs experiment-authored reconstruction explicitly distinguished and both independently justified: native PEP-handler-PDP-response boundary per dataflow/glossary plus observed original Indeterminate Detail; wrapper as measured pre-step per world proven by in-packet builder bytes, diffs, token/call scans, and triple-pinning; c14n-identity (not byte-identity) correctly stated; one native cycle per world-instantiation with pre/post checkpoints delimits measured interval; disjointness enforced in builder bytes.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-21,26-29,34-43 (5 Matches MustBePresent=true, 4 coordinates, string-equal/anyURI-equal only, zero env designators)",
+        "corpus/fixture/request.xml:3-18 (present singleton bags + empty environment Attributes)",
+        "corpus/fixture/response.xml:3-11 (Indeterminate + missing-attribute + MissingAttributeDetail triple some-attribute/access-subject/string)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.4 via candidates/locator_map.json Sec-7.3.4-Attribute-Matching stripped_lines 8381-8404 (Issuer-absent governed by AttributeId+DataType alone)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.5 via candidates/locator_map.json Sec-7.3.5-Attribute-Retrieval stripped_lines 8405-8432 (missing+MustBePresent-true=>Indeterminate not empty bag; bags immutable)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.6 via candidates/locator_map.json Sec-7.3.6-Environment stripped_lines 8434-8441 (handler SHALL supply env if missing)",
+        "n4_excerpts/xsd_std_providers.txt:7-19 + n4_excerpts/stdenv_default_factory.txt:8 (std-env provider enabled default true override=false serves current-* only)",
+        "candidates/repaired_request_x_permit.xml:3-7 + candidates/repaired_request_x_nonpermit.xml:3-7 (admitted completed worlds singleton insertion)"
+      ],
+      "notes": "Multimap keyed by Category/AttributeId/DataType/Issuer-or-null plus absent_required marker and empty_categories exactly covers frozen interface: single missing-able coordinate proven by policy census + request absence + response Detail; empty env recorded not dropped; Issuer uniformly absent in policy designators and all three request files so finer key causes no divergence per 7.3.4; env inertness follows from zero env reads and sole current-* channel.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/COMMIT.txt:1 + corpus/RELEASE.json:2-6 + corpus/MANIFEST.json:2-27 (commit 3cc0e988 release 21.2.0 tag release-21.2.0)",
+        "corpus/fixture/policies/policy.xml (sha256 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64)",
+        "corpus/fixture/pdp.xml:6-8 (StaticPolicyProvider PARENT_DIR glob)",
+        "n4_excerpts/xsd_std_providers.txt:7-19 + n4_excerpts/xsd_stdenv_doc.txt:6-20 + n4_excerpts/stdenv_default_factory.txt:8 + n4_excerpts/std_wiring.txt:2-19 + n4_excerpts/adapter_defaults.txt:9-11 + n4_excerpts/xsd_strict_issuer.txt:8 (default-lax preprocessor strictIssuer=false xPath=false; std-env DEFAULT_FACTORY override=false)",
+        "candidates/resolved_effective.json (bytes hash-equal to exclusions.resolved_defaults sha256 62bc5f920879c22d08dda611ec31ffd0f33ecfeaccf748046366598b74301e67)",
+        "candidates/lambda_manifest.json:1-91 + candidates/lambda_deferral.json (claimed pre_hash 3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a and post==pre criterion)"
+      ],
+      "notes": "GAP: partial support only. Identity/policy/provider-wiring components verified, but engine_sources 5 file hashes state no hashing method and bytes are absent from packet manifest file list (only short excerpts in n4_excerpts present), failing rubric-supplement rules 1-2 blind verifiability; pre_hash stated as UTF-8 JSON sorted-keys of components+exclusions is not reconstructible from packet (canonical form underspecified; recomputation mismatches; derive_Lambda code absent); post_hash deferred with 0 executions and enforcement-mechanism code absent; request_path parser rules cite preprocessor source absent from packet. No tolerance/exception can fill these without external bytes.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43 (5 designator occurrences project to 4 coordinates; action-id duplicated read/write; all MustBePresent=true)",
+        "candidates/match_table.json:2-68 (per-coordinate TRUE/FALSE/Indeterminate table; blindness-hygiene note records no per-world outcomes)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.6 via candidates/locator_map.json Sec-7.6-Match stripped_lines 8569-8600 (error=>Indeterminate; empty=>False; existential True; else False)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.5 via candidates/locator_map.json Sec-7.3.5-Attribute-Retrieval stripped_lines 8405-8432 (missing+MustBePresent-true=>Indeterminate; empty unreachable here)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.4 via candidates/locator_map.json Sec-7.3.4-Attribute-Matching stripped_lines 8381-8404 (Issuer-absent wildcard; pooling immaterial)",
+        "corpus/fixture/request.xml:3-17 + candidates/repaired_request_x_permit.xml:7 + candidates/repaired_request_x_nonpermit.xml:7 (singleton null-Issuer bags on admitted interface)"
+      ],
+      "notes": "Match-vector TRUE/FALSE/INDETERMINATE rule with interface-scoped bag-identity coincidence is independently justified: 5-to-4 dedup verified in policy bytes; error-token semantics verbatim in 7.3.5; Match semantics verbatim in 7.6; coincidence on singleton null-Issuer exact-datatype interface follows logically and is scoped as extensional not general; Issuer pooling immaterial verified by zero Issuer in designators and bags plus 7.3.4 wildcard.",
+      "status": "FIXED"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "certificate_id": "PC-XACML-S3PLUS-v1-completion-space",
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "execution_inputs_sha256": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "free_k_relevant_fields": 0,
+  "k_table_sha256": "d8007ab744914c6cb8bc94206cb92609d2d78b23f2e77828befe066fcef131ed",
+  "ledger_sha256": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+  "nontrivial": true,
+  "produced_utc": "2026-09-12T18:46:29Z",
+  "rows": [
+    {
+      "check_detail": "worlds/actions/order cross-checked between prereg inputs and contract/table",
+      "evidence": {
+        "contract": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+        "prereg/execution_inputs.json": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407"
+      },
+      "free_after_audit": false,
+      "pc_field": "X",
+      "source_constraint": "experiment prereg"
+    },
+    {
+      "check_detail": "admitted histories present over proven-equivalent source",
+      "evidence": {
+        "derived/H_initial.json": "8841a09353687e1521a885d1357125ed6798a7926f74f6ca2a608fe0e92a004d",
+        "derived/H_nonpermit.json": "7ad03de2001f453f585b279851672ea0e3fec592cc343ea65885a5a25dfd18d5",
+        "derived/H_permit.json": "741221a31909762b7b0ddcf4e2bfb5812498cec1f839ee88b6d25b005981d203",
+        "derived/h_equivalence_proof.json": "2f89ae4d99ac7d2728886e51a6e3dd4ca1a7e9f511275909359c971b326b0d1b"
+      },
+      "free_after_audit": false,
+      "pc_field": "U_H",
+      "source_constraint": "external + wrapper"
+    },
+    {
+      "check_detail": "checkpoints/successors cover both worlds under native boundary",
+      "evidence": {
+        "contract": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+        "derived/atom_record.json": "8dbf228c5dada4a8028e2005a1c4595f3641dabfd215aac064315a252f6f0aab",
+        "derived/requests/request_x_nonpermit.xml": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
+        "derived/requests/request_x_permit.xml": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294"
+      },
+      "free_after_audit": false,
+      "pc_field": "S",
+      "source_constraint": "native / wrapper"
+    },
+    {
+      "check_detail": "ledger FIXED with N1/N3 evidence and valid equivalence proof",
+      "evidence": {
+        "derived/H_initial.json": "8841a09353687e1521a885d1357125ed6798a7926f74f6ca2a608fe0e92a004d",
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "derived/h_equivalence_proof.json": "2f89ae4d99ac7d2728886e51a6e3dd4ca1a7e9f511275909359c971b326b0d1b"
+      },
+      "free_after_audit": false,
+      "pc_field": "H",
+      "source_constraint": "N1 / N3"
+    },
+    {
+      "check_detail": "ledger FIXED with adequate frozen projection and relation",
+      "evidence": {
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "derived/policy_adequacy_certificate.json": "70137a9d8700167a295a5a9a2fc0c50a9c70d9c0ea149c4df4b9d0015623f7d2",
+        "derived/policy_projection.json": "1816bf1b05a4b99529958537f72fdbfcb753987113c5fc43297e14e3a7f401dd",
+        "derived/pr_relation.json": "252f78b3f4af4f701a1abeee137f7858252d9627cf3c009983861c9da098761f"
+      },
+      "free_after_audit": false,
+      "pc_field": "P_R",
+      "source_constraint": "N1 / N3"
+    },
+    {
+      "check_detail": "ledger FIXED with frozen capability hash present",
+      "evidence": {
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "derived/lambda_record.json": "8a3c13cddedcf8375e38e53c1d61a5f5faef39a3dc5242357bafb43a259000e1",
+        "external/MANIFEST.json": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff"
+      },
+      "free_after_audit": false,
+      "pc_field": "Lambda",
+      "source_constraint": "N1 / N2 / N3"
+    },
+    {
+      "check_detail": "ledger FIXED with native response observation present",
+      "evidence": {
+        "artifacts/raw/original_response_actual.xml": "cf2325f9f3d65a135bfe14c50571920bc7e422ea0ca2e862ec6d0c039b8d33ca",
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595"
+      },
+      "free_after_audit": false,
+      "pc_field": "omega",
+      "source_constraint": "N1 / N3"
+    },
+    {
+      "check_detail": "ledger FIXED with prereg wrapper operation defined",
+      "evidence": {
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "derived/atom_record.json": "8dbf228c5dada4a8028e2005a1c4595f3641dabfd215aac064315a252f6f0aab",
+        "prereg/execution_inputs.json": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407"
+      },
+      "free_after_audit": false,
+      "pc_field": "Q",
+      "source_constraint": "N1 + prereg wrapper"
+    },
+    {
+      "check_detail": "ledger FIXED with both world successors present",
+      "evidence": {
+        "contract": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "derived/requests/request_x_permit.xml": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294"
+      },
+      "free_after_audit": false,
+      "pc_field": "Succ+",
+      "source_constraint": "N3 + prereg wrapper"
+    },
+    {
+      "check_detail": "ledger FIXED with unit normalization matching contract costs",
+      "evidence": {
+        "contract": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "prereg/execution_inputs.json": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407"
+      },
+      "free_after_audit": false,
+      "pc_field": "c",
+      "source_constraint": "prereg normalization"
+    },
+    {
+      "check_detail": "ledger FIXED with heterogeneous target map over two worlds",
+      "evidence": {
+        "contract": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595"
+      },
+      "free_after_audit": false,
+      "pc_field": "A_Pi",
+      "source_constraint": "native PDP execution"
+    },
+    {
+      "check_detail": "ledger FIXED with proven native transaction boundary",
+      "evidence": {
+        "derived/anchor_ledger.json": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+        "derived/atom_record.json": "8dbf228c5dada4a8028e2005a1c4595f3641dabfd215aac064315a252f6f0aab"
+      },
+      "free_after_audit": false,
+      "pc_field": "Atom",
+      "source_constraint": "N1 / native interface"
+    },
+    {
+      "check_detail": "outcome classes induced where omega/Succ+/A_Pi constrained and table matches contract/order",
+      "evidence": {
+        "artifacts/freezes/K_table.json": "d8007ab744914c6cb8bc94206cb92609d2d78b23f2e77828befe066fcef131ed",
+        "contract": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9"
+      },
+      "free_after_audit": false,
+      "pc_field": "Y",
+      "source_constraint": "induced by canonical response representation (covered by omega/Succ+/A_Pi)"
+    }
+  ],
+  "verdict": "COMPLETE"
+}

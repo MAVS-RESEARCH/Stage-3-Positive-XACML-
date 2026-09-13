@@ -1,0 +1,46 @@
+experiment_id: PC-XACML-S3PLUS-v1
+paper_target: Perceptive Closure D33+
+system:
+  standard: OASIS XACML 3.0
+  implementation: AuthzForce Core CE
+  release: 21.2.0
+  tag: release-21.2.0
+  commit: 3cc0e988e1639da48184434cd5c918102ff5b499
+fixture:
+  name: StatusDetail.MissingAttributeDetail
+worlds:
+  x_permit:
+    some_attribute: "riddle me this"
+    expected_decision: Permit
+  x_nonpermit:
+    some_attribute: "not-riddle-me-this"
+    expected_decision: NotApplicable
+action_interface:
+  actions:
+    - q_supply_missing_attribute
+  unit_cost: 1
+freeze_order:
+  - F000
+  - F100
+  - F010
+  - F001
+  - F110
+  - F101
+  - F011
+  - F111
+expected_touch:
+  q_supply_missing_attribute: [E]
+expected_K:
+  - 1
+  - INF
+  - 1
+  - 1
+  - INF
+  - INF
+  - 1
+  - INF
+abort_on_anchor_ambiguity: true
+allow_manual_touch_labels: false
+allow_policy_modification: false
+allow_engine_modification: false
+allow_dynamic_authority_change: false

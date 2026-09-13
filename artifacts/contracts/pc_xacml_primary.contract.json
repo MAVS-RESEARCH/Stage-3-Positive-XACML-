@@ -1,0 +1,346 @@
+{
+  "H": {
+    "S0": {
+      "attributes": [
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+          "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "Julius Hibbert"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+          "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "read"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+          "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+          "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "issuer": null,
+          "values": [
+            "http://medico.com/record/patient/BartSimpson"
+          ]
+        }
+      ],
+      "checkpoint": "S0",
+      "history_id": "PC-XACML-S3PLUS-v1-H_initial",
+      "produced_utc": "2026-09-11T20:33:39Z",
+      "proof": {
+        "ref": "h_equivalence_proof.json",
+        "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
+        "verdict": "VALID"
+      },
+      "source": {
+        "request_file": "external/authzforce/fixture/request.xml",
+        "sha256": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540"
+      }
+    },
+    "S_nonpermit": {
+      "attributes": [
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+          "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "Julius Hibbert"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+          "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "not-riddle-me-this"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+          "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "read"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+          "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+          "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "issuer": null,
+          "values": [
+            "http://medico.com/record/patient/BartSimpson"
+          ]
+        }
+      ],
+      "checkpoint": "S_nonpermit",
+      "history_id": "PC-XACML-S3PLUS-v1-H_nonpermit",
+      "produced_utc": "2026-09-11T20:33:39Z",
+      "proof": {
+        "ref": "h_equivalence_proof.json",
+        "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
+        "verdict": "VALID"
+      },
+      "source": {
+        "request_file": "derived/requests/request_x_nonpermit.xml",
+        "sha256": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8"
+      }
+    },
+    "S_permit": {
+      "attributes": [
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+          "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "Julius Hibbert"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+          "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "riddle me this"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+          "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+          "data_type": "http://www.w3.org/2001/XMLSchema#string",
+          "issuer": null,
+          "values": [
+            "read"
+          ]
+        },
+        {
+          "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+          "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+          "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "issuer": null,
+          "values": [
+            "http://medico.com/record/patient/BartSimpson"
+          ]
+        }
+      ],
+      "checkpoint": "S_permit",
+      "history_id": "PC-XACML-S3PLUS-v1-H_permit",
+      "produced_utc": "2026-09-11T20:33:39Z",
+      "proof": {
+        "ref": "h_equivalence_proof.json",
+        "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
+        "verdict": "VALID"
+      },
+      "source": {
+        "request_file": "derived/requests/request_x_permit.xml",
+        "sha256": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294"
+      }
+    }
+  },
+  "Lambda": {
+    "components": {
+      "attribute_provider_set": [],
+      "native_request_interface": "XACML request/response transaction (N1 data-flow)",
+      "pdp_xml_sha256": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d",
+      "policy_provider_sha256": "73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+      "request_preprocessor": [
+        "default-absent-in-pdp.xml"
+      ],
+      "root_policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64"
+    },
+    "equality_criterion": "post_hash == pre_hash after q_supply_missing_attribute; any extensional change invalidates the constant-Lambda design",
+    "lambda_id": "PC-XACML-S3PLUS-v1-Lambda",
+    "post_hash": null,
+    "pre_hash": "bb2c3c9472f887eb6674c337ac3c5145fa04b4fb0e169908e4e4a6cbc4b3dc94",
+    "produced_utc": "2026-09-11T18:56:45Z"
+  },
+  "PR": {
+    "adequacy_ref": "policy_adequacy_certificate.json",
+    "adequacy_sha256": "0fc251e2a554c031897e23c7355b8cefe1522a0a5ce8ed5fb6027bc344976248",
+    "constant_across_repair": true,
+    "designator_coordinates": [
+      {
+        "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+        "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+        "data_type": "http://www.w3.org/2001/XMLSchema#string",
+        "issuer": null
+      },
+      {
+        "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+        "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+        "data_type": "http://www.w3.org/2001/XMLSchema#string",
+        "issuer": null
+      },
+      {
+        "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+        "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+        "data_type": "http://www.w3.org/2001/XMLSchema#string",
+        "issuer": null
+      },
+      {
+        "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+        "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+        "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "issuer": null
+      }
+    ],
+    "produced_utc": "2026-09-11T18:56:44Z",
+    "projection_sha256": "77b1a650070fd8ea86c7280a6880678092d6f1bdf631b5a7ebb80b79629cb158",
+    "relation_id": "PC-XACML-S3PLUS-v1-PR",
+    "rule": "histories h1, h2 are P_R-equivalent iff for every frozen designator coordinate (Category, AttributeId, DataType, Issuer) the named attribute bags compare equal as sorted typed multisets under XACML matching semantics"
+  },
+  "actions": {
+    "q_supply_missing_attribute": {
+      "construction_rule": "Copy the frozen original request byte-identically except for inserting exactly one subject Attribute (Category access-subject, AttributeId urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute, DataType xsd:string) carrying the world-specific value. No authorization logic is performed by the wrapper.",
+      "cost": 1,
+      "pre": "S0",
+      "successors": [
+        "S_permit",
+        "S_nonpermit"
+      ]
+    }
+  },
+  "atomicity": {
+    "q_supply_missing_attribute": {
+      "atom_id": "xacml-request-transaction",
+      "conclusion": "NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER"
+    }
+  },
+  "checkpoints": {
+    "S0": {
+      "fiber": [
+        "x_nonpermit",
+        "x_permit"
+      ],
+      "open": true,
+      "reason": "heterogeneous fiber: Permit vs NotApplicable"
+    },
+    "S_nonpermit": {
+      "fiber": [
+        "x_nonpermit"
+      ],
+      "open": false,
+      "reason": "singleton homogeneous fiber: NotApplicable"
+    },
+    "S_permit": {
+      "fiber": [
+        "x_permit"
+      ],
+      "open": false,
+      "reason": "singleton homogeneous fiber: Permit"
+    }
+  },
+  "contract_id": "pc-xacml-s3plus-primary",
+  "costs": {
+    "q_supply_missing_attribute": 1
+  },
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "freeze_order": [
+    "F000",
+    "F100",
+    "F010",
+    "F001",
+    "F110",
+    "F101",
+    "F011",
+    "F111"
+  ],
+  "initial_checkpoint": "S0",
+  "omega": {
+    "ambiguity_status": "FIXED",
+    "anchor_id": "omega.native_responses",
+    "auditor_status": "INDEPENDENT_CHECK_PASS",
+    "derivation_module": null,
+    "evidence": {
+      "fixture_response_sha256": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687",
+      "frozen_triple_match": true,
+      "n1_locator": "Response/Decision/StatusCode/StatusDetail semantics; MissingAttributeDetail element (verified raw-HTML map Sec-5.57-5.58); Indeterminate lists AttributeId/DataType/Issuer (verified Sec. 7.3.5 tail)",
+      "observed_triple": [
+        "Indeterminate",
+        "urn:oasis:names:tc:xacml:1.0:status:missing-attribute",
+        {
+          "AttributeId": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+          "Category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+          "DataType": "http://www.w3.org/2001/XMLSchema#string"
+        }
+      ],
+      "single_result_single_status": true,
+      "status_message_observed_excluded": [
+        "Missing named Attribute"
+      ]
+    },
+    "extensional_definition": "Native XACML response classes (Decision, StatusCode, StatusDetail/MissingAttributeDetail) observed on the frozen original request.",
+    "manual_semantic_choice_required": false,
+    "pc_field": "omega",
+    "source_class": [
+      "N1",
+      "N3"
+    ]
+  },
+  "provenance": {
+    "anchor_ledger_sha256": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+    "atom_record_sha256": "8dbf228c5dada4a8028e2005a1c4595f3641dabfd215aac064315a252f6f0aab",
+    "derivation_module": "src/pc/compile_contract.py",
+    "execution_inputs_sha256": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407",
+    "external_manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+    "h_initial_sha256": "8841a09353687e1521a885d1357125ed6798a7926f74f6ca2a608fe0e92a004d",
+    "h_nonpermit_sha256": "7ad03de2001f453f585b279851672ea0e3fec592cc343ea65885a5a25dfd18d5",
+    "h_permit_sha256": "741221a31909762b7b0ddcf4e2bfb5812498cec1f839ee88b6d25b005981d203",
+    "inputs": [
+      "prereg/execution_inputs.json",
+      "external/MANIFEST.json",
+      "derived/anchor_ledger.json",
+      "derived/H_initial.json",
+      "derived/H_permit.json",
+      "derived/H_nonpermit.json",
+      "derived/pr_relation.json",
+      "derived/lambda_record.json",
+      "derived/atom_record.json",
+      "derived/requests/request_x_permit.xml",
+      "derived/requests/request_x_nonpermit.xml",
+      "artifacts/audits/launch/quarantine/response_x_permit.xml",
+      "artifacts/audits/launch/quarantine/response_x_nonpermit.xml"
+    ],
+    "lambda_record_sha256": "8a3c13cddedcf8375e38e53c1d61a5f5faef39a3dc5242357bafb43a259000e1",
+    "policy_projection_sha256": "1816bf1b05a4b99529958537f72fdbfcb753987113c5fc43297e14e3a7f401dd",
+    "pr_relation_sha256": "252f78b3f4af4f701a1abeee137f7858252d9627cf3c009983861c9da098761f",
+    "produced_utc": "2026-09-12T18:46:17Z",
+    "request_hashes": {
+      "request_x_nonpermit.xml": "b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
+      "request_x_permit.xml": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294"
+    },
+    "response_hashes": {
+      "response_x_nonpermit.xml": "67961314e19c0fc00df45eeff46d396778704a3461ba9c8a0f4b794889c17f10",
+      "response_x_permit.xml": "87f6336c52763de2810fa478d38695f229eeea8b4aaecd68e06b33c49ccef53b"
+    },
+    "target_rule": "Use the canonical XACML Decision returned by the frozen PDP on each complete request world. No expected per-world outcome is stated here; outcomes enter only via parsed PDP responses in the Phase-2 target audit.",
+    "target_source": "parsed PDP responses -> A_Pi -> target map"
+  },
+  "successors": {
+    "S0": {
+      "q_supply_missing_attribute": {
+        "x_nonpermit": "S_nonpermit",
+        "x_permit": "S_permit"
+      }
+    }
+  },
+  "target": {
+    "x_nonpermit": "NotApplicable",
+    "x_permit": "Permit"
+  },
+  "worlds": [
+    "x_nonpermit",
+    "x_permit"
+  ]
+}

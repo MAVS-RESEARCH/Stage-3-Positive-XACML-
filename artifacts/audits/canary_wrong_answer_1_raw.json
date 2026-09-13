@@ -1,0 +1,20 @@
+{
+  "backend_commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+  "base": "wrong1",
+  "canary_id": "wrong_answer_1",
+  "control": "5.9",
+  "driver_exit": 0,
+  "driver_produced_response": true,
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "frozen_external_untouched": true,
+  "observed": {
+    "decision": "NotApplicable",
+    "missing_attribute_detail_present": false,
+    "missing_detail": null,
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:ok"
+  },
+  "policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+  "produced_utc": "2026-09-12T19:01:11Z",
+  "request_sha256": "9f2f45534add88aa0ebf4ff1c3cf34dc64176e54e63603e0e60d2bae9b4498cc",
+  "response_sha256": "67961314e19c0fc00df45eeff46d396778704a3461ba9c8a0f4b794889c17f10"
+}

@@ -1,0 +1,71 @@
+{
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/final_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Phase-6 final result seal (observed values only; one of 8 taxonomy outcomes).",
+  "properties": {
+    "K": {
+      "items": true,
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array"
+    },
+    "anchor_status": {
+      "properties": {
+        "Atom": {"type": "string"},
+        "H": {"type": "string"},
+        "Lambda": {"type": "string"},
+        "PR": {"type": "string"}
+      },
+      "required": ["H", "PR", "Lambda", "Atom"],
+      "type": "object"
+    },
+    "auditors": {
+      "items": {"type": "string"},
+      "type": "array"
+    },
+    "derived_touch": {
+      "type": "object"
+    },
+    "downstream_phases": {
+      "type": "string"
+    },
+    "experiment_id": {
+      "const": "PC-XACML-S3PLUS-v1",
+      "type": "string"
+    },
+    "identified_set_cardinality": {
+      "type": "integer"
+    },
+    "outcome": {
+      "enum": [
+        "POSITIVE_NATIVE_STAGE3",
+        "NATIVE_ANCHOR_INSUFFICIENT",
+        "SOURCE_REPRODUCTION_FAIL",
+        "TARGET_REPRODUCTION_FAIL",
+        "TOUCH_DERIVATION_MISMATCH",
+        "SOLVER_MISMATCH",
+        "NONTRIVIALITY_FAIL",
+        "INDEPENDENT_REPRODUCTION_FAIL"
+      ],
+      "type": "string"
+    },
+    "primary_classification": {
+      "type": "string"
+    },
+    "stopped_at_phase": {
+      "type": "integer"
+    },
+    "trigger": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "outcome",
+    "anchor_status",
+    "derived_touch",
+    "K"
+  ],
+  "title": "Phase-6 final result seal",
+  "type": "object"
+}

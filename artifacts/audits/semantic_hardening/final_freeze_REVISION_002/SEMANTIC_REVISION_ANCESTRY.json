@@ -1,0 +1,12 @@
+{
+  "operative_revision": 2,
+  "prior_revisions": [
+    {
+      "packet_sha256": "4b9f6556bd9d136010adfc0bd65b124d5f140b3da7b02daf6485d666a05b63c1",
+      "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+      "revision": 1,
+      "revision_dir": "final_freeze_REVISION_001",
+      "round": "HARDENING_ROUND_002"
+    }
+  ]
+}

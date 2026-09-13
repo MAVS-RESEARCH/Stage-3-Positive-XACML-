@@ -1,0 +1,16 @@
+{
+  "byte_offset": 100,
+  "control": "5.1",
+  "detected": true,
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "file": "request.xml",
+  "frozen_external_untouched": true,
+  "mutated_blob": "e3d279580a2c22915bd0bca0d90fb5c5ee011c57",
+  "mutated_byte": 35,
+  "mutated_sha256": "c27d8da5132eb5695e59803cfd9e805803a09435408de30c11a173b24fed364a",
+  "original_byte": 34,
+  "produced_utc": "2026-09-12T19:01:00Z",
+  "sealed_blob": "ff6582db3d9c2bd00ae87e69279c23057b14a47a",
+  "sealed_sha256": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540",
+  "verifier_exit_nonzero": true
+}

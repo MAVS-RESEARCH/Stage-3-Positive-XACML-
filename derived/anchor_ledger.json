@@ -1,0 +1,195 @@
+{
+  "anchors": {
+    "A_Pi": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "A_Pi.target_functional",
+      "auditor_status": "INDEPENDENT_CHECK_PASS",
+      "derivation_module": null,
+      "evidence": {
+        "rule": "Use the canonical XACML Decision returned by the frozen PDP on each complete request world. No expected per-world outcome is stated here; outcomes enter only via parsed PDP responses in the Phase-2 target audit.",
+        "rule_nonempty": true,
+        "values": "PENDING_TARGET_AUDIT"
+      },
+      "extensional_definition": "Sealed target functional: the canonical XACML Decision returned by the frozen PDP/policy on a complete request world. Definition fixed; per-world values pending the Phase-2 target audit.",
+      "manual_semantic_choice_required": false,
+      "pc_field": "A_Pi",
+      "source_class": [
+        "N3",
+        "X"
+      ]
+    },
+    "Atom": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "Atom.transaction_boundary",
+      "auditor_status": "PENDING_2B",
+      "derivation_module": "src/pc/derive_atom.py",
+      "evidence": {
+        "atom_id": "xacml-request-transaction"
+      },
+      "extensional_definition": "NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER",
+      "manual_semantic_choice_required": false,
+      "pc_field": "Atom",
+      "source_class": [
+        "N1",
+        "X"
+      ]
+    },
+    "H": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "H.request_context",
+      "auditor_status": "PENDING_2B",
+      "derivation_module": "src/pc/derive_H.py",
+      "evidence": {
+        "checkpoint_sha256": {
+          "H_initial": "fa9e4079cad8ddf43afbd2871f5956351a9284105e6ec7bb8e05ee5047221a62",
+          "H_nonpermit": "f7c385083092a3b5de899650f957e4ebc5bb92c253311860f1f864cdcade48f1",
+          "H_permit": "a5c98a5df4a7fe09142a08293a6cc3c3508c9f055da0da3c71332e1e6e584977"
+        },
+        "checkpoints": [
+          "H_initial",
+          "H_permit",
+          "H_nonpermit"
+        ],
+        "n1_locators": [
+          "Sec. 7.3.5 (lines 8405-8424)",
+          "data-flow (lines 1755-1784)"
+        ],
+        "proof": "derived/h_equivalence_proof.json"
+      },
+      "extensional_definition": "Canonicalized logical XACML request-context attribute multimap available to PDP evaluation, keyed by (Category, AttributeId, DataType, Issuer-or-null).",
+      "manual_semantic_choice_required": false,
+      "pc_field": "H",
+      "source_class": [
+        "N1",
+        "N3"
+      ]
+    },
+    "Lambda": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "Lambda.authority",
+      "auditor_status": "PENDING_2B",
+      "derivation_module": "src/pc/derive_Lambda.py",
+      "evidence": {
+        "manifest_note": "historical narrow-tuple hash superseded for operative use; preserved here for ROUND_000 provenance",
+        "operative_manifest": "lambda_manifest.json (reconstructible canonical pre_hash; see refs mode lambda.pre_hash check)",
+        "pre_hash_historical": "bb2c3c9472f887eb6674c337ac3c5145fa04b4fb0e169908e4e4a6cbc4b3dc94"
+      },
+      "extensional_definition": "Frozen authorization evaluation capability (policy/provider/preprocessor/interface).",
+      "manual_semantic_choice_required": false,
+      "pc_field": "Lambda",
+      "source_class": [
+        "N1",
+        "N2",
+        "N3"
+      ]
+    },
+    "P_R": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "P_R.policy_projection",
+      "auditor_status": "PENDING_2B",
+      "derivation_module": "src/pc/derive_PR.py",
+      "evidence": {
+        "adequacy": "derived/policy_adequacy_certificate.json",
+        "designator_coordinates": 4
+      },
+      "extensional_definition": "histories h1, h2 are P_R-equivalent iff for every frozen designator coordinate (Category, AttributeId, DataType, Issuer) the named attribute bags compare equal as sorted typed multisets under XACML matching semantics",
+      "manual_semantic_choice_required": false,
+      "pc_field": "P_R",
+      "source_class": [
+        "N1",
+        "N3"
+      ]
+    },
+    "Q": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "Q.native_repair_operation",
+      "auditor_status": "INDEPENDENT_CHECK_PASS",
+      "derivation_module": null,
+      "evidence": {
+        "actions": [
+          "q_supply_missing_attribute"
+        ],
+        "n1_locator": "Data-flow model (frozen stripped-text lines 1755-1784)",
+        "unit_cost": 1,
+        "values_cross_checked": true
+      },
+      "extensional_definition": "One native PEP-style request submission / PDP response cycle applying the preregistered construction rule. FIXED covers the operation definition; boundary attribution follows the Atom record.",
+      "manual_semantic_choice_required": false,
+      "pc_field": "Q",
+      "source_class": [
+        "N1",
+        "X"
+      ]
+    },
+    "Succ+": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "Succ.positive_support_successors",
+      "auditor_status": "INDEPENDENT_CHECK_PASS",
+      "derivation_module": null,
+      "evidence": {
+        "terminal_outcomes": "PENDING_TARGET_AUDIT",
+        "world_files_present": true,
+        "worlds": [
+          "x_permit",
+          "x_nonpermit"
+        ]
+      },
+      "extensional_definition": "Positive-support successor set over the two preregistered complete request worlds; terminal outcomes pending the Phase-2 target audit. FIXED covers membership definition, not outcome values.",
+      "manual_semantic_choice_required": false,
+      "pc_field": "Succ+",
+      "source_class": [
+        "N3",
+        "X"
+      ]
+    },
+    "c": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "c.unit_cost",
+      "auditor_status": "INDEPENDENT_CHECK_PASS",
+      "derivation_module": null,
+      "evidence": {
+        "unit_cost": 1,
+        "value_cross_checked": true
+      },
+      "extensional_definition": "Unit action-cost normalization (experiment-authored, frozen; structural result must be cost-invariant).",
+      "manual_semantic_choice_required": false,
+      "pc_field": "c",
+      "source_class": [
+        "X"
+      ]
+    },
+    "omega": {
+      "ambiguity_status": "FIXED",
+      "anchor_id": "omega.native_responses",
+      "auditor_status": "INDEPENDENT_CHECK_PASS",
+      "derivation_module": null,
+      "evidence": {
+        "fixture_response_sha256": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687",
+        "frozen_triple_match": true,
+        "n1_locator": "Response/Decision/StatusCode/StatusDetail semantics; MissingAttributeDetail element (verified raw-HTML map Sec-5.57-5.58); Indeterminate lists AttributeId/DataType/Issuer (verified Sec. 7.3.5 tail)",
+        "observed_triple": [
+          "Indeterminate",
+          "urn:oasis:names:tc:xacml:1.0:status:missing-attribute",
+          {
+            "AttributeId": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+            "Category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+            "DataType": "http://www.w3.org/2001/XMLSchema#string"
+          }
+        ],
+        "single_result_single_status": true,
+        "status_message_observed_excluded": [
+          "Missing named Attribute"
+        ]
+      },
+      "extensional_definition": "Native XACML response classes (Decision, StatusCode, StatusDetail/MissingAttributeDetail) observed on the frozen original request.",
+      "manual_semantic_choice_required": false,
+      "pc_field": "omega",
+      "source_class": [
+        "N1",
+        "N3"
+      ]
+    }
+  },
+  "ledger_id": "PC-XACML-S3PLUS-v1-ledger",
+  "produced_utc": "see-parts"
+}

@@ -1,0 +1,27 @@
+{
+  "acceptable_alternatives": [],
+  "canary_id": "wrong_category",
+  "compared_utc": "2026-09-12T20:11:23Z",
+  "expectations_sha256": "1fae1a1eca007b4df07fd0f6829f5d1675878d6ca8cea0881cef163ba0df83ad",
+  "expected": {
+    "decision": "Indeterminate",
+    "missing_attribute_detail_present": true,
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:missing-attribute"
+  },
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "match_alternative": false,
+  "match_expected": true,
+  "matched_alternative_index": null,
+  "observed": {
+    "decision": "Indeterminate",
+    "missing_attribute_detail_present": true,
+    "missing_detail": {
+      "AttributeId": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "Category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "DataType": "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:missing-attribute"
+  },
+  "pass": true,
+  "raw_sha256": "cf2325f9f3d65a135bfe14c50571920bc7e422ea0ca2e862ec6d0c039b8d33ca"
+}

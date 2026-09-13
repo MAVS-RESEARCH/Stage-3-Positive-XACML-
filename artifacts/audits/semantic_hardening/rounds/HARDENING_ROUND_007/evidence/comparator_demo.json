@@ -1,0 +1,14 @@
+{
+  "abort_token": "TOUCH_DERIVATION_MISMATCH path on authority drift (Phase-3 touch derivation re-runs derive_Lambda post-repair and aborts the structural-E claim on any component difference)",
+  "demo_id": "PC-XACML-S3PLUS-v1-comparator-demo",
+  "expected_pre_hash": "3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a",
+  "fail_closed": true,
+  "mutated_component": "pdp.xml single-byte flip at offset 200 (temp copy only; frozen original untouched, re-verified byte-identical after)",
+  "mutated_input_sha256": "302d74003266121f165062cac83a59d11f2f345b8fcbbe75c2ed94e99bbef9d7",
+  "observed_actual_pre_hash": null,
+  "observed_exit": 1,
+  "observed_stdout_tail": [
+    "[P2:derl:FAIL] authority artifacts differ from sealed manifest"
+  ],
+  "pristine_input_sha256": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d"
+}

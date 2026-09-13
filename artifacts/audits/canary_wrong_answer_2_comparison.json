@@ -1,0 +1,23 @@
+{
+  "acceptable_alternatives": [],
+  "canary_id": "wrong_answer_2",
+  "compared_utc": "2026-09-12T20:11:23Z",
+  "expectations_sha256": "1fae1a1eca007b4df07fd0f6829f5d1675878d6ca8cea0881cef163ba0df83ad",
+  "expected": {
+    "decision": "NotApplicable",
+    "missing_attribute_detail_present": false,
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:ok"
+  },
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "match_alternative": false,
+  "match_expected": true,
+  "matched_alternative_index": null,
+  "observed": {
+    "decision": "NotApplicable",
+    "missing_attribute_detail_present": false,
+    "missing_detail": null,
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:ok"
+  },
+  "pass": true,
+  "raw_sha256": "67961314e19c0fc00df45eeff46d396778704a3461ba9c8a0f4b794889c17f10"
+}

@@ -1,0 +1,28 @@
+{
+  "current": {
+    "pre_hash": "5d602e07db597fdcd6f181014f41558c0a32df3c287dc7bc72f7c0c7806ec55b",
+    "scope": "launch packet manifest (see lambda_manifest.json)"
+  },
+  "history": [
+    {
+      "pre_hash": "bb2c3c9472f887eb6674c337ac3c5145fa04b4fb0e169908e4e4a6cbc4b3dc94",
+      "scope": "narrow tuple (policy/provider/preprocessor/interface)",
+      "status": "HISTORICAL (derived/lambda_record.json, Phase-2A); superseded, preserved in git"
+    },
+    {
+      "pre_hash": "3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a",
+      "scope": "components + exclusions + engine sources + resolved defaults + dir listing (see lambda_manifest.json); recompute procedure: canonical JSON sort_keys of components+exclusions (see refs mode)",
+      "status": "HISTORICAL (stale current preserved transparently at launch 003)"
+    },
+    {
+      "pre_hash": "d4a5fcd891910184c8d7919ab44395cbf6c1860de95bf8d5ba098b68d757a00b",
+      "scope": "pre-refresh operative (superseded at launch 003; value preserved)",
+      "status": "HISTORICAL"
+    }
+  ],
+  "note": "Intermediate manifest constructions existed transiently pre-freeze during hardening and were superseded without independent preservation; only the historical opaque value and the current operative value are attested here.",
+  "record_id": "PC-XACML-S3PLUS-v1-pre-hash-lineage",
+  "review_note": "current pre_hash recomputed over anonymized review bytes (was 194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3 over canonical bytes with local paths); history preserved verbatim as canonical provenance.",
+  "review_snapshot": true,
+  "rule": "Exactly one operative pre_hash (the current manifest's); history preserved, never rewritten."
+}

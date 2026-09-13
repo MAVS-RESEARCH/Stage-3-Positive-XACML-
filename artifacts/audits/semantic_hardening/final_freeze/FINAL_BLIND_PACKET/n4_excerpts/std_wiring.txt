@@ -1,0 +1,23 @@
+SOURCE: pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/PdpEngineConfiguration.java lines 375-396 (pinned 3cc0e988)
+			attProviderIds.add(StandardEnvironmentAttributeProvider.DEFAULT_ID);
+		}
+
+		for (final AbstractAttributeProvider attProviderJaxbConf : attProviderJaxbConfs)
+		{
+			Preconditions.checkArgument(!(attProviderJaxbConf instanceof StdEnvAttributeProviderDescriptor) || !enableStdAttProviders, "Custom StdEnvAttributeProviderDescriptor(s) is/are not compatible with standardAttributeProvidersEnabled='true' in PDP configuration");
+			/*
+			PDP XML schema is supposed to be used for AttributeProvider ID uniqueness check, but we double-check in case XML schema is disabled.
+			 */
+			final boolean isUnique = attProviderIds.add(attProviderJaxbConf.getId());
+			if (!isUnique)
+			{
+				throw new IllegalArgumentException("AttributeProvider ID '" + attProviderJaxbConf.getId() + "' already used! Each AttributeProvider ID must be unique in the PDP configuration.");
+			}
+
+			final CloseableNamedAttributeProvider.DependencyAwareFactory depAwareAttrProviderModFactory = newAttributeProviderProviderFactory(attProviderJaxbConf, envProps);
+			attProviderFactories.add(depAwareAttrProviderModFactory);
+		}
+
+
+		/*
+		 * Variable processing - max Variable reference depth

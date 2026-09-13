@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-09-12T08:39:59Z",
+  "exec_count_at_init": 0,
+  "freeze_revision": "SEMANTIC_FREEZE_REVISION_004",
+  "freeze_sha256": "68fc73075a249a51b06d28a1d9a1f83f0d9d51bf2cdd9923f089f41802def32d",
+  "header": "THIS IS A NON_BLIND DEVELOPMENTAL REHEARSAL. THIS OUTPUT CANNOT CERTIFY OR UNLOCK THE EXPERIMENT.",
+  "label": "NON_BLIND_CERTIFICATION_REHEARSAL",
+  "manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+  "mutation_required": false,
+  "packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e",
+  "panels_required": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "phase": "2B-R",
+  "preservation": {
+    "decision": "HOLDOUT_CLEAN_NO_REOPEN",
+    "reason": "3 objections: 2 DUPLICATE, 1 VALID_NONMATERIAL (projection_sha naming); attacker self-graded zero surviving",
+    "reopen": false
+  },
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "repo_commit": "<AUTHOR_REPO_COMMIT_024>",
+  "sweep_id": "REHEARSAL_SWEEP_011_HOLDOUT"
+}

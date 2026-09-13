@@ -1,0 +1,113 @@
+{
+  "anonymization_mode": "orphan-review-snapshot",
+  "author_repo_git_object_scan": "PASS",
+  "binary_metadata_scan": "PASS (archive omitted; see packaging_note)",
+  "canonical_branch": "main (untouched)",
+  "canonical_head": "<REDACTED_CANONICAL_HEAD>",
+  "categories": [
+    "author-controlled-urls",
+    "copyright-holder",
+    "git-commit-aliases",
+    "git-object-aliases",
+    "local-filesystem-paths",
+    "review-hash-recomputation",
+    "review-aware-provenance-gate",
+    "schema-authority",
+    "timezone-indicators",
+    "archive-packaging-omission"
+  ],
+  "external_provenance_preservation": "PASS",
+  "files_transformed_for_anonymization": 33,
+  "files_transformed_review_provenance": 6,
+  "files_transformed_total": 39,
+  "identity_findings_removed": 773,
+  "identity_scan": "PASS",
+  "local_path_scan": "PASS",
+  "non_regression": {
+    "amendment_history": "UNCHANGED (protocol texts preserved except identity aliases; chronology preserved)",
+    "authzforce_commit": "3cc0e988e1639da48184434cd5c918102ff5b499 (preserved verbatim)",
+    "authzforce_version": "AuthzForce Core CE 21.2.0 (preserved)",
+    "completion": "COMPLETE (preserved)",
+    "costs": "UNCHANGED",
+    "decisions": {
+      "x_nonpermit": "NotApplicable",
+      "x_permit": "Permit"
+    },
+    "experiment_id": "PC-XACML-S3PLUS-v1",
+    "external_versions": "UNCHANGED",
+    "falsification": "13/13 (preserved)",
+    "freeze_signature": [
+      1,
+      "INF",
+      1,
+      1,
+      "INF",
+      "INF",
+      1,
+      "INF"
+    ],
+    "frozen_structure": "UNCHANGED",
+    "historical_negatives": "PRESERVED (FINAL_RESULT.json and FINAL_RESULT_CYCLE_002.json remain NATIVE_ANCHOR_INSUFFICIENT; CYCLE_001/CYCLE_002 and L01-06 failures preserved)",
+    "identified_set_cardinality": 1,
+    "launch_hashes_canonical": {
+      "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+      "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+      "registry_sha256": "d7641f64ced4092a23e7e75dcb26f00f5fa274f27ca3171b2d39792e6fe7e44a"
+    },
+    "launch_hashes_review": {
+      "packet_sha256_review": "c282a29e06e039a868c8ee1630525f2afc581aa5f4d4a95369e857d9a3c9bda3",
+      "note": "review recomputation over review bytes; canonical hashes above remain historical in FINAL_RESULT_LAUNCH.json"
+    },
+    "measured_values": "UNCHANGED",
+    "native_suite_sealed": "193 passed, 6 skipped (preserved in CHANGELOG/FINAL_AUDIT)",
+    "outcome": "POSITIVE_NATIVE_STAGE3 (preserved)",
+    "policies": "UNCHANGED",
+    "requests": "UNCHANGED",
+    "semantic_anchors": "UNCHANGED (Atom/H/Lambda/PR FIXED)",
+    "status": "PASS",
+    "touch": {
+      "q_supply_missing_attribute": [
+        "E"
+      ]
+    },
+    "worlds": "UNCHANGED"
+  },
+  "orphan_branch": true,
+  "packaging_note": "PC-XACML-S3PLUS-v1.tar.gz and its two .sha256 sidecars omitted from review snapshot by design (compressed archive would embed canonical bytes containing identity; all constituent files present individually and covered by REVIEW_SHA256SUMS.txt). Original archive hashes remain authoritative in canonical branch.",
+  "review_branch": "anonymous",
+  "review_commit_author": "Anonymous Authors",
+  "review_commit_message": "Anonymous reviewer snapshot",
+  "review_hash_note": "REVIEW_SHA256SUMS.txt authenticates review bytes only; original seals (MANIFEST.sha256, FINAL_RESULT_LAUNCH.json packet/prompt/registry, amendment seal history) remain historical for canonical bytes. Never relabel review hashes as original seals.",
+  "review_provenance_recomputations": [
+    "artifacts/audits/amendment_001_seal.json: amendment_sha256 dad4260000c197944676f0e68c2c3a8b76f431fe93c0d44a27d7a85990972338 (was 47c803a41177ddfb885e60a4ead3f3ed8b65a010977922862cc993a440be1be8), review_snapshot true",
+    "artifacts/audits/launch/launch_packet/candidates/lambda_manifest.json: dependency_content.sha256 b7ee4fb81a07960e0d09b2a73d1f124a5cbd63ec652c544597a81836ea53621d (was bac1eae93f099ec85af41aaf0f3725ca674fd035cd65c835356741e98af41c56), pre_hash 5d602e07db597fdcd6f181014f41558c0a32df3c287dc7bc72f7c0c7806ec55b (was 194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3), review_snapshot true",
+    "artifacts/audits/launch/launch_packet/PACKET_MANIFEST.json: entries for anonymized files recomputed, review_snapshot true",
+    "artifacts/audits/launch/launch_packet/PACKET_SHA256.txt: c282a29e06e039a868c8ee1630525f2afc581aa5f4d4a95369e857d9a3c9bda3 (was 8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6), review recomputation",
+    "artifacts/audits/launch/launch_packet/candidates/pre_hash_lineage.json: current pre_hash 5d602e07db597fdcd6f181014f41558c0a32df3c287dc7bc72f7c0c7806ec55b (was 194fcbbecc398f718d4b172133db3825f40648f73d62e31d1fae658bd50f4ed3), review_snapshot true",
+    "src/audit/model_adjudication.py + tests/test_model_adjudication.py: review-aware ancestry skip when review alias (other bindings enforced)"
+  ],
+  "review_snapshot": true,
+  "schema_authority": "https://anonymous.invalid (suffixes preserved)",
+  "secret_scan": "PASS",
+  "status": "PASS",
+  "tests": {
+    "canonical_working_tree": "200 passed, 6 skipped, 206 collected (original final-positive working tree, with git history and ignored upstream clone present)",
+    "environment_only_failures": [
+      "tests/test_lambda_manifest.py::test_builder_recompute_agreement (requires git-ignored upstream clone external/authzforce-repo with .git; absent from any snapshot by design; also fails on clean canonical checkout without that ignored directory; no science change)"
+    ],
+    "note": "review_run recorded from orphan review snapshot with .git (single root commit, no canonical history, ignored upstream clone absent by design). Manifest drift failure is expected review-artifact drift (MANIFEST.sha256 is canonical seal; review bytes differ exactly in anonymized set; all scientific files still match). No scientific failure remains.",
+    "review_drift_failures": [
+      "tests/test_phase6_seal.py::test_manifest_and_archive (MANIFEST.sha256 preserved verbatim as canonical seal; review bytes differ exactly in 39 anonymized/review-recomputed files; all scientific files — contracts, freezes, seals, policies, requests, worlds, costs, anchors, certificates, falsification artifacts — still match MANIFEST; drift list verified to be exactly the anonymized set; see non_regression)"
+    ],
+    "review_run": {
+      "failed": 2,
+      "failed_tests": [
+        "tests/test_lambda_manifest.py::test_builder_recompute_agreement",
+        "tests/test_phase6_seal.py::test_manifest_and_archive"
+      ],
+      "passed": 197,
+      "skipped": 7,
+      "total_collected": 206
+    }
+  }
+}

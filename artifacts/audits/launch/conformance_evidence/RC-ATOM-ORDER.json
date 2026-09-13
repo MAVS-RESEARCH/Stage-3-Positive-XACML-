@@ -1,0 +1,10 @@
+{
+  "events": [
+    "build_done",
+    "stage_done",
+    "verify_done",
+    "invoke_start",
+    "invoke_end",
+    "response_sealed"
+  ]
+}

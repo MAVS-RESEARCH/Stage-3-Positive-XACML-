@@ -1,0 +1,64 @@
+{
+  "chairs": {
+    "AUD-C01": {
+      "files": {
+        "attestation.txt": "d282ff14ce83c37886d664eac150ddb11dfa5f9daf5d0b5cd179dbd144f65bcc",
+        "provenance.json": "c3f291e7104d56c43d2c6b5eca6d2a91505f502b83c7f5ce34ed856a108ce69d",
+        "raw_response.txt": "6804023e3e1590d37338db47383e62b56684ab36d45b5f0f24a0952c3f289ac6",
+        "verdict.json": "5e12a8e0841a961fce746bd5a37cc60105e095b8f5a8e01e0e2f9518166da57c"
+      },
+      "tally": {
+        "Atom": "FIXED",
+        "H": "FIXED",
+        "Lambda": "PARTIAL",
+        "P_R": "FIXED"
+      }
+    },
+    "AUD-C02": {
+      "files": {
+        "attestation.txt": "7d49750044135647f4196183de12b0bf2b53f2ff502c2167cd1be40f43cc87c0",
+        "provenance.json": "8bc5149c8aa00172462934d7f89cff0d3aa624b5c9baa522d92d7bbd74b3f367",
+        "raw_response.txt": "171ce4cc8a459b3109a168df2005897b9b60c7a727ce0e4e9e6161f48e7e9813",
+        "verdict.json": "375096c7b16aab6c80240097936b10096282ac3533734969fab7c6c1035f23ee"
+      },
+      "tally": {
+        "Atom": "FIXED",
+        "H": "FIXED",
+        "Lambda": "PARTIAL",
+        "P_R": "FIXED"
+      }
+    },
+    "AUD-C03": {
+      "files": {
+        "attestation.txt": "ee17cd11117da952ee54947ab7e06f98e650565cc60ed092e7e3ef18e3044696",
+        "provenance.json": "a4bc02a64f127d7a0ec042fd2d8eba38eab448b65b55db8561133733c20c4f41",
+        "raw_response.txt": "8feaa2466943766559d2a309eb015be5fc7b8313410ff4cdbae9a4fe6882849b",
+        "verdict.json": "28c62367b2d7f0a810e8a1e76f6dd95f01548e7cfa9ab3be584a0d74776df768"
+      },
+      "tally": {
+        "Atom": "PARTIAL",
+        "H": "FIXED",
+        "Lambda": "PARTIAL",
+        "P_R": "FIXED"
+      }
+    }
+  },
+  "failed_gate": {
+    "exit": 3,
+    "route": "failure-seal",
+    "status": "MODEL_ADJUDICATION_NONUNANIMOUS"
+  },
+  "historical_result_sha256": "cc36504171c3f8ff581187694f66e46a0c70a53cd13f99f7e0161524fc803213",
+  "note": "Immutable references to the preserved failed certification. Originals under artifacts/audits/final_certification/ and artifacts/seal/ are never edited here.",
+  "prior_freeze": {
+    "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+    "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+    "record_sha256": "d255fcb075ec7a7218c40bff806be28c5385c4cbec1dcacd890989404081867a",
+    "revision": 2
+  },
+  "record_id": "POST_CERT_HARDENING_ROUND_000",
+  "zero_execution_proof": {
+    "completed_executions": 0,
+    "target_scan": []
+  }
+}

@@ -1,0 +1,103 @@
+# Correspondence record (NOT an adjudication record -- see disposition)
+
+Received: 2026-09-11, as chat text in the operator session (transcribed
+byte-faithfully below to the extent of manual transcription; original
+lives in session history, not in this repository).
+Claimed auditor ID: AUD-2B7 (not in the protocol set {AUD-M01, AUD-M02,
+AUD-M03}; no schema-conformant verdict.json; no prompt/packet hash
+binding; no isolation object; unattributable attestation string).
+Disposition: NOT INGESTED (fails validation: identity, form,
+non-unanimous content). Gate unchanged: 0/3 valid records, locked.
+Full rationale: Path.md Sec.3.11.
+
+## Verdict table (summary)
+
+- H: PARTIAL
+- P_R: FIXED
+- Lambda: AMBIGUOUS
+- Atom: PARTIAL
+- OVERALL_ALL_FOUR_FIXED: NO
+
+## Transcribed input (verbatim to transcription fidelity)
+
+## Blind semantic adjudication -- sealed packet PC-XACML-S3PLUS-v1-blind-packet
+Auditor ID: AUD-2B7
+Non-exposure attestation SHA-256 (private text retained until de-anonymization): 4adf511155e57ea63c409c470c495c6443849977d774ff3943caf15a0dad62cb
+
+### H -- verdict: PARTIAL
+
+**Proposed mapping (as written):** `candidates/anchor_ledger.json:35-64` -- H = "Canonicalized logical XACML request-context attribute multimap available to PDP evaluation, keyed by (Category, AttributeId, DataType, Issuer-or-null)" with checkpoints H_initial/H_permit/H_nonpermit; derivation `src/pc/derive_H.py`; evidence n1_locators Sec. 7.3.5 + data-flow, proof `derived/h_equivalence_proof.json`.
+
+**Exact supporting locators inspected:**
+- `corpus/fixture/request.xml:1-19` complete -- subject-id `Julius Hibbert` (lines 3-6), resource-id `http://medico.com/record/patient/BartSimpson` (8-11), action-id `read` (13-16), empty environment element (line 18). Matches `candidates/H_initial.json:2-29`.
+- `corpus/fixture/response.xml:9-10` -- MissingAttributeDetail Category access-subject / AttributeId `...:some-attribute` / DataType string. Explains why H_initial has 3 attributes and repaired Hs add that 4th coordinate.
+- `corpus/xacml-3.0-core-spec-cos01-en.html` raw lines `9755-9853` (Sec. 5.29: designator retrieves bag from request context 9755-9769; Category/AttributeId/DataType/Issuer matching 9831-9853); `12149-12181` (Sec. 7.3.5: PDP SHALL request values from handler 12149-12152; handler MAY also add without request 12152-12154; handler returns matching values as bag 12161-12163; missing + MustBePresent True->Indeterminate / False->empty bag 12165-12176); `12391-12408` (Sec. 7.6 Match: designator error->Indeterminate, empty->False, else existential apply); `3463-3503` (data-flow steps 3-4, 10-12).
+- `candidates/h_equivalence_proof.json:2-75` attribute_rows (4 coordinates, equality_argument) and `:76-101` global_conditions; `candidates/H_initial.json`, `H_permit.json`, `H_nonpermit.json` full contents.
+
+**Reasoning:** Core key structure (Category, AttributeId, DataType, Issuer) is genuinely fixed by 5.29 matching rules, and H_initial values are directly verifiable against frozen request.xml. H_permit/nonpermit values (adding `riddle me this` / `not-riddle-me-this` for some-attribute) are consistent with response.xml MissingAttributeDetail + MustBePresent=true designators in `corpus/fixture/policies/policy.xml:16,20,28,36,42`, but their coincidence with the *resolved* PDP-visible context is not independently established from the packet.
+
+**Residual semantic freedom:**
+1. Resolved-context vs raw-XML gap: handler "optionally adds attributes" (`3469-3472`), "MAY also add ... without PDP requesting" (`12152-12154`), "responsible for obtaining ... by whatever means it deems appropriate, including ... PIP" (`12156-12160`), SHALL supply environment values if absent -- Sec. 7.3.6 raw `12192-12202` -- plus "How [conversion to XACML context] is achieved is outside the scope" (raw `3525-3532`) and repository/protocol unrestricted (raw `3442-3449`). A handler-added environment/current-time/date bag or normalization would be in "available to PDP evaluation" but is absent from H (which lists only 3-4 attributes, no environment).
+2. Inadmissible/missing derivation evidence: `h_equivalence_proof.json:76-81` cites `derived/route_a_probe.json` (route_a_unavailable), `:92-96` cites `derived/requests/request_x_*.xml` (add-only claim), `:97-101` cites `derived/policy_projection.json` -- none present in sealed packet (packet contains only `corpus/fixture/*` + `candidates/*`). Only hashes remain (`h_equivalence_proof.json:103-107` input_hashes; `atom_record.json:15-25` counts+hashes), which cannot prove byte-identical-except-one-insertion or value-identity through the handler.
+3. `no_pip_configured` from `pdp.xml child elements=['policyProvider']` is verifiable (`corpus/fixture/pdp.xml:1-9` contains only StaticPolicyProvider), but per (1) no-PIP does not entail no-add.
+
+**Materiality:** Yes, could materially affect resource-specific interpretation. If resolved bags differ from claimed H (extra env attributes, normalization, Issuer handling), H identity conditions misstate the PDP-visible history; Decision attribution to history vs handler would be misassigned. Hence not FIXED. Not UNSUPPORTED (original checkpoint + key structure fixed) and not merely ambiguous intent (definition clear, proof incomplete) -> PARTIAL.
+
+### P_R -- verdict: FIXED
+
+**Proposed mapping:** `candidates/anchor_ledger.json:82-98` + `candidates/pr_relation.json:1-35` + `candidates/policy_adequacy_certificate.json:1-26` -- histories equivalent iff for every frozen designator coordinate (Category, AttributeId, DataType, Issuer) bags compare equal as sorted typed multisets; 4 coordinates listed in `pr_relation.json:5-30`.
+
+**Exact supporting locators inspected (complete files):**
+- `corpus/fixture/policies/policy.xml:1-48` complete -- single Permit Rule, deny-overrides, empty Policy Target (`<Target/>` line 6), Rule Target with 5 Match/designator occurrences collapsing to 4 distinct coordinates: subject-id/string/access-subject (line 16), some-attribute/string/access-subject (line 20), resource-id/anyURI/resource (line 28), action-id/string/action with literals `read` (line 36) and `write` (line 42, same coordinate). All MustBePresent="true". No AttributeSelector, no Content, no Condition/Apply/VariableReference, no PolicyIdReference/PolicySetIdReference, no Obligations/Advice -- verified by full 48-line read.
+- `corpus/fixture/pdp.xml:1-9` complete -- sole child `policyProvider`; no PIP/provider channels.
+- Spec: 5.29 raw `9755-9853` (bag retrieval + 4-part matching + MustBePresent->7.3.5); 5.30 raw `9886-9900` (Selector support OPTIONAL; evaluation Sec. 7.3.7 raw `12204-12280` reads Content/XPath only); 7.3.5 raw `12149-12190` (exclusive named-attribute retrieval path + empty vs Indeterminate + immutability `12183-12190`); 7.6 raw `12350-12408` (MatchId takes literal + each bag element `12365-12380`; empty->False, error->Indeterminate, existential True `12391-12408`); 7.7 raw `12492-12503` (empty target matches any; else Match/No Match/Indeterminate table).
+- `candidates/policy_adequacy_certificate.json:3-14` channel_inventory (selectors 0, xpath 0, references 0, pdp children [policyProvider], types string/anyURI) cross-checked against frozen policy/pdp above; `:16-21` n1_locators + instantiation argument citing same spec sections.
+
+**Reasoning:** Frozen policy queries authorization inputs ONLY through the 4 inventoried designator coordinates. No selector/XPath/Content channel exists in policy (complete-file verification), no reference/provider channel in pdp.xml, no Condition/Obligation path. Spec defines designator retrieval + Match consumption as the exclusive path for this fixture. Same designator bags therefore deterministically yield same Target/Match/Rule evaluation; different some-attribute singletons (`riddle me this` vs `not-...`) yield different Match results. 4-coordinate collapse (action read/write sharing one coordinate) correctly reflects spec matching (Category/Id/Type/Issuer, Issuer absent -> governed by Id/Type per `9845-9853`).
+
+**Residual freedom:** Strict bag-identity is finer than pure Match-result equivalence (e.g., duplicate or extra non-matching values, `{read}` vs `{read,write}`, differing Issuers pooled when designator omits Issuer per `9845-9853`), and "sorted typed multisets" normalization is experimenter gloss, not spec text. However all admitted histories (`H_initial/H_permit/H_nonpermit`) carry singleton bags with Issuer null and exact DataType matches, so this over-refinement never manifests in the stated experimental interface (two complete worlds differing in the single some-attribute value). No source-consistent alternative that preserves the frozen 4-coordinate set would change authorization-visibility for these worlds.
+
+**Materiality:** No -- residual finer-vs-coarser distinction could not affect resource-specific interpretation for the frozen medico-record read/write fixture with null-Issuer singleton bags. Boundary sufficiently determined -> FIXED.
+
+### Lambda -- verdict: AMBIGUOUS
+
+**Proposed mapping:** `candidates/anchor_ledger.json:65-81` -- Lambda = "Frozen authorization evaluation capability (policy/provider/preprocessor/interface)"; `candidates/lambda_record.json:1-17` components: attribute_provider_set [], native_request_interface, pdp_xml_sha256 `2c3c...`, policy_provider_sha256 `73eb...`, request_preprocessor ["default-absent-in-pdp.xml"], root_policy_sha256 `8475...`; equality `post_hash==pre_hash`, pre `bb2c...`, post null.
+
+**Exact supporting locators (partial):**
+- Pinned: `corpus/fixture/pdp.xml:1-9` sha `2c3c...` matches `corpus/MANIFEST.json:5-8`; `corpus/fixture/policies/policy.xml` sha `8475...` matches `MANIFEST.json:9-12`; `corpus/RELEASE.json:1-8` + `COMMIT.txt:1` + `MANIFEST.json:2-7,22-26` pin AuthzForce `release-21.2.0` commit `3cc0e988...`; glossary PDP/PEP/handler raw `2442-2448,2524-2545`; data-flow raw `3463-3503`.
+- Vagueness sources: 3.2 raw `3515-3532` (conversion outside scope of spec); data-flow Note raw `3442-3449` (repository/protocol unrestricted); 7.3.5 raw `12152-12160` (handler MAY add / whatever means including PIP); 7.3.6 raw `12192-12202` (handler SHALL supply environment date/time if absent).
+
+**Reasoning:** Policy + PDP-config + implementation tag are frozen, but "capability (policy/provider/preprocessor/interface)" has no extensional iff-rule. Hash scope undefined: pre_hash `bb2c...` matches no frozen file sha in MANIFEST; policy_provider_sha `73eb...` matches no packet file; post_hash null so constancy (`post==pre after q_supply_missing_attribute`) untestable from packet. `request_preprocessor ["default-absent-in-pdp.xml"]` and `attribute_provider_set []` infer absence from `pdp.xml` children alone, which per vagueness sources does not exclude handler-added attributes, built-in AuthzForce defaults, or environment time sources.
+
+**Residual freedom:** At least two source-consistent Lambda scopes remain: (i) narrow = frozen policy.xml + pdp.xml StaticPolicyProvider only; (ii) broad = (i) + handler translation/normalization + implicit environment PIP (current-time/date per 7.3.6) + AuthzForce-version defaults (outside-spec per 3.2). Packet does not determine which counts as Lambda vs H vs environment, nor what `bb2c...` hashes.
+
+**Materiality:** Yes -- if (ii) holds, Lambda could vary across time-delayed repairs or across handler/normalization behavior, and a Decision change could be misattributed to history rather than capability drift, directly affecting resource-specific interpretation. Multiple materially different boundaries remain -> AMBIGUOUS (not UNSUPPORTED, because policy/provider/version part is pinned).
+
+### Atom -- verdict: PARTIAL
+
+**Proposed mapping:** `candidates/anchor_ledger.json:19-34` + `candidates/atom_record.json:1-34` -- conclusion `NATIVE_TRANSACTION_PROVEN + RECONSTRUCTION_AS_WRAPPER`; native boundary "PEP-style request submission -> PDP evaluation -> XACML response"; wrapper construction_rule "Copy frozen original byte-identically except inserting exactly one subject Attribute (... some-attribute ...) ... No authorization logic"; `candidates/execution_inputs.json:1` repeats rule + `authorization_logic_performed:false`.
+
+**Exact supporting locators:**
+- (a) Native transaction PROVEN: data-flow raw `3460-3503` -- step 3 PEP sends native to handler (`3463-3469`), step 4 handler constructs context optionally adds and sends to PDP (`3470-3472`), steps 5-10 PDP/handler/PIP exchange (`3473-3494`), step 11 PDP returns response context with authorization decision (`3495-3498`), step 12 handler translates to native and returns to PEP (`3499-3503`); glossary Context handler raw `2442-2448`, PDP `2524-2531`, PEP `2533-2540`, PIP `2542-2545`; Response/StatusDetail/MissingAttributeDetail 5.57-5.58 raw `11559-11726` (esp. `11606-11612` missing-attribute MAY return MissingAttributeDetail; `11640-11726` detail carries Category/AttributeId/DataType/Issuer); 7.3.5 Indeterminate MAY list AttributeId/DataType/Issuer raw `12177-12181`; `corpus/fixture/response.xml:1-14` observed Indeterminate/missing-attribute triple for some-attribute.
+- (b) Wrapper NOT proven: `atom_record.json:13-32` construction_rule + diff_evidence (counts original 3 / permit 4 / nonpermit 4; three file hashes) + `no_authorization_logic {builder: "src\\xacml\\build_repaired_requests.py", forbidden_tokens: "absent, verified", import_roots: "locked set, verified"}`. Sealed packet contains neither repaired `request_x_*.xml` contents (only hashes `7e28...`/`f5c3...` also in `h_equivalence_proof.json:103-107`), nor builder source, nor token/import verification artifacts, nor `derived/*` probes.
+
+**Reasoning per special Atom rule:** (a) is genuinely supported -- external N1 defines the PEP->handler->PDP->response->PEP transaction boundary. (b) is experimenter assertion only: counts+hashes cannot prove "byte-identically except one insertion" (namespace, whitespace, CombinedDecision/ReturnPolicyIdList, ordering, extra attrs could change without changing counts; hashes opaque without contents), and absent builder code cannot prove "merely constructs/invokes rather than performing authorization logic."
+
+**Residual freedom:** Repaired requests could differ beyond the single declared Attribute; wrapper could embed filtering/decision logic. Both remain source-consistent with the packet.
+
+**Materiality:** Yes -- if wrapper altered more than claimed or decided, the observed PDP response would not isolate the native authorization transaction, corrupting resource-specific interpretation of the repair (`q_supply_missing_attribute`). One conjunct proven, one missing -> PARTIAL.
+
+### OVERALL_ALL_FOUR_FIXED: NO
+
+"I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet."
+
+## Disposition (experiment side, not part of the input)
+
+Received as chat text, not via the ingest path. Fails validation on:
+identity (AUD-2B7 not in {AUD-M01, AUD-M02, AUD-M03}); form (prose,
+not schema-conformant verdict.json: no verdict_id/qualification/
+prompt_sha256/packet_sha256/isolation object); content (non-unanimous:
+PARTIAL/AMBIGUOUS present, overall NO). Human-path reading likewise
+insufficient (single record; human-only unlock superseded by Amendment
+001). NOT ingested. Gate unchanged: 0/3 valid records ->
+BLOCKED_PENDING_MODEL_ADJUDICATION. No target audit. No Phase 3+.

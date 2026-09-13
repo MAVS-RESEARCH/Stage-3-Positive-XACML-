@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/completion_space.schema.json",
+  "title": "Phase-4 completion-space closure certificate",
+  "description": "Machine-checked certificate over the thirteen K-relevant fields (X, U_H, S, H, P_R, Lambda, omega, Q, Succ+, c, A_Pi, Atom, Y). Each row carries its constraint source plus artifact-hash evidence and a free_after_audit flag. Only a zero-free certificate may authorize cardinality 1.",
+  "type": "object",
+  "required": ["certificate_id", "experiment_id", "contract_sha256", "k_table_sha256", "ledger_sha256", "execution_inputs_sha256", "rows", "free_k_relevant_fields", "nontrivial", "verdict", "produced_utc"],
+  "additionalProperties": false,
+  "properties": {
+    "certificate_id": {"type": "string", "const": "PC-XACML-S3PLUS-v1-completion-space"},
+    "experiment_id": {"type": "string", "const": "PC-XACML-S3PLUS-v1"},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "k_table_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "ledger_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "execution_inputs_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "rows": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "object",
+        "required": ["pc_field", "source_constraint", "evidence", "free_after_audit", "check_detail"],
+        "additionalProperties": false,
+        "properties": {
+          "pc_field": {"type": "string", "enum": ["X", "U_H", "S", "H", "P_R", "Lambda", "omega", "Q", "Succ+", "c", "A_Pi", "Atom", "Y"]},
+          "source_constraint": {"type": "string", "minLength": 1},
+          "evidence": {"type": "object", "minProperties": 1},
+          "free_after_audit": {"type": "boolean"},
+          "check_detail": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "free_k_relevant_fields": {"type": "integer", "minimum": 0, "maximum": 13},
+    "nontrivial": {"type": "boolean"},
+    "verdict": {"type": "string", "enum": ["COMPLETE", "INCOMPLETE"]},
+    "produced_utc": {"type": "string", "minLength": 1}
+  }
+}

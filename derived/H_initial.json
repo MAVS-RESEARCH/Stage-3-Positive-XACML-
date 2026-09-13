@@ -1,0 +1,43 @@
+{
+  "attributes": [
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "values": [
+        "Julius Hibbert"
+      ]
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "values": [
+        "read"
+      ]
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+      "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "issuer": null,
+      "values": [
+        "http://medico.com/record/patient/BartSimpson"
+      ]
+    }
+  ],
+  "checkpoint": "S0",
+  "history_id": "PC-XACML-S3PLUS-v1-H_initial",
+  "produced_utc": "2026-09-11T20:33:39Z",
+  "proof": {
+    "ref": "h_equivalence_proof.json",
+    "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
+    "verdict": "VALID"
+  },
+  "source": {
+    "request_file": "external/authzforce/fixture/request.xml",
+    "sha256": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540"
+  }
+}

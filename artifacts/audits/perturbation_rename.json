@@ -1,0 +1,21 @@
+{
+  "control": "5.6",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "frozen_external_untouched": true,
+  "h_equal": true,
+  "k_equal": true,
+  "lambda_equal": true,
+  "pdp_decision_equal": true,
+  "pdp_decision_primary": "Permit",
+  "pdp_decision_variant": "Permit",
+  "pr_equal": true,
+  "primary_lambda_hash": "bb2c3c9472f887eb6674c337ac3c5145fa04b4fb0e169908e4e4a6cbc4b3dc94",
+  "primary_pr_hash": "6fc384a92c06821df0199a856cd7cf2b73c313f7efde4c64a35592970a4bc62c",
+  "primary_request_sha256": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294",
+  "produced_utc": "2026-09-12T19:01:38Z",
+  "relocated_decision": "Permit",
+  "relocated_equal": true,
+  "request_sha256": "3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294",
+  "touch_equal": true,
+  "variant": "rename"
+}

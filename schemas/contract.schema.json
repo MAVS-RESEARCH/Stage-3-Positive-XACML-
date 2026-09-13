@@ -1,0 +1,107 @@
+{
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/contract.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Phase-3 primary PC contract input schema. Carries no touch/resource field; touch is a derived output artifact only.",
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "touch"
+        ]
+      },
+      {
+        "required": [
+          "resource"
+        ]
+      },
+      {
+        "required": [
+          "touches"
+        ]
+      },
+      {
+        "required": [
+          "resources"
+        ]
+      }
+    ]
+  },
+  "properties": {
+    "actions": {
+      "type": "object"
+    },
+    "atomicity": {
+      "type": "object"
+    },
+    "checkpoints": {
+      "type": "object"
+    },
+    "contract_id": {
+      "type": "string"
+    },
+    "costs": {
+      "type": "object"
+    },
+    "experiment_id": {
+      "type": "string"
+    },
+    "freeze_order": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array"
+    },
+    "H": {
+      "type": "object"
+    },
+    "initial_checkpoint": {
+      "type": "string"
+    },
+    "Lambda": {
+      "type": "object"
+    },
+    "omega": {
+      "type": "object"
+    },
+    "PR": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "successors": {
+      "type": "object"
+    },
+    "target": {
+      "type": "object"
+    },
+    "worlds": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "contract_id",
+    "experiment_id",
+    "worlds",
+    "initial_checkpoint",
+    "checkpoints",
+    "target",
+    "H",
+    "PR",
+    "Lambda",
+    "omega",
+    "actions",
+    "successors",
+    "costs",
+    "atomicity",
+    "provenance"
+  ],
+  "title": "Phase-3 primary PC contract (input, no touch)",
+  "type": "object"
+}

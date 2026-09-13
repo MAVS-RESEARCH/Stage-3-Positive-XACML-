@@ -1,0 +1,8 @@
+{
+  "event": "SEMANTIC_FREEZE_REOPENED",
+  "material_evidence": "artifacts/audits/certification_rehearsal/REHEARSAL_SWEEP_008_HOLDOUT/objections.json:RS008-CE1",
+  "new_auditor_ids_required": true,
+  "new_packet_required": true,
+  "reason": "RS008-CE1 VALID_MATERIAL: runtime classpath/extension deployment unpinned (pdp-ext fallback, test-classes content, staged TOCTOU window)",
+  "utc": "2026-09-12T08:20:52Z"
+}

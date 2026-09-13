@@ -1,0 +1,15 @@
+{
+  "amendment_id": "PROTOCOL_AMENDMENT_001",
+  "amendment_sha256": "dad4260000c197944676f0e68c2c3a8b76f431fe93c0d44a27d7a85990972338",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "packet_sha256": "007105496cc70525810ba9da1da44680ebcc9c506280a33f793cf6588572c413",
+  "pre_amendment_commit": "<AUTHOR_REPO_COMMIT_011>",
+  "pre_prereg_seal_blob": "<AUTHOR_GIT_OBJECT_003>",
+  "pre_spec_blob": "<AUTHOR_GIT_OBJECT_001>",
+  "pre_workplan_blob": "<AUTHOR_GIT_OBJECT_004>",
+  "prompt_sha256": "9d983e35fa05090bb1a889358d3dfc54b3e687667e3bce3f359b6261f8265651",
+  "resulting_workplan_blob": "<AUTHOR_GIT_OBJECT_002>",
+  "review_note": "amendment_sha256 recomputed over anonymized review bytes (author commit/blob identifiers aliased to <AUTHOR_REPO_COMMIT_...>/<AUTHOR_GIT_OBJECT_...>); original canonical seal preserved in canonical branch. pre_amendment_commit and blob identifiers are review aliases, not resolvable git objects in this orphan snapshot.",
+  "review_snapshot": true,
+  "sealed_utc": "2026-09-11T17:23:59Z"
+}

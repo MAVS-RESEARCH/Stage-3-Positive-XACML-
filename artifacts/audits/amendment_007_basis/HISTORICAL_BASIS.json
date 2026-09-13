@@ -1,0 +1,159 @@
+{
+  "chairs": {
+    "AUD-C01": {
+      "attestation.txt": "d282ff14ce83c37886d664eac150ddb11dfa5f9daf5d0b5cd179dbd144f65bcc",
+      "provenance.json": "c3f291e7104d56c43d2c6b5eca6d2a91505f502b83c7f5ce34ed856a108ce69d",
+      "raw_response.txt": "6804023e3e1590d37338db47383e62b56684ab36d45b5f0f24a0952c3f289ac6",
+      "verdict.json": "5e12a8e0841a961fce746bd5a37cc60105e095b8f5a8e01e0e2f9518166da57c"
+    },
+    "AUD-C02": {
+      "attestation.txt": "7d49750044135647f4196183de12b0bf2b53f2ff502c2167cd1be40f43cc87c0",
+      "provenance.json": "8bc5149c8aa00172462934d7f89cff0d3aa624b5c9baa522d92d7bbd74b3f367",
+      "raw_response.txt": "171ce4cc8a459b3109a168df2005897b9b60c7a727ce0e4e9e6161f48e7e9813",
+      "verdict.json": "375096c7b16aab6c80240097936b10096282ac3533734969fab7c6c1035f23ee"
+    },
+    "AUD-C03": {
+      "attestation.txt": "ee17cd11117da952ee54947ab7e06f98e650565cc60ed092e7e3ef18e3044696",
+      "provenance.json": "a4bc02a64f127d7a0ec042fd2d8eba38eab448b65b55db8561133733c20c4f41",
+      "raw_response.txt": "8feaa2466943766559d2a309eb015be5fc7b8313410ff4cdbae9a4fe6882849b",
+      "verdict.json": "28c62367b2d7f0a810e8a1e76f6dd95f01548e7cfa9ab3be584a0d74776df768"
+    },
+    "AUD-C04": {
+      "attestation.txt": "88968de01d38538f2b2ff7012b377584821c1ab2ea4b8fc41e22a18ec96a07bc",
+      "provenance.json": "e9da5e08311b3d8677dedfaa079a6fdab79f731095e1791a5857a8ea3b3c200b",
+      "raw_response.txt": "cfff3dcc436d38f07baabee2bc1e75a765f09967d5aef02f3731cae3c392c21e",
+      "verdict.json": "da4a657d4a94ccd8c6ff9a19a9f415c89f856e859196e636d5950d8f912e2b8c"
+    },
+    "AUD-C05": {
+      "attestation.txt": "56b3fddec8d65aa1844f89a723d355de9d851972d8b49bd63713f0036ed09129",
+      "provenance.json": "ebd4cd42a6c61b0c131875134dc43afc1ad1fe076e929444784702ef095aa9e3",
+      "raw_response.txt": "84b30d7dd4c44142b70df9fa7e365fe2c733273086d3e2494492cd0d20d05136",
+      "verdict.json": "a56fe10881ebb2b014e0ff0af8a392f193c746855529185aabb7257929a9f881"
+    },
+    "AUD-C06": {
+      "attestation.txt": "7ffb4ff960abe21bd934764a2f935277c4487e033c73231803e1a3b6d59b7e4d",
+      "provenance.json": "f26db703b8a8607c045806fe9887ab6fa878c14af5605c0b49bfb2674def3ec3",
+      "raw_response.txt": "b1fa89faa43f2d8ee325e0661dfff6b60ced7ce1e315c66ad78aa7443a2a2b42",
+      "verdict.json": "68e7f8c51c62bf1482ac8d8f244a27464750b7a2d5969f3cceec04170373c1a9"
+    }
+  },
+  "cycle_002_assessment": "0e9ea33c7ef05cd0e5c4109a25eb724a5d7f93f3105ae644b46b6c2e5bee289f",
+  "cycle_002_objections": "ec0183dded5c7087f8503ea5cb9d1c8a99e2270949b1ab75dc19b9b5788d4693",
+  "cycles": [
+    {
+      "assessment": {
+        "assessed_utc": "2026-09-12T08:59:41Z",
+        "freeze_packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c",
+        "freeze_prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+        "tally": {
+          "AUD-C01": "NON_FIXED:Lambda",
+          "AUD-C02": "NON_FIXED:Lambda",
+          "AUD-C03": "NON_FIXED:Lambda,Atom"
+        },
+        "unanimous": false
+      },
+      "cycle_id": "CERTIFICATION_CYCLE_001",
+      "decision": {
+        "decided_utc": "2026-09-12T08:59:42Z",
+        "material_objections": [
+          "C01-Lambda-engine-closure",
+          "C02-Lambda-verifiability",
+          "C03-Lambda-deferral",
+          "C03-Atom-staging"
+        ],
+        "reason": "Lambda 3xPARTIAL + Atom 1xPARTIAL with source-grounded gaps; consumed by Phase 2D revisions 003/004",
+        "verdict": "CERTIFICATION_FAILED_REPAIRABLE"
+      },
+      "panel": [
+        "AUD-C01",
+        "AUD-C02",
+        "AUD-C03"
+      ],
+      "revision": 2,
+      "status": "SEALED_FAILED_REPAIRABLE"
+    },
+    {
+      "assessment": {
+        "assessed_utc": "2026-09-12T10:31:30Z",
+        "freeze_packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e",
+        "freeze_prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+        "tally": {
+          "AUD-C04": "NON_FIXED:Lambda",
+          "AUD-C05": "NON_FIXED:Lambda",
+          "AUD-C06": "NON_FIXED:Lambda,Atom"
+        },
+        "unanimous": false
+      },
+      "cycle_id": "CERTIFICATION_CYCLE_002",
+      "decision": {
+        "decided_utc": "2026-09-12T10:32:02Z",
+        "material_objections": [],
+        "reason": "Measurement-gating deadlock: surviving gaps are PENDING_TARGET-by-design (post equality, live staged measurement) unprovable before locked execution; no pre-measurement revision can advance unanimity; further cycles would be positivity theater. Assessment: Path.md Sec.3.23 + CYCLE_002.objections.json (0 material, 0 unresolved).",
+        "verdict": "CERTIFICATION_FAILED_IRREDUCIBLE"
+      },
+      "panel": [
+        "AUD-C04",
+        "AUD-C05",
+        "AUD-C06"
+      ],
+      "revision": 4,
+      "status": "SEALED_FAILED_IRREDUCIBLE"
+    }
+  ],
+  "record_id": "AMENDMENT_007_HISTORICAL_BASIS",
+  "revisions": {
+    "1": {
+      "packet_sha256": "4b9f6556bd9d136010adfc0bd65b124d5f140b3da7b02daf6485d666a05b63c1"
+    },
+    "2": {
+      "packet_sha256": "fbd22e2c706402c7dd8b4461f7dfaa860fb656ff49f48f10c80d6443b6fc3b1c"
+    },
+    "3": {
+      "packet_sha256": "5702825aea4e144c59aab0d89d9778adf5978ff48572957a4b8e4d9d4a7020da"
+    },
+    "4": {
+      "packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e"
+    }
+  },
+  "seals": {
+    "FINAL_RESULT.json": "cc36504171c3f8ff581187694f66e46a0c70a53cd13f99f7e0161524fc803213",
+    "FINAL_RESULT_CYCLE_002.json": "270570d81e18915b0a2cd4ce67e2620154af7393abef47653b9ae3261e55a6fc"
+  },
+  "specimen": {
+    "commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+    "fixture_files": {
+      "pdp.xml": {
+        "git_blob_sha": "01a0adc080253afc2c523a0b8e58e8578e8275eb",
+        "sha256": "2c3ceab04f21064938ae82407adae21ac1f02dcc18d05f01b47aa2987d1c6e9d"
+      },
+      "policies/policy.xml": {
+        "git_blob_sha": "698af364ba2db79534cc654765baaed4d1c8f867",
+        "sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64"
+      },
+      "request.xml": {
+        "git_blob_sha": "ff6582db3d9c2bd00ae87e69279c23057b14a47a",
+        "sha256": "8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540"
+      },
+      "response.xml": {
+        "git_blob_sha": "835d483564a1c3ab052e0dbbd24c2258e5a5c295",
+        "sha256": "f78d839fa4637b1651474e2dfaed4998791860598aaa124c3faa0128effed687"
+      }
+    },
+    "fixture_subpath": "pdp-testutils/src/test/resources/conformance/others/StatusDetail.MissingAttributeDetail",
+    "repository": "https://github.com/authzforce/core",
+    "tag": "release-21.2.0",
+    "verified_head": true,
+    "working_tree_clean": true
+  },
+  "statements": [
+    "CYCLE_002 is terminal for the old single-stage architecture.",
+    "Amendment 007 does NOT reopen CYCLE_002.",
+    "Amendment 007 creates a prospective pre-measurement split-gate launch architecture; no target-world result observed.",
+    "No historical chair is recoded as passing.",
+    "Manuscript discloses failed panels plus gate redesign."
+  ],
+  "zero_execution_proof": {
+    "completed_executions": 0,
+    "target_scan": []
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/canary_expectations.schema.json",
+  "title": "Phase-1 sealed exact canary expectations",
+  "description": "Exact expected decision/status/error class (or finite XACML-dictated permissible set) per Phase-5 canary. Sealed in Phase 1 before any canary executes. Opened only by the post-execution comparison step.",
+  "type": "object",
+  "required": ["canary_expectations_id", "sealed_before_execution", "canaries"],
+  "additionalProperties": false,
+  "properties": {
+    "canary_expectations_id": {"type": "string"},
+    "sealed_before_execution": {"type": "boolean", "const": true},
+    "canaries": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["expected", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "expected": {
+            "type": "object",
+            "required": ["decision"],
+            "additionalProperties": false,
+            "properties": {
+              "decision": {"type": "string"},
+              "status_code": {"type": ["string", "null"]},
+              "missing_attribute_detail_present": {"type": "boolean"}
+            }
+          },
+          "rationale": {"type": "string"},
+          "acceptable_alternatives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["decision"],
+              "additionalProperties": false,
+              "properties": {
+                "decision": {"type": "string"},
+                "status_code": {"type": ["string", "null"]},
+                "missing_attribute_detail_present": {"type": "boolean"}
+              }
+            },
+            "default": []
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mutation_required": true,
+  "normalized_utc": "2026-09-12T08:20:47Z",
+  "surviving": 1,
+  "surviving_ids": [
+    "RS008-CE1"
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_008_HOLDOUT",
+  "total": 8,
+  "valid_material": 1
+}

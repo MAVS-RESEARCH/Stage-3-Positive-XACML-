@@ -1,0 +1,1 @@
+{"adapter":"SingleDecisionXacmlJaxbRequestPreprocessor.LaxVariantFactory (N4 PdpEngineAdapters.java:245)","flags":"strictAttributeIssuerMatch=false, xPathEnabled=false, result postprocessor BaseXacmlJaxbResultPostprocessor(verbosity=0)","id":"urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax","record_id":"PC-XACML-S3PLUS-v1-preprocessor-resolved"}

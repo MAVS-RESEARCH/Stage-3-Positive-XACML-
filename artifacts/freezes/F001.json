@@ -1,0 +1,24 @@
+{
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "freeze": "F001",
+  "frozen_resources": [
+    "A"
+  ],
+  "kappa": 1,
+  "proper_closer_exists": true,
+  "reachable_checkpoints": [
+    "S0",
+    "S_nonpermit",
+    "S_permit"
+  ],
+  "removed_actions": [],
+  "solver": "primary",
+  "surviving_actions": [
+    "q_supply_missing_attribute"
+  ],
+  "terminal_target_classes": {
+    "S_nonpermit": "NotApplicable",
+    "S_permit": "Permit"
+  },
+  "worst_branch_cost": 1
+}

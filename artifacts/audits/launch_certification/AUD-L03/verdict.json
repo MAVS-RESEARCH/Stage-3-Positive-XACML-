@@ -1,0 +1,75 @@
+{
+  "attestation_hash": "0c7209e9b685892f6f184a4d783855d5f9218b279ea04934864e98100f91a73d",
+  "auditor_id": "AUD-L03",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed launch packet.",
+  "deferrals": {
+    "RC-ATOM-ORDER": "LEGITIMATELY_DEFERRED",
+    "RC-CLASSPATH-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPLOYMENT-ACTUAL": "LEGITIMATELY_DEFERRED",
+    "RC-DEPS-CONSISTENT": "LEGITIMATELY_DEFERRED",
+    "RC-LAMBDA-POST": "LEGITIMATELY_DEFERRED",
+    "RC-REQUEST-ACTUAL": "LEGITIMATELY_DEFERRED"
+  },
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "db661dd74a37bec4586fce0ae329263b63ab679908fd1336a69eefa904e92a8d",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-L03-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-3.1 stripped_start_line 1733 lines 1755-1785 via candidates/locator_verified_table.json Sec-3.1 stripped_start_line 1733",
+        "corpus/xacml-3.0-core-spec-cos01-en.html glossary PDP-PEP-handler stripped_lines 1008-1024",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-5.57-5.58 MissingAttributeDetail via candidates/locator_verified_table.json Sec-5.57-5.58 stripped_start_line 491",
+        "corpus/fixture/response.xml lines 3-13 plus corpus/fixture/policies/policy.xml lines 18-20 plus corpus/fixture/request.xml",
+        "candidates/builder_source.py read_missing_detail read_policy_designators insert_attribute assert_single_attribute_addition assert_out_dir_disjoint plus candidates/wrapper_evidence.json rule_to_code builder_reaches_pdp false forbidden_token_hits empty",
+        "candidates/request_diffs.json unified_diffs plus c14n_sha256",
+        "candidates/invocation/PdpRunner.java lines 46-74 plus candidates/invocation/run_authzforce.py stage_completed_fixture lines 125-147 verify_staged_fixture lines 159-182 ordering refusal lines 196-198",
+        "candidates/execution_inputs.json worlds x_permit x_nonpermit count 2 plus candidates/invocation_record.json plus candidates/staging_certificate.json"
+      ],
+      "notes": "Native PEP-handler-PDP-response transaction distinguished from single-Attribute wrapper reconstruction; staged-copy exclusivity and pre-post checkpoints delimit measured interval with one native cycle per world-instantiation; c14n-identity except inserted Attribute dispositioned; triple-pinned across response policy and builder.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-7.3.4 stripped_lines 8394-8401 via candidates/locator_verified_table.json Sec-7.3.4 stripped_start_line 8382",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-7.3.5 stripped_lines 8417-8424 via candidates/locator_verified_table.json Sec-7.3.5 stripped_start_line 8406",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-5.29 stripped_lines 6291-6295 via candidates/locator_verified_table.json Sec-5.29 stripped_start_line 6283",
+        "corpus/fixture/policies/policy.xml lines 14-42 five AttributeDesignator occurrences all MustBePresent=true",
+        "corpus/fixture/request.xml sha256 8c733c467ff3585e729a67b64d90b00f00117c1a371dd63554eb4187a675f540 plus candidates/repaired_request_x_permit.xml sha256 3f8eedb7106aad8bfac605b6915f3a456ce7288a4dfb68e07edd402891a82294 plus candidates/repaired_request_x_nonpermit.xml sha256 b4077e77761fcc9ac06ae77285295b5cf84801d89824883aa66de89e96ce9ce8",
+        "corpus/fixture/response.xml line 10 MissingAttributeDetail triple",
+        "candidates/admitted_value_census.json null_issuers 3-4-4 empty_issuers 0 env_values 0",
+        "n4_excerpts/xsd_std_providers.txt lines 7-20 plus n4_excerpts/stdenv_default_factory.txt lines 4-8 plus candidates/env_inertness.json designator_census environment_category_designators 0"
+      ],
+      "notes": "Keyed multimap, single absent_required coordinate, explicit empty_categories, env inertness, and Issuer-absent matching are each grounded in spec text plus policy and request bytes plus mechanical censuses. C14N rule per HASHING_CONVENTIONS and builder canonical.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/COMMIT.txt 3cc0e988e1639da48184434cd5c918102ff5b499 plus corpus/RELEASE.json release-21.2.0 plus corpus/MANIFEST.json",
+        "candidates/engine_sources_manifest.json 80-plus files plus candidates/lambda_manifest.json engine_semantic_set tree 51e22664e96f4f24b7d2f6dfc7bbcafaa0cfec8a",
+        "candidates/built/jars four hashes 64b730bd 7b0533b0 065d4fcc 74f4f51ce matching candidates/lambda_manifest.json built_artifacts.jars",
+        "candidates/classpath_manifest.json sha256 5920a4267e3533055b497e2696a31813acf78a77cd547a8885f6a0dd523694ce",
+        "corpus/fixture/policies/policy.xml sha256 8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64 plus candidates/provider_element_c14n.xml sha256 73ebcf1d3013892f6323b709ae9255e4b5aceb2fd5a17e7c2e5a361c25d0dbe5",
+        "n4_excerpts/adapter_defaults.txt lines 9-11 plus n4_excerpts/xsd_preprocessor_defaults.txt plus n4_excerpts/xsd_std_providers.txt plus candidates/preprocessor_resolved.json plus candidates/resolved_effective.json"
+      ],
+      "notes": "Most constituents bound, but material gap: lambda_manifest built_artifacts.drivers run_authzforce.py sha 47b40bdea86fca039be2edcc3a6c0e8241e81829269f544c96d6d11a1d65d0c8 bytes 9575 contradicts frozen candidates/invocation/run_authzforce.py sha 708c80eae73b6fe87e7c710a068320d99f901068379d1f71af52aaccb9679fce bytes 14104 and LAUNCH_FREEZE execution_code; root pom 21bd6806 bytes 2467 orphan with no in-packet bytes; transitive Central artifacts by coordinates only per manifest disclosed limitation. Composite pre_hash therefore not fully justified.",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-7.6 stripped_lines 8605-8617 via candidates/locator_verified_table.json Sec-7.6 stripped_start_line 554",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec-7.3.5 stripped_lines 8419-8424",
+        "corpus/fixture/policies/policy.xml lines 34-43 action-id same coordinate two literals",
+        "candidates/match_table.json designator_rows five occurrences four coordinates all MustBePresent true with match-mismatch-missing semantics",
+        "candidates/admitted_value_census.json plus candidates/repaired_request_x_permit.xml plus candidates/repaired_request_x_nonpermit.xml singleton null-Issuer exact datatypes"
+      ],
+      "notes": "TRUE-FALSE-INDETERMINATE Match-vector from spec existential and empty-error rules; 5-to-4 dedup from policy; bag-identity versus Match-vector coincidence scoped to admitted singleton null-Issuer interface via censuses and diffs; missing with MustBePresent true as Indeterminate token.",
+      "status": "FIXED"
+    }
+  }
+}

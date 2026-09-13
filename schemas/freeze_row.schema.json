@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/freeze_row.schema.json",
+  "title": "Phase-4 exact freeze row",
+  "description": "One D33 freeze evaluation row: identifier-only removal, surviving set, closer existence, worst-branch cost, kappa (finite number or INF string), solver tag, and contract hash. Extended reachable/terminal fields are permitted.",
+  "type": "object",
+  "required": ["freeze", "frozen_resources", "removed_actions", "surviving_actions", "proper_closer_exists", "kappa", "solver", "contract_sha256"],
+  "additionalProperties": true,
+  "properties": {
+    "freeze": {"type": "string", "enum": ["F000", "F100", "F010", "F001", "F110", "F101", "F011", "F111"]},
+    "frozen_resources": {"type": "array", "items": {"enum": ["E", "R", "A"]}, "uniqueItems": true},
+    "removed_actions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "surviving_actions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "reachable_checkpoints": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "proper_closer_exists": {"type": "boolean"},
+    "worst_branch_cost": {"anyOf": [{"type": "number", "exclusiveMinimum": 0}, {"const": "INF"}]},
+    "kappa": {"anyOf": [{"type": "number", "exclusiveMinimum": 0}, {"const": "INF"}]},
+    "terminal_target_classes": {"type": "object"},
+    "solver": {"type": "string", "enum": ["primary", "independent"]},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

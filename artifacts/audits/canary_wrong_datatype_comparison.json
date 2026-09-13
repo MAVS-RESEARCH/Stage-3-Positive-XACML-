@@ -1,0 +1,29 @@
+{
+  "acceptable_alternatives": [
+    {
+      "decision": "Indeterminate",
+      "missing_attribute_detail_present": false,
+      "status_code": "urn:oasis:names:tc:xacml:1.0:status:syntax-error"
+    }
+  ],
+  "canary_id": "wrong_datatype",
+  "compared_utc": "2026-09-12T20:11:23Z",
+  "expectations_sha256": "1fae1a1eca007b4df07fd0f6829f5d1675878d6ca8cea0881cef163ba0df83ad",
+  "expected": {
+    "decision": "Indeterminate",
+    "missing_attribute_detail_present": false,
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:processing-error"
+  },
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "match_alternative": true,
+  "match_expected": false,
+  "matched_alternative_index": 0,
+  "observed": {
+    "decision": "Indeterminate",
+    "missing_attribute_detail_present": false,
+    "missing_detail": null,
+    "status_code": "urn:oasis:names:tc:xacml:1.0:status:syntax-error"
+  },
+  "pass": true,
+  "raw_sha256": "7b21e600933c41854079e262bf16d81dc28261e3c71072be47bcef75dc572c77"
+}

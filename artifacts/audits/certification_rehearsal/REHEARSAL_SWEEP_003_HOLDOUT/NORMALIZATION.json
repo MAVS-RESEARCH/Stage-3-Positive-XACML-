@@ -1,0 +1,11 @@
+{
+  "mutation_required": true,
+  "normalized_utc": "2026-09-12T06:26:38Z",
+  "surviving": 1,
+  "surviving_ids": [
+    "RS003-B01"
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_003_HOLDOUT",
+  "total": 11,
+  "valid_material": 1
+}

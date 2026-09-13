@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anonymous.invalid/pc-xacml-s3plus/execution_inputs.schema.json",
+  "title": "Phase-1 sealed non-outcome computation inputs",
+  "description": "The ONLY prereg file computation stages may read. Must not contain expected touch, expected K, expected classification, or expected per-world outcome mappings.",
+  "type": "object",
+  "required": ["execution_inputs_id", "worlds", "action_interface", "target_semantics", "freeze_order", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "execution_inputs_id": {"type": "string"},
+    "worlds": {
+      "type": "object",
+      "required": ["x_permit", "x_nonpermit"],
+      "additionalProperties": false,
+      "properties": {
+        "x_permit": {
+          "type": "object",
+          "required": ["missing_attribute_value"],
+          "additionalProperties": false,
+          "properties": {"missing_attribute_value": {"type": "string"}}
+        },
+        "x_nonpermit": {
+          "type": "object",
+          "required": ["missing_attribute_value"],
+          "additionalProperties": false,
+          "properties": {"missing_attribute_value": {"type": "string"}}
+        }
+      }
+    },
+    "action_interface": {
+      "type": "object",
+      "required": ["actions", "unit_cost", "construction_rule", "authorization_logic_performed"],
+      "additionalProperties": false,
+      "properties": {
+        "actions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "unit_cost": {"type": "number", "exclusiveMinimum": 0},
+        "construction_rule": {"type": "string"},
+        "authorization_logic_performed": {"type": "boolean", "const": false}
+      }
+    },
+    "target_semantics": {
+      "type": "object",
+      "required": ["rule"],
+      "additionalProperties": false,
+      "properties": {"rule": {"type": "string"}}
+    },
+    "freeze_order": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string"}},
+    "sources": {
+      "type": "object",
+      "required": ["standard", "implementation", "release", "tag", "commit", "fixture"],
+      "additionalProperties": false,
+      "properties": {
+        "standard": {"type": "string"},
+        "implementation": {"type": "string"},
+        "release": {"type": "string"},
+        "tag": {"type": "string"},
+        "commit": {"type": "string"},
+        "fixture": {"type": "string"}
+      }
+    }
+  }
+}

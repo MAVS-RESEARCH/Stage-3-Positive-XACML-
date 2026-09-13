@@ -1,0 +1,45 @@
+{
+  "absent_required": [
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "status": "missing-must-be-present-true"
+    }
+  ],
+  "basis": "HARDENING_ROUND_001 evidence; unchanged bag semantics from Phase-2A H objects",
+  "canonicalization": {
+    "empty_categories": "recorded explicitly, never silently dropped",
+    "rule": "W3C exclusive C14N of the request document for byte comparison; multimap comparison is order/whitespace-insensitive by construction",
+    "whitespace_order": "normalized by C14N; semantically irrelevant under XACML request semantics"
+  },
+  "changes_vs_r0": [
+    "absent_required marker list added (was: key omission)",
+    "empty_categories recorded explicitly (was: silently dropped)",
+    "environment_scope statement added",
+    "issuer_rule stated with frozen locator"
+  ],
+  "definition": "Canonicalized logical XACML request-context attribute multimap available to PDP evaluation, keyed by (Category, AttributeId, DataType, Issuer-or-null), over the admitted native interface (initial + two completed worlds). Present-value bags as in Phase-2A H objects; required-but-absent coordinates carried explicitly in absent_required with missing-must-be-present-true status (error semantics live in the omega linkage, not in a bag).",
+  "empty_categories": [
+    "urn:oasis:names:tc:xacml:3.0:attribute-category:environment"
+  ],
+  "environment_scope": {
+    "handler_may_supply": [
+      "current-time",
+      "current-date",
+      "current-dateTime"
+    ],
+    "present_in_requests": [],
+    "read_by_policy": [],
+    "values": "evaluation-time-dependent; excluded from frozen byte-identity, included in this scope statement",
+    "verdict": "authorization-inert for the measured interface (proven by designator census: zero environment designators; function census: string-equal/anyURI-equal only)"
+  },
+  "issuer_rule": {
+    "admitted_interface": "Issuer uniformly absent (verified: zero Issuer attributes across all three request files)",
+    "consequence": "H raw key (Issuer-or-null) is finer than PDP matching; no material divergence on this interface",
+    "locator": "Sec. 7.3.4 frozen stripped-text lines 8394-8401: Issuer-absent designator matching governed by AttributeId+DataType alone regardless of context Issuer presence/value",
+    "rule": "Issuer supplied in designator MUST match via string-equal; Issuer absent in designator matches regardless of context Issuer"
+  },
+  "record_id": "PC-XACML-S3PLUS-v1-H-r1",
+  "total_form_equivalence": "The total error-function form (coordinate -> Bag | MISSING_MBP_TRUE | EMPTY) is extensionally equivalent to this record on the admitted interface (single missing-able coordinate; empty-bag state unreachable as values); the partial-multimap+markers form is retained as derivation-faithful."
+}

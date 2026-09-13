@@ -1,0 +1,65 @@
+{
+  "attestation_hash": "56b3fddec8d65aa1844f89a723d355de9d851972d8b49bd63713f0036ed09129",
+  "auditor_id": "AUD-C05",
+  "declaration": "I was not supplied an expected touch set, expected freeze signature or K vector, expected classification, desired experiment outcome, or manuscript claim. I made these judgments solely from the contents of the sealed blind packet.",
+  "isolation": {
+    "fresh_context": true,
+    "no_prior_experiment_context": true,
+    "other_outputs_unavailable": true
+  },
+  "packet_sha256": "156e36d75627d2aa746026a9689e1d3f3f293b51b5104e16a60ea3f29bdc255e",
+  "prompt_sha256": "4ec4f9b6e21794f8068d225bf7b6825c8ab3f3a4ca1b43161fef504b08dcbdf3",
+  "qualification": "COLD_MODEL_INDEPENDENT",
+  "verdict_id": "AUD-C05-verdict",
+  "verdicts": {
+    "Atom": {
+      "locators": [
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 3.1 stripped lines 1733-1785 (PEP native request -> handler constructs context -> PDP evaluates -> response -> PEP)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 5.57-5.58 stripped lines 7902-7980 (StatusDetail MAY carry MissingAttributeDetail conveying missing attributes) + Sec 7.3.5 lines 8426-8429 (Indeterminate MAY list triple)",
+        "corpus/fixture/request.xml:1-19 + corpus/fixture/response.xml:3-13 (native pair: incomplete request + Indeterminate/missing-attribute/MissingAttributeDetail triple)",
+        "candidates/builder_source.py:82-193,204-274 (copy+single-insert+INV-05/INV-06+disjoint; imports copy/os/sys/lxml only, no PDP/evaluate/subprocess)",
+        "candidates/request_diffs.json:9-12 + candidates/repaired_request_x_permit.xml + candidates/repaired_request_x_nonpermit.xml (c14n-identity except one subject Attribute; re-serialization deltas dispositioned, not byte-identity)",
+        "candidates/wrapper_evidence.json rule_to_code/forbidden_token_hits/world_value_binding + candidates/invocation_record.json + candidates/invocation_excerpts.txt (build pre-step before any completed run; reads frozen Detail+policy only)",
+        "corpus/fixture/pdp.xml:6-8 + candidates/policy_dir_listing.json + candidates/verify_deployment_set.py:disjoint (single-file glob, PARENT_DIR, out-dir disjoint pre/post-create)"
+      ],
+      "notes": "Native transaction (external N1 submission->context->evaluation->response) distinguished from experiment-authored wrapper reconstruction (pre-submission construction invoking one native cycle per world). Original native pair observed; repaired native cycles pending by design (0 executions) with pre/post checkpoints delimiting measured interval, not a single PDP cycle. No outcome inferred; MissingAttributeDetail channel treated as native per blindness boundary.",
+      "status": "FIXED"
+    },
+    "H": {
+      "locators": [
+        "corpus/fixture/request.xml:3-18 (subject-id present; some-attribute absent; empty environment Attributes container line 18)",
+        "corpus/fixture/policies/policy.xml:14-43 (5 AttributeDesignators, all MustBePresent=true, zero Issuer, zero environment-category designators, functions string-equal/anyURI-equal only)",
+        "corpus/fixture/response.xml:9-10 (MissingAttributeDetail triple: some-attribute/access-subject/xsd:string)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.4 Attribute Matching (verified stripped 8381-8404; Issuer-absent rule 8398-8401 via candidates/locator_map.json)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.5 Attribute Retrieval (verified stripped 8405-8432: missing vs empty-bag vs Indeterminate, MustBePresent true/false, bags immutable)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 5.29 AttributeDesignator (verified stripped 6282-6300: bag of matched values)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 10.2.5 (verified stripped 10700-10730: current-time/date/dateTime MUST-supply) + Sec 7.3.6 (verified stripped 8434-8441)",
+        "n4_excerpts/xsd_std_providers.txt + n4_excerpts/stdenv_default_factory.txt + n4_excerpts/stdenv_default_doc.txt + n4_excerpts/xsd_stdenv_doc.txt (standard provider enabled override=false, serves current-* only)"
+      ],
+      "notes": "Multimap key (Category,AttributeId,DataType,Issuer-or-null), present bags, absent_required single coordinate, empty_categories explicit, environment inertness, issuer wildcard, and C14N/sorted-multimap comparison are each grounded above. Empty-bag unreachable follows from all-MustBePresent-true plus admitted histories supplying/missing discretely. No outcome inferred.",
+      "status": "FIXED"
+    },
+    "Lambda": {
+      "locators": [
+        "corpus/COMMIT.txt:1 + corpus/RELEASE.json:3-6 + corpus/MANIFEST.json:3-7 (commit 3cc0e988e1639da48184434cd5c918102ff5b499, release-21.2.0)",
+        "corpus/fixture/policies/policy.xml sha8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64 == lambda_manifest policy_bytes",
+        "corpus/fixture/pdp.xml:6-8 + n4_excerpts/parent_dir.txt (PARENT_DIR glob) + n4_excerpts/adapter_defaults.txt + n4_excerpts/xsd_std_providers.txt + n4_excerpts/xsd_strict_issuer.txt + n4_excerpts/xsd_preprocessor_defaults.txt (default-lax id, strictIssuer=false, xPath=false, verbosity 0, std providers true)",
+        "candidates/engine_sources/pdp-engine/src/main/java/org/ow2/authzforce/core/pdp/impl/io/SingleDecisionXacmlJaxbRequestPreprocessor.java:55-77,179-202 + candidates/engine_sources/pdp-engine/src/main/resources/pdp.xsd (parser fidelity)",
+        "candidates/lambda_manifest.json pre_hash d4a5fcd891910184c8d7919ab44395cbf6c1860de95bf8d5ba098b68d757a00b recomputes via documented canonical JSON sort_keys (verified)"
+      ],
+      "notes": "Partial support with material gaps: (1) candidates/pre_hash_lineage.json current 3e8cf8ffba078c54c25867cb3aa2e0c232165bbded136efb2a3f58407f4e221a contradicts operative manifest d4a5fcd8...; lineage stale. (2) built_artifacts jars/drivers/poms hashes cite bytes absent from packet file list, failing blind verifiability per rubric supplement R2 (hash-only without method-inputs-bytes). (3) engine tree 51e22664... not recomputable packet-only; file hashes verify but tree binding does not; transitive Central artifacts by coordinates only (disclosed). Core policy/provider/preprocessor/engine-file/resolved_effective/policy_location constituents verify; post-repair constancy honestly deferred (0 executions).",
+      "status": "PARTIAL"
+    },
+    "P_R": {
+      "locators": [
+        "corpus/fixture/policies/policy.xml:14-43 (5 occurrences project to 4 coordinates; action-id duplicated read/write literals; all MustBePresent=true)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.6 stripped lines 8605-8617 (error=>Indeterminate; empty=>False; existential True/Indeterminate/False)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.5 stripped lines 8417-8424 (missing+MustBePresent-true=>Indeterminate, false=>empty bag)",
+        "corpus/xacml-3.0-core-spec-cos01-en.html Sec 7.3.4 stripped lines 8394-8401 (Issuer-absent matching) + Sec 5.29 lines 6291-6295",
+        "candidates/repaired_request_x_permit.xml:1-19 + candidates/repaired_request_x_nonpermit.xml:1-19 + corpus/fixture/request.xml:1-19 (singleton null-Issuer bags; coincidence scope observable)"
+      ],
+      "notes": "Match-vector TRUE/FALSE/INDETERMINATE per coordinate with Indeterminate tokens distinct from bags is spec-determined. 5-to-4 dedup verified in policy bytes. Interface-scoped coincidence (bag-identity==Match-vector on singleton null-Issuer exact-datatype histories) is proven by policy literals plus request bytes, not assumed generally. Pooling immaterial here.",
+      "status": "FIXED"
+    }
+  }
+}

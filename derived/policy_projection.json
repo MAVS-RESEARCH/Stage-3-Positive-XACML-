@@ -1,0 +1,73 @@
+{
+  "construct_inventory": {
+    "attribute_selectors": 0,
+    "data_types": [
+      "http://www.w3.org/2001/XMLSchema#anyURI",
+      "http://www.w3.org/2001/XMLSchema#string"
+    ],
+    "match_functions": [
+      "urn:oasis:names:tc:xacml:1.0:function:anyURI-equal",
+      "urn:oasis:names:tc:xacml:1.0:function:string-equal"
+    ],
+    "obligations_advice": 0,
+    "policy_id_references": 0,
+    "rule_combining": "urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-overrides",
+    "xpath_expressions": 0
+  },
+  "designators": [
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "must_be_present": "true",
+      "path": "/Policy/Rule/Target/AnyOf/AllOf/Match/AttributeDesignator",
+      "rule_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:IIA007:rule"
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute",
+      "category": "urn:oasis:names:tc:xacml:1.0:subject-category:access-subject",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "must_be_present": "true",
+      "path": "/Policy/Rule/Target/AnyOf/AllOf/Match/AttributeDesignator",
+      "rule_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:IIA007:rule"
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:resource:resource-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+      "data_type": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "issuer": null,
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:anyURI-equal",
+      "must_be_present": "true",
+      "path": "/Policy/Rule/Target/AnyOf/AllOf/Match/AttributeDesignator",
+      "rule_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:IIA007:rule"
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "must_be_present": "true",
+      "path": "/Policy/Rule/Target/AnyOf/AllOf/Match/AttributeDesignator",
+      "rule_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:IIA007:rule"
+    },
+    {
+      "attribute_id": "urn:oasis:names:tc:xacml:1.0:action:action-id",
+      "category": "urn:oasis:names:tc:xacml:3.0:attribute-category:action",
+      "data_type": "http://www.w3.org/2001/XMLSchema#string",
+      "issuer": null,
+      "match_function": "urn:oasis:names:tc:xacml:1.0:function:string-equal",
+      "must_be_present": "true",
+      "path": "/Policy/Rule/Target/AnyOf/AllOf/Match/AttributeDesignator",
+      "rule_id": "urn:oasis:names:tc:xacml:2.0:conformance-test:IIA007:rule"
+    }
+  ],
+  "manifest_policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+  "policy_sha256": "8475166ce0a38dabdcddb0a41189893e5546fbbe72a9a27e8f547a0be204fe64",
+  "produced_utc": "2026-09-11T18:56:42Z",
+  "projection_id": "PC-XACML-S3PLUS-v1-projection"
+}

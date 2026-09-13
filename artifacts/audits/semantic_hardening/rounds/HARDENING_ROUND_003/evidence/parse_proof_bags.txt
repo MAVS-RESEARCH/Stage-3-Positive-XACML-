@@ -1,0 +1,36 @@
+[original]
+urn:oasis:names:tc:xacml:1.0:subject-category:access-subject
+urn:oasis:names:tc:xacml:1.0:subject:subject-id
+null => [http://www.w3.org/2001/XMLSchema#string|Julius Hibbert]
+urn:oasis:names:tc:xacml:3.0:attribute-category:action
+urn:oasis:names:tc:xacml:1.0:action:action-id
+null => [http://www.w3.org/2001/XMLSchema#string|read]
+urn:oasis:names:tc:xacml:3.0:attribute-category:resource
+urn:oasis:names:tc:xacml:1.0:resource:resource-id
+null => [http://www.w3.org/2001/XMLSchema#anyURI|http://medico.com/record/patient/BartSimpson]
+[permit]
+urn:oasis:names:tc:xacml:1.0:subject-category:access-subject
+urn:oasis:names:tc:xacml:1.0:subject:subject-id
+null => [http://www.w3.org/2001/XMLSchema#string|Julius Hibbert]
+urn:oasis:names:tc:xacml:1.0:subject-category:access-subject
+urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute
+null => [http://www.w3.org/2001/XMLSchema#string|riddle me this]
+urn:oasis:names:tc:xacml:3.0:attribute-category:action
+urn:oasis:names:tc:xacml:1.0:action:action-id
+null => [http://www.w3.org/2001/XMLSchema#string|read]
+urn:oasis:names:tc:xacml:3.0:attribute-category:resource
+urn:oasis:names:tc:xacml:1.0:resource:resource-id
+null => [http://www.w3.org/2001/XMLSchema#anyURI|http://medico.com/record/patient/BartSimpson]
+[nonpermit]
+urn:oasis:names:tc:xacml:1.0:subject-category:access-subject
+urn:oasis:names:tc:xacml:1.0:subject:subject-id
+null => [http://www.w3.org/2001/XMLSchema#string|Julius Hibbert]
+urn:oasis:names:tc:xacml:1.0:subject-category:access-subject
+urn:oasis:names:tc:xacml:2.0:conformance-test:some-attribute
+null => [http://www.w3.org/2001/XMLSchema#string|not-riddle-me-this]
+urn:oasis:names:tc:xacml:3.0:attribute-category:action
+urn:oasis:names:tc:xacml:1.0:action:action-id
+null => [http://www.w3.org/2001/XMLSchema#string|read]
+urn:oasis:names:tc:xacml:3.0:attribute-category:resource
+urn:oasis:names:tc:xacml:1.0:resource:resource-id
+null => [http://www.w3.org/2001/XMLSchema#anyURI|http://medico.com/record/patient/BartSimpson]

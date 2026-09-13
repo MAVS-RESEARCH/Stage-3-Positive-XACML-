@@ -1,0 +1,11 @@
+{
+  "ablated_anchor": "Lambda",
+  "checker_exit": 1,
+  "control": "5.10",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "frozen_external_untouched": true,
+  "pass": true,
+  "produced_utc": "2026-09-12T19:01:44Z",
+  "refuses_positive": true,
+  "removed": "derived/lambda_record.json"
+}

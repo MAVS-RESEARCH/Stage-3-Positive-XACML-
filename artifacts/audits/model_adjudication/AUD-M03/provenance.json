@@ -1,0 +1,10 @@
+{
+  "auditor_id": "AUD-M03",
+  "ingested_utc": "2026-09-11T18:56:28Z",
+  "problems": [],
+  "raw_sha256": "61ab2c9f4a45f2147cb1192ecc7e79ef5ca1525d4866d9451cbc9d806d9c16fa",
+  "sealed_packet_sha256": "007105496cc70525810ba9da1da44680ebcc9c506280a33f793cf6588572c413",
+  "sealed_prompt_sha256": "9d983e35fa05090bb1a889358d3dfc54b3e687667e3bce3f359b6261f8265651",
+  "valid": true,
+  "verdict_sha256": "e8c2a319a8fa5bd2db1da9710904c0a10f4587cc79544e47cae9cda072914a61"
+}

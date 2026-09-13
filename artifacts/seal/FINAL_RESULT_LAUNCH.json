@@ -1,0 +1,70 @@
+{
+  "K": [
+    1,
+    "INF",
+    1,
+    1,
+    "INF",
+    "INF",
+    1,
+    "INF"
+  ],
+  "anchor_status": {
+    "Atom": "FIXED",
+    "H": "FIXED",
+    "Lambda": "FIXED",
+    "PR": "FIXED"
+  },
+  "auditors": [
+    "AUD-L07",
+    "AUD-L08",
+    "AUD-L09"
+  ],
+  "authzforce_commit": "3cc0e988e1639da48184434cd5c918102ff5b499",
+  "capsules": {
+    "x_nonpermit": {
+      "response_bytes": 167,
+      "response_sha256": "67961314e19c0fc00df45eeff46d396778704a3461ba9c8a0f4b794889c17f10"
+    },
+    "x_permit": {
+      "response_bytes": 160,
+      "response_sha256": "87f6336c52763de2810fa478d38695f229eeea8b4aaecd68e06b33c49ccef53b"
+    }
+  },
+  "claim_scope": "source-native positive Stage-III specification witness; not prevalence or production-safety evidence",
+  "completion_certificate_sha256": "5842ab0f304b911b9647787e13defbdacd6e2d4d3a978e41c2913ef12c45c9b5",
+  "conformance": "RUN_CONFORMANCE_PASSED",
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "decisions": {
+    "x_nonpermit": "NotApplicable",
+    "x_permit": "Permit"
+  },
+  "derived_touch": {
+    "q_supply_missing_attribute": [
+      "E"
+    ]
+  },
+  "execution_inputs_sha256": "04ec1aaa43e5b7919156d81e78246d2d5e464985d252ca4b20ec0b3dd4e79407",
+  "experiment_id": "PC-XACML-S3PLUS-v1",
+  "external_manifest_sha256": "05f55f0a2c95a338ad33ecc2cc21e613d7f0a932a4c5f7e7f8650dbfb4c9cbff",
+  "external_system": "OASIS XACML 3.0 + AuthzForce Core CE 21.2.0",
+  "fixture": "StatusDetail.MissingAttributeDetail",
+  "historical_note": "artifacts/seal/FINAL_RESULT.json (CYCLE_001) and artifacts/seal/FINAL_RESULT_CYCLE_002.json (CYCLE_002) remain untouched; this is the separate launch-003 positive seal.",
+  "identified_set_cardinality": 1,
+  "identified_set_sha256": "dee7864a7cbf0f57d7ec151581af0d9e603990c517913adc03949ac355107873",
+  "k_table_sha256": "d8007ab744914c6cb8bc94206cb92609d2d78b23f2e77828befe066fcef131ed",
+  "launch_id": "PC-XACML-S3PLUS-v1-launch-003",
+  "ledger_sha256": "3ff36ae883a5ec346c2e3d5526d6629aa0ffb0cdef7f639cc3f85da2d227b595",
+  "manual_touch_labels_used": false,
+  "native_engine_modified": false,
+  "native_policy_modified": false,
+  "outcome": "POSITIVE_NATIVE_STAGE3",
+  "packet_sha256": "8e23901d4643a42a4748af8894c0439f19f071f736d23225ea906aac97099ce6",
+  "primary_classification": "STRUCTURAL_E_TOUCH_DEPENDENCE",
+  "prompt_sha256": "251f7e5875b243a24d0fe95b3252ecfdf08e06f97fbc254e0ed45ea3cb4c7865",
+  "registry_sha256": "d7641f64ced4092a23e7e75dcb26f00f5fa274f27ca3171b2d39792e6fe7e44a",
+  "run_conformance_sha256": "b79aef4f9968bb133c8f5667e96cf89eea929c292f7e3ec1937963c90b80075d",
+  "sealed_utc": "2026-09-12T19:11:05Z",
+  "target_execution_authorized_sha256": "e05e3111f0a3fc848d7f8333751038cd25e9df6ba23095c71c05b4cbde6e7909",
+  "touch_sha256": "123672b954f2f79c6d98220f260db2e9786e89fa6006a7ef7e9f991d013f2127"
+}

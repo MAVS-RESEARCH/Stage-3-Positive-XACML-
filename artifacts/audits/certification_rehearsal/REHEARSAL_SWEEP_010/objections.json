@@ -1,0 +1,96 @@
+{
+  "objections": [
+    {
+      "anchor": "H",
+      "claim_attacked": "H form beyond admitted interface",
+      "counterinterpretation": "Form variants, admitted-effect none per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "marker/empty/env/C14N/capture/Issuer records",
+      "materiality": "Same form family as RS009-01/RS007-01: interface-stated, censused",
+      "objection_id": "RS010-01",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_010"
+    },
+    {
+      "anchor": "P_R",
+      "claim_attacked": "P_R form beyond admitted interface",
+      "counterinterpretation": "Form variants, admitted-effect none per censuses",
+      "disposition": "DUPLICATE",
+      "locator": "fineness/token/pooling/dedup/adequacy records",
+      "materiality": "Same rule family as RS009-02/RS007-02: scoped coincidence proven",
+      "objection_id": "RS010-02",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_010"
+    },
+    {
+      "anchor": "PROVENANCE",
+      "claim_attacked": "lineage current.pre_hash equals operative pre_hash",
+      "counterinterpretation": "Lineage rule violated; audit cleanliness",
+      "disposition": "DUPLICATE",
+      "locator": "pre_hash_lineage current d4a5fcd8-era vs operative",
+      "materiality": "Same erratum as RS007-03/RS009-M2: nothing mechanical reads lineage.current; scheduled",
+      "objection_id": "RS010-M1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_010"
+    },
+    {
+      "anchor": "PROVENANCE",
+      "claim_attacked": "packet gate copy equals live gate source",
+      "counterinterpretation": "Blind reader cannot run classpath gate from packet bytes",
+      "disposition": "DUPLICATE",
+      "locator": "packet gate pre-classpath vs live --check-classpath version",
+      "materiality": "Same erratum as RS009-M1: operative repair present + tested; scheduled refresh",
+      "objection_id": "RS010-M2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_010"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "one N1 window evidences H+Q+Atom (common-mode independence)",
+      "counterinterpretation": "Shared-window misreading defeats three FIXEDs at once",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "derive_atom N1_DATAFLOW; ledger H/Q n1_locators",
+      "materiality": "Real attribution polish, nonmaterial here (censuses separately recorded); shared background + differential locators at next revision",
+      "objection_id": "RS010-D1",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "per-anchor censuses + distinct locator sets",
+      "sweep": "REHEARSAL_SWEEP_010"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "Atom evidence independent of Q construction_rule string",
+      "counterinterpretation": "Q mis-specification propagates silently into Atom",
+      "disposition": "VALID_NONMATERIAL",
+      "locator": "derive_atom Q-import; atom_record wrapper rule",
+      "materiality": "Real attribution polish, nonmaterial here (diffs + scan corroborate string); record Q-attribution separately at next revision",
+      "objection_id": "RS010-D2",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": "INV-05/06 + token scan + byte diffs",
+      "sweep": "REHEARSAL_SWEEP_010"
+    },
+    {
+      "anchor": "JOINT",
+      "claim_attacked": "Lambda closure independent of H/Q vocabulary + ledger hash binding",
+      "counterinterpretation": "Closure borrows credibility; substitution passes ledger",
+      "disposition": "DUPLICATE",
+      "locator": "derive_Lambda N1/action phrases; ledger manifest pointer",
+      "materiality": "Same binding family as RS002-J04/RS009-D2: packet aggregate binds content; promote pins at next revision",
+      "objection_id": "RS010-D3",
+      "outside_information": false,
+      "refuting_evidence": null,
+      "source_grounding": null,
+      "sweep": "REHEARSAL_SWEEP_010"
+    }
+  ],
+  "sweep_id": "REHEARSAL_SWEEP_010"
+}

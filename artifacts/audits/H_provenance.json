@@ -1,0 +1,15 @@
+{
+  "derivation_module": "src/pc/derive_H.py",
+  "h_files": {
+    "H_initial": "fa9e4079cad8ddf43afbd2871f5956351a9284105e6ec7bb8e05ee5047221a62",
+    "H_nonpermit": "f7c385083092a3b5de899650f957e4ebc5bb92c253311860f1f864cdcade48f1",
+    "H_permit": "a5c98a5df4a7fe09142a08293a6cc3c3508c9f055da0da3c71332e1e6e584977"
+  },
+  "produced_utc": "2026-09-11T20:33:39Z",
+  "proof": {
+    "ref": "h_equivalence_proof.json",
+    "sha256": "d91de7bdcc2b9b7da9a0267820c56932bc252bb7eab4156c44ac7422fffaba7a",
+    "verdict": "VALID"
+  },
+  "provenance_id": "PC-XACML-S3PLUS-v1-H"
+}

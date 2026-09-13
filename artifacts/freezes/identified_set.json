@@ -1,0 +1,26 @@
+{
+  "basis": "all required Stage-III semantic anchors fixed by accepted external provenance plus preregistered measurement wrapper",
+  "certificate_sha256": "5842ab0f304b911b9647787e13defbdacd6e2d4d3a978e41c2913ef12c45c9b5",
+  "contract_sha256": "7510e78d57b6926263b4c44f8164e56b3b2cf4c1bc3dbed9a4f151d511ad2fd9",
+  "freeze_order": [
+    "F000",
+    "F100",
+    "F010",
+    "F001",
+    "F110",
+    "F101",
+    "F011",
+    "F111"
+  ],
+  "identified_set_cardinality": 1,
+  "signature": [
+    1,
+    "INF",
+    1,
+    1,
+    "INF",
+    "INF",
+    1,
+    "INF"
+  ]
+}
